@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -36,19 +38,19 @@ namespace BoBo2D_Eyal_Gal
         }
         static void MoveUP(Transform transform)
         {
-            transform.Position.Add(new Vector3D(0, 1, 0));
+            transform.Position += new Vector2(0, 1);
         }
         static void MoveDown(Transform transform)
         {
-            transform.Position.Add(new Vector3D(0, -1, 0));
+            transform.Position += new Vector2(0, -1);
         }
         static void MoveRight(Transform transform)
         {
-            transform.Position.Add(new Vector3D(1, 0, 0));
+            transform.Position += new Vector2(1, 0);
         }
         static void MoveLeft(Transform transform)
         {
-            transform.Position.Add(new Vector3D(-1, 0, 0));
+            transform.Position += new Vector2(-1, 0);
         }
     }
 }
