@@ -10,7 +10,10 @@ namespace BoBo2D_Eyal_Gal
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameObjectManager _gameObjectManager;
+        private GameObject _player;
+        private Texture2D _playerTextures;
         private Texture2D _backGround;
+        private SpriteFont _gameFont;
 
         //drawing
         Vector3 _camTarget;
@@ -62,13 +65,19 @@ namespace BoBo2D_Eyal_Gal
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            
             // TODO: use this.Content to load your game content here
             _backGround = Content.Load<Texture2D>("BG");
-            _gameObjectManager.AddNewParent("Spaceship");
-            GameObject go = _gameObjectManager.FindGameObjectByName("Spaceship");
+
+            _player = new GameObject("Player");
+            _gameObjectManager.AddNewParent("Player");
+
+            GameObject go = _gameObjectManager.FindGameObjectByName("Player");
             go.AddComponent(new Rigidbooty(go));
-            //go.AddComponent(new Model3D(go, "Pizza_Car"));
+            go.AddComponent(new BoxCollider(go));
+            go.AddComponent(new Sprite(go, "PlayerShip"));
+            //go.GetComponent<Sprite>().Content
+
             System.Console.WriteLine(go);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
         }
@@ -89,11 +98,17 @@ namespace BoBo2D_Eyal_Gal
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
-            GameObject go = _gameObjectManager.FindGameObjectByName("Spaceship");
-            //go.GetComponent<Model3D>().GetModel.Draw(_worldMatrix, _viewMatrix, _projectionMatrix);
+            GameObject go = _gameObjectManager.FindGameObjectByName("Player");
+            _playerTextures = go.GetComponent<Sprite>().GetSprite;
             _spriteBatch.Begin();
             _spriteBatch.Draw(_backGround, new Vector2(0, 0), Color.White);
-            //_spriteBatch.DrawString(_gameFont, _score.ToString(), new Vector2(200, 0), Color.White);
+
+            if (go.IsEnabled)
+            {
+                _spriteBatch.Draw(_playerTextures, new Vector2(150, 150), Color.White);
+                _spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
+            }
+
             _spriteBatch.End();
 
             base.Draw(gameTime);
