@@ -10,7 +10,7 @@ namespace BoBo2D_Eyal_Gal
 {
     class InputManager : IUpdatable, IStartable
     {
-        GameObject player;
+        Spaceship player;
         bool _usingWASD = false;
         bool _usingNumbersForGuns;
         public InputManager()
