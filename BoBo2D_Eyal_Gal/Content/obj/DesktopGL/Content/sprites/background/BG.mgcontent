@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/background/BG.png</SourceFile>
-  <SourceTime>2021-07-27T05:51:35.5263647+03:00</SourceTime>
+  <SourceTime>2021-07-27T05:55:29.2063138+03:00</SourceTime>
   <DestFile>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/background/BG.xnb</DestFile>
-  <DestTime>2021-07-27T05:53:06.5229154+03:00</DestTime>
+  <DestTime>2021-07-27T06:16:24.5699576+03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T19:17:54+03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
