@@ -40,7 +40,7 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine($"New Game Object has been created {ToString()}");
             Transform transform = new Transform(this);
             AddComponent(transform);
-            transform.GameObjectP = this;
+            transform.GetSetGameObject = this;
         }
 
         //Constructor with Transform that the player will enter
