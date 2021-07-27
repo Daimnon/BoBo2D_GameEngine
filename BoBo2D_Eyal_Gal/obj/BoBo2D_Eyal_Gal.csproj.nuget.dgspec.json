@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Daimnon's\\source\\repos\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj": {}
+    "D:\\Users\\Daimnon's\\Documents\\GitHub\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Daimnon's\\source\\repos\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj": {
+    "D:\\Users\\Daimnon's\\Documents\\GitHub\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Daimnon's\\source\\repos\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj",
+        "projectUniqueName": "D:\\Users\\Daimnon's\\Documents\\GitHub\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj",
         "projectName": "BoBo2D_Eyal_Gal",
-        "projectPath": "C:\\Users\\Daimnon's\\source\\repos\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj",
+        "projectPath": "D:\\Users\\Daimnon's\\Documents\\GitHub\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj",
         "packagesPath": "C:\\Users\\Daimnon's\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Daimnon's\\source\\repos\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\obj\\",
+        "outputPath": "D:\\Users\\Daimnon's\\Documents\\GitHub\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
