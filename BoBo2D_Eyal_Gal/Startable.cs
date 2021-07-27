@@ -35,7 +35,7 @@ namespace BoBo2D_Eyal_Gal
         {
             foreach (var startable in _startableList)
             {
-                startable.start();
+                startable.Start();
             }
         }
         #endregion

@@ -1,0 +1,69 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+
+
+namespace BoBo2D_Eyal_Gal
+{
+    public static class StatsHandler//all base data is going to come from this class, stats names for sprites and more
+    {
+        static Dictionary<Stats.StatsType, Dictionary<int, Stats>> _statsDictionary = new Dictionary<Stats.StatsType, Dictionary<int, Stats>>()
+        {
+            {Stats.StatsType.Ship,_SpaceShipDictionary },
+            {Stats.StatsType.Weapon,_weaponStatsDictionaty },
+        };
+        static Dictionary<int, Stats> _SpaceShipDictionary = new Dictionary<int, Stats>()
+        {
+            {(int)SpaceshipType.BasicEnemySpaceship,_basicShip},
+        };
+        static Dictionary<int, Stats> _weaponStatsDictionaty = new Dictionary<int, Stats>()
+        {
+            {(int)WeaponType.BasicMainWeapon,_basicWeapon},
+        };
+        static WeaponStats _basicWeapon = new WeaponStats(WeaponType.BasicMainWeapon, 1, 10, 1, 1);
+        static ShipStats _basicShip = new ShipStats(SpaceshipType.BasicPlayerSpaceship, 100, 1, 0, 40, 1, 1, 1);
+        public static T GetStats<T>(Stats.StatsType statsType,int enumType) where T : Stats
+        {
+            if(_statsDictionary.TryGetValue(statsType,out Dictionary<int,Stats> dictionary))
+            {
+                if (dictionary.TryGetValue(enumType, out Stats itemStats))
+                    return itemStats as T;
+            }
+            return null;
+        }
+        #region Spaceship
+
+        static string BaseWeaponSpriteName = "BaseWeapon";
+        static string BaseWeaponProjectileSpriteName = "BaseWeaponProjectile";
+        #endregion
+        #region Direction
+        public static Vector2 forward = new Vector2(0, 1);
+        public static Vector2 Backward = new Vector2(0, -1);
+        #endregion
+        #region WeaponDataMethods
+        public static string GetWeaponTextureName(WeaponType weaponType)
+        {
+            switch (weaponType)
+            {
+                case WeaponType.BasicMainWeapon:
+                    return BaseWeaponSpriteName;
+                default:
+                    return null;
+            }
+        }
+        public static string GetProjectileTextureName(WeaponType weaponType)
+        {
+            switch (weaponType)
+            {
+                case WeaponType.BasicMainWeapon:
+                    return BaseWeaponProjectileSpriteName;
+                default:
+                    return null;
+            }
+        }
+        #endregion
+    }
+}

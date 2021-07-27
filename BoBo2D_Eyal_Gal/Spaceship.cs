@@ -4,6 +4,12 @@ using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
+    public enum SpaceshipType
+    {
+        BasicEnemySpaceship = 0,
+        BasicPlayerSpaceship = 1,
+    }
+
     public class Spaceship : GameObject
     {
         #region Fields
@@ -16,6 +22,7 @@ namespace BoBo2D_Eyal_Gal
         float _shieldRegen; 
         float _speed;       
         float _damageScalar;
+        bool _isPlayer;
 
         Weapon _mainWeapon;
         Weapon _seconderyWeapon;
@@ -27,21 +34,28 @@ namespace BoBo2D_Eyal_Gal
         public Weapon GetSpecialWeapon => _specialWeapon;
 
         #endregion
-        public Spaceship(string name) : base(name)
+        public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)
         {
-            LoadStats();
+            LoadStats(shipType);
             //load basic weapon
         }
-        void LoadStats()
+        void LoadStats(SpaceshipType shipType)
         {
-            _health = Stats.Health;
-            _maxHealth = Stats.MaxHealth;
-            _healthRegen = Stats.HealthRegen;
-            _shield = Stats.Shield;
-            _maxShield = Stats.MaxShield;
-            _shieldRegen = Stats.ShieldRegen;
-            _speed = Stats.Shield;
-            _damageScalar = Stats.DamageScalar;
+            ShipStats stats = StatsHandler.GetStats<ShipStats>(Stats.StatsType.Ship, (int)shipType);
+            if (stats != null)
+            {
+                _health = stats.MaxHealth;
+                _maxHealth = stats.MaxHealth;
+                _healthRegen = stats.HealthRegen;
+                _shield = stats.Shield;
+                _maxShield = stats.MaxShield;
+                _shieldRegen = stats.ShieldRegen;
+                _speed = stats.Speed;
+                _damageScalar = stats.DamageScalar;
+            }
+        }
+        void loadWeapons(bool isPlayer)
+        {
         }
     }
 }

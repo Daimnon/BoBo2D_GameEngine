@@ -15,8 +15,8 @@ namespace BoBo2D_Eyal_Gal
         #endregion
         
         #region Properties
-        public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
-        public Transform TransformP { get => _transform; set => _transform = value; }
+        public GameObject GetSetGameObject { get => _gameObject; set => _gameObject = value; }
+        public Transform GetSetTransform { get => _transform; set => _transform = value; }
         public string Name { get => _name; set => _name = value; }
         #endregion
 

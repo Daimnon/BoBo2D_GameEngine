@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
-    class Sprite : Component, IComponent
+    public class Sprite : Component, IComponent
     {
         #region Fields
         Texture2D _texture;

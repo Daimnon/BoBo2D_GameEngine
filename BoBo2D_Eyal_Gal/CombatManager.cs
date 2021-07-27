@@ -4,26 +4,19 @@ using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public enum WeaponType
-    {
-        MainWeapon = 0,
-        SeconderyWeapon = 1,
-        SpecialWeapon = 2,
-    }
-
     public static class CombatManager
     {
-        public static void FireWeapon(Spaceship spaceship, WeaponType type)
+        public static void FireWeapon(Spaceship spaceship, SelectedWeapon type)//get the button and translate it to a weapon to shoot with
         {
             switch (type)
             {
-                case WeaponType.MainWeapon:
+                case SelectedWeapon.MainWeapon:
                     spaceship.GetMainWeapon.Shoot();
                     break;
-                case WeaponType.SeconderyWeapon:
+                case SelectedWeapon.SeconderyWeapon:
                     spaceship.GetSecondaryWeapon.Shoot();
                     break;
-                case WeaponType.SpecialWeapon:
+                case SelectedWeapon.SpecialWeapon:
                     spaceship.GetSpecialWeapon.Shoot();
                     break;
                 default:

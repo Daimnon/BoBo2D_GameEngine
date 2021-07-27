@@ -8,6 +8,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
+    public enum SelectedWeapon
+    {
+        MainWeapon = 0,
+        SeconderyWeapon = 1,
+        SpecialWeapon = 2,
+    }
     class InputManager : IUpdatable, IStartable
     {
         Spaceship player;
@@ -18,7 +24,7 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.AddSubscriber<IStartable>(this);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
-        public void start()
+        public void Start()
         {
             //getplayer gameobject
         }
@@ -98,30 +104,31 @@ namespace BoBo2D_Eyal_Gal
         {
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.LeftShift))
             {
-                //fire stuff
+                CombatManager.FireWeapon(player, SelectedWeapon.SeconderyWeapon);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) || Keyboard.GetState().IsKeyDown(Keys.RightControl))
             {
-                //fire missiles
+                CombatManager.FireWeapon(player, SelectedWeapon.SpecialWeapon);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                //Basic Shots
+                CombatManager.FireWeapon(player, SelectedWeapon.MainWeapon);
+
             }
         }
         void FireWithNumbers()//1,2,3
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
             {
-                //fire stuff
+                CombatManager.FireWeapon(player, SelectedWeapon.MainWeapon);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D2))
             {
-                //fire missiles
+                CombatManager.FireWeapon(player, SelectedWeapon.SeconderyWeapon);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D3))
             {
-                //Basic Shots
+                CombatManager.FireWeapon(player, SelectedWeapon.SpecialWeapon);
             }
         }
         #endregion
