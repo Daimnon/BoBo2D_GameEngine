@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -64,19 +66,19 @@ namespace BoBo2D_Eyal_Gal
                     {
                         //bounce left
                         if (colider.BoxRight >= anotherColider.BoxLeft)
-                            colider.Position.Sub(new Vector3D(1, 0, 0));
+                            colider.Position -= (new Vector2(1, 0));
 
                         //bounce right
                         if (colider.BoxLeft >= anotherColider.BoxRight)
-                            colider.Position.Add(new Vector3D(1, 0, 0));
+                            colider.Position += (new Vector2(1, 0));
 
                         //bounce up
                         if (colider.BoxBottom >= anotherColider.BoxTop)
-                            colider.Position.Sub(new Vector3D(0, 1, 0));
+                            colider.Position -= (new Vector2(0, 1));
 
                         //bounce down
                         if (colider.BoxTop >= anotherColider.BoxBottom)
-                            colider.Position.Add(new Vector3D(0, 1, 0));
+                            colider.Position += (new Vector2(0, 1));
                     }
 
                     //simple diagonal direction solutions: ↖ ↗ ↙ ↘
@@ -85,22 +87,22 @@ namespace BoBo2D_Eyal_Gal
                         //bounce top-left
                         if (colider.BoxRight >= anotherColider.BoxLeft)
                             if (colider.BoxBottom >= anotherColider.BoxTop)
-                                colider.Position.Sub(new Vector3D(1, 1, 0));
+                                colider.Position -= (new Vector2(1, 1));
 
                         //bounce top-right
                         if (colider.BoxLeft >= anotherColider.BoxRight)
                             if (colider.BoxBottom >= anotherColider.BoxTop)
-                                colider.Position.Add(new Vector3D(1, -1, 0));
+                                colider.Position += (new Vector2(1, -1));
 
                         //bounce bottom-left
                         if (colider.BoxRight >= anotherColider.BoxLeft)
                             if (colider.BoxTop >= anotherColider.BoxBottom)
-                                colider.Position.Sub(new Vector3D(1, -1, 0));
+                                colider.Position -= (new Vector2 (1, -1));
 
                         //bounce bottom-right
                         if (colider.BoxLeft >= anotherColider.BoxRight)
                             if (colider.BoxTop >= anotherColider.BoxBottom)
-                                colider.Position.Add(new Vector3D(1, 1, 0));
+                                colider.Position += (new Vector2(1, 1));
                     }
                 }
             }
