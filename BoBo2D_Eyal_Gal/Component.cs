@@ -13,7 +13,7 @@ namespace BoBo2D_Eyal_Gal
 
         string _name;
         #endregion
-
+        
         #region Properties
         public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
         public Transform TransformP { get => _transform; set => _transform = value; }
