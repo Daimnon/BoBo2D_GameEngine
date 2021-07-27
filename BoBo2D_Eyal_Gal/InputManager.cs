@@ -4,8 +4,10 @@ using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
+
     class InputManager : IUpdatable, IStartable
     {
+        GameObject player;
         public InputManager()
         {
             SubscriptionManager.AddSubscriber<IStartable>(this);
@@ -14,12 +16,33 @@ namespace BoBo2D_Eyal_Gal
 
         public void start()
         {
-            throw new NotImplementedException();
+            //getplayer gameobject
         }
 
         public void Update()
         {
-            throw new NotImplementedException();
+            if(Console.ReadKey().Key == ConsoleKey.UpArrow)
+            {
+                MovementManager.Movement(MoveDirection.Up, player);
+            }
+            else if(Console.ReadKey().Key == ConsoleKey.DownArrow)
+            {
+                MovementManager.Movement(MoveDirection.Down, player);
+
+            }
+            else if(Console.ReadKey().Key == ConsoleKey.RightArrow)
+            {
+                MovementManager.Movement(MoveDirection.Right, player);
+
+            }
+            else if(Console.ReadKey().Key == ConsoleKey.LeftArrow)
+            {
+                MovementManager.Movement(MoveDirection.Left, player);
+            }
+            else
+            {
+                //stay still
+            }
         }
     }
 }
