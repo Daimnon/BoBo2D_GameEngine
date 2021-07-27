@@ -53,17 +53,17 @@ namespace BoBo2D_Eyal_Gal
         //need fixes
         #region Methods
 
-        public void Translate(Vector2 translation)
-        {
-            //not good
-            Position = Position.Add(Position, translation);
-        }
+        //public void Translate(Vector2 translation)
+        //{
+        //    //not good
+        //    Position.Add(translation);
+        //}
 
-        public void Translate(float x, float y)
-        {
-            //not good
-            Position.Add(new Vector2(x, y));
-        }
+        //public void Translate(float x, float y)
+        //{
+        //    //not good
+        //    Position.Add(new Vector2(x, y));
+        //}
 
         public T GetComponent<T>() where T : Component
         {
