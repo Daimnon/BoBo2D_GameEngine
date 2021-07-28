@@ -115,6 +115,7 @@ namespace BoBo2D_Eyal_Gal
             }
 
             Components.Add(component);
+            //component.GetSetGameObject = this;
             Console.WriteLine("Component added");
             Console.WriteLine();
         }

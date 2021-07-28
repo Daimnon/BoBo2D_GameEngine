@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public abstract class Component : Game
+    public abstract class Component
     {
         #region Fields
         GameObject _gameObject;

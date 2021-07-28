@@ -8,7 +8,7 @@ namespace BoBo2D_Eyal_Gal
     public class Rigidbooty : Component
     {
         #region Fields
-        GameObject _parent;
+        GameObject _gameObject;
         Transform _transform;
         BoxCollider _boxCollider;
 
@@ -19,7 +19,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public GameObject Parent { get => _parent; set => _parent = value; }
+        public GameObject GameObject{ get => _gameObject; set => _gameObject = value; }
         public Transform TransformP { get => _transform; set => _transform = value; }
         public BoxCollider BoxColliderP { get => _boxCollider; set => _boxCollider = value; }
         public string Name { get => _name; set => _name = value; }
@@ -35,9 +35,10 @@ namespace BoBo2D_Eyal_Gal
 
         public Rigidbooty(GameObject gameObject)
         {
-            Name = gameObject.Name;
-            TransformP = gameObject.GetComponent<Transform>();
-            BoxColliderP = gameObject.GetComponent<BoxCollider>();
+            _gameObject = gameObject;
+            Name = _gameObject.Name;
+            TransformP = _gameObject.GetComponent<Transform>();
+            //BoxColliderP = _gameObject.GetComponent<BoxCollider>();
         }
 
         //need fixes
@@ -75,7 +76,7 @@ namespace BoBo2D_Eyal_Gal
 
         public T GetComponent<T>() where T : Component
         {
-            foreach (Component component in Parent.Components)
+            foreach (Component component in _gameObject.Components)
                 if (component is T)
                     return component as T;
 
@@ -84,7 +85,7 @@ namespace BoBo2D_Eyal_Gal
 
         public T GetComponents<T>() where T : Component
         {
-            foreach (Component component in Parent.Components)
+            foreach (Component component in _gameObject.Components)
                 return component as T;
 
             return null;

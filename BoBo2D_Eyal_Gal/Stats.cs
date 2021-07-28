@@ -8,8 +8,8 @@ namespace BoBo2D_Eyal_Gal
     {
         public enum StatsType
         {
-            Ship,
-            Weapon,
+            Ship = 0,
+            Weapon = 1,
         }
         StatsType _statsType;
         public StatsType GetStatsType => _statsType;

@@ -15,9 +15,9 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Methods
-        public void AddNewParent(string gameObjectName)
+        public void AddNewParent(GameObject gameObject)
         {
-            GameObject go = new GameObject(gameObjectName);
+            GameObject go = gameObject;
             Node node = new Node(go, null);
             TreeOfGameObjects togo = new TreeOfGameObjects(node);
             _hirarchy.Add(togo);
