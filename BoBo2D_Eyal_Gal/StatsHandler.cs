@@ -32,7 +32,7 @@ namespace BoBo2D_Eyal_Gal
             {Stats.StatsType.Weapon,_weaponStatsDictionaty },
         };
 
-        public static T GetStats<T>(Stats.StatsType statsType,int enumType) where T : Stats
+        static T GetStats<T>(Stats.StatsType statsType,int enumType) where T : Stats
         {
             if(_statsDictionary.TryGetValue(statsType,out Dictionary<int,Stats> dictionary))
             {
@@ -40,6 +40,14 @@ namespace BoBo2D_Eyal_Gal
                     return itemStats as T;
             }
             return null;
+        }
+        public static T GetStats<T> (SpaceshipType shipType) where T: Stats
+        {
+            return GetStats<ShipStats>(Stats.StatsType.Ship, (int)shipType) as T;
+        }
+        public static T GetStats<T> (WeaponType weaponType) where T: Stats
+        {
+            return GetStats<WeaponStats>(Stats.StatsType.Weapon, (int)weaponType) as T;
         }
         #region Spaceship
 
