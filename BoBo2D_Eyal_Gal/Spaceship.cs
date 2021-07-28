@@ -41,7 +41,7 @@ namespace BoBo2D_Eyal_Gal
         }
         void LoadStats(SpaceshipType shipType)
         {
-            ShipStats stats = StatsHandler.GetStats<ShipStats>(Stats.StatsType.Ship, (int)shipType);
+            ShipStats stats = StatsHandler.GetStats<ShipStats>(shipType);
             if (stats != null)
             {
                 _health = stats.MaxHealth;

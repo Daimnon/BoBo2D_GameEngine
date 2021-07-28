@@ -38,11 +38,11 @@ namespace BoBo2D_Eyal_Gal
         }
         static void MoveUP(Transform transform)
         {
-            transform.Position += new Vector2(0, 1);
+            transform.Position += new Vector2(0, -1);
         }
         static void MoveDown(Transform transform)
         {
-            transform.Position += new Vector2(0, -1);
+            transform.Position += new Vector2(0, 1);
         }
         static void MoveRight(Transform transform)
         {

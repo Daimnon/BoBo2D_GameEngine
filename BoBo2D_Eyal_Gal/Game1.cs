@@ -88,7 +88,8 @@ namespace BoBo2D_Eyal_Gal
 
             if (go.IsEnabled)
             {
-                _spriteBatch.Draw(_playerTextures, new Vector2(150, 150), Color.White);
+                Transform playerTransform = go.GetComponent<Transform>();
+                _spriteBatch.Draw(_playerTextures,playerTransform.Position , Color.White);
                 //_spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
             }
 

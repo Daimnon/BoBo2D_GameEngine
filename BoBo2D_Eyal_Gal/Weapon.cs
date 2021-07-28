@@ -60,7 +60,7 @@ namespace BoBo2D_Eyal_Gal
 
         void LoadStats(WeaponType weaponType)
         {
-            WeaponStats stats = StatsHandler.GetStats<WeaponStats>(Stats.StatsType.Weapon, (int)weaponType);
+            WeaponStats stats = StatsHandler.GetStats<WeaponStats>(weaponType);
             if(stats != null)
             {
                 _id = stats.Id;
