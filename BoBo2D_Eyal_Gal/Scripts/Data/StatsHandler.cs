@@ -11,8 +11,10 @@ namespace BoBo2D_Eyal_Gal
     public static class StatsHandler//all base data is going to come from this class, stats names for sprites and more
     {
         static WeaponStats _basicWeapon = new WeaponStats(WeaponType.BasicMainWeapon, 1, 10, 1, 1);
-        static ShipStats _basicPlayerShip = new ShipStats(SpaceshipType.BasicPlayerSpaceship, 100, 1, 0, 40, 1, 3, 1);
-        static ShipStats _basicEnemyShip = new ShipStats(SpaceshipType.BasicEnemySpaceship, 30, 1, 0, 10, 1, 1, 1);
+        static ShipStats _basicPlayerShip = new ShipStats(SpaceshipType.BasicPlayerSpaceship,WeaponType.BasicMainWeapon,
+            100, 1, 0, 40, 1, 3, 1, 100);
+        static ShipStats _basicEnemyShip = new ShipStats(SpaceshipType.BasicEnemySpaceship,WeaponType.BasicMainWeapon,
+            30, 1, 0, 10, 1, 1, 1, 100);
 
         static Dictionary<int, Stats> _SpaceShipDictionary = new Dictionary<int, Stats>()
         {
@@ -59,6 +61,16 @@ namespace BoBo2D_Eyal_Gal
         public static Vector2 Backward = new Vector2(0, -1);
         #endregion
         #region WeaponDataMethods
+        public static string GetWeaponTextureName(WeaponType weaponType)
+        {
+            switch (weaponType)
+            {
+                case WeaponType.BasicMainWeapon:
+                    return "PlayerShip";
+                default:
+                    return null;
+            }
+        }
         public static string GetProjectileTextureName(WeaponType weaponType)
         {
             switch (weaponType)
