@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
-    class Sprite : Component, IComponent
+    public class Sprite : Component
     {
         #region Fields
         Texture2D _texture;
         GameObject parent;
-
+        Vector2 _position;
         string _name;
         #endregion
 
@@ -23,7 +23,7 @@ namespace BoBo2D_Eyal_Gal
 
         public Sprite(GameObject parentObject, string spriteName)
         {
-            _texture = Content.Load<Texture2D>(spriteName);
+            _texture = DataManager.Instance.GetTexture2D(spriteName);
             _name = spriteName;
             parent = parentObject;
         }

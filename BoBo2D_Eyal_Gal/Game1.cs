@@ -10,10 +10,10 @@ namespace BoBo2D_Eyal_Gal
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private GameObjectManager _gameObjectManager;
-        private GameObject _player;
+        private Spaceship _player;
         private Texture2D _playerTextures;
         private Texture2D _backGround;
-        private SpriteFont _gameFont;
+        private SpriteFont _gameFont = default;
 
         //drawing
         Vector3 _camTarget;
@@ -44,22 +44,15 @@ namespace BoBo2D_Eyal_Gal
         {
             // TODO: Add your initialization logic here
             _gameObjectManager = new GameObjectManager();
-            InputManager im = new InputManager();
 
-            //camera settings should create a class or static class
-            _camTarget = new Vector3(0f, 0f, 0f);
-            _camPosition = new Vector3(0, 0, -100);
-            _projectionMatrix = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), GraphicsDevice.DisplayMode.AspectRatio, 1, 1000);
-            _viewMatrix = Matrix.CreateLookAt(_camPosition, _camTarget, Vector3.Up);
-            _worldMatrix = Matrix.CreateWorld(_camTarget, Vector3.Forward, Vector3.Up);
-
-            //Basic Effect
-            _basicEffect = new BasicEffect(GraphicsDevice);
-            _basicEffect.Alpha = 1;
-            _basicEffect.VertexColorEnabled = true;
-            _basicEffect.LightingEnabled = false;
-
+            DataManager.Game = this;
+            DataManager.Instance.LoadAllExternalData();
             base.Initialize();
+        }
+
+        public T LoadData<T>(string fileName)
+        {
+            return Content.Load<T>(fileName);
         }
 
         protected override void LoadContent()
@@ -68,17 +61,7 @@ namespace BoBo2D_Eyal_Gal
             
             // TODO: use this.Content to load your game content here
             _backGround = Content.Load<Texture2D>("BG");
-
-            _player = new GameObject("Player");
-            _gameObjectManager.AddNewParent("Player");
-
-            GameObject go = _gameObjectManager.FindGameObjectByName("Player");
-            go.AddComponent(new Rigidbooty(go));
-            go.AddComponent(new BoxCollider(go));
-            go.AddComponent(new Sprite(go, "PlayerShip"));
-            //go.GetComponent<Sprite>().Content
-
-            System.Console.WriteLine(go);
+            CreatePlayer();
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
         }
 
@@ -105,13 +88,25 @@ namespace BoBo2D_Eyal_Gal
 
             if (go.IsEnabled)
             {
-                _spriteBatch.Draw(_playerTextures, new Vector2(150, 150), Color.White);
-                _spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
+                Transform playerTransform = go.GetComponent<Transform>();
+                _spriteBatch.Draw(_playerTextures,playerTransform.Position , Color.White);
+                //_spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
             }
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+        void CreatePlayer()
+        {
+
+            _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship,"Player", true);
+            _gameObjectManager.AddNewParent(_player);
+            _player.AddComponent(new Rigidbooty(_player));
+            _player.AddComponent(new BoxCollider(_player));
+            _player.AddComponent(new Sprite(_player, "PlayerShip"));
+            InputManager im = new InputManager(_player);
+
         }
     }
 }

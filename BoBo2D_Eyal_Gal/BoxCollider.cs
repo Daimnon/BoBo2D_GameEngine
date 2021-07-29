@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -21,8 +23,8 @@ namespace BoBo2D_Eyal_Gal
         float _boxRight;
         float _boxFront;
         float _boxBack;
-        Vector3D _scale = new Vector3D(1, 1, 1);
-        Vector3D _position = new Vector3D();
+        Vector2 _scale = new Vector2(1, 1);
+        Vector2 _position = new Vector2();
 
         bool _isEnabled = true;
         #endregion
@@ -38,8 +40,8 @@ namespace BoBo2D_Eyal_Gal
         public float BoxRight { get => _boxRight; set => _boxRight = value; }
         public float BoxFront { get => _boxFront; set => _boxFront = value; }
         public float BoxBack { get => _boxBack; set => _boxBack = value; }
-        public Vector3D Scale { get => _scale; set => _scale = value; }
-        public Vector3D Position { get => _position; set => _position = value; }
+        public Vector2 Scale { get => _scale; set => _scale = value; }
+        public Vector2 Position { get => _position; set => _position = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
         #endregion
 
@@ -48,30 +50,30 @@ namespace BoBo2D_Eyal_Gal
             Name = gameObject.Name + " Colider";
             float objX = gameObject.GetComponent<Transform>().Position.X;
             float objY = gameObject.GetComponent<Transform>().Position.Y;
-            float objZ = gameObject.GetComponent<Transform>().Position.Z;
+            //float objZ = gameObject.GetComponent<Transform>().Position.Z;
 
             //width
             float objW = gameObject.GetComponent<Transform>().Scale.X;
             //height
             float objH = gameObject.GetComponent<Transform>().Scale.Y;
             //depth
-            float objD = gameObject.GetComponent<Transform>().Scale.Z;
+            //float objD = gameObject.GetComponent<Transform>().Scale.Z;
 
             //determain distance of every side from center
             CX = objW / 2;
             CY = objH / 2;
-            CZ = objD / 2;
+            //CZ = objD / 2;
 
             //set colider posiotion to object positino
-            Position = new Vector3D(objX, objY, objZ);
+            Position = new Vector2(objX, objY);
 
             // set the exact points of box
             BoxLeft = Position.X - CX;
             BoxRight = Position.X + CX;
             BoxTop = Position.Y - CY;
             BoxBottom = Position.Y + CY;
-            BoxFront = Position.Z - CZ;
-            BoxBack = Position.Z + CZ;
+            //BoxFront = Position.Z - CZ;
+            //BoxBack = Position.Z + CZ;
         }
 
         #region Methods

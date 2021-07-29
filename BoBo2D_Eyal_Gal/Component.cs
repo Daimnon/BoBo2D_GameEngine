@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public abstract class Component : Game
+    public abstract class Component
     {
         #region Fields
         GameObject _gameObject;
@@ -13,10 +13,10 @@ namespace BoBo2D_Eyal_Gal
 
         string _name;
         #endregion
-
+        
         #region Properties
-        public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
-        public Transform TransformP { get => _transform; set => _transform = value; }
+        public GameObject GetSetGameObject { get => _gameObject; set => _gameObject = value; }
+        public Transform GetSetTransform { get => _transform; set => _transform = value; }
         public string Name { get => _name; set => _name = value; }
         #endregion
 
