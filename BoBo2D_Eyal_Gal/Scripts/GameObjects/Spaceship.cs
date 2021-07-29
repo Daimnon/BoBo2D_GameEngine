@@ -24,6 +24,8 @@ namespace BoBo2D_Eyal_Gal
         float _speed;       
         float _damageScalar;
         bool _isPlayer;
+        bool _isDefeatedByPlayer = false;
+        bool _isDefeatedByEnemy = false;
 
         Weapon _mainWeapon;
         Weapon _seconderyWeapon;
