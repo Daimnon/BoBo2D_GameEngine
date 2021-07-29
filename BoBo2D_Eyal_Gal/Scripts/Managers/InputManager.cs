@@ -51,23 +51,37 @@ namespace BoBo2D_Eyal_Gal
         #region Movement
         void MoveWithKeyArrows()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            if(Keyboard.GetState().IsKeyDown(Keys.Up) && Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                MovementManager.Movement(MoveDirection.Up, _player);
+                MovementHandler.Movement(MoveDirection.UpperRight, _player);
+            }
+            else if(Keyboard.GetState().IsKeyDown(Keys.Up) && Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                MovementHandler.Movement(MoveDirection.UpperLeft, _player);
+            }
+            else if(Keyboard.GetState().IsKeyDown(Keys.Down) && Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                MovementHandler.Movement(MoveDirection.LowerRight, _player);
+            }
+            else if(Keyboard.GetState().IsKeyDown(Keys.Down) && Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                MovementHandler.Movement(MoveDirection.LowerLeft, _player);
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                MovementHandler.Movement(MoveDirection.Up, _player);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Down))
             {
-                MovementManager.Movement(MoveDirection.Down, _player);
-
+                MovementHandler.Movement(MoveDirection.Down, _player);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                MovementManager.Movement(MoveDirection.Right, _player);
-
+                MovementHandler.Movement(MoveDirection.Right, _player);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                MovementManager.Movement(MoveDirection.Left, _player);
+                MovementHandler.Movement(MoveDirection.Left, _player);
             }
             else
             {
@@ -76,23 +90,39 @@ namespace BoBo2D_Eyal_Gal
         }
         void MoveWithWASD()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
+            if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                MovementManager.Movement(MoveDirection.Up, _player);
+                MovementHandler.Movement(MoveDirection.UpperRight, _player);
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                MovementHandler.Movement(MoveDirection.UpperLeft, _player);
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                MovementHandler.Movement(MoveDirection.LowerRight, _player);
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                MovementHandler.Movement(MoveDirection.LowerLeft, _player);
+            }
+            else if (Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                MovementHandler.Movement(MoveDirection.Up, _player);
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                MovementManager.Movement(MoveDirection.Down, _player);
+                MovementHandler.Movement(MoveDirection.Down, _player);
 
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                MovementManager.Movement(MoveDirection.Right, _player);
+                MovementHandler.Movement(MoveDirection.Right, _player);
 
             }
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                MovementManager.Movement(MoveDirection.Left, _player);
+                MovementHandler.Movement(MoveDirection.Left, _player);
             }
             else
             {

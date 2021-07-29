@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Xna.Framework;
+
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -40,7 +42,7 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine($"New Game Object has been created {ToString()}");
             Transform transform = new Transform(this);
             AddComponent(transform);
-            transform.GetSetGameObject = this;
+            transform.GameObjectP = this;
         }
 
         //Constructor with Transform that the player will enter
@@ -194,8 +196,19 @@ namespace BoBo2D_Eyal_Gal
 
             return false;
         }
-        #endregion
 
+        public virtual void MoveGameObject(Vector2 direction)
+        {
+            Transform transform = GetComponent<Transform>();
+            transform.Position += direction;
+
+            BoxCollider boxCollider = GetComponent<BoxCollider>();
+            if (boxCollider != null)
+            {
+                boxCollider.Position = transform.Position;
+            }
+        }
+        #endregion
         /*
             public void GetComponent(string componentName)
             {

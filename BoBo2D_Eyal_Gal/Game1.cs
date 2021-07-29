@@ -14,23 +14,7 @@ namespace BoBo2D_Eyal_Gal
         private Texture2D _playerTextures;
         private Texture2D _backGround;
         private SpriteFont _gameFont = default;
-
-        //drawing
-        Vector3 _camTarget;
-        Vector3 _camPosition;
-        Matrix _projectionMatrix;
-        Matrix _viewMatrix;
-        Matrix _worldMatrix;
-        BasicEffect _basicEffect;
-
-        //GeometricInfo
-        VertexPositionColor[] _triangleVertices;
-        VertexBuffer _vertexBuffer;
-
-        //Orbit
-        bool orbit;
         #endregion
-
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
