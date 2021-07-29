@@ -6,8 +6,12 @@ namespace BoBo2D_Eyal_Gal
 {
     public static class PlayerProgression
     {
+        #region Fields
         static Spaceship _player;
+        static bool _isLevelingUp = false;
+        #endregion
 
+        #region Properties
         public static Spaceship Player
         {
             get => _player;
@@ -17,13 +21,22 @@ namespace BoBo2D_Eyal_Gal
                     _player = value;
             }
         }
+        static bool IsLevelingUp { get => _isLevelingUp; set => _isLevelingUp = value; }
+        #endregion
 
-        public static void Lvlup(Spaceship enemy)
+        #region Methods
+        public static void LvlUp(Spaceship enemy)
         {
-            if (enemy.IsDefeatedByPlayer)
+            if (enemy.IsDefeatedByPlayer && _player.Exp >= _player.MaxExp)
             {
-
+                //reset exp bar and continue from 0
+                //_player.Exp = 0 + הפרש
             }
         }
+        public static void StatUpdate()
+        {
+            Player.
+        }
+        #endregion
     }
 }
