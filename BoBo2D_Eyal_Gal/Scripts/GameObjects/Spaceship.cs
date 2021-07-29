@@ -36,6 +36,8 @@ namespace BoBo2D_Eyal_Gal
         public Weapon GetMainWeapon => _mainWeapon;
         public Weapon GetSecondaryWeapon => _seconderyWeapon;
         public Weapon GetSpecialWeapon => _specialWeapon;
+        public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
+        public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
 
         #endregion
 
