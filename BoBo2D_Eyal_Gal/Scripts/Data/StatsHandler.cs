@@ -59,6 +59,16 @@ namespace BoBo2D_Eyal_Gal
         public static Vector2 Backward = new Vector2(0, -1);
         #endregion
         #region WeaponDataMethods
+        public static string GetWeaponTextureName(WeaponType weaponType)
+        {
+            switch (weaponType)
+            {
+                case WeaponType.BasicMainWeapon:
+                    return "PlayerShip";
+                default:
+                    return null;
+            }
+        }
         public static string GetProjectileTextureName(WeaponType weaponType)
         {
             switch (weaponType)
