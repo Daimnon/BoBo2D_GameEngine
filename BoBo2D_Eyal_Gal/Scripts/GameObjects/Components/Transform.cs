@@ -143,7 +143,7 @@ namespace BoBo2D_Eyal_Gal
         public override bool Equals(object obj)
         {
             return obj is Transform transform &&
-                   EqualityComparer<GameObject>.Default.Equals(GetSetGameObject, transform.GetSetGameObject) &&
+                   EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
                    EqualityComparer<Transform>.Default.Equals(GetSetTransform, transform.GetSetTransform) &&
                    Name == transform.Name &&
                    EqualityComparer<GameObject>.Default.Equals(_parent, transform._parent) &&

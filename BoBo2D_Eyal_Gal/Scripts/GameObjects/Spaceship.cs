@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -37,7 +38,7 @@ namespace BoBo2D_Eyal_Gal
         public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)
         {
             LoadStats(shipType);
-            //load basic weapon
+            LoadStartingWeapons(isPlayer);
         }
         void LoadStats(SpaceshipType shipType)
         {
@@ -54,8 +55,20 @@ namespace BoBo2D_Eyal_Gal
                 _damageScalar = stats.DamageScalar;
             }
         }
-        void loadWeapons(bool isPlayer)
+        void LoadStartingWeapons(bool isPlayer)
         {
+            //_mainWeapon = new Weapon(isPlayer, WeaponType.BasicMainWeapon);
+        }
+        public override void MoveGameObject(Vector2 direction)
+        {
+            Transform transform = GetComponent<Transform>();
+            transform.Position += direction*_speed;
+
+            BoxCollider boxCollider = GetComponent<BoxCollider>();
+            if (boxCollider != null)
+            {
+                boxCollider.Position = transform.Position;
+            }
         }
     }
 }

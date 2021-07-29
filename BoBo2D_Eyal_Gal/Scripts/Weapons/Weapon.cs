@@ -11,6 +11,7 @@ namespace BoBo2D_Eyal_Gal
     }
     public abstract class Weapon :Component
     {
+        #region Fields
         int _id;
         float _coolDown;
         int _ammo;
@@ -22,11 +23,12 @@ namespace BoBo2D_Eyal_Gal
         bool _isPlayer;
         Sprite _weaponSprite;
         Sprite _projectileSprite;
+        #endregion
         public Weapon(bool isPlayer,WeaponType weaponType)
         {
             _isPlayer = isPlayer;
-            _weaponSprite = new Sprite(GetSetGameObject, StatsHandler.GetWeaponTextureName(weaponType));
-            _projectileSprite = new Sprite(GetSetGameObject, StatsHandler.GetWeaponTextureName(weaponType));
+            _weaponSprite = new Sprite(GameObjectP, StatsHandler.GetWeaponTextureName(weaponType));
+            _projectileSprite = new Sprite(GameObjectP, StatsHandler.GetWeaponTextureName(weaponType));
             LoadStats(weaponType);
         }
         public virtual void Shoot()
