@@ -63,11 +63,15 @@ namespace BoBo2D_Eyal_Gal
         {
             Transform transform = GetComponent<Transform>();
             transform.Position += direction*_speed;
-
             BoxCollider boxCollider = GetComponent<BoxCollider>();
             if (boxCollider != null)
             {
                 boxCollider.Position = transform.Position;
+            }
+            Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
+            if (rigidbooty != null)
+            {
+                rigidbooty.TransformP.Position = transform.Position;
             }
         }
     }
