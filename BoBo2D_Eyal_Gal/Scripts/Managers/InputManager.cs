@@ -14,7 +14,7 @@ namespace BoBo2D_Eyal_Gal
         SeconderyWeapon = 1,
         SpecialWeapon = 2,
     }
-    class InputManager : IUpdatable, IStartable
+    class InputManager : IUpdatable
     {
         Spaceship _player;
         bool _usingWASD = false;
@@ -24,10 +24,6 @@ namespace BoBo2D_Eyal_Gal
             _player = player;
             SubscriptionManager.AddSubscriber<IStartable>(this);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
-        }
-        public void Start()
-        {
-            //getplayer gameobject
         }
         public void Update()
         {

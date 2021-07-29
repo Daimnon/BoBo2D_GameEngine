@@ -193,7 +193,6 @@ namespace BoBo2D_Eyal_Gal
                         return true;
                 }
             }
-
             return false;
         }
 
@@ -206,6 +205,11 @@ namespace BoBo2D_Eyal_Gal
             if (boxCollider != null)
             {
                 boxCollider.Position = transform.Position;
+            }
+            Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
+            if(rigidbooty != null)
+            {
+                rigidbooty.TransformP.Position = transform.Position;
             }
         }
         #endregion
