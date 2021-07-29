@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class Projectile: GameObject, IUpdatable, IStartable
+    public class Projectile: GameObject, IUpdatable
     {
         #region Fields
         float _damage;
@@ -19,16 +19,15 @@ namespace BoBo2D_Eyal_Gal
         public Vector2 SetProjectileDirection { set => _projectileDirection = value; }
         public bool SetFlying { set => _flying = value; }
         #endregion
-        public Projectile(string name, float Damage, Vector2 flightDirectin, Sprite sprite, Transform transform) : base(name)
+        public Projectile(string name, float Damage, Vector2 flightDirectin, Sprite projectileSprite,
+            Transform transform) : base(name)
         {
             _damage = Damage;
-            SubscriptionManager.AddSubscriber<IStartable>(this);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
             _projectileDirection = flightDirectin;
-        }
-        public void Start()
-        {
             _projectileTransform = GetComponent<Transform>();
+            _projectileSprite = projectileSprite;
+
         }
         public void Update()
         {

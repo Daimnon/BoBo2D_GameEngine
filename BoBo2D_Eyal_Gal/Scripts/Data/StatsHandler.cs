@@ -53,30 +53,18 @@ namespace BoBo2D_Eyal_Gal
         }
         #region Spaceship
 
-        static string BaseWeaponSpriteName = "BaseWeapon";
-        static string BaseWeaponProjectileSpriteName = "BaseWeaponProjectile";
         #endregion
         #region Direction
         public static Vector2 forward = new Vector2(0, 1);
         public static Vector2 Backward = new Vector2(0, -1);
         #endregion
         #region WeaponDataMethods
-        public static string GetWeaponTextureName(WeaponType weaponType)
-        {
-            switch (weaponType)
-            {
-                case WeaponType.BasicMainWeapon:
-                    return BaseWeaponSpriteName;
-                default:
-                    return null;
-            }
-        }
         public static string GetProjectileTextureName(WeaponType weaponType)
         {
             switch (weaponType)
             {
                 case WeaponType.BasicMainWeapon:
-                    return BaseWeaponProjectileSpriteName;
+                    return "PlayerShip";
                 default:
                     return null;
             }
