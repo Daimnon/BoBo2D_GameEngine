@@ -15,6 +15,7 @@ namespace BoBo2D_Eyal_Gal
         private Texture2D _backGround;
         private SpriteFont _gameFont = default;
         #endregion
+
         public Game1()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -32,11 +33,6 @@ namespace BoBo2D_Eyal_Gal
             DataManager.Game = this;
             DataManager.Instance.LoadAllExternalData();
             base.Initialize();
-        }
-
-        public T LoadData<T>(string fileName)
-        {
-            return Content.Load<T>(fileName);
         }
 
         protected override void LoadContent()
@@ -64,19 +60,9 @@ namespace BoBo2D_Eyal_Gal
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
-            GameObject go = _gameObjectManager.FindGameObjectByName("Player");
-            _playerTextures = go.GetComponent<Sprite>().GetSprite;
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_backGround, new Vector2(0, 0), Color.White);
-
-            if (go.IsEnabled)
-            {
-                Transform playerTransform = go.GetComponent<Transform>();
-                _spriteBatch.Draw(_playerTextures,playerTransform.Position , Color.White);
-                //_spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
-            }
-
+            // TODO: Add your update logic here
+            GameObject player = _gameObjectManager.FindGameObjectByName("Player");
+            StartDrawing(player);
             _spriteBatch.End();
 
             base.Draw(gameTime);
@@ -91,6 +77,25 @@ namespace BoBo2D_Eyal_Gal
             _player.AddComponent(new Sprite(_player, "PlayerShip"));
             InputManager im = new InputManager(_player);
 
+        }
+
+        void StartDrawing(GameObject player)
+        {
+            _playerTextures = player.GetComponent<Sprite>().GetSprite;
+            _spriteBatch.Begin();
+            _spriteBatch.Draw(_backGround, new Vector2(0, 0), Color.White);
+
+            if (player.IsEnabled)
+            {
+                Transform playerTransform = player.GetComponent<Transform>();
+                _spriteBatch.Draw(_playerTextures, playerTransform.Position, Color.White);
+                //_spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
+            }
+        }
+
+        public T LoadData<T>(string fileName)
+        {
+            return Content.Load<T>(fileName);
         }
     }
 }

@@ -12,6 +12,7 @@
         float _damageScalar;
         SpaceshipType _shipType;
         #endregion
+
         #region Propeties
         public SpaceshipType GetShipType => _shipType;
         public int MaxHealth => _maxHealth;
