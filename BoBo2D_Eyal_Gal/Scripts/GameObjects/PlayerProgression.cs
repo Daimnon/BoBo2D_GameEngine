@@ -35,7 +35,7 @@ namespace BoBo2D_Eyal_Gal
         }
         public static void StatUpdate()
         {
-            Player.
+            //Player.
         }
         #endregion
     }
