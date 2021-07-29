@@ -39,11 +39,18 @@ namespace BoBo2D_Eyal_Gal
         public Weapon GetMainWeapon => _mainWeapon;
         public Weapon GetSecondaryWeapon => _seconderyWeapon;
         public Weapon GetSpecialWeapon => _specialWeapon;
+        public float Health { get => _health; set => _health = value; }
+        public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+        public float HealthRegen { get => _healthRegen; set => _healthRegen = value; }
+        public float Shield { get => _shield; set => _shield = value; }
+        public float MaxShield { get => _maxShield; set => _maxShield = value; }
+        public float ShieldRegen { get => _shieldRegen; set => _shieldRegen = value; }
+        public float Speed { get => _speed; set => _speed = value; }
+        public float DamageScalar { get => _damageScalar; set => _damageScalar = value; } 
         public float Exp { get => _exp; set => _exp = value; }
         public float MaxExp { get => _maxExp; set => _maxExp = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
         public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
-
         #endregion
 
         public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)

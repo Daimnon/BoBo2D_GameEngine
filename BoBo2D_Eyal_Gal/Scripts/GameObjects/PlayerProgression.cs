@@ -33,9 +33,12 @@ namespace BoBo2D_Eyal_Gal
                 //_player.Exp = 0 + הפרש
             }
         }
+
         public static void StatUpdate()
         {
-            //Player.
+            Player.MaxHealth += 1;
+            Player.HealthRegen += 0.5f;
+            Player.MaxShield += 1;
         }
         #endregion
     }
