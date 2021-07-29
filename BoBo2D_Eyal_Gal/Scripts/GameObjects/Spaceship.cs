@@ -23,6 +23,8 @@ namespace BoBo2D_Eyal_Gal
         float _shieldRegen; 
         float _speed;       
         float _damageScalar;
+        float _exp;
+        float _maxExp;
         bool _isPlayer;
         bool _isDefeatedByPlayer = false;
         bool _isDefeatedByEnemy = false;
@@ -36,6 +38,8 @@ namespace BoBo2D_Eyal_Gal
         public Weapon GetMainWeapon => _mainWeapon;
         public Weapon GetSecondaryWeapon => _seconderyWeapon;
         public Weapon GetSpecialWeapon => _specialWeapon;
+        public float Exp { get => _exp; set => _exp = value; }
+        public float MaxExp { get => _maxExp; set => _maxExp = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
         public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
 
