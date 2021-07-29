@@ -20,7 +20,7 @@ namespace BoBo2D_Eyal_Gal
 
         public static void Lvlup(Spaceship enemy)
         {
-            if (enemy.isEnemyDefeated)
+            if (enemy.IsDefeatedByPlayer)
             {
 
             }
