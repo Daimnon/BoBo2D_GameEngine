@@ -25,6 +25,7 @@ namespace BoBo2D_Eyal_Gal
         float _damageScalar;
         float _exp;
         float _maxExp;
+        int _score;
         bool _isPlayer;
         bool _isDefeatedByPlayer = false;
         bool _isDefeatedByEnemy = false;
@@ -75,6 +76,8 @@ namespace BoBo2D_Eyal_Gal
                 _shieldRegen = stats.ShieldRegen;
                 _speed = stats.Speed;
                 _damageScalar = stats.DamageScalar;
+                _score = stats.Score;
+                _mainWeapon = new Weapon(_isPlayer,this,stats.WeaponType);
             }
         }
 
