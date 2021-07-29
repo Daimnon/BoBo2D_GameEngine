@@ -11,12 +11,15 @@ namespace BoBo2D_Eyal_Gal
             switch (type)
             {
                 case SelectedWeapon.MainWeapon:
+                    if(spaceship.GetMainWeapon!= null)
                     spaceship.GetMainWeapon.Shoot();
                     break;
                 case SelectedWeapon.SeconderyWeapon:
+                    if(spaceship.GetSecondaryWeapon!= null)
                     spaceship.GetSecondaryWeapon.Shoot();
                     break;
                 case SelectedWeapon.SpecialWeapon:
+                    if(spaceship.GetSpecialWeapon != null)
                     spaceship.GetSpecialWeapon.Shoot();
                     break;
                 default:
