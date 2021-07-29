@@ -9,9 +9,11 @@ namespace BoBo2D_Eyal_Gal
     {
         BasicMainWeapon = 0,
     }
-    public abstract class Weapon :Component
+    public class Weapon
     {
         #region Fields
+        Spaceship _spaceShip;
+
         int _id;
         float _coolDown;
         int _ammo;
@@ -24,31 +26,37 @@ namespace BoBo2D_Eyal_Gal
         Sprite _weaponSprite;
         Sprite _projectileSprite;
         #endregion
-        public Weapon(bool isPlayer,WeaponType weaponType)
+        public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType)
         {
+            _spaceShip = spaceShip;
             _isPlayer = isPlayer;
-            _weaponSprite = new Sprite(GameObjectP, StatsHandler.GetWeaponTextureName(weaponType));
-            _projectileSprite = new Sprite(GameObjectP, StatsHandler.GetWeaponTextureName(weaponType));
+            GetSprites(weaponType, _spaceShip);
             LoadStats(weaponType);
         }
-        public virtual void Shoot()
+        public void Shoot()
         {
             //check for cooldown and ammo
             if(_coolDown <= 0 && _ammo > 0)
             {
                 float finalDamage = CalculateDamage(_baseDamage, _damageScalar);
                 Vector2 flightDirection = Direction();
-                Projectile projectile = new Projectile(_projectileName, finalDamage,flightDirection, _projectileSprite);
-                //create a new projectile with sprite
-                //add stats to projectile
-                //fire projecetile by giving it a vector that it will go towards
+                Transform transform = _spaceShip.GetComponent<Transform>();
+                if (transform != null && _projectileSprite != null && _projectileName != null)
+                {
+                    new Projectile(_projectileName, finalDamage, flightDirection, _projectileSprite, transform);
+                }
             }
         }
-        public virtual float CalculateDamage(float baseDamage, float damageScalar)
+        public void GetSprites(WeaponType weaponType, GameObject spaceShip)
+        {
+            _weaponSprite = new Sprite(spaceShip, StatsHandler.GetWeaponTextureName(weaponType));
+            _projectileSprite = new Sprite(spaceShip, StatsHandler.GetWeaponTextureName(weaponType));
+        }
+        public float CalculateDamage(float baseDamage, float damageScalar)
         {
             return baseDamage * damageScalar;
         }
-        public virtual Vector2 Direction()
+        public Vector2 Direction()
         {
             if(_isPlayer)
             {

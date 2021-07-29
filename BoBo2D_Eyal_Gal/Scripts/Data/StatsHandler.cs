@@ -41,10 +41,12 @@ namespace BoBo2D_Eyal_Gal
             }
             return null;
         }
+
         public static T GetStats<T> (SpaceshipType shipType) where T: Stats
         {
             return GetStats<ShipStats>(Stats.StatsType.Ship, (int)shipType) as T;
         }
+
         public static T GetStats<T> (WeaponType weaponType) where T: Stats
         {
             return GetStats<WeaponStats>(Stats.StatsType.Weapon, (int)weaponType) as T;
