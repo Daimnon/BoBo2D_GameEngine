@@ -69,14 +69,12 @@ namespace BoBo2D_Eyal_Gal
         }
         void CreatePlayer()
         {
-
             _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship,"Player", true);
             _gameObjectManager.AddNewParent(_player);
             _player.AddComponent(new Rigidbooty(_player));
             _player.AddComponent(new BoxCollider(_player));
             _player.AddComponent(new Sprite(_player, "PlayerShip"));
             InputManager im = new InputManager(_player);
-
         }
 
         void StartDrawing(GameObject player)
