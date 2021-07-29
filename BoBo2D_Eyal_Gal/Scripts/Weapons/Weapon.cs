@@ -23,7 +23,6 @@ namespace BoBo2D_Eyal_Gal
         string _weaponName;
         string _projectileName;
         bool _isPlayer;
-        Sprite _weaponSprite;
         Sprite _projectileSprite;
         #endregion
         public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType)
@@ -49,8 +48,7 @@ namespace BoBo2D_Eyal_Gal
         }
         public void GetSprites(WeaponType weaponType, GameObject spaceShip)
         {
-            _weaponSprite = new Sprite(spaceShip, StatsHandler.GetWeaponTextureName(weaponType));
-            _projectileSprite = new Sprite(spaceShip, StatsHandler.GetWeaponTextureName(weaponType));
+            _projectileSprite = new Sprite(spaceShip, StatsHandler.GetProjectileTextureName(weaponType));
         }
         public float CalculateDamage(float baseDamage, float damageScalar)
         {

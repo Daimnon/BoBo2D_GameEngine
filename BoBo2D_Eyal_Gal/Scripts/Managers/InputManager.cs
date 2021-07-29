@@ -22,7 +22,6 @@ namespace BoBo2D_Eyal_Gal
         public InputManager(Spaceship player)
         {
             _player = player;
-            SubscriptionManager.AddSubscriber<IStartable>(this);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
         public void Update()
