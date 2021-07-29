@@ -88,12 +88,8 @@ namespace BoBo2D_Eyal_Gal
             foreach (GameObject gameObject in GetSetGameObjects)
                 gameObject.GetComponent<Rigidbooty>();
 
-
             Console.WriteLine("Executing Update");
-            Console.ReadLine();
-            Console.WriteLine();
         }
-
         public void OnEnable()//Enabling all game objects
         {
             if (GetHirarchy != null || GetHirarchy.Count != 0)
