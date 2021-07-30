@@ -31,12 +31,14 @@ namespace BoBo2D_Eyal_Gal
             {
                 StatUpdate();
                 ResetExp();
+                UpgradeWeapon();
                 //special effects
             }
         }
 
         public static void StatUpdate()
         {
+            Player.CurrentLvl++;
             Player.MaxHealth += 1;
             Player.HealthRegen += 0.5f;
             Player.MaxShield += 1;
@@ -50,6 +52,27 @@ namespace BoBo2D_Eyal_Gal
             tempExp = Player.Exp - Player.MaxExp;
             Player.Exp = tempExp;
             Player.MaxExp *= 1.5f;
+        }
+
+        public static void UpgradeWeapon()
+        {
+            switch (true)
+            {
+                case true when Player.CurrentLvl < 3:
+                    Player.CurrentWeapon = Player.FirstWeapon;
+                    break;
+
+                case true when Player.CurrentLvl < 6 && Player.CurrentLvl > 3:
+                    Player.CurrentWeapon = Player.SecondWeapon;
+                    break;
+
+                case true when Player.CurrentLvl < 10 && Player.CurrentLvl > 6:
+                    Player.CurrentWeapon = Player.ThirdWeapon;
+                    break;
+
+                default:
+                    break;
+            }
         }
         #endregion
     }

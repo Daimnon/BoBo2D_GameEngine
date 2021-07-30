@@ -77,3 +77,5 @@ C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcor
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.dll
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.pdb
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.genruntimeconfig.cache
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\EnemyBoss.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\RebelShip.xnb

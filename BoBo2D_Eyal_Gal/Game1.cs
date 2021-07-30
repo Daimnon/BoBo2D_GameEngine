@@ -8,8 +8,8 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
         private GameObjectManager _gameObjectManager;
+        private SpriteBatch _spriteBatch;
         private Spaceship _player;
         private Texture2D _playerTextures;
         private Texture2D _backGround;

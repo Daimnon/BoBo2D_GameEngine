@@ -96,10 +96,8 @@ namespace BoBo2D_Eyal_Gal
             {
                 Console.WriteLine("Enabling Scene");
                 foreach (var tree in Hirarchy)
-                {
                     tree.Root.EnableNode(tree.Root);
                     //gameObject.Enable();
-                }
 
                 Console.WriteLine("Scene Enabled");
                 Console.WriteLine();

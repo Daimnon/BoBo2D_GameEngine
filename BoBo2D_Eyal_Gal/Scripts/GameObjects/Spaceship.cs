@@ -14,9 +14,10 @@ namespace BoBo2D_Eyal_Gal
     public class Spaceship : GameObject
     {
         #region Fields
-        Weapon _mainWeapon, _seconderyWeapon, _specialWeapon;
+        Weapon _currentWeapon, _firstWeapon, _secondWeapon, _thirdWeapon;
         Sprite _sprite;
         float _health, _maxHealth, _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
+        int _currentLvl = 1;
         int _score;
         bool _isPlayer;
         bool _isDefeatedByPlayer = false;
@@ -24,9 +25,10 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Propetries
-        public Weapon MainWeapon => _mainWeapon;
-        public Weapon SecondaryWeapon => _seconderyWeapon;
-        public Weapon SpecialWeapon => _specialWeapon;
+        public Weapon CurrentWeapon { get => _currentWeapon; set => _currentWeapon = value; }
+        public Weapon FirstWeapon => _firstWeapon;
+        public Weapon SecondWeapon => _secondWeapon;
+        public Weapon ThirdWeapon => _thirdWeapon;
         public float Health { get => _health; set => _health = value; }
         public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
         public float HealthRegen { get => _healthRegen; set => _healthRegen = value; }
@@ -37,6 +39,7 @@ namespace BoBo2D_Eyal_Gal
         public float DamageScalar { get => _damageScalar; set => _damageScalar = value; } 
         public float Exp { get => _exp; set => _exp = value; }
         public float MaxExp { get => _maxExp; set => _maxExp = value; }
+        public int CurrentLvl { get => _currentLvl; set => _currentLvl = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
         public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
         #endregion
@@ -75,7 +78,7 @@ namespace BoBo2D_Eyal_Gal
                 _speed = stats.Speed;
                 _damageScalar = stats.DamageScalar;
                 _score = stats.Score;
-                _mainWeapon = new Weapon(_isPlayer,this,stats.WeaponType);
+                _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType);
             }
         }
 
