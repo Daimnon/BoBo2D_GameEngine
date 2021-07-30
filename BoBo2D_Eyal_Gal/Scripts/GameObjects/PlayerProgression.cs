@@ -30,8 +30,8 @@ namespace BoBo2D_Eyal_Gal
             if (_player.Exp >= _player.MaxExp)
             {
                 StatUpdate();
-                //reset exp bar and continue from 0
-                //_player.Exp = 0 + הפרש
+                ResetExp();
+                //special effects
             }
         }
 
@@ -42,6 +42,14 @@ namespace BoBo2D_Eyal_Gal
             Player.MaxShield += 1;
             Player.ShieldRegen += 1;
             Player.DamageScalar += 0.1f;
+        }
+
+        public static void ResetExp()
+        {
+            float tempExp;
+            tempExp = Player.Exp - Player.MaxExp;
+            Player.Exp = tempExp;
+            Player.MaxExp *= 1.5f;
         }
         #endregion
     }
