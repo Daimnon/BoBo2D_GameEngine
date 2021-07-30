@@ -9,17 +9,19 @@ namespace BoBo2D_Eyal_Gal
     public class Projectile: GameObject, IUpdatable
     {
         #region Fields
-        float _damage;
-        Vector2 _projectileDirection;
-        bool _flying = false;
         Transform _projectileTransform;
+        Vector2 _projectileDirection;
+        float _damage;
+        bool _flying = false;
         #endregion
+
         #region Properties
-        public Vector2 SetProjectileDirection { set => _projectileDirection = value; }
-        public bool SetFlying { set => _flying = value; }
+        public Vector2 ProjectileDirection { set => _projectileDirection = value; }
+        public bool Flying { set => _flying = value; }
         #endregion
-        public Projectile(string name, float Damage, Vector2 flightDirectin, WeaponType weaponType,
-            Transform transform) : base(name)
+
+        public Projectile(string name, float Damage, Vector2 flightDirectin,
+            WeaponType weaponType, Transform transform) : base(name)
         {
             Components.Add(new Sprite(this, StatsHandler.GetProjectileTextureName(weaponType)));
             _damage = Damage;
@@ -34,9 +36,7 @@ namespace BoBo2D_Eyal_Gal
         public void Update()
         {
             if(_flying)
-            {
                 MoveGameObject(_projectileDirection);
-            }
         }
     }
 }

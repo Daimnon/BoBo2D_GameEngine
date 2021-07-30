@@ -29,8 +29,8 @@ namespace BoBo2D_Eyal_Gal
         public float X { get => _x; set => _x = value; }
         public float Y { get => _y; set => _y = value; }
         public float Z { get => _z; set => _z = value; }
-        public float Magnitude { get => _magnitude; }
-        public float SqrMagnitude { get => _sqrMagnitude; }
+        public float Magnitude => _magnitude;
+        public float SqrMagnitude => _sqrMagnitude;
         public static Vector3D Front { get => _forward; set => _forward = value; }
         public static Vector3D Back { get => _back; set => _back = value; }
         public static Vector3D Left { get => _left; set => _left = value; }

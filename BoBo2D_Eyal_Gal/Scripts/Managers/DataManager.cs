@@ -32,15 +32,18 @@ namespace BoBo2D_Eyal_Gal
             _spriteDataHolder = new SpritesDataHolder();
         }
         #endregion
+
         #region Fields
         static Game1 _game;
         SpritesDataHolder _spriteDataHolder;
         SoundsDataHolder _soundDataHolder;
         #endregion
+
         #region Properties
         public static Game1 Game { get => _game; set => _game = value; } //Stores the current game
         //public SpriteDataHolder SpriteDataHolder => _spriteDataHolder;
         #endregion
+        
         #region Methods
         public void LoadAllExternalData()
         {
@@ -62,5 +65,6 @@ namespace BoBo2D_Eyal_Gal
             return _soundDataHolder.GetSoundEffect(dataName);
         }
         #endregion
+
     }
 }

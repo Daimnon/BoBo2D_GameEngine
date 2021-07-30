@@ -9,6 +9,8 @@ namespace BoBo2D_Eyal_Gal
     public class BoxCollider : Component
     {
         #region Fields
+        Vector2 _scale = new Vector2(1, 1);
+        Vector2 _position = new Vector2();
         string _name;
         // distance from center to horizontal edge
         float _cX;
@@ -17,19 +19,13 @@ namespace BoBo2D_Eyal_Gal
         // distance from center to diagonal edge
         float _cZ;
 
-        float _boxTop;
-        float _boxBottom;
-        float _boxLeft;
-        float _boxRight;
-        float _boxFront;
-        float _boxBack;
-        Vector2 _scale = new Vector2(1, 1);
-        Vector2 _position = new Vector2();
-
+        float _boxTop, _boxBottom, _boxLeft, _boxRight, _boxFront, _boxBack;
         bool _isEnabled = true;
         #endregion
 
         #region Properties
+        public Vector2 Scale { get => _scale; set => _scale = value; }
+        public Vector2 Position { get => _position; set => _position = value; }
         public string Name { get => _name; set => _name = value; }
         public float CX { get => _cX; set => _cX = value; }
         public float CY { get => _cY; set => _cY = value; }
@@ -40,8 +36,6 @@ namespace BoBo2D_Eyal_Gal
         public float BoxRight { get => _boxRight; set => _boxRight = value; }
         public float BoxFront { get => _boxFront; set => _boxFront = value; }
         public float BoxBack { get => _boxBack; set => _boxBack = value; }
-        public Vector2 Scale { get => _scale; set => _scale = value; }
-        public Vector2 Position { get => _position; set => _position = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
         #endregion
 

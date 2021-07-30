@@ -28,6 +28,7 @@
         public int Score => _score;
 
         #endregion
+
         public ShipStats(SpaceshipType shipType,WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
             float shieldRegen,float speed, float damageScalar, int score) : base(StatsType.Ship)
         {

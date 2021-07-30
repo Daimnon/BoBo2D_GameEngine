@@ -26,6 +26,7 @@ namespace BoBo2D_Eyal_Gal
             //SubscriptionManager.AddSubscriber<IStartable>(this);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
+
         public void Update()
         {
             if(_usingWASD)

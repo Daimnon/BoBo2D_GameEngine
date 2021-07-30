@@ -11,7 +11,6 @@ namespace BoBo2D_Eyal_Gal
         #region Fields
         List<Component> _components = new List<Component>();
         Node _parentNode;
-
         string _name;
         bool _isEnabled;
         bool _isActive = true;
@@ -19,6 +18,7 @@ namespace BoBo2D_Eyal_Gal
 
         #region Properties
         public List<Component> Components { get => _components; set => _components = value; }
+        public Node ParentNode { get => _parentNode; set => _parentNode = value; }
         public string Name { get => _name; set => _name = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
         public bool IsActive
@@ -29,7 +29,6 @@ namespace BoBo2D_Eyal_Gal
                 _isEnabled = value;
             }
         }
-        public Node GetSetParentNode { get => _parentNode; set => _parentNode = value; }
         #endregion
 
         #region Constructors
