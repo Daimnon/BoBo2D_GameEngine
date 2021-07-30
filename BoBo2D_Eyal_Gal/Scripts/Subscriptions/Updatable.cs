@@ -33,9 +33,9 @@ namespace BoBo2D_Eyal_Gal
         }
         public void RunUpdate()
         {
-            foreach (var updatable in _updatablesList)
+            for (int i = 0; i < _updatablesList.Count; i++)
             {
-                updatable.Update();
+                _updatablesList[i].Update();
             }
         }
         #endregion

@@ -171,20 +171,20 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Operators
-        public static bool operator ==(Transform firstTransform, Transform secondTransform)
-        {
-            if (firstTransform == secondTransform)
-                return true;
-            else
-                return false;
-        }
-        public static bool operator !=(Transform firstTransform, Transform secondTransform)
-        {
-            if (firstTransform != secondTransform)
-                return true;
-            else
-                return false;
-        }
+        //public static bool operator ==(Transform firstTransform, Transform secondTransform)
+        //{
+        //    if (firstTransform == secondTransform)
+        //        return true;
+        //    else
+        //        return false;
+        //}
+        //public static bool operator !=(Transform firstTransform, Transform secondTransform)
+        //{
+        //    if (firstTransform != secondTransform)
+        //        return true;
+        //    else
+        //        return false;
+        //}
         #endregion
     }
 }

@@ -4,7 +4,7 @@
     {
         #region Fields
         WeaponType _weaponType;
-        float _coolDown;
+        float _cooldown;
         int _maxAmmo;
         float _baseDamage;
         float _damageScalar;
@@ -15,7 +15,7 @@
 
         #region Properties
         public WeaponType WeaponType => _weaponType;
-        public float CoolDown => _coolDown;
+        public float Cooldown => _cooldown;
         public int MaxAmmo => _maxAmmo;
         public float BaseDamage => _baseDamage;
         public float DamageScalar => _damageScalar;
@@ -28,7 +28,7 @@
             float damageScalar):base (StatsType.Weapon)
         {
             _weaponType = weaponType;
-            _coolDown = cooldown;
+            _cooldown = cooldown;
             _maxAmmo = maxAmmo;
             _baseDamage = baseDamage;
             _damageScalar = damageScalar;

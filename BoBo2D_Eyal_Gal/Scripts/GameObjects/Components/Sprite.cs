@@ -27,5 +27,9 @@ namespace BoBo2D_Eyal_Gal
             _name = spriteName;
             parent = parentObject;
         }
+        public override string ToString()
+        {
+            return $"Sprite of {Name}" + Environment.NewLine;
+        }
     }
 }
