@@ -48,13 +48,11 @@ namespace BoBo2D_Eyal_Gal
         public void LoadAllExternalData()
         {
             if(_spriteDataHolder!=null)
-            {
                 _spriteDataHolder.LoadSpriteData(_game);
-            }
+
             if(_soundDataHolder!=null)
-            {
                 _soundDataHolder.LoadSoundData(_game);
-            }
+
         }
         public Texture2D GetTexture2D(string dataName)
         {
