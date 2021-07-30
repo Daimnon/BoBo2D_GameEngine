@@ -17,7 +17,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public Texture2D GetSprite => _texture;
+        public Texture2D Texture => _texture;
         public string Name { get => _name; set => _name = value; }
         #endregion
 
@@ -26,6 +26,10 @@ namespace BoBo2D_Eyal_Gal
             _texture = DataManager.Instance.GetTexture2D(spriteName);
             _name = spriteName;
             parent = parentObject;
+        }
+        public override string ToString()
+        {
+            return $"Sprite of {Name}" + Environment.NewLine;
         }
     }
 }

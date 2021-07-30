@@ -14,31 +14,19 @@ namespace BoBo2D_Eyal_Gal
     public class Spaceship : GameObject
     {
         #region Fields
+        Weapon _mainWeapon, _seconderyWeapon, _specialWeapon;
         Sprite _sprite;
-        float _health;
-        float _maxHealth;
-        float _healthRegen;
-        float _shield;
-        float _maxShield;
-        float _shieldRegen; 
-        float _speed;       
-        float _damageScalar;
-        float _exp;
-        float _maxExp;
+        float _health, _maxHealth, _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
         int _score;
         bool _isPlayer;
         bool _isDefeatedByPlayer = false;
         bool _isDefeatedByEnemy = false;
-
-        Weapon _mainWeapon;
-        Weapon _seconderyWeapon;
-        Weapon _specialWeapon;
         #endregion
 
         #region Propetries
-        public Weapon GetMainWeapon => _mainWeapon;
-        public Weapon GetSecondaryWeapon => _seconderyWeapon;
-        public Weapon GetSpecialWeapon => _specialWeapon;
+        public Weapon MainWeapon => _mainWeapon;
+        public Weapon SecondaryWeapon => _seconderyWeapon;
+        public Weapon SpecialWeapon => _specialWeapon;
         public float Health { get => _health; set => _health = value; }
         public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
         public float HealthRegen { get => _healthRegen; set => _healthRegen = value; }
@@ -60,7 +48,10 @@ namespace BoBo2D_Eyal_Gal
 
             if (isPlayer)
             {
+                //connect progression system to player
                 PlayerProgression.Player = this;
+
+                //starting position
                 PlayerProgression.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
             }
         }
@@ -91,19 +82,6 @@ namespace BoBo2D_Eyal_Gal
         void LoadStartingWeapons(bool isPlayer)
         {
             //_mainWeapon = new Weapon(isPlayer, WeaponType.BasicMainWeapon);
-        }
-
-        public void LevelUp()
-        {
-            _maxHealth += 1;
-            _maxShield *= 1.5f;
-            _speed += 0.5f;
-            _damageScalar *= 2;
-        }
-
-        public void Upgrade()
-        {
-
         }
 
         public override void MoveGameObject(Vector2 direction)

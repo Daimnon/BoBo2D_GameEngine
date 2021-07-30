@@ -29,7 +29,7 @@ namespace BoBo2D_Eyal_Gal
         public Node(GameObject gameObject, Node parent)
         {
             _gameObject = gameObject;
-            _gameObject.GetSetParentNode = this;
+            _gameObject.ParentNode = this;
             _children = new List<Node>();
             if (parent != null)
             {

@@ -144,10 +144,10 @@ namespace BoBo2D_Eyal_Gal
         {
             return obj is Transform transform &&
                    EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
-                   EqualityComparer<Transform>.Default.Equals(GetSetTransform, transform.GetSetTransform) &&
+                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
                    Name == transform.Name &&
                    EqualityComparer<GameObject>.Default.Equals(_parent, transform._parent) &&
-                   EqualityComparer<Transform>.Default.Equals(GetSetTransform, transform.GetSetTransform) &&
+                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
                    Name == transform.Name &&
                    EqualityComparer<Vector2>.Default.Equals(_position, transform._position) &&
                    EqualityComparer<Vector2>.Default.Equals(_scale, transform._scale) &&
@@ -155,7 +155,7 @@ namespace BoBo2D_Eyal_Gal
                    EqualityComparer<Vector2>.Default.Equals(_yAxis, transform._yAxis) &&
                    //EqualityComparer<Vector3D>.Default.Equals(_zAxis, transform._zAxis) &&
                    EqualityComparer<GameObject>.Default.Equals(Parent, transform.Parent) &&
-                   EqualityComparer<Transform>.Default.Equals(GetSetTransform, transform.GetSetTransform) &&
+                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
                    Name == transform.Name &&
                    EqualityComparer<Vector2>.Default.Equals(Position, transform.Position) &&
                    EqualityComparer<Vector2>.Default.Equals(Scale, transform.Scale) &&
@@ -171,20 +171,20 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Operators
-        public static bool operator ==(Transform firstTransform, Transform secondTransform)
-        {
-            if (firstTransform == secondTransform)
-                return true;
-            else
-                return false;
-        }
-        public static bool operator !=(Transform firstTransform, Transform secondTransform)
-        {
-            if (firstTransform != secondTransform)
-                return true;
-            else
-                return false;
-        }
+        //public static bool operator ==(Transform firstTransform, Transform secondTransform)
+        //{
+        //    if (firstTransform == secondTransform)
+        //        return true;
+        //    else
+        //        return false;
+        //}
+        //public static bool operator !=(Transform firstTransform, Transform secondTransform)
+        //{
+        //    if (firstTransform != secondTransform)
+        //        return true;
+        //    else
+        //        return false;
+        //}
         #endregion
     }
 }

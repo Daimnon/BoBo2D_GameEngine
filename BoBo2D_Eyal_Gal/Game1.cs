@@ -79,7 +79,7 @@ namespace BoBo2D_Eyal_Gal
 
         void StartDrawing(GameObject player)
         {
-            _playerTextures = player.GetComponent<Sprite>().GetSprite;
+            _playerTextures = player.GetComponent<Sprite>().Texture;
             _spriteBatch.Begin();
             _spriteBatch.Draw(_backGround, new Vector2(0, 0), Color.White);
 

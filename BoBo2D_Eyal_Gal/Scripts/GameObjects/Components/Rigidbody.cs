@@ -11,10 +11,9 @@ namespace BoBo2D_Eyal_Gal
         GameObject _gameObject;
         Transform _transform;
         BoxCollider _boxCollider;
-
+        Vector3D _position;
         string _name;
         float _velocity, _gravityScale, _mass, _drag;
-        Vector3D _position;
         bool _useGravity, _isKinematic, _freezRotation;
         #endregion
 
@@ -22,12 +21,12 @@ namespace BoBo2D_Eyal_Gal
         public GameObject GameObject{ get => _gameObject; set => _gameObject = value; }
         public Transform TransformP { get => _transform; set => _transform = value; }
         public BoxCollider BoxColliderP { get => _boxCollider; set => _boxCollider = value; }
+        public Vector3D Position { get => _position; set => _position = value; }
         public string Name { get => _name; set => _name = value; }
         public float Velocity { get => _velocity; set => _velocity = value; }
         public float GravityScale { get => _gravityScale; set => _gravityScale = value; }
         public float Mass { get => _mass; set => _mass = value; }
         public float Drag { get => _drag; set => _drag = value; }
-        public Vector3D Position { get => _position; set => _position = value; }
         public bool UseGravity { get => _useGravity; set => _useGravity = value; }
         public bool IsKinematic { get => _isKinematic; set => _isKinematic = value; }
         public bool FreezRotation { get => _freezRotation; set => _freezRotation = value; }

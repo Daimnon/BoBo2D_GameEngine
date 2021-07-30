@@ -16,9 +16,9 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public List<TreeOfGameObjects> GetHirarchy => _hirarchy;
-        public List<GameObject> GetSetGameObjects { get => _gameObjects; set => _gameObjects = value; }
-        public GameObject @GameObject { get => _gameObject; set => _gameObject = value; }
+        public List<TreeOfGameObjects> Hirarchy => _hirarchy;
+        public List<GameObject> GameObjectsP { get => _gameObjects; set => _gameObjects = value; }
+        public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
         public int SceneIndex { get => _sceneIndex; set => _sceneIndex = value; }
 
         #endregion
@@ -34,18 +34,18 @@ namespace BoBo2D_Eyal_Gal
         public void Start()
         {
             Console.WriteLine("Starting Scene");
-            GetSetGameObjects.Add(new GameObject("Empty Game Object", new Transform(new Vector2(0, 0), new Vector2(1, 1))));
+            GameObjectsP.Add(new GameObject("Empty Game Object", new Transform(new Vector2(0, 0), new Vector2(1, 1))));
 
             //testing hirarcy
 
-            GetHirarchy.Add(new TreeOfGameObjects(new Node(new GameObject("Player"), null)));
-            new Node(new GameObject("Player Hand", new Transform(new Vector2(0, 0), new Vector2(1, 1))), GetHirarchy[0].Root);
+            Hirarchy.Add(new TreeOfGameObjects(new Node(new GameObject("Player"), null)));
+            new Node(new GameObject("Player Hand", new Transform(new Vector2(0, 0), new Vector2(1, 1))), Hirarchy[0].Root);
             BoxCollider bc = new BoxCollider(_gameObjects[0]);
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(bc);
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(new BoxCollider(_gameObjects[0]));
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(bc);
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.GetComponent<Transform>();
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(bc);
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(new BoxCollider(_gameObjects[0]));
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(bc);
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.GetComponent<Transform>();
             GetGameObject("Player Hand");
             GetGameObject("Player");
 
@@ -60,22 +60,22 @@ namespace BoBo2D_Eyal_Gal
             GameObject emptyGameObject = new GameObject("Empty Game Object", new Transform(new Vector2(0, 0), new Vector2(1, 1)));
             GameObject playerHand = new GameObject("Player Hand", new Transform(new Vector2(0, 0), new Vector2(1, 1)));
 
-            Node node = new Node(playerHand, GetHirarchy[0].Root);
+            Node node = new Node(playerHand, Hirarchy[0].Root);
             Node treeNode = new Node(player, null);
 
             TreeOfGameObjects tree = new TreeOfGameObjects(treeNode);
             Console.WriteLine("Starting Scene");
-            GetSetGameObjects.Add(@GameObject);
+            GameObjectsP.Add(GameObjectP);
 
             //testing hirarcy
 
-            GetHirarchy.Add(tree);
+            Hirarchy.Add(tree);
             BoxCollider bc = new BoxCollider(_gameObjects[0]);
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(bc);
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(new BoxCollider(_gameObjects[0]));
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(bc);
-            GetHirarchy[0].Root.GetChildren[0].GetGameObject.GetComponent<Transform>();
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(bc);
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(new BoxCollider(_gameObjects[0]));
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(bc);
+            Hirarchy[0].Root.GetChildren[0].GetGameObject.GetComponent<Transform>();
             GetGameObject("Player Hand");
             GetGameObject("Player");
 
@@ -85,17 +85,17 @@ namespace BoBo2D_Eyal_Gal
         }
         public void Update()
         {
-            foreach (GameObject gameObject in GetSetGameObjects)
+            foreach (GameObject gameObject in GameObjectsP)
                 gameObject.GetComponent<Rigidbooty>();
 
             Console.WriteLine("Executing Update");
         }
         public void OnEnable()//Enabling all game objects
         {
-            if (GetHirarchy != null || GetHirarchy.Count != 0)
+            if (Hirarchy != null || Hirarchy.Count != 0)
             {
                 Console.WriteLine("Enabling Scene");
-                foreach (var tree in GetHirarchy)
+                foreach (var tree in Hirarchy)
                 {
                     tree.Root.EnableNode(tree.Root);
                     //gameObject.Enable();
@@ -112,7 +112,7 @@ namespace BoBo2D_Eyal_Gal
 
         public void OnDisable()
         {
-            foreach (var tree in GetHirarchy)
+            foreach (var tree in Hirarchy)
                 tree.Root.GetGameObject.Disable();
 
         }
@@ -120,7 +120,7 @@ namespace BoBo2D_Eyal_Gal
         public void GetGameObject(string gameObjectName)
         {
             Console.WriteLine($"Looking for GameObject with the name:{gameObjectName}");
-            foreach (var tree in GetHirarchy)
+            foreach (var tree in Hirarchy)
                 tree.Root.FindGameObject(gameObjectName);
 
             Console.WriteLine();

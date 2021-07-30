@@ -15,7 +15,8 @@ namespace BoBo2D_Eyal_Gal
         Spaceship _spaceShip;
 
         int _id;
-        float _coolDown;
+        float _currentCoolDown;
+        float _maxCooldown;
         int _ammo;
         int _maxAmmo;
         float _baseDamage;
@@ -23,32 +24,31 @@ namespace BoBo2D_Eyal_Gal
         string _weaponName;
         string _projectileName;
         bool _isPlayer;
-        Sprite _projectileSprite;
+        WeaponType _weaponType;
         #endregion
         public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType)
         {
             _spaceShip = spaceShip;
             _isPlayer = isPlayer;
-            GetSprites(weaponType, _spaceShip);
             LoadStats(weaponType);
         }
         public void Shoot()
         {
             //check for cooldown and ammo
-            if(_coolDown <= 0 && _ammo > 0)
+            if(_currentCoolDown <= 0 && _ammo > 0)
             {
                 float finalDamage = CalculateDamage(_baseDamage, _damageScalar);
                 Vector2 flightDirection = Direction();
                 Transform transform = _spaceShip.GetComponent<Transform>();
-                if (transform != null && _projectileSprite != null && _projectileName != null)
+                if (transform != null && _projectileName != null)
                 {
-                    new Projectile(_projectileName, finalDamage, flightDirection, _projectileSprite, transform);
+                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform);
                 }
             }
-        }
-        public void GetSprites(WeaponType weaponType, GameObject spaceShip)
-        {
-            _projectileSprite = new Sprite(spaceShip, StatsHandler.GetProjectileTextureName(weaponType));
+            else
+            {
+                //error sound
+            }
         }
         public float CalculateDamage(float baseDamage, float damageScalar)
         {
@@ -72,13 +72,14 @@ namespace BoBo2D_Eyal_Gal
             if(stats != null)
             {
                 _id = stats.Id;
-                _coolDown = stats.CoolDown;
+                _maxCooldown = stats.Cooldown;
                 _ammo = stats.MaxAmmo;
                 _maxAmmo = stats.MaxAmmo;
                 _baseDamage = stats.BaseDamage;
                 _damageScalar = stats.DamageScalar;
                 _weaponName = stats.WeaponName;
                 _projectileName = stats.ProjectileName;
+                _weaponType = weaponType;
             }   
         }       
                 

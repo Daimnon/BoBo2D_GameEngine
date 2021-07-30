@@ -10,6 +10,7 @@ namespace BoBo2D_Eyal_Gal
         static Updatable<IUpdatable> _updatable = new Updatable<IUpdatable>();
         static Startable<IStartable> _startable = new Startable<IStartable>();
         #endregion
+
         #region Methods
         public static void AddSubscriber<T>(T item)
         {

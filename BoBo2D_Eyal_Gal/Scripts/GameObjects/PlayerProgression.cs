@@ -25,10 +25,11 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Methods
-        public static void LvlUp(Spaceship enemy)
+        public static void LvlUp()
         {
-            if (enemy.IsDefeatedByPlayer && _player.Exp >= _player.MaxExp)
+            if (_player.Exp >= _player.MaxExp)
             {
+                StatUpdate();
                 //reset exp bar and continue from 0
                 //_player.Exp = 0 + הפרש
             }
@@ -39,6 +40,8 @@ namespace BoBo2D_Eyal_Gal
             Player.MaxHealth += 1;
             Player.HealthRegen += 0.5f;
             Player.MaxShield += 1;
+            Player.ShieldRegen += 1;
+            Player.DamageScalar += 0.1f;
         }
         #endregion
     }

@@ -11,7 +11,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public List<TreeOfGameObjects> GetHirarchy => _hirarchy;
+        public List<TreeOfGameObjects> Hirarchy => _hirarchy;
         #endregion
 
         #region Methods
@@ -32,7 +32,7 @@ namespace BoBo2D_Eyal_Gal
         public GameObject FindGameObjectByName(string gameObjectName)
         {
             GameObject go;
-            foreach (var rootNode in GetHirarchy)
+            foreach (var rootNode in Hirarchy)
             {
                 go = rootNode.Root.FindGameObject(gameObjectName);
 
