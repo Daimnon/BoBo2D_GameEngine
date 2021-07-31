@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 
 namespace BoBo2D_Eyal_Gal
@@ -23,6 +25,7 @@ namespace BoBo2D_Eyal_Gal
         public Projectile(string name, float Damage, Vector2 flightDirectin,
             WeaponType weaponType, Transform transform, float speed) : base(name)
         {
+            AddToHirarcy();
             Components.Add(new Sprite(this, StatsHandler.GetProjectileTextureName(weaponType)));
             _damage = Damage;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
@@ -37,6 +40,25 @@ namespace BoBo2D_Eyal_Gal
         {
             if(_flying)
                 MoveGameObject(_projectileDirection);
+            if (_projectileTransform.Position.Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height || _projectileTransform.Position.Y <0)
+            {
+                SubscriptionManager.RemoveSubscriber<IUpdatable>(this);
+                GameObjectManager.Instance.DestroyGameObject(this);
+            }
+        }
+        void AddToHirarcy()
+        {
+            GameObject projectile = GameObjectManager.Instance.FindGameObjectByName("ProjectileHolder");
+            if (projectile == null)
+            {
+                GameObject projectileHolder = new GameObject("ProjectileHolder");
+                GameObjectManager.Instance.AddGameObject(projectileHolder);
+                GameObjectManager.Instance.AddGameObject(this, projectileHolder);
+            }
+            else
+            {
+                GameObjectManager.Instance.AddGameObject(this, projectile);
+            }
         }
     }
 }

@@ -27,5 +27,9 @@ namespace BoBo2D_Eyal_Gal
         {
             return GetEnumerator();
         }
+        public void DestroyTree()
+        {
+            GameObjectManager.Instance.Hirarchy.Remove(this);
+        }
     }
 }

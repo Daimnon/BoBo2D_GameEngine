@@ -40,6 +40,10 @@ namespace BoBo2D_Eyal_Gal
             Transform transform = GameObjectP.GetComponent<Transform>();
             DrawManager.Instance.DrawSprite(_texture, transform.Position,_color);
         }
+        public override void Unsubscribe()
+        {
+            SubscriptionManager.RemoveSubscriber<IDrawable>(this);
+        }
         public override string ToString()
         {
             return $"Sprite of {Name}" + Environment.NewLine;

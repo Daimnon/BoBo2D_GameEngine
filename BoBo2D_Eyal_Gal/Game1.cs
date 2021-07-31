@@ -8,11 +8,8 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         private GraphicsDeviceManager _graphics;
-        private GameObjectManager _gameObjectManager;
         private SpriteBatch _spriteBatch;
         private Spaceship _player;
-        private Texture2D _playerTextures;
-        private Texture2D _backGround;
         private SpriteFont _gameFont = default;
         #endregion
 
@@ -28,20 +25,19 @@ namespace BoBo2D_Eyal_Gal
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _gameObjectManager = new GameObjectManager();
 
             DataManager.Game = this;
-            DrawManager.Game = this;
             DataManager.Instance.LoadAllExternalData();
+            DrawManager.Game = this;
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
             // TODO: use this.Content to load your game content here
-            _backGround = Content.Load<Texture2D>("BG");
+            CreateBackGround();
             CreatePlayer();
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
         }
@@ -61,28 +57,27 @@ namespace BoBo2D_Eyal_Gal
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your update logic here
-            GameObject player = _gameObjectManager.FindGameObjectByName("Player");
-            StartDrawing(player);
+            // TODO: Add your update logic here1
+            _spriteBatch.Begin();
+            SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
             _spriteBatch.End();
 
             base.Draw(gameTime);
         }
+        void CreateBackGround()
+        {
+            GameObject bg = new GameObject("BackGround");
+            GameObjectManager.Instance.AddGameObject(bg);
+            bg.AddComponent(new Sprite(bg,"BG"));
+        }
         void CreatePlayer()
         {
             _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship,"Player", true);
-            _gameObjectManager.AddNewParent(_player);
+            GameObjectManager.Instance.AddGameObject(_player);
             _player.AddComponent(new Rigidbooty(_player));
             _player.AddComponent(new BoxCollider(_player));
             _player.AddComponent(new Sprite(_player, "PlayerShip"));
             InputManager im = new InputManager(_player);
-        }
-        void StartDrawing(GameObject player)
-        {
-            _playerTextures = player.GetComponent<Sprite>().Texture;
-            _spriteBatch.Begin();
-            _spriteBatch.Draw(_backGround, new Vector2(0, 0), Color.White);
-            SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
         }
         public void DrawSprite(Texture2D texture,Vector2 position, Color color )
         {

@@ -41,11 +41,11 @@ namespace BoBo2D_Eyal_Gal
             Hirarchy.Add(new TreeOfGameObjects(new Node(new GameObject("Player"), null)));
             new Node(new GameObject("Player Hand", new Transform(new Vector2(0, 0), new Vector2(1, 1))), Hirarchy[0].Root);
             BoxCollider bc = new BoxCollider(_gameObjects[0]);
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(bc);
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(new BoxCollider(_gameObjects[0]));
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(bc);
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.GetComponent<Transform>();
+            Hirarchy[0].Root.Children[0].GameObjectP.AddComponent(bc);
+            Hirarchy[0].Root.Children[0].GameObjectP.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
+            Hirarchy[0].Root.Children[0].GameObjectP.RemoveComponent(new BoxCollider(_gameObjects[0]));
+            Hirarchy[0].Root.Children[0].GameObjectP.RemoveComponent(bc);
+            Hirarchy[0].Root.Children[0].GameObjectP.GetComponent<Transform>();
             GetGameObject("Player Hand");
             GetGameObject("Player");
 
@@ -71,11 +71,11 @@ namespace BoBo2D_Eyal_Gal
 
             Hirarchy.Add(tree);
             BoxCollider bc = new BoxCollider(_gameObjects[0]);
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(bc);
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(new BoxCollider(_gameObjects[0]));
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.RemoveComponent(bc);
-            Hirarchy[0].Root.GetChildren[0].GetGameObject.GetComponent<Transform>();
+            Hirarchy[0].Root.Children[0].GameObjectP.AddComponent(bc);
+            Hirarchy[0].Root.Children[0].GameObjectP.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
+            Hirarchy[0].Root.Children[0].GameObjectP.RemoveComponent(new BoxCollider(_gameObjects[0]));
+            Hirarchy[0].Root.Children[0].GameObjectP.RemoveComponent(bc);
+            Hirarchy[0].Root.Children[0].GameObjectP.GetComponent<Transform>();
             GetGameObject("Player Hand");
             GetGameObject("Player");
 
@@ -111,7 +111,7 @@ namespace BoBo2D_Eyal_Gal
         public void OnDisable()
         {
             foreach (var tree in Hirarchy)
-                tree.Root.GetGameObject.Disable();
+                tree.Root.GameObjectP.Disable();
 
         }
 
