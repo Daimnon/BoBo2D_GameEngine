@@ -4,10 +4,10 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/EnemyBoss.png</File>
-    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/PlayerShip.png</File>
-    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/RebelShip.png</File>
-    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/background/BG.png</File>
+    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/EnemyBoss.png</File>
+    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/PlayerShip.png</File>
+    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/RebelShip.png</File>
+    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/background/BG.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

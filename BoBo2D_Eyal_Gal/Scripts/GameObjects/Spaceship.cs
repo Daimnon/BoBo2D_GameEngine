@@ -40,12 +40,14 @@ namespace BoBo2D_Eyal_Gal
         public float Exp { get => _exp; set => _exp = value; }
         public float MaxExp { get => _maxExp; set => _maxExp = value; }
         public int CurrentLvl { get => _currentLvl; set => _currentLvl = value; }
+        public int Score { get => _score; set => _score = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
         public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
         #endregion
 
         public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)
         {
+            int scoreModifier;
             LoadStats(shipType);
             LoadStartingWeapons(isPlayer);
 
@@ -53,6 +55,20 @@ namespace BoBo2D_Eyal_Gal
             {
                 //connect progression system to player
                 PlayerProgression.Player = this;
+
+                //starting position
+                PlayerProgression.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
+            }
+
+            if (!isPlayer)
+            {
+                //connect progression system to player
+                if (CurrentLvl == 1)
+                    scoreModifier = 17 * (CurrentLvl / 1);
+                else
+                    scoreModifier = 28 * (CurrentLvl / 2);
+
+                Score = CurrentLvl + scoreModifier;
 
                 //starting position
                 PlayerProgression.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
