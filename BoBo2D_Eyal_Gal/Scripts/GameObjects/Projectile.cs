@@ -21,12 +21,12 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         public Projectile(string name, float Damage, Vector2 flightDirectin,
-            WeaponType weaponType, Transform transform) : base(name)
+            WeaponType weaponType, Transform transform, float speed) : base(name)
         {
             Components.Add(new Sprite(this, StatsHandler.GetProjectileTextureName(weaponType)));
             _damage = Damage;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
-            _projectileDirection = flightDirectin;
+            _projectileDirection = flightDirectin*speed;
             _projectileTransform = GetComponent<Transform>();
             Vector2 pos = transform.Position;
             _projectileTransform.Position = pos;
