@@ -77,19 +77,12 @@ namespace BoBo2D_Eyal_Gal
             _player.AddComponent(new Sprite(_player, "PlayerShip"));
             InputManager im = new InputManager(_player);
         }
-
         void StartDrawing(GameObject player)
         {
             _playerTextures = player.GetComponent<Sprite>().Texture;
             _spriteBatch.Begin();
             _spriteBatch.Draw(_backGround, new Vector2(0, 0), Color.White);
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
-            //if (player.IsEnabled)
-            //{
-            //    Transform playerTransform = player.GetComponent<Transform>();
-            //    _spriteBatch.Draw(_playerTextures, playerTransform.Position, Color.White);
-            //    //_spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
-            //}
         }
         public void DrawSprite(Texture2D texture,Vector2 position, Color color )
         {

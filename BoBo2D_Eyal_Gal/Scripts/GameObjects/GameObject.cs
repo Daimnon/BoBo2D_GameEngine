@@ -212,23 +212,6 @@ namespace BoBo2D_Eyal_Gal
             }
         }
         #endregion
-        /*
-            public void GetComponent(string componentName)
-            {
-
-
-                // try get component
-                foreach (Component component in Components)
-                {               
-                    if (componentName != component.ToString())
-                        continue;
-                    else
-                    {
-                        //return component;
-                    }
-                }
-                Console.WriteLine("Component Recieved");
-            }*/
 
         #region Overrides
         public override string ToString()
