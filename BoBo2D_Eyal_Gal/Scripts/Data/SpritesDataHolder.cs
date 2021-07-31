@@ -13,7 +13,9 @@ namespace BoBo2D_Eyal_Gal
             _spriteNames = new List<string>()
             {
                 "BG",
-                "PlayerShip"
+                "PlayerShip",
+                "EnemyBoss",
+                "RebelShip",
             };
         }
         #region Fields

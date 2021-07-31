@@ -10,7 +10,7 @@ namespace BoBo2D_Eyal_Gal
         List<T> _startableList = new List<T>(5);
         #endregion
         #region Properties
-        public List<T> GetStartableList => _startableList;
+        public List<T> StartableList => _startableList;
         #endregion
         #region Methods
         public void AddStartable(T startableClass)

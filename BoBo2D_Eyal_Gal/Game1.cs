@@ -31,6 +31,7 @@ namespace BoBo2D_Eyal_Gal
             _gameObjectManager = new GameObjectManager();
 
             DataManager.Game = this;
+            DrawManager.Game = this;
             DataManager.Instance.LoadAllExternalData();
             base.Initialize();
         }
@@ -82,15 +83,21 @@ namespace BoBo2D_Eyal_Gal
             _playerTextures = player.GetComponent<Sprite>().Texture;
             _spriteBatch.Begin();
             _spriteBatch.Draw(_backGround, new Vector2(0, 0), Color.White);
-
-            if (player.IsEnabled)
+            SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
+            //if (player.IsEnabled)
+            //{
+            //    Transform playerTransform = player.GetComponent<Transform>();
+            //    _spriteBatch.Draw(_playerTextures, playerTransform.Position, Color.White);
+            //    //_spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
+            //}
+        }
+        public void DrawSprite(Texture2D texture,Vector2 position, Color color )
+        {
+            if (texture != null || position != null || color != null)
             {
-                Transform playerTransform = player.GetComponent<Transform>();
-                _spriteBatch.Draw(_playerTextures, playerTransform.Position, Color.White);
-                //_spriteBatch.DrawString(_gameFont, go.ToString(), new Vector2(200, 0), Color.White);
+                _spriteBatch.Draw(texture, position, color);
             }
         }
-
         public T LoadData<T>(string fileName)
         {
             return Content.Load<T>(fileName);
