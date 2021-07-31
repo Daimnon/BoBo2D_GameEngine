@@ -12,12 +12,14 @@ namespace BoBo2D_Eyal_Gal
         static List<BoxCollider> _allBoxColliders = new List<BoxCollider>(20);
         static float _gravity = 9.80665f;
         static bool _usePhysics = true;
+        static float _deltatime = 0.016666f;
         #endregion
 
         #region Properties
         public static List<BoxCollider> AllBoxColliders { get => _allBoxColliders; set => _allBoxColliders = value; }
         public static float Gravity { get => _gravity; set => _gravity = value; }
         public static bool UsePhysics { get => _usePhysics; set => _usePhysics = value; }
+        public static float DeltaTime => _deltatime;
         #endregion
 
         #region Methods

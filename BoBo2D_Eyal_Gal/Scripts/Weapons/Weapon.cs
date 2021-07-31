@@ -45,7 +45,7 @@ namespace BoBo2D_Eyal_Gal
                 {
                     _ammo -= 1;
                     _currentCoolDown = _maxCooldown;
-                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform);
+                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform,_spaceShip.Speed);
                 }
             }
             else
@@ -55,7 +55,10 @@ namespace BoBo2D_Eyal_Gal
         }
         public void Update()
         {
-            _currentCoolDown -= 1;
+            if(_currentCoolDown >0)
+            {
+                _currentCoolDown -= 1*Physics.DeltaTime;
+            }
         }
         public float CalculateDamage(float baseDamage, float damageScalar)
         {

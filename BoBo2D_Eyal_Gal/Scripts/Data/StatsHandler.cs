@@ -10,7 +10,7 @@ namespace BoBo2D_Eyal_Gal
 {
     public static class StatsHandler//all base data is going to come from this class, stats names for sprites and more
     {
-        static WeaponStats _basicWeapon = new WeaponStats(WeaponType.BasicMainWeapon, 60, 10, 1, 1);
+        static WeaponStats _basicWeapon = new WeaponStats(WeaponType.BasicMainWeapon, 1, 10, 1, 1);
         static ShipStats _basicPlayerShip = new ShipStats(SpaceshipType.BasicPlayerSpaceship,WeaponType.BasicMainWeapon,
             100, 1, 0, 40, 1, 3, 1, 100);
         static ShipStats _basicEnemyShip = new ShipStats(SpaceshipType.BasicEnemySpaceship,WeaponType.BasicMainWeapon,
