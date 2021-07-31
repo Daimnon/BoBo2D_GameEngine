@@ -4,8 +4,29 @@ using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
-    class GameObjectManager
+    public class GameObjectManager
     {
+        #region Singelton
+        static GameObjectManager _instance;
+        public static GameObjectManager Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new GameObjectManager();
+                }
+                return _instance;
+            }
+        }
+        public GameObjectManager()
+        {
+            if (_instance == null)
+            {
+                _instance = this;
+            }
+        }
+        #endregion
         #region Fields
         List<TreeOfGameObjects> _hirarchy = new List<TreeOfGameObjects>(10);
         #endregion
@@ -15,20 +36,24 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Methods
-        public void AddNewParent(GameObject gameObject)
+        void AddChild(GameObject gameObject, GameObject parentGameObject)
+        {
+            Node node = new Node(gameObject, parentGameObject.Node);
+            parentGameObject.Node.AddChild(node);
+
+        }
+        public void AddGameObject(GameObject gameObject)
         {
             GameObject go = gameObject;
             Node node = new Node(go, null);
             TreeOfGameObjects togo = new TreeOfGameObjects(node);
             _hirarchy.Add(togo);
         }
-
-        public void AddNewChild(Node node, string gameObjectName)
+        public void AddGameObject(GameObject gameObject, GameObject parentGameObject)
         {
-            GameObject go = new GameObject(gameObjectName);
-            node.AddChild(new Node(go, node));
+            GameObject parent = FindGameObjectByName(parentGameObject.Name);
+            AddChild(gameObject, parentGameObject);
         }
-
         public GameObject FindGameObjectByName(string gameObjectName)
         {
             GameObject go;
@@ -42,20 +67,15 @@ namespace BoBo2D_Eyal_Gal
 
             return null;
         }
-
-        /*public GameObject FindGameObjectByName2(string gameObjectName)
+        public void DestroyGameObject(GameObject gameObject)
         {
-            foreach (var rootNode in GetHirarchy)
+            if(gameObject == null)
             {
-                go = rootNode.Root.FindGameObject(gameObjectName);
-
-                if (go != null)
-                    return go;
+                Console.WriteLine("Game Object Does not exsists");
+                return;
             }
-
-            return null;
-        }*/
-
+            gameObject.Node.DestroyNode();
+        }
         #endregion
     }
 }
