@@ -54,7 +54,8 @@ namespace BoBo2D_Eyal_Gal
             return GetStats<WeaponStats>(Stats.StatsType.Weapon, (int)weaponType) as T;
         }
         #region Spaceship
-
+        public static int EndOfScreenHightPosition = 600;
+        public static int StartOfScreenHightPosition = 10;
         #endregion
         #region Direction
         public static Vector2 forward = new Vector2(0, 1);

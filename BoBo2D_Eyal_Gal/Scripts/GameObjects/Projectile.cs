@@ -14,7 +14,9 @@ namespace BoBo2D_Eyal_Gal
         Transform _projectileTransform;
         Vector2 _projectileDirection;
         float _damage;
+        float _speed;
         bool _flying = false;
+        bool _isPlayerProjectile;
         #endregion
 
         #region Properties
@@ -23,7 +25,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         public Projectile(string name, float Damage, Vector2 flightDirectin,
-            WeaponType weaponType, Transform transform, float speed) : base(name)
+            WeaponType weaponType, Transform transform, float speed, bool isPlayerProjectile) : base(name)
         {
             AddToHirarcy();
             Components.Add(new Sprite(this, StatsHandler.GetProjectileTextureName(weaponType)));
@@ -33,13 +35,14 @@ namespace BoBo2D_Eyal_Gal
             _projectileTransform = GetComponent<Transform>();
             Vector2 pos = transform.Position;
             _projectileTransform.Position = pos;
-
             _flying = true;
+            _speed = speed;
+            _isPlayerProjectile = isPlayerProjectile;
         }
         public void Update()
         {
             if(_flying)
-                MoveGameObject(_projectileDirection);
+                MoveGameObject(_projectileDirection, _isPlayerProjectile, _speed);
             if (_projectileTransform.Position.Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height || _projectileTransform.Position.Y <0)
             {
                 SubscriptionManager.RemoveSubscriber<IUpdatable>(this);

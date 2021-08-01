@@ -11,6 +11,7 @@ namespace BoBo2D_Eyal_Gal
         private SpriteBatch _spriteBatch;
         private Spaceship _player;
         private SpriteFont _gameFont = default;
+        WaveManager _waveManager;
         #endregion
 
         public Game1()
@@ -40,6 +41,7 @@ namespace BoBo2D_Eyal_Gal
             CreateBackGround();
             CreatePlayer();
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
+            _waveManager = new WaveManager();
         }
 
         protected override void Update(GameTime gameTime)
