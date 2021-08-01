@@ -45,7 +45,7 @@ namespace BoBo2D_Eyal_Gal
                 {
                     _ammo -= 1;
                     _currentCoolDown = _maxCooldown;
-                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform,_spaceShip.Speed);
+                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform,_spaceShip.Speed, _isPlayer);
                 }
             }
             else

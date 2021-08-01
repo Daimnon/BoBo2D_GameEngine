@@ -207,6 +207,7 @@ namespace BoBo2D_Eyal_Gal
 
         public virtual void MoveGameObject(Vector2 direction)
         {
+            
             Transform transform = GetComponent<Transform>();
             transform.Position += direction;
 
@@ -217,6 +218,28 @@ namespace BoBo2D_Eyal_Gal
             }
             Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
             if(rigidbooty != null)
+            {
+                rigidbooty.TransformP.Position = transform.Position;
+            }
+        }
+        public void MoveGameObject(Vector2 direction, bool isPlayer, float speed)
+        {
+            Transform transform = GetComponent<Transform>();
+            if (isPlayer)
+            {
+                transform.Position += direction * speed;
+            }
+            else
+            {
+                transform.Position -= direction * speed;
+            }
+            BoxCollider boxCollider = GetComponent<BoxCollider>();
+            if (boxCollider != null)
+            {
+                boxCollider.Position = transform.Position;
+            }
+            Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
+            if (rigidbooty != null)
             {
                 rigidbooty.TransformP.Position = transform.Position;
             }
