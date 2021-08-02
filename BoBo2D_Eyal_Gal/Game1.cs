@@ -32,7 +32,6 @@ namespace BoBo2D_Eyal_Gal
             DrawManager.Game = this;
             base.Initialize();
         }
-
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -63,7 +62,6 @@ namespace BoBo2D_Eyal_Gal
             _spriteBatch.Begin();
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
             _spriteBatch.End();
-
             base.Draw(gameTime);
         }
         void CreateBackGround()
