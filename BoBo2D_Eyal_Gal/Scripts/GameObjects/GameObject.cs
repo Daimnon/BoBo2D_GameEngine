@@ -10,7 +10,7 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         List<Component> _components = new List<Component>();
-        Node _parentNode;
+        Node _node;
         string _name;
         bool _isEnabled;
         bool _isActive = true;
@@ -18,7 +18,7 @@ namespace BoBo2D_Eyal_Gal
 
         #region Properties
         public List<Component> Components { get => _components; set => _components = value; }
-        public Node ParentNode { get => _parentNode; set => _parentNode = value; }
+        public Node Node { get => _node; set => _node = value; }
         public string Name { get => _name; set => _name = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
         public bool IsActive
@@ -79,24 +79,34 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine($"GameObject Enabled {ToString()}");
         }
 
-        public void Destroy(List<GameObject> gameObjects)
+        public void Destroy()
         {
             Console.WriteLine($"Destroying {this}");
-            OnDisable();
+            int index = _components.Count;
+            for (int i = index - 1; i >= 0; i--)
+            {
+                _components[i].Unsubscribe();
+                _components.Remove(_components[i]);
+            }
+            //OnDisable();
             Console.WriteLine($"{Name} is Destroyed");
-            gameObjects.Remove(this);
             Console.WriteLine();
         }
-
-        public void OnDisable()
+        public virtual void Unsubscribe()
         {
-            Console.WriteLine($"Removing all Components from {this} GameObject");
-            foreach (var component in Components)
-                Components.Remove(component);
 
-            Console.WriteLine($"All Components Are Removed from {this}");
-            Console.WriteLine();
         }
+        //public void OnDisable()
+        //{
+        //    Console.WriteLine($"Removing all Components from {this} GameObject");
+        //    foreach (var component in Components)
+        //    {
+        //        component.Unsubscribe();
+        //        Components.Remove(component);
+        //    }
+        //    Console.WriteLine($"All Components Are Removed from {this}");
+        //    Console.WriteLine();
+        //}
 
         public void AddComponent(Component component)
         {
@@ -195,8 +205,9 @@ namespace BoBo2D_Eyal_Gal
             return false;
         }
 
-        public virtual void MoveGameObject(Vector2 direction)
+        public void MoveGameObject(Vector2 direction)
         {
+            
             Transform transform = GetComponent<Transform>();
             transform.Position += direction;
 
@@ -212,23 +223,6 @@ namespace BoBo2D_Eyal_Gal
             }
         }
         #endregion
-        /*
-            public void GetComponent(string componentName)
-            {
-
-
-                // try get component
-                foreach (Component component in Components)
-                {               
-                    if (componentName != component.ToString())
-                        continue;
-                    else
-                    {
-                        //return component;
-                    }
-                }
-                Console.WriteLine("Component Recieved");
-            }*/
 
         #region Overrides
         public override string ToString()

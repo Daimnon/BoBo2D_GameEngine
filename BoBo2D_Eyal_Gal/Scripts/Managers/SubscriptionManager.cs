@@ -9,6 +9,7 @@ namespace BoBo2D_Eyal_Gal
         #region Fields
         static Updatable<IUpdatable> _updatable = new Updatable<IUpdatable>();
         static Startable<IStartable> _startable = new Startable<IStartable>();
+        static Drawable<IDrawable> _drawable = new Drawable<IDrawable>();
         #endregion
 
         #region Methods
@@ -27,6 +28,9 @@ namespace BoBo2D_Eyal_Gal
                 case true when typeof(T) == typeof(IStartable):
                     _startable.AddStartable(item as IStartable);
                     break;
+                case true when typeof(T) == typeof(IDrawable):
+                    _drawable.AddDrawable(item as IDrawable);
+                        break;
                 default:
                     Console.WriteLine("Error in AddSubscriber");
                     break;
@@ -46,6 +50,9 @@ namespace BoBo2D_Eyal_Gal
                 case true when typeof(T) == typeof(IStartable):
                     _startable.RemoveStartable(item as IStartable);
                     break;
+                case true when typeof(T) == typeof(IDrawable):
+                    _drawable.RemoveDrawable(item as IDrawable);
+                    break;
                 default:
                     Console.WriteLine("Error in RemoveSubscriber");
                     break;
@@ -60,6 +67,9 @@ namespace BoBo2D_Eyal_Gal
                     break;
                 case true when typeof(T) == typeof(IStartable):
                     _startable.StartAll();
+                    break;
+                case true when typeof(T) == typeof(IDrawable):
+                    _drawable.DrawAll();
                     break;
                 default:
                     Console.WriteLine("Error in ActivateAllSubscribersOfType");

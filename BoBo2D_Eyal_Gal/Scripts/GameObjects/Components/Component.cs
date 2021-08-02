@@ -20,7 +20,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Methods
-
+        public virtual void Unsubscribe() { }
         #endregion
 
         #region Overrides

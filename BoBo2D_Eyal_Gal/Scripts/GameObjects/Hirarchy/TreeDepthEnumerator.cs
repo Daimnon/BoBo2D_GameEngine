@@ -46,9 +46,9 @@ namespace BoBo2D_Eyal_Gal
                 return true;
             }
             var context = _cache.Pop();
-            while (context >= _current.GetChildren.Count)
+            while (context >= _current.Children.Count)
             {
-                _current = _current.GetSetParant;
+                _current = _current.Parant;
                 if (_current == null)
                 {
                     _reachedEnd = true;
@@ -56,7 +56,7 @@ namespace BoBo2D_Eyal_Gal
                 }
                 context = _cache.Pop();
             }
-            _current = _current.GetChildren[context++];
+            _current = _current.Children[context++];
             _cache.Push(context);
             _cache.Push(0);
             return true;

@@ -11,7 +11,7 @@ namespace BoBo2D_Eyal_Gal
         BasicPlayerSpaceship = 1,
     }
 
-    public class Spaceship : GameObject
+    public class Spaceship : GameObject,IUpdatable
     {
         #region Fields
         Weapon _currentWeapon, _firstWeapon, _secondWeapon, _thirdWeapon;
@@ -40,16 +40,19 @@ namespace BoBo2D_Eyal_Gal
         public float Exp { get => _exp; set => _exp = value; }
         public float MaxExp { get => _maxExp; set => _maxExp = value; }
         public int CurrentLvl { get => _currentLvl; set => _currentLvl = value; }
+        public int Score { get => _score; set => _score = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
         public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
         #endregion
 
         public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)
         {
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
+            _isPlayer = isPlayer;
+            int scoreModifier;
             LoadStats(shipType);
-            LoadStartingWeapons(isPlayer);
 
-            if (isPlayer)
+            if (_isPlayer)
             {
                 //connect progression system to player
                 PlayerProgression.Player = this;
@@ -57,11 +60,27 @@ namespace BoBo2D_Eyal_Gal
                 //starting position
                 PlayerProgression.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
             }
-        }
 
+            if (!_isPlayer)
+            {
+                //connect progression system to player
+                if (CurrentLvl == 1)
+                    scoreModifier = 17 * (CurrentLvl / 1);
+                else
+                    scoreModifier = 28 * (CurrentLvl / 2);
+
+                Score = CurrentLvl + scoreModifier;
+
+                //starting position
+            }
+        }
         public void Update()
         {
-             
+             if(_isPlayer == false)
+            {
+                CheckEnemyPosition();
+                MovementHandler.Movement(MoveDirection.Down, this, _speed);
+            }
         }
 
         void LoadStats(SpaceshipType shipType)
@@ -81,27 +100,18 @@ namespace BoBo2D_Eyal_Gal
                 _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType);
             }
         }
-
-        void LoadStartingWeapons(bool isPlayer)
-        {
-            //_mainWeapon = new Weapon(isPlayer, WeaponType.BasicMainWeapon);
-        }
-
-        public override void MoveGameObject(Vector2 direction)
+        void CheckEnemyPosition()
         {
             Transform transform = GetComponent<Transform>();
-            transform.Position += direction*_speed;
-            BoxCollider boxCollider = GetComponent<BoxCollider>();
-            if (boxCollider != null)
+            if (transform.Position.Y > StatsHandler.EndOfScreenHightPosition)
             {
-                boxCollider.Position = transform.Position;
+                Vector2 pos = new Vector2(transform.Position.X, StatsHandler.StartOfScreenHightPosition);
+                transform.Position = pos;
             }
-
-            Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
-            if (rigidbooty != null)
-            {
-                rigidbooty.TransformP.Position = transform.Position;
-            }
+        }
+        public override void Unsubscribe()
+        {
+            SubscriptionManager.RemoveSubscriber<IUpdatable>(this);
         }
     }
 }

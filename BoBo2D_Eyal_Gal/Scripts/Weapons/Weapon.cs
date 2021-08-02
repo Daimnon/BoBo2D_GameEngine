@@ -9,7 +9,7 @@ namespace BoBo2D_Eyal_Gal
     {
         BasicMainWeapon = 0,
     }
-    public class Weapon
+    public class Weapon: IUpdatable
     {
         #region Fields
         Spaceship _spaceShip;
@@ -31,6 +31,7 @@ namespace BoBo2D_Eyal_Gal
             _spaceShip = spaceShip;
             _isPlayer = isPlayer;
             LoadStats(weaponType);
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
         public void Shoot()
         {
@@ -42,12 +43,21 @@ namespace BoBo2D_Eyal_Gal
                 Transform transform = _spaceShip.GetComponent<Transform>();
                 if (transform != null && _projectileName != null)
                 {
-                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform);
+                    _ammo -= 1;
+                    _currentCoolDown = _maxCooldown;
+                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform,_spaceShip.Speed, _isPlayer);
                 }
             }
             else
             {
                 //error sound
+            }
+        }
+        public void Update()
+        {
+            if(_currentCoolDown >0)
+            {
+                _currentCoolDown -= 1*Physics.DeltaTime;
             }
         }
         public float CalculateDamage(float baseDamage, float damageScalar)

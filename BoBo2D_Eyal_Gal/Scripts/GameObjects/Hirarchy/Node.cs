@@ -7,29 +7,25 @@ namespace BoBo2D_Eyal_Gal
     //class that holds one gameObject and knows the location on the tree
     public class Node
     {
-        //leaf, root, chield, parant
-
         #region Fields
         List<Node> _children;
         Node _parent;
         GameObject _gameObject;
         bool _isRoot = true;
-        //bool _isLeaf;
-        //bool _isChild;
-        //bool _isParent;
+        TreeOfGameObjects _tree;
         #endregion
 
         #region Properties
-        public GameObject GetGameObject => _gameObject;
-        public bool GetIsRoot => _isRoot;
-        public List<Node> GetChildren => _children;
-        public Node GetSetParant { get => _parent; set => _parent = value; }
+        public GameObject GameObjectP => _gameObject;
+        public bool IsRoot => _isRoot;
+        public List<Node> Children => _children;
+        public Node Parant { get => _parent; set => _parent = value; }
         #endregion
 
         public Node(GameObject gameObject, Node parent)
         {
             _gameObject = gameObject;
-            _gameObject.ParentNode = this;
+            _gameObject.Node = this;
             _children = new List<Node>();
             if (parent != null)
             {
@@ -38,34 +34,20 @@ namespace BoBo2D_Eyal_Gal
                 parent.AddChild(this);
             }
         }
-        //public GameObject FindGameObjectInChildren(string name)
-        //{
-        //    //check if name is acceptable or not null
-        //    if (name == _gameObject.Name)
-        //    {
-        //        return _gameObject;
-        //    }
-        //    GameObject wantedObject = null;
-        //    foreach (var node in _children)
-        //    {
-        //        wantedObject = node.FindGameObjectInChildren(name);
-        //        if(wantedObject != null)
-        //        {
-        //            return wantedObject;
-        //        }
-        //    }
-        //    return null;
-        //}
         public void AddChild(Node child)
         {
-            child.GetSetParant = this;
+            child.Parant = this;
             _children.Add(child);
+        }
+        public void RemoveChild(Node child)
+        {
+            _children.Remove(child);
         }
         public void EnableNode(Node node)//enabling all nodes
         {
             Console.WriteLine($"Enabling {node}");
-            node.GetGameObject.EnableGameObject();
-            foreach (var child in node.GetChildren)
+            node.GameObjectP.EnableGameObject();
+            foreach (var child in node.Children)
             {
                 EnableNode(child);
             }
@@ -75,8 +57,8 @@ namespace BoBo2D_Eyal_Gal
         public void DisableNode(Node node)
         {
             Console.WriteLine($"Disabling {node}");
-            node.GetGameObject.Disable();
-            foreach (var child in node.GetChildren)
+            node.GameObjectP.Disable();
+            foreach (var child in node.Children)
             {
                 DisableNode(child);
             }
@@ -98,7 +80,7 @@ namespace BoBo2D_Eyal_Gal
             }
             else
             {
-                foreach (var child in GetChildren)
+                foreach (var child in Children)
                 {
                     var gameObject = child.FindGameObject(gameObjectName);
                     if (gameObject != null)
@@ -113,9 +95,29 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine();
             return null;
         }
+        public void DestroyNode()
+        {
+            if (_children.Count != 0)
+            {
+                foreach (var child in _children)
+                {
+                    child.DestroyNode();
+                    RemoveChild(child);
+                }
+            }
+            GameObjectP.Destroy();
+            if (IsRoot)
+            {
+                _tree.DestroyTree();
+            }
+            else
+            {
+                Parant.RemoveChild(this);
+            }
+        }
         public override string ToString()
         {
-            return GetGameObject.Name.ToString() + Environment.NewLine;
+            return GameObjectP.Name.ToString() + Environment.NewLine;
         }
     }
 }
