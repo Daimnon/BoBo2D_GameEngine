@@ -41,8 +41,15 @@ namespace BoBo2D_Eyal_Gal
         }
         public void Update()
         {
-            if(_flying)
-                MoveGameObject(_projectileDirection, _isPlayerProjectile, _speed);
+            if (_flying)
+            {
+                if (_isPlayerProjectile)
+                    MovementHandler.Movement(MoveDirection.Up, this, _speed);
+                else
+                {
+                    MovementHandler.Movement(MoveDirection.Down, this, _speed);
+                }
+            }
             if (_projectileTransform.Position.Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height || _projectileTransform.Position.Y <0)
             {
                 SubscriptionManager.RemoveSubscriber<IUpdatable>(this);

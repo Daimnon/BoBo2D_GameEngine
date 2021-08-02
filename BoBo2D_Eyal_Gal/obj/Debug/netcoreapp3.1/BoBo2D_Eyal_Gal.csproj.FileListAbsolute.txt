@@ -111,3 +111,4 @@ C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreap
 C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.pdb
 C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.genruntimeconfig.cache
 C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\GameSpriteFont.xnb
+C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\GameSpriteFont.xnb

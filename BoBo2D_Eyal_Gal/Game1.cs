@@ -77,7 +77,7 @@ namespace BoBo2D_Eyal_Gal
             _player.AddComponent(new Rigidbooty(_player));
             _player.AddComponent(new BoxCollider(_player));
             _player.AddComponent(new Sprite(_player, "PlayerShip"));
-            InputManager im = new InputManager(_player);
+            InputManager im = new InputManager(_player, false, false);
         }
 
         public void DrawSprite(Texture2D texture,Vector2 position, Color color )
@@ -87,7 +87,6 @@ namespace BoBo2D_Eyal_Gal
                 _spriteBatch.Draw(texture, position, color);
             }
         }
-
         public T LoadData<T>(string fileName)
         {
             return Content.Load<T>(fileName);
