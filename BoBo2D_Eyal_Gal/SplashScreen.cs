@@ -1,20 +1,24 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class Game1 : Game
+    public class SplashScreen : Game
     {
         #region Fields
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
-        private Spaceship _player;
-        private SpriteFont _gameFont = default;
-        WaveManager _waveManager;
+        private SpriteFont _spriteFont;
+        private static float _deltaTime;
         #endregion
 
-        public Game1()
+        public static float DeltaTime => _deltaTime;
+
+        public SplashScreen()
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -26,21 +30,17 @@ namespace BoBo2D_Eyal_Gal
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            DataManager.Game = this;
-            DataManager.Instance.LoadAllExternalData();
-            DrawManager.Game = this;
+            _deltaTime = 0;
             base.Initialize();
         }
+
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            _spriteFont = Content.Load<SpriteFont>("GameSpriteFont");
             // TODO: use this.Content to load your game content here
-            CreateBackGround();
-            CreatePlayer();
+
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
-            _waveManager = new WaveManager();
         }
 
         protected override void Update(GameTime gameTime)
@@ -49,38 +49,34 @@ namespace BoBo2D_Eyal_Gal
                 Exit();
 
             // TODO: Add your update logic here
+            _deltaTime++;
             SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
-
+            
+            /* - splash screen
+            if (_deltaTime / 100 == 5)
+            {
+                using var mainMenu = new Game1();
+                mainMenu.Run();
+            }
+            */
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your update logic here1
+            float deltaTime = DeltaTime / 100f;
             _spriteBatch.Begin();
-            SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
+            _spriteBatch.DrawString(_spriteFont, "BoBo2D By Eyal Deutscher & Gal Erez", new Vector2(250, 175), Color.White);
+            _spriteBatch.DrawString(_spriteFont, deltaTime.ToString(), new Vector2(275, 200), Color.White);
             _spriteBatch.End();
+
             base.Draw(gameTime);
         }
-        void CreateBackGround()
-        {
-            GameObject bg = new GameObject("BackGround");
-            GameObjectManager.Instance.AddGameObject(bg);
-            bg.AddComponent(new Sprite(bg,"BG"));
-        }
-        void CreatePlayer()
-        {
-            _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship,"Player", true);
-            GameObjectManager.Instance.AddGameObject(_player);
-            _player.AddComponent(new Rigidbooty(_player));
-            _player.AddComponent(new BoxCollider(_player));
-            _player.AddComponent(new Sprite(_player, "PlayerShip"));
-            InputManager im = new InputManager(_player);
-        }
 
-        public void DrawSprite(Texture2D texture,Vector2 position, Color color )
+        public void DrawSprite(Texture2D texture, Vector2 position, Color color)
         {
             if (texture != null || position != null || color != null)
             {
@@ -88,9 +84,13 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
-        public T LoadData<T>(string fileName)
+        public void DrawFont(SpriteFont font, Vector2 position, Color color)
         {
-            return Content.Load<T>(fileName);
+            if (font != null || position != null || color != null)
+            {
+                _spriteBatch.DrawString(font, "GameSpriteFont", new Vector2(100, 100), Color.Black);
+
+            }
         }
     }
 }
