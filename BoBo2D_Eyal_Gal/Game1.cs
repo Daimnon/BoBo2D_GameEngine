@@ -12,7 +12,7 @@ namespace BoBo2D_Eyal_Gal
         private Spaceship _player;
         private SpriteFont _gameFont = default;
         private WaveManager _waveManager;
-        private float _projectileOffset;
+        private float _projectileOffset = 27;
         #endregion
 
         public Game1()
@@ -97,8 +97,8 @@ namespace BoBo2D_Eyal_Gal
             _player.AddComponent(new Rigidbooty(_player));
             _player.AddComponent(new BoxCollider(_player));
             _player.AddComponent(new Sprite(_player, playerSprite));
-            new InputManager(_player, false, false);
-
+            //new InputManager(_player, _projectileOffset, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.Space, Keys.LeftControl, Keys.LeftShift);
+            new InputManager(_player, _projectileOffset, false, false);
             /*
             //*onboard input system* - wasd scheme + shoot weapons with number keys
             new InputManager(_player, true, true);

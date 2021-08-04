@@ -33,6 +33,15 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
 
+        public InputManager(Spaceship player, float projectileOffset, bool WASD, bool numbersForGuns)
+        {
+            _player = player;
+            _projectileOffset = projectileOffset;
+            _usingWASD = WASD;
+            _usingNumbersForGuns = numbersForGuns;
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
+        }
+
         public InputManager(Spaceship player, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey)
         {
             _customMovementKeys = true;
