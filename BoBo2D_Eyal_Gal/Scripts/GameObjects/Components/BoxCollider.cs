@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class BoxCollider : Component
+    public class BoxCollider : Component , ICollidable
     {
         #region Fields
         Vector2 _scale = new Vector2(1, 1);
@@ -41,6 +41,7 @@ namespace BoBo2D_Eyal_Gal
 
         public BoxCollider(GameObject gameObject)
         {
+            SubscriptionManager.AddSubscriber<ICollidable>(this);
             Name = gameObject.Name + " Colider";
             float objX = gameObject.GetComponent<Transform>().Position.X;
             float objY = gameObject.GetComponent<Transform>().Position.Y;
@@ -80,6 +81,14 @@ namespace BoBo2D_Eyal_Gal
         {
             if (!IsEnabled)
                 IsEnabled = true;
+        }
+        public override void Unsubscribe()
+        {
+            SubscriptionManager.RemoveSubscriber<ICollidable>(this);
+        }
+        public void CheckCollision()
+        {
+            //need implementation
         }
         #endregion
 

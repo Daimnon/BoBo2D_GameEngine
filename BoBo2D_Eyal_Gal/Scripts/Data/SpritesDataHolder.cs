@@ -34,20 +34,7 @@ namespace BoBo2D_Eyal_Gal
         
         public SpritesDataHolder()
         {
-            _spriteNames = new List<string>(10)
-            {
-                "BG",
-                "PlayerShip",
-                "EnemyBoss",
-                "RebelShip",
-                "EnemyBossJetBeam",
-                "PlayerJetBeam",
-                "RebelJetBeam",
-                "Bolt1",
-                "Bolt2",
-                "Laser1",
-                "Laser2"
-            };
+            _spriteNames = new List<string>(10);
         }
 
         public void LoadSpriteData(Game1 game)

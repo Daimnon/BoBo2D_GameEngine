@@ -9,31 +9,29 @@ using Microsoft.Xna.Framework.Input;
 namespace BoBo2D_Eyal_Gal
 {
     public static class StatsHandler//all base data is going to come from this class, stats names for sprites and more
-    {
-        static WeaponStats _basicWeapon = new WeaponStats(WeaponType.BasicMainWeapon, 1, 10, 1, 1);
-        static ShipStats _basicPlayerShip = new ShipStats(SpaceshipType.BasicPlayerSpaceship,WeaponType.BasicMainWeapon,
-            100, 1, 0, 40, 1, 3, 1, 100);
-        static ShipStats _basicEnemyShip = new ShipStats(SpaceshipType.BasicEnemySpaceship,WeaponType.BasicMainWeapon,
-            30, 1, 0, 10, 1, 1, 1, 100);
-
-        static Dictionary<int, Stats> _SpaceShipDictionary = new Dictionary<int, Stats>()
-        {
-            {(int)SpaceshipType.BasicPlayerSpaceship,_basicPlayerShip},
-            {(int)SpaceshipType.BasicEnemySpaceship,_basicEnemyShip },
-
-        };
-
-        static Dictionary<int, Stats> _weaponStatsDictionaty = new Dictionary<int, Stats>()
-        {
-            {(int)WeaponType.BasicMainWeapon,_basicWeapon},
-        };
+    {   
+        static Dictionary<int, Stats> _SpaceshipStatsDictionary = new Dictionary<int, Stats>() { };
+        static Dictionary<int, Stats> _weaponStatsDictionary = new Dictionary<int, Stats>() { };
+        static Dictionary<int, Stats> _projectileStatsDictionary = new Dictionary<int, Stats>() { };
 
         static Dictionary<Stats.StatsType, Dictionary<int, Stats>> _statsDictionary = new Dictionary<Stats.StatsType, Dictionary<int, Stats>>()
         {
-            {Stats.StatsType.Ship,_SpaceShipDictionary },
-            {Stats.StatsType.Weapon,_weaponStatsDictionaty },
+            {Stats.StatsType.Ship,_SpaceshipStatsDictionary },
+            {Stats.StatsType.Weapon,_weaponStatsDictionary },
+            {Stats.StatsType.Projectile,_projectileStatsDictionary }
         };
-
+        public static void AddToCollection(ShipStats shipStats)
+        {
+            _SpaceshipStatsDictionary.Add((int)shipStats.ShipType, shipStats);
+        }
+        public static void AddToCollection(WeaponStats weaponStats)
+        {
+            _weaponStatsDictionary.Add((int)weaponStats.WeaponType, weaponStats);
+        }
+        public static void AddToCollection(ProjectileStats projectileStats)
+        {
+            _projectileStatsDictionary.Add((int)projectileStats.ProjectileType, projectileStats);
+        }
         static T GetStats<T>(Stats.StatsType statsType,int enumType) where T : Stats
         {
             if(_statsDictionary.TryGetValue(statsType,out Dictionary<int,Stats> dictionary))
@@ -48,10 +46,13 @@ namespace BoBo2D_Eyal_Gal
         {
             return GetStats<ShipStats>(Stats.StatsType.Ship, (int)shipType) as T;
         }
-
         public static T GetStats<T> (WeaponType weaponType) where T: Stats
         {
             return GetStats<WeaponStats>(Stats.StatsType.Weapon, (int)weaponType) as T;
+        }
+        public static T GetStats<T>(ProjectileType projectileType) where T : Stats
+        {
+            return GetStats<WeaponStats>(Stats.StatsType.Projectile, (int)projectileType) as T;
         }
         #region Spaceship
         public static int EndOfScreenHightPosition = 600;
@@ -62,6 +63,7 @@ namespace BoBo2D_Eyal_Gal
         public static Vector2 Backward = new Vector2(0, -1);
         #endregion
         #region WeaponDataMethods
+        //need to change
         public static string GetWeaponTextureName(WeaponType weaponType)
         {
             switch (weaponType)
