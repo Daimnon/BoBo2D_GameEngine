@@ -40,7 +40,7 @@ namespace BoBo2D_Eyal_Gal
             CreateBackGround("BackGround", "BG");
             CreatePlayer("Player", "PlayerShip");
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
-            _waveManager = new WaveManager();
+            _waveManager = new WaveManager(0, 750);
         }
 
         protected override void Update(GameTime gameTime)
@@ -96,7 +96,17 @@ namespace BoBo2D_Eyal_Gal
             _player.AddComponent(new Rigidbooty(_player));
             _player.AddComponent(new BoxCollider(_player));
             _player.AddComponent(new Sprite(_player, playerSprite));
-            InputManager im = new InputManager(_player, false, false);
+            new InputManager(_player, false, false);
+            /*
+            //wasd scheme + shoot weapons with number keys
+            new InputManager(_player, true, true);
+            /
+            //custom set of movement input keys
+            new InputManager(_player, Keys.I, Keys.K, Keys.J, Keys.L);
+            /
+            //custom set of weapon input keys
+            new InputManager(_player, Keys.Z, Keys.X, Keys.C);
+            */
         }
 
         public void DrawSprite(Texture2D texture,Vector2 position, Color color )

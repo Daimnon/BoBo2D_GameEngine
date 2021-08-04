@@ -77,7 +77,7 @@ namespace BoBo2D_Eyal_Gal
             switch (weaponType)
             {
                 case WeaponType.BasicMainWeapon:
-                    return "PlayerShip";
+                    return "Laser1";
                 default:
                     return null;
             }

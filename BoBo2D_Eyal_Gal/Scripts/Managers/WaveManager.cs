@@ -25,6 +25,15 @@ namespace BoBo2D_Eyal_Gal
             _waveNumber = 10;
             _waveStatus = WaveStatus.StartOfWave;
         }
+
+        public WaveManager(int spawnMinWidth, int spawnMaxWidth)
+        {
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
+            _enemySpawner = new GameObject("EnemySpawner");
+            _enemySpawnManager = new EnemySpawnManager(_enemySpawner, spawnMinWidth, spawnMaxWidth);
+            _waveNumber = 10;
+            _waveStatus = WaveStatus.StartOfWave;
+        }
         public void Update()
         {
             WaveState(_waveStatus);

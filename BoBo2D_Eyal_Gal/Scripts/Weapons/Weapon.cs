@@ -57,7 +57,7 @@ namespace BoBo2D_Eyal_Gal
         {
             if(_currentCoolDown >0)
             {
-                _currentCoolDown -= 1*Physics.DeltaTime;
+                _currentCoolDown -= 1 * (Time.DeltaTime * 10);
             }
         }
         public float CalculateDamage(float baseDamage, float damageScalar)
