@@ -6,7 +6,10 @@ namespace BoBo2D_Eyal_Gal
 {
     static public class Time
     {
-        public static void DeltaTime()
+        static float _deltaTime = DeltaTimeAsFloat();
+        static public float DeltaTime => _deltaTime;
+
+        public static void DeltaTimeAsDateTime()
         {
             DateTime time1 = DateTime.Now;
             DateTime time2 = DateTime.Now;

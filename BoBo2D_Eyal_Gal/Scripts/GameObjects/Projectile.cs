@@ -15,6 +15,7 @@ namespace BoBo2D_Eyal_Gal
         Vector2 _projectileDirection;
         float _damage;
         float _speed;
+        float _ProjectileOffset;
         bool _flying = false;
         bool _isPlayerProjectile;
         #endregion
@@ -34,15 +35,40 @@ namespace BoBo2D_Eyal_Gal
             _projectileDirection = flightDirectin*speed;
             _projectileTransform = GetComponent<Transform>();
             Vector2 pos = transform.Position;
-            _projectileTransform.Position = pos;
+            _ProjectileOffset = 27;
+            _projectileTransform.Position = new Vector2(pos.X + 27, pos.Y);
             _flying = true;
             _speed = speed;
             _isPlayerProjectile = isPlayerProjectile;
         }
+
+        public Projectile(string name, float Damage, Vector2 flightDirectin,
+            WeaponType weaponType, Transform transform, float speed, float projectileOffset, bool isPlayerProjectile) : base(name)
+        {
+            AddToHirarcy();
+            Components.Add(new Sprite(this, StatsHandler.GetProjectileTextureName(weaponType)));
+            _damage = Damage;
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
+            _projectileDirection = flightDirectin * speed;
+            _projectileTransform = GetComponent<Transform>();
+            Vector2 pos = transform.Position;
+            _projectileTransform.Position = new Vector2(pos.X + projectileOffset, pos.Y);
+            _flying = true;
+            _speed = speed;
+            _isPlayerProjectile = isPlayerProjectile;
+        }
+
         public void Update()
         {
-            if(_flying)
-                MoveGameObject(_projectileDirection, _isPlayerProjectile, _speed);
+            if (_flying)
+            {
+                if (_isPlayerProjectile)
+                    MovementHandler.Movement(MoveDirection.Up, this, _speed);
+                else
+                {
+                    MovementHandler.Movement(MoveDirection.Down, this, _speed);
+                }
+            }
             if (_projectileTransform.Position.Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height || _projectileTransform.Position.Y <0)
             {
                 SubscriptionManager.RemoveSubscriber<IUpdatable>(this);

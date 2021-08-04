@@ -25,6 +25,17 @@ namespace BoBo2D_Eyal_Gal
             _spawnMaxWidth = 750;
             _spawnMinWidth = 0;
         }
+
+        public EnemySpawnManager(GameObject enemySpawner, int spawnMinWidth, int spawnMaxWidth)
+        {
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
+            GameObjectManager.Instance.AddGameObject(enemySpawner);
+            _enemySpawner = enemySpawner;
+            _spawnHight = StatsHandler.StartOfScreenHightPosition;
+            //_spawnMaxWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            _spawnMinWidth = spawnMinWidth;
+            _spawnMaxWidth = spawnMaxWidth;
+        }
         //every wave the player will have more enemies that will spawn in a random time frame between every spawn
         //Enemies will shoot at a regular time frame
         public void AddEnemiesToSpawn(int enemyNumber)
@@ -55,7 +66,7 @@ namespace BoBo2D_Eyal_Gal
             }
             else
             {
-                _timeTillNextSpawn -= Physics.DeltaTime;
+                _timeTillNextSpawn -= Time.DeltaTime * 10;
             }
         }
         void SetNextTimeToSpawn()

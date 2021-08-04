@@ -57,7 +57,7 @@ namespace BoBo2D_Eyal_Gal
         public void DisableNode(Node node)
         {
             Console.WriteLine($"Disabling {node}");
-            node.GameObjectP.Disable();
+            node.GameObjectP.DisableGameObject();
             foreach (var child in node.Children)
             {
                 DisableNode(child);

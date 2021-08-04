@@ -53,11 +53,33 @@ namespace BoBo2D_Eyal_Gal
                 //error sound
             }
         }
+
+        public void Shoot(float projectileOffset)
+        {
+            //check for cooldown and ammo
+            if (_currentCoolDown <= 0 && _ammo > 0)
+            {
+                float finalDamage = CalculateDamage(_baseDamage, _damageScalar);
+                Vector2 flightDirection = Direction();
+                Transform transform = _spaceShip.GetComponent<Transform>();
+                if (transform != null && _projectileName != null)
+                {
+                    _ammo -= 1;
+                    _currentCoolDown = _maxCooldown;
+                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform, _spaceShip.Speed, projectileOffset, _isPlayer);
+                }
+            }
+            else
+            {
+                //error sound
+            }
+        }
+
         public void Update()
         {
             if(_currentCoolDown >0)
             {
-                _currentCoolDown -= 1*Physics.DeltaTime;
+                _currentCoolDown -= 1 * (Time.DeltaTime * 10);
             }
         }
         public float CalculateDamage(float baseDamage, float damageScalar)

@@ -11,7 +11,7 @@ namespace BoBo2D_Eyal_Gal
         BasicPlayerSpaceship = 1,
     }
 
-    public class Spaceship : GameObject,IUpdatable
+    public class Spaceship : GameObject, IUpdatable
     {
         #region Fields
         Weapon _currentWeapon, _firstWeapon, _secondWeapon, _thirdWeapon;
@@ -72,7 +72,6 @@ namespace BoBo2D_Eyal_Gal
                 Score = CurrentLvl + scoreModifier;
 
                 //starting position
-                PlayerProgression.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
             }
         }
         public void Update()
@@ -80,7 +79,7 @@ namespace BoBo2D_Eyal_Gal
              if(_isPlayer == false)
             {
                 CheckEnemyPosition();
-                MoveGameObject(StatsHandler.Backward, _isPlayer, _speed);
+                MovementHandler.Movement(MoveDirection.Down, this, _speed);
             }
         }
 
@@ -110,11 +109,6 @@ namespace BoBo2D_Eyal_Gal
                 transform.Position = pos;
             }
         }
-        void MoveEnemyPerFrame(Vector2 direction)
-        {
-            GetComponent<Transform>().Position -= direction;
-        }
-
         public override void Unsubscribe()
         {
             SubscriptionManager.RemoveSubscriber<IUpdatable>(this);

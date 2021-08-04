@@ -11,7 +11,8 @@ namespace BoBo2D_Eyal_Gal
         private SpriteBatch _spriteBatch;
         private Spaceship _player;
         private SpriteFont _gameFont = default;
-        WaveManager _waveManager;
+        private WaveManager _waveManager;
+        private float _projectileOffset = 27;
         #endregion
 
         public Game1()
@@ -26,7 +27,6 @@ namespace BoBo2D_Eyal_Gal
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             DataManager.Game = this;
             DataManager.Instance.LoadAllExternalData();
             DrawManager.Game = this;
@@ -38,10 +38,10 @@ namespace BoBo2D_Eyal_Gal
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            CreateBackGround();
-            CreatePlayer();
+            CreateBackGround("BackGround", "BG");
+            CreatePlayer("Player", "PlayerShip");
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
-            _waveManager = new WaveManager();
+            _waveManager = new WaveManager(0, 750);
         }
 
         protected override void Update(GameTime gameTime)
@@ -59,19 +59,27 @@ namespace BoBo2D_Eyal_Gal
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your update logic here1
+            // TODO: Add your update logic here
             _spriteBatch.Begin();
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
             _spriteBatch.End();
-
             base.Draw(gameTime);
         }
+
         void CreateBackGround()
         {
             GameObject bg = new GameObject("BackGround");
             GameObjectManager.Instance.AddGameObject(bg);
             bg.AddComponent(new Sprite(bg,"BG"));
         }
+
+        void CreateBackGround(string backgroundName, string backgroundSprite)
+        {
+            GameObject background = new GameObject(backgroundName);
+            GameObjectManager.Instance.AddGameObject(background);
+            background.AddComponent(new Sprite(background, backgroundSprite));
+        }
+
         void CreatePlayer()
         {
             _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship,"Player", true);
@@ -79,7 +87,31 @@ namespace BoBo2D_Eyal_Gal
             _player.AddComponent(new Rigidbooty(_player));
             _player.AddComponent(new BoxCollider(_player));
             _player.AddComponent(new Sprite(_player, "PlayerShip"));
-            InputManager im = new InputManager(_player);
+            InputManager im = new InputManager(_player, false, false);
+        }
+
+        void CreatePlayer(string playerName, string playerSprite)
+        {
+            _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship, playerName, true);
+            GameObjectManager.Instance.AddGameObject(_player);
+            _player.AddComponent(new Rigidbooty(_player));
+            _player.AddComponent(new BoxCollider(_player));
+            _player.AddComponent(new Sprite(_player, playerSprite));
+            //new InputManager(_player, _projectileOffset, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.Space, Keys.LeftControl, Keys.LeftShift);
+            new InputManager(_player, _projectileOffset, false, false);
+            /*
+            //*onboard input system* - wasd scheme + shoot weapons with number keys
+            new InputManager(_player, true, true);
+            /
+            //custom set of movement input keys - *!use only with onboard input systems!*
+            new InputManager(_player, Keys.I, Keys.K, Keys.J, Keys.L);
+            /
+            //custom set of weapon input keys + projectile transform offset - *!use only with onboard input systems!*
+            new InputManager(_player, _projectileOffset, Keys.Z, Keys.X, Keys.C);
+            /
+            //custom set of movement & weapon input keys with projectile transform offset
+            new InputManager(_player, _projectileOffset, Keys.I, Keys.K, Keys.J, Keys.L, Keys.Z, Keys.X, Keys.C);
+            */
         }
 
         public void DrawSprite(Texture2D texture,Vector2 position, Color color )
@@ -89,7 +121,6 @@ namespace BoBo2D_Eyal_Gal
                 _spriteBatch.Draw(texture, position, color);
             }
         }
-
         public T LoadData<T>(string fileName)
         {
             return Content.Load<T>(fileName);

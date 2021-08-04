@@ -28,7 +28,7 @@ namespace BoBo2D_Eyal_Gal
             {
                 _instance = this;
             }
-            _soundDataHolder = new SoundsDataHolder();
+            _soundDataHolder = new SoundsDataHolder(); 
             _spriteDataHolder = new SpritesDataHolder();
         }
         #endregion
