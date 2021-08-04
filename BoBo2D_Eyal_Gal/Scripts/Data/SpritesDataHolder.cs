@@ -8,9 +8,33 @@ namespace BoBo2D_Eyal_Gal
 {
     public class SpritesDataHolder
     {
+        #region Singleton
+        static SpritesDataHolder _instance = null;
+        public static SpritesDataHolder Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new SpritesDataHolder();
+                }
+                return _instance;
+            }
+        }
+        #endregion
+
+        #region Fields
+        List<string> _spriteNames;
+        Dictionary<string, Texture2D> _sprites = new Dictionary<string, Texture2D>();
+        #endregion
+        
+        #region Properties
+        public List<string> SpriteNames { get => _spriteNames; set => _spriteNames = value; }
+        #endregion
+        
         public SpritesDataHolder()
         {
-            _spriteNames = new List<string>()
+            _spriteNames = new List<string>(10)
             {
                 "BG",
                 "PlayerShip",
@@ -18,13 +42,7 @@ namespace BoBo2D_Eyal_Gal
                 "RebelShip",
             };
         }
-        #region Fields
-        Dictionary<string, Texture2D> _sprites = new Dictionary<string, Texture2D>();
-        List<string> _spriteNames;
-        #endregion
-        #region Properties
-        public List<string> SpriteNames => _spriteNames;
-        #endregion
+
         public void LoadSpriteData(Game1 game)
         {
             if (game != null)
@@ -36,6 +54,33 @@ namespace BoBo2D_Eyal_Gal
                 }
             }
         }
+
+        public void UpdateSpriteName(string spriteName)
+        {
+            _spriteNames.Add(spriteName);
+        }
+
+        public void UpdateSpriteName(string firstSpriteName, string secondSpriteName)
+        {
+            _spriteNames.Add(firstSpriteName);
+            _spriteNames.Add(secondSpriteName);
+        }
+
+        public void UpdateSpriteName(string firstSpriteName, string secondSpriteName, string thirdSpriteName)
+        {
+            _spriteNames.Add(firstSpriteName);
+            _spriteNames.Add(secondSpriteName);
+            _spriteNames.Add(thirdSpriteName);
+        }
+
+        public void UpdateSpriteName(string firstSpriteName, string secondSpriteName, string thirdSpriteName, string fourthSpriteName)
+        {
+            _spriteNames.Add(firstSpriteName);
+            _spriteNames.Add(secondSpriteName);
+            _spriteNames.Add(thirdSpriteName);
+            _spriteNames.Add(fourthSpriteName);
+        }
+
         public Texture2D GetTexture2D(string dataName)
         {
             Texture2D texture;

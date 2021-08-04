@@ -26,19 +26,19 @@ namespace BoBo2D_Eyal_Gal
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             DataManager.Game = this;
             DataManager.Instance.LoadAllExternalData();
             DrawManager.Game = this;
             base.Initialize();
         }
+
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
-            CreateBackGround();
-            CreatePlayer();
+            CreateBackGround("BackGround", "BG");
+            CreatePlayer("Player", "PlayerShip");
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             _waveManager = new WaveManager();
         }
@@ -58,18 +58,27 @@ namespace BoBo2D_Eyal_Gal
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your update logic here1
+            // TODO: Add your update logic here
             _spriteBatch.Begin();
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
             _spriteBatch.End();
             base.Draw(gameTime);
         }
+
         void CreateBackGround()
         {
             GameObject bg = new GameObject("BackGround");
             GameObjectManager.Instance.AddGameObject(bg);
             bg.AddComponent(new Sprite(bg,"BG"));
         }
+
+        void CreateBackGround(string backgroundName, string backgroundSprite)
+        {
+            GameObject background = new GameObject(backgroundName);
+            GameObjectManager.Instance.AddGameObject(background);
+            background.AddComponent(new Sprite(background, backgroundSprite));
+        }
+
         void CreatePlayer()
         {
             _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship,"Player", true);
@@ -77,6 +86,16 @@ namespace BoBo2D_Eyal_Gal
             _player.AddComponent(new Rigidbooty(_player));
             _player.AddComponent(new BoxCollider(_player));
             _player.AddComponent(new Sprite(_player, "PlayerShip"));
+            InputManager im = new InputManager(_player, false, false);
+        }
+
+        void CreatePlayer(string playerName, string playerSprite)
+        {
+            _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship, playerName, true);
+            GameObjectManager.Instance.AddGameObject(_player);
+            _player.AddComponent(new Rigidbooty(_player));
+            _player.AddComponent(new BoxCollider(_player));
+            _player.AddComponent(new Sprite(_player, playerSprite));
             InputManager im = new InputManager(_player, false, false);
         }
 

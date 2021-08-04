@@ -11,7 +11,7 @@ namespace BoBo2D_Eyal_Gal
         BasicPlayerSpaceship = 1,
     }
 
-    public class Spaceship : GameObject,IUpdatable
+    public class Spaceship : GameObject, IUpdatable
     {
         #region Fields
         Weapon _currentWeapon, _firstWeapon, _secondWeapon, _thirdWeapon;

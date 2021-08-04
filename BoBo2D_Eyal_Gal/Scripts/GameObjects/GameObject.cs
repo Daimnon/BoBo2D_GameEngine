@@ -55,7 +55,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Methods
-        public void Disable()
+        public void DisableGameObject()
         {
             Console.WriteLine($"Disabling GameObject{ToString()}");
             IsEnabled = false;

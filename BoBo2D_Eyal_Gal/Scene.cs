@@ -111,7 +111,7 @@ namespace BoBo2D_Eyal_Gal
         public void OnDisable()
         {
             foreach (var tree in Hirarchy)
-                tree.Root.GameObjectP.Disable();
+                tree.Root.GameObjectP.DisableGameObject();
 
         }
 

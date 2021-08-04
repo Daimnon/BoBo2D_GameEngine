@@ -30,12 +30,15 @@ namespace BoBo2D_Eyal_Gal
             }
         }
         #endregion
+
         #region Fields
         static Game1 _game;
         #endregion
+
         #region Properties
         public static Game1 Game { get => _game; set => _game = value; }
         #endregion
+
         public void DrawSprite(Texture2D texture, Vector2 position, Color color)
         {
             Game.DrawSprite(texture, position, color);
