@@ -38,14 +38,14 @@ namespace BoBo2D_Eyal_Gal
             //check for cooldown and ammo
             if(_currentCoolDown <= 0 && _ammo > 0)
             {
-                float finalDamage = CalculateDamage(_baseDamage, _damageScalar);
+                //float finalDamage = CalculateDamage(_baseDamage, _damageScalar);
                 Vector2 flightDirection = Direction();
                 Transform transform = _spaceShip.GetComponent<Transform>();
                 if (transform != null && _projectileName != null)
                 {
                     _ammo -= 1;
                     _currentCoolDown = _maxCooldown;
-                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform,_spaceShip.Speed, _isPlayer);
+                    new Projectile(_projectileName, flightDirection, _weaponType, transform, _isPlayer,_spaceShip, ProjectileType.BasicProjectile);
                 }
             }
             else

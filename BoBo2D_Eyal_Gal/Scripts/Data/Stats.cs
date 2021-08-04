@@ -10,6 +10,7 @@ namespace BoBo2D_Eyal_Gal
         {
             Ship = 0,
             Weapon = 1,
+            Projectile =2,
         }
         StatsType _statsType;
         public StatsType GetStatsType => _statsType;

@@ -36,6 +36,5 @@
             _weaponName = weaponType.ToString();
             _projectileName = weaponType.ToString() + "Projectile";
         }
-
     }
 }

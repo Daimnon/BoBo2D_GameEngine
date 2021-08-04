@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
+    public enum ProjectileType
+    {
+        BasicProjectile
+    }
     public class Projectile: GameObject, IUpdatable
     {
         #region Fields
@@ -15,9 +19,10 @@ namespace BoBo2D_Eyal_Gal
         Vector2 _projectileDirection;
         float _damage;
         float _speed;
-        float _ProjectileOffset;
+        float _projectileOffset;
         bool _flying = false;
         bool _isPlayerProjectile;
+        Spaceship _spaceShip;
         #endregion
 
         #region Properties
@@ -25,20 +30,20 @@ namespace BoBo2D_Eyal_Gal
         public bool Flying { set => _flying = value; }
         #endregion
 
-        public Projectile(string name, float Damage, Vector2 flightDirectin,
-            WeaponType weaponType, Transform transform, float speed, bool isPlayerProjectile) : base(name)
+        public Projectile(string name, Vector2 flightDirectin,
+            WeaponType weaponType, Transform transform, bool isPlayerProjectile,Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
             AddToHirarcy();
+            _spaceShip = spaceship;
             Components.Add(new Sprite(this, StatsHandler.GetProjectileTextureName(weaponType)));
-            _damage = Damage;
+            LoadStats(projectileType);
+            _projectileDirection = flightDirectin*_speed* _spaceShip.Speed;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
-            _projectileDirection = flightDirectin*speed;
             _projectileTransform = GetComponent<Transform>();
             Vector2 pos = transform.Position;
-            _ProjectileOffset = 27;
-            _projectileTransform.Position = new Vector2(pos.X + 27, pos.Y);
+            //_projectileOffset = 27;
+            _projectileTransform.Position = new Vector2(pos.X + _projectileOffset, pos.Y);
             _flying = true;
-            _speed = speed;
             _isPlayerProjectile = isPlayerProjectile;
         }
 
@@ -88,6 +93,13 @@ namespace BoBo2D_Eyal_Gal
             {
                 GameObjectManager.Instance.AddGameObject(this, projectile);
             }
+        }
+        void LoadStats(ProjectileType projectileType)
+        {
+            ProjectileStats stats = StatsHandler.GetStats<ProjectileStats>(projectileType);
+            _damage = stats.Damage;
+            _speed = stats.Speed;
+            _projectileOffset = stats.ProjectileOffset;
         }
     }
 }
