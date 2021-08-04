@@ -125,3 +125,10 @@ D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\ne
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Laser1.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Laser2.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Lasers.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Bolt1.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Bolt2.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Laser1.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Laser2.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\EnemyBossJetBeam.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\PlayerJetBeam.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\RebelJetBeam.xnb

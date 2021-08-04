@@ -40,13 +40,13 @@ namespace BoBo2D_Eyal_Gal
                 "PlayerShip",
                 "EnemyBoss",
                 "RebelShip",
-                //"EnemyBossJetBeam",
-                //"PlayerJetBeam",
-                //"RebelJetBeam",
-                //"Bolt1",
-                //"Bolt2",
-                "Laser1"
-                //"Laser2",
+                "EnemyBossJetBeam",
+                "PlayerJetBeam",
+                "RebelJetBeam",
+                "Bolt1",
+                "Bolt2",
+                "Laser1",
+                "Laser2"
             };
         }
 
