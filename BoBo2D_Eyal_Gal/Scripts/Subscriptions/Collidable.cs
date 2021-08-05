@@ -9,9 +9,11 @@ namespace BoBo2D_Eyal_Gal
         #region Fields
         List<T> _collidablesList = new List<T>(5);
         #endregion
+
         #region Properties
         public List<T> GetUpdatableList => _collidablesList;
         #endregion
+
         #region Methods
         public void AddCollidable(T collidableClass)
         {
@@ -30,13 +32,6 @@ namespace BoBo2D_Eyal_Gal
                 return;
             }
             _collidablesList.Remove(collidableClass);
-        }
-        public void CheckCollision()
-        {
-            for (int i = 0; i < _collidablesList.Count; i++)
-            {
-                _collidablesList[i].CheckCollision();
-            }
         }
         #endregion
     }

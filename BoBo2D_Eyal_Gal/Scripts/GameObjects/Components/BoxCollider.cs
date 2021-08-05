@@ -20,6 +20,7 @@ namespace BoBo2D_Eyal_Gal
         float _cZ;
 
         float _boxTop, _boxBottom, _boxLeft, _boxRight, _boxFront, _boxBack;
+        float _collisionTimer = 0;
         bool _isEnabled = true;
         #endregion
 
@@ -36,13 +37,16 @@ namespace BoBo2D_Eyal_Gal
         public float BoxRight { get => _boxRight; set => _boxRight = value; }
         public float BoxFront { get => _boxFront; set => _boxFront = value; }
         public float BoxBack { get => _boxBack; set => _boxBack = value; }
+        public float CollisionTimer { get => _collisionTimer; set => _collisionTimer = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
         #endregion
 
         public BoxCollider(GameObject gameObject)
         {
             SubscriptionManager.AddSubscriber<ICollidable>(this);
+            Physics.AllBoxColliders.Add(this);
             Name = gameObject.Name + " Colider";
+
             float objX = gameObject.GetComponent<Transform>().Position.X;
             float objY = gameObject.GetComponent<Transform>().Position.Y;
             //float objZ = gameObject.GetComponent<Transform>().Position.Z;
@@ -82,13 +86,10 @@ namespace BoBo2D_Eyal_Gal
             if (!IsEnabled)
                 IsEnabled = true;
         }
+
         public override void Unsubscribe()
         {
             SubscriptionManager.RemoveSubscriber<ICollidable>(this);
-        }
-        public void CheckCollision()
-        {
-            //need implementation
         }
         #endregion
 
