@@ -9,119 +9,155 @@ namespace BoBo2D_Eyal_Gal
     public class Scene
     {
         #region Field
-        List<TreeOfGameObjects> _hirarchy = new List<TreeOfGameObjects>();
-        List<GameObject> _gameObjects = new List<GameObject>();
-        GameObject _gameObject;
-        int _sceneIndex;
+        Game1 _game;
+        LinkedList<Level> _levels = new LinkedList<Level>();
+        //private WaveManager _waveManager;
+        private Spaceship _player;
+
         #endregion
 
         #region Properties
-        public List<TreeOfGameObjects> Hirarchy => _hirarchy;
-        public List<GameObject> GameObjectsP { get => _gameObjects; set => _gameObjects = value; }
-        public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
-        public int SceneIndex { get => _sceneIndex; set => _sceneIndex = value; }
 
         #endregion
 
-        public Scene(int sceneIndex)
+        public Scene(Game1 game)
         {
-            SceneIndex = sceneIndex;
+            _game = game;
         }
 
         #region Methods
 
         //initializing scene
+        public void Init()
+        {
+            CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27);
+            CreateWeapon(WeaponType.BasicMainWeapon, 1, 10, 1, 1);
+            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 100, 1, 0, 40, 1, 3, 1, 100);
+            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicMainWeapon, 30, 1, 0, 10, 1, 1, 1, 100);
+            DataManager.Game = _game;
+            AddSprites();
+            AddSounds();
+            DataManager.Instance.LoadAllExternalData();
+            DrawManager.Game = _game;
+        }
         public void Start()
         {
-            Console.WriteLine("Starting Scene");
-            GameObjectsP.Add(new GameObject("Empty Game Object", new Transform(new Vector2(0, 0), new Vector2(1, 1))));
-
-            //testing hirarcy
-
-            Hirarchy.Add(new TreeOfGameObjects(new Node(new GameObject("Player"), null)));
-            new Node(new GameObject("Player Hand", new Transform(new Vector2(0, 0), new Vector2(1, 1))), Hirarchy[0].Root);
-            BoxCollider bc = new BoxCollider(_gameObjects[0]);
-            Hirarchy[0].Root.Children[0].GameObjectP.AddComponent(bc);
-            Hirarchy[0].Root.Children[0].GameObjectP.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
-            Hirarchy[0].Root.Children[0].GameObjectP.RemoveComponent(new BoxCollider(_gameObjects[0]));
-            Hirarchy[0].Root.Children[0].GameObjectP.RemoveComponent(bc);
-            Hirarchy[0].Root.Children[0].GameObjectP.GetComponent<Transform>();
-            GetGameObject("Player Hand");
-            GetGameObject("Player");
-
-            OnEnable();
-            Console.WriteLine("Scene Started");
-            Console.WriteLine();
-        }
-
-        public void AlternativeStart()
-        {
-            GameObject player = new GameObject("Player");
-            GameObject emptyGameObject = new GameObject("Empty Game Object", new Transform(new Vector2(0, 0), new Vector2(1, 1)));
-            GameObject playerHand = new GameObject("Player Hand", new Transform(new Vector2(0, 0), new Vector2(1, 1)));
-
-            Node node = new Node(playerHand, Hirarchy[0].Root);
-            Node treeNode = new Node(player, null);
-
-            TreeOfGameObjects tree = new TreeOfGameObjects(treeNode);
-            Console.WriteLine("Starting Scene");
-            GameObjectsP.Add(GameObjectP);
-
-            //testing hirarcy
-
-            Hirarchy.Add(tree);
-            BoxCollider bc = new BoxCollider(_gameObjects[0]);
-            Hirarchy[0].Root.Children[0].GameObjectP.AddComponent(bc);
-            Hirarchy[0].Root.Children[0].GameObjectP.AddComponent(new Transform(new Vector2(0, 1), new Vector2(1, 1)));
-            Hirarchy[0].Root.Children[0].GameObjectP.RemoveComponent(new BoxCollider(_gameObjects[0]));
-            Hirarchy[0].Root.Children[0].GameObjectP.RemoveComponent(bc);
-            Hirarchy[0].Root.Children[0].GameObjectP.GetComponent<Transform>();
-            GetGameObject("Player Hand");
-            GetGameObject("Player");
-
-            OnEnable();
-            Console.WriteLine("Scene Started");
-            Console.WriteLine();
+            CreateBackGround("BackGround", "BG");
+            CreatePlayer("Player", "PlayerShip");
+            SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
+            //_waveManager = new WaveManager(0, 750);
         }
         public void Update()
         {
-            foreach (GameObject gameObject in GameObjectsP)
-                gameObject.GetComponent<Rigidbooty>();
-
-            Console.WriteLine("Executing Update");
+            SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
+            //check collisions need implementation
+            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
         }
-        public void OnEnable()//Enabling all game objects
+        public void DrawScene()
         {
-            if (Hirarchy != null || Hirarchy.Count != 0)
+            SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
+
+        }
+        void CreateWeapon(WeaponType weaponType, int cooldown, int maxAmmo, float baseDamage, float damageScalar)
+        {
+            WeaponStats weaponStats = new WeaponStats(weaponType, cooldown, maxAmmo, baseDamage, damageScalar);
+            StatsHandler.AddToCollection(weaponStats);
+        }
+
+        void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
+            float shieldRegen, float speed, float damageScalar, int score)
+        {
+            ShipStats spaceShipStats = new ShipStats(shipType, weaponType, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed, damageScalar, score);
+            StatsHandler.AddToCollection(spaceShipStats);
+        }
+
+        void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffset)
+        {
+            ProjectileStats projectileStats = new ProjectileStats(projectileType, damage, speed, projectileOffset);
+            StatsHandler.AddToCollection(projectileStats);
+        }
+
+        void AddSounds()
+        {
+            List<string> soundNames = new List<string>()
             {
-                Console.WriteLine("Enabling Scene");
-                foreach (var tree in Hirarchy)
-                    tree.Root.EnableNode(tree.Root);
-                    //gameObject.Enable();
+                //sound names
+            };
+            DataManager.Instance.SoundDataHolder.SoundNames = soundNames;
+        }
 
-                Console.WriteLine("Scene Enabled");
-                Console.WriteLine();
+        void AddSprites()
+        {
+            List<string> spriteNames = new List<string>()
+            {
+                "BG",
+                "PlayerShip",
+                "EnemyBoss",
+                "RebelShip",
+                "EnemyBossJetBeam",
+                "PlayerJetBeam",
+                "RebelJetBeam",
+                "Bolt1",
+                "Bolt2",
+                "Laser1",
+                "Laser2"
+            };
+            DataManager.Instance.SpriteDataHolder.SpriteNames = spriteNames;
+        }
+        void CreateBackGround(string backgroundName, string backgroundSprite)
+        {
+            GameObject background = new GameObject(backgroundName);
+            GameObjectManager.Instance.AddGameObject(background);
+            background.AddComponent(new Sprite(background, backgroundSprite));
+        }
+
+        void CreatePlayer(string playerName, string playerSprite)
+        {
+            _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship, playerName, true);
+            GameObjectManager.Instance.AddGameObject(_player);
+            _player.AddComponent(new Rigidbooty(_player));
+            _player.AddComponent(new BoxCollider(_player));
+            _player.AddComponent(new Sprite(_player, playerSprite));
+            //new InputManager(_player, _projectileOffset, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.Space, Keys.LeftControl, Keys.LeftShift);
+            new InputManager(_player, false, false);
+            /*
+            //*onboard input system* - wasd scheme + shoot weapons with number keys
+            new InputManager(_player, true, true);
+            /
+            //custom set of movement input keys - *!use only with onboard input systems!*
+            new InputManager(_player, Keys.I, Keys.K, Keys.J, Keys.L);
+            /
+            //custom set of weapon input keys + projectile transform offset - *!use only with onboard input systems!*
+            new InputManager(_player, _projectileOffset, Keys.Z, Keys.X, Keys.C);
+            /
+            //custom set of movement & weapon input keys with projectile transform offset
+            new InputManager(_player, _projectileOffset, Keys.I, Keys.K, Keys.J, Keys.L, Keys.Z, Keys.X, Keys.C);
+            */
+        }
+
+        //GAL why do we have collisions outside of a physics? not supposed to be in game or scene im my opinion
+        public void OnCollision(GameObject gameObject, GameObject anotherGameObject)
+        {
+            if (Physics.CheckCollision(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
+
             }
-            else
-                Console.WriteLine("Game Objects ListEmpty, Enabling Skipped");
-
-            Console.WriteLine();
         }
 
-        public void OnDisable()
+        public void OnCollisionStart(GameObject gameObject, GameObject anotherGameObject)
         {
-            foreach (var tree in Hirarchy)
-                tree.Root.GameObjectP.DisableGameObject();
+            if (Physics.CheckCollisionStart(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
 
+            }
         }
-
-        public void GetGameObject(string gameObjectName)
+        
+        public void OnCollisionEnd(GameObject gameObject, GameObject anotherGameObject)
         {
-            Console.WriteLine($"Looking for GameObject with the name:{gameObjectName}");
-            foreach (var tree in Hirarchy)
-                tree.Root.FindGameObject(gameObjectName);
+            if (Physics.CheckCollisionEnd(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
 
-            Console.WriteLine();
+            }
         }
         #endregion
     }

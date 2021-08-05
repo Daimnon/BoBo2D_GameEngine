@@ -52,7 +52,7 @@ namespace BoBo2D_Eyal_Gal
         }
         public static T GetStats<T>(ProjectileType projectileType) where T : Stats
         {
-            return GetStats<WeaponStats>(Stats.StatsType.Projectile, (int)projectileType) as T;
+            return GetStats<ProjectileStats>(Stats.StatsType.Projectile, (int)projectileType) as T;
         }
         #region Spaceship
         public static int EndOfScreenHightPosition = 600;
