@@ -10,6 +10,7 @@ namespace BoBo2D_Eyal_Gal
         static Updatable<IUpdatable> _updatable = new Updatable<IUpdatable>();
         static Startable<IStartable> _startable = new Startable<IStartable>();
         static Drawable<IDrawable> _drawable = new Drawable<IDrawable>();
+        static Collidable<ICollidable> _collidable = new Collidable<ICollidable>();
         #endregion
 
         #region Methods
@@ -31,6 +32,9 @@ namespace BoBo2D_Eyal_Gal
                 case true when typeof(T) == typeof(IDrawable):
                     _drawable.AddDrawable(item as IDrawable);
                         break;
+                case true when typeof(T) == typeof(ICollidable):
+                    _collidable.AddCollidable(item as ICollidable);
+                    break;
                 default:
                     Console.WriteLine("Error in AddSubscriber");
                     break;
@@ -53,6 +57,9 @@ namespace BoBo2D_Eyal_Gal
                 case true when typeof(T) == typeof(IDrawable):
                     _drawable.RemoveDrawable(item as IDrawable);
                     break;
+                case true when typeof(T) == typeof(ICollidable):
+                    _collidable.RemoveCollidable(item as ICollidable);
+                    break;
                 default:
                     Console.WriteLine("Error in RemoveSubscriber");
                     break;
@@ -70,6 +77,9 @@ namespace BoBo2D_Eyal_Gal
                     break;
                 case true when typeof(T) == typeof(IDrawable):
                     _drawable.DrawAll();
+                    break;
+                case true when typeof(T) == typeof(ICollidable):
+                    Physics.SolveCollision();
                     break;
                 default:
                     Console.WriteLine("Error in ActivateAllSubscribersOfType");

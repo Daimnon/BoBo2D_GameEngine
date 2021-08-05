@@ -40,10 +40,13 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public static Game1 Game { get => _game; set => _game = value; } //Stores the current game
+        public static Game1 Game { get => _game; set => _game = value; }
+        public SpritesDataHolder SpriteDataHolder => _spriteDataHolder;
+        public SoundsDataHolder SoundDataHolder => _soundDataHolder;
+        //Stores the current game
         //public SpriteDataHolder SpriteDataHolder => _spriteDataHolder;
         #endregion
-        
+
         #region Methods
         public void LoadAllExternalData()
         {

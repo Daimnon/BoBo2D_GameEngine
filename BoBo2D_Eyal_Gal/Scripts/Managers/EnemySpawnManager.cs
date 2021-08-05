@@ -77,6 +77,8 @@ namespace BoBo2D_Eyal_Gal
         void Spawn()
         {
             Spaceship EnemySpaceship = new Spaceship(SpaceshipType.BasicEnemySpaceship,$"Enemy{_numberToSpawn}",false);
+            EnemySpaceship.AddComponent(new Rigidbooty(EnemySpaceship));
+            EnemySpaceship.AddComponent(new BoxCollider(EnemySpaceship));
             EnemySpaceship.AddComponent(new Sprite(EnemySpaceship, "RebelShip"));
             Random random = new Random();
             int width = random.Next(_spawnMinWidth, _spawnMaxWidth);

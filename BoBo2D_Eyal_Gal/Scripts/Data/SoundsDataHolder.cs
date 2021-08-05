@@ -21,7 +21,7 @@ namespace BoBo2D_Eyal_Gal
         List<string> _soundNames;
         #endregion
         #region Properties
-        public List<string> SoundNames => _soundNames;
+        public List<string> SoundNames { get => _soundNames; set => _soundNames = value; }
         #endregion
         public void LoadSoundData(Game1 game)
         {
