@@ -62,7 +62,6 @@ namespace BoBo2D_Eyal_Gal
             _speed = speed;
             _isPlayerProjectile = isPlayerProjectile;
         }
-
         public void Update()
         {
             if (_flying)
