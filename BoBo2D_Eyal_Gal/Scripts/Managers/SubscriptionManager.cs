@@ -79,7 +79,7 @@ namespace BoBo2D_Eyal_Gal
                     _drawable.DrawAll();
                     break;
                 case true when typeof(T) == typeof(ICollidable):
-                    _collidable.CheckCollision();
+                    Physics.SolveCollision();
                     break;
                 default:
                     Console.WriteLine("Error in ActivateAllSubscribersOfType");

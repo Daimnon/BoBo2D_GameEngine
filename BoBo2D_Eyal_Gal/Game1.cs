@@ -58,7 +58,9 @@ namespace BoBo2D_Eyal_Gal
                 Exit();
             // TODO: Add your update logic here
             SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
-            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();//check collisions need implementation
+            
+            //check collisions need implementation
+            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
 
             base.Update(gameTime);
         }
@@ -73,12 +75,14 @@ namespace BoBo2D_Eyal_Gal
             _spriteBatch.End();
             base.Draw(gameTime);
         }
+
         void CreateBackGround(string backgroundName, string backgroundSprite)
         {
             GameObject background = new GameObject(backgroundName);
             GameObjectManager.Instance.AddGameObject(background);
             background.AddComponent(new Sprite(background, backgroundSprite));
         }
+
         void CreatePlayer(string playerName, string playerSprite)
         {
             _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship, playerName, true);
@@ -102,22 +106,26 @@ namespace BoBo2D_Eyal_Gal
             new InputManager(_player, _projectileOffset, Keys.I, Keys.K, Keys.J, Keys.L, Keys.Z, Keys.X, Keys.C);
             */
         }
+
         void CreateWeapon(WeaponType weaponType, int cooldown, int maxAmmo, float baseDamage, float damageScalar)
         {
             WeaponStats weaponStats = new WeaponStats(weaponType, cooldown, maxAmmo, baseDamage, damageScalar);
             StatsHandler.AddToCollection(weaponStats);
         }
+
         void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
             float shieldRegen, float speed, float damageScalar, int score)
         {
             ShipStats spaceShipStats = new ShipStats(shipType, weaponType, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed, damageScalar, score);
             StatsHandler.AddToCollection(spaceShipStats);
         }
+
         void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffset)
         {
             ProjectileStats projectileStats = new ProjectileStats(projectileType, damage, speed, projectileOffset);
             StatsHandler.AddToCollection(projectileStats);
         }
+
         void AddSounds()
         {
             List<string> soundNames = new List<string>()
@@ -126,6 +134,7 @@ namespace BoBo2D_Eyal_Gal
             };
             DataManager.Instance.SoundDataHolder.SoundNames = soundNames;
         }
+
         void AddSprites()
         {
             List<string> spriteNames = new List<string>()
@@ -152,9 +161,34 @@ namespace BoBo2D_Eyal_Gal
                 _spriteBatch.Draw(texture, position, color);
             }
         }
+
         public T LoadData<T>(string fileName)
         {
             return Content.Load<T>(fileName);
+        }
+
+        public void OnCollision(GameObject gameObject, GameObject anotherGameObject)
+        {
+            if (Physics.CheckCollision(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
+
+            }
+        }
+
+        public void OnCollisionStart(GameObject gameObject, GameObject anotherGameObject)
+        {
+            if (Physics.CheckCollisionStart(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
+
+            }
+        }
+
+        public void OnCollisionEnd(GameObject gameObject, GameObject anotherGameObject)
+        {
+            if (Physics.CheckCollisionEnd(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
+
+            }
         }
     }
 }

@@ -36,5 +36,33 @@ namespace BoBo2D_Eyal_Gal
                 return deltaTime;
             }
         }
+
+        public static void StartTimer(float timer)
+        {
+            timer = 0;
+            timer = timer + (1 * DeltaTime);
+        }
+
+        public static void ContinueTimer(float timer)
+        {
+            timer = timer + (1 * DeltaTime);
+        }
+
+        public static void StopTimer(float timer)
+        {
+            if (timer > 0)
+            {
+                float tempTimer = timer;
+                timer = tempTimer;
+            }
+        }
+
+        public static void ResetTimer(float timer)
+        {
+            if (timer > 0)
+            {
+                timer = 0;
+            }
+        }
     }
 }
