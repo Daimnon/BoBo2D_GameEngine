@@ -72,28 +72,6 @@ namespace BoBo2D_Eyal_Gal
             return Content.Load<T>(fileName);
         }
 
-        public void OnCollision(GameObject gameObject, GameObject anotherGameObject)
-        {
-            if (Physics.CheckCollision(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
-            {
 
-            }
-        }
-
-        public void OnCollisionStart(GameObject gameObject, GameObject anotherGameObject)
-        {
-            if (Physics.CheckCollisionStart(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
-            {
-
-            }
-        }
-
-        public void OnCollisionEnd(GameObject gameObject, GameObject anotherGameObject)
-        {
-            if (Physics.CheckCollisionEnd(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
-            {
-
-            }
-        }
     }
 }
