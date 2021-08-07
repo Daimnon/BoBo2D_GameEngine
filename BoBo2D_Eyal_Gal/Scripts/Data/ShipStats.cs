@@ -9,8 +9,8 @@
         int _maxShield;
         float _shieldRegen;
         float _speed;
-        float _damageScalar;
         int _score;
+        bool _hasWeaponSprite;
         SpaceshipType _shipType;
         WeaponType _weaponType;
         #endregion
@@ -24,13 +24,13 @@
         public int MaxShield => _maxShield;
         public float ShieldRegen => _shieldRegen;
         public float Speed => _speed;
-        public float DamageScalar => _damageScalar;
         public int Score => _score;
+        public bool HasWeaponSprite => _hasWeaponSprite;
 
         #endregion
 
         public ShipStats(SpaceshipType shipType,WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
-            float shieldRegen,float speed, float damageScalar, int score) : base(StatsType.Ship)
+            float shieldRegen,float speed, int score, bool hasWeaponSprite) : base(StatsType.Ship)
         {
             _shipType = shipType;
             _weaponType = weaponType;
@@ -40,8 +40,8 @@
             _maxShield = maxShield;
             _shieldRegen = shieldRegen;
             _speed = speed;
-            _damageScalar = damageScalar;
             _score = score;
+            _hasWeaponSprite = hasWeaponSprite;
         }
     }
 

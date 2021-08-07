@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/JetBeams/EnemyBossJetBeam.png</SourceFile>
-  <SourceTime>2021-08-04T10:13:29.437109+03:00</SourceTime>
-  <DestFile>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/JetBeams/EnemyBossJetBeam.xnb</DestFile>
-  <DestTime>2021-08-05T11:05:49.0746293+03:00</DestTime>
+  <SourceFile>C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/JetBeams/EnemyBossJetBeam.png</SourceFile>
+  <SourceTime>2021-08-04T12:58:06.7248631+03:00</SourceTime>
+  <DestFile>C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/JetBeams/EnemyBossJetBeam.xnb</DestFile>
+  <DestTime>2021-08-07T17:40:57.2761706+03:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T19:17:54+03:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

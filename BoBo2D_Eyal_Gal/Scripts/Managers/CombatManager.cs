@@ -12,37 +12,15 @@ namespace BoBo2D_Eyal_Gal
             {
                 case SelectedWeapon.MainWeapon:
                     if(spaceship.FirstWeapon!= null)
-                    spaceship.FirstWeapon.Shoot();
+                    spaceship.FirstWeapon.Shoot(spaceship.CurrentSpeed);
                     break;
                 case SelectedWeapon.SeconderyWeapon:
                     if(spaceship.SecondWeapon!= null)
-                    spaceship.SecondWeapon.Shoot();
+                    spaceship.SecondWeapon.Shoot(spaceship.CurrentSpeed);
                     break;
                 case SelectedWeapon.SpecialWeapon:
                     if(spaceship.ThirdWeapon != null)
-                    spaceship.ThirdWeapon.Shoot();
-                    break;
-                default:
-                    Console.WriteLine("Unrecognized Weapon");
-                    break;
-            }
-        }
-
-        public static void FireWeapon(Spaceship spaceship, SelectedWeapon type, float projectileOffset)//get the button and translate it to a weapon to shoot with
-        {
-            switch (type)
-            {
-                case SelectedWeapon.MainWeapon:
-                    if (spaceship.FirstWeapon != null)
-                        spaceship.FirstWeapon.Shoot(projectileOffset);
-                    break;
-                case SelectedWeapon.SeconderyWeapon:
-                    if (spaceship.SecondWeapon != null)
-                        spaceship.SecondWeapon.Shoot(projectileOffset);
-                    break;
-                case SelectedWeapon.SpecialWeapon:
-                    if (spaceship.ThirdWeapon != null)
-                        spaceship.ThirdWeapon.Shoot(projectileOffset);
+                    spaceship.ThirdWeapon.Shoot(spaceship.CurrentSpeed);
                     break;
                 default:
                     Console.WriteLine("Unrecognized Weapon");

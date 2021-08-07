@@ -52,38 +52,11 @@ namespace BoBo2D_Eyal_Gal
         }
         public static T GetStats<T>(ProjectileType projectileType) where T : Stats
         {
-            return GetStats<WeaponStats>(Stats.StatsType.Projectile, (int)projectileType) as T;
+            return GetStats<ProjectileStats>(Stats.StatsType.Projectile, (int)projectileType) as T;
         }
         #region Spaceship
         public static int EndOfScreenHightPosition = 600;
         public static int StartOfScreenHightPosition = 10;
-        #endregion
-        #region Direction
-        public static Vector2 forward = new Vector2(0, 1);
-        public static Vector2 Backward = new Vector2(0, -1);
-        #endregion
-        #region WeaponDataMethods
-        //need to change
-        public static string GetWeaponTextureName(WeaponType weaponType)
-        {
-            switch (weaponType)
-            {
-                case WeaponType.BasicMainWeapon:
-                    return "PlayerShip";
-                default:
-                    return null;
-            }
-        }
-        public static string GetProjectileTextureName(WeaponType weaponType)
-        {
-            switch (weaponType)
-            {
-                case WeaponType.BasicMainWeapon:
-                    return "Laser1";
-                default:
-                    return null;
-            }
-        }
         #endregion
     }
 }

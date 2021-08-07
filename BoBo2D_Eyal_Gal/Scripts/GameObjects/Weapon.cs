@@ -9,64 +9,46 @@ namespace BoBo2D_Eyal_Gal
     {
         BasicMainWeapon = 0,
     }
-    public class Weapon: IUpdatable
+    public class Weapon: GameObject ,IUpdatable
     {
         #region Fields
         Spaceship _spaceShip;
 
-        int _id;
         float _currentCoolDown;
         float _maxCooldown;
         int _ammo;
         int _maxAmmo;
         float _baseDamage;
         float _damageScalar;
-        string _weaponName;
         string _projectileName;
         bool _isPlayer;
         WeaponType _weaponType;
+        string _spriteName;
         #endregion
-        public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType)
+        public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType, bool hasSprite):base(weaponType.ToString())
         {
             _spaceShip = spaceShip;
             _isPlayer = isPlayer;
             LoadStats(weaponType);
+            _projectileName = weaponType.ToString() + "Projectile";
+            if(hasSprite)
+            {
+                AddComponent(new Sprite(this, _spriteName));
+            }
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
-        public void Shoot()
+        public void Shoot(Vector2 currentSpeed)
         {
             //check for cooldown and ammo
             if(_currentCoolDown <= 0 && _ammo > 0)
             {
-                //float finalDamage = CalculateDamage(_baseDamage, _damageScalar);
                 Vector2 flightDirection = Direction();
                 Transform transform = _spaceShip.GetComponent<Transform>();
                 if (transform != null && _projectileName != null)
                 {
                     _ammo -= 1;
                     _currentCoolDown = _maxCooldown;
-                    new Projectile(_projectileName, flightDirection, _weaponType, transform, _isPlayer,_spaceShip, ProjectileType.BasicProjectile);
-                }
-            }
-            else
-            {
-                //error sound
-            }
-        }
-
-        public void Shoot(float projectileOffset)
-        {
-            //check for cooldown and ammo
-            if (_currentCoolDown <= 0 && _ammo > 0)
-            {
-                float finalDamage = CalculateDamage(_baseDamage, _damageScalar);
-                Vector2 flightDirection = Direction();
-                Transform transform = _spaceShip.GetComponent<Transform>();
-                if (transform != null && _projectileName != null)
-                {
-                    _ammo -= 1;
-                    _currentCoolDown = _maxCooldown;
-                    new Projectile(_projectileName, finalDamage, flightDirection, _weaponType, transform, _spaceShip.Speed, projectileOffset, _isPlayer);
+                    new Projectile(_projectileName, flightDirection,_damageScalar, _weaponType, transform, _isPlayer,_spaceShip, ProjectileType.BasicProjectile);
                 }
             }
             else
@@ -90,11 +72,11 @@ namespace BoBo2D_Eyal_Gal
         {
             if(_isPlayer)
             {
-                return StatsHandler.forward;
+                return MovementHandler.GetVector(MoveDirection.Up);
             }
             else
             {
-                return StatsHandler.Backward;
+                return MovementHandler.GetVector(MoveDirection.Down);
             }
         }
 
@@ -103,15 +85,13 @@ namespace BoBo2D_Eyal_Gal
             WeaponStats stats = StatsHandler.GetStats<WeaponStats>(weaponType);
             if(stats != null)
             {
-                _id = stats.Id;
                 _maxCooldown = stats.Cooldown;
                 _ammo = stats.MaxAmmo;
                 _maxAmmo = stats.MaxAmmo;
                 _baseDamage = stats.BaseDamage;
                 _damageScalar = stats.DamageScalar;
-                _weaponName = stats.WeaponName;
-                _projectileName = stats.ProjectileName;
                 _weaponType = weaponType;
+                _spriteName = stats.SpriteName;
             }   
         }       
                 
