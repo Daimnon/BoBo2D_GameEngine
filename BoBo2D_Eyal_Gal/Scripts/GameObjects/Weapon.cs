@@ -43,7 +43,6 @@ namespace BoBo2D_Eyal_Gal
             if(_currentCoolDown <= 0 && _ammo > 0)
             {
                 Vector2 flightDirection = Direction();
-               // flightDirection *= currentSpeed;
                 Transform transform = _spaceShip.GetComponent<Transform>();
                 if (transform != null && _projectileName != null)
                 {
