@@ -30,10 +30,10 @@ namespace BoBo2D_Eyal_Gal
         //initializing scene
         public void Init()
         {
-            CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27);
-            CreateWeapon(WeaponType.BasicMainWeapon, 1, 10, 1, 1);
-            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 100, 1, 0, 40, 1, 3, 1, 100);
-            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicMainWeapon, 30, 1, 0, 10, 1, 1, 1, 100);
+            CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27, "Laser1");
+            CreateWeapon(WeaponType.BasicMainWeapon, 1, 10, 1, 1, null);
+            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 100, 1, 0, 40, 1, 3, 100, false);
+            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicMainWeapon, 30, 1, 0, 10, 1, 1, 100, false);
             DataManager.Game = _game;
             AddSprites();
             AddSounds();
@@ -58,22 +58,20 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
 
         }
-        void CreateWeapon(WeaponType weaponType, int cooldown, int maxAmmo, float baseDamage, float damageScalar)
+        void CreateWeapon(WeaponType weaponType, int cooldown, int maxAmmo, float baseDamage, float damageScalar, string spriteName)
         {
-            WeaponStats weaponStats = new WeaponStats(weaponType, cooldown, maxAmmo, baseDamage, damageScalar);
+            WeaponStats weaponStats = new WeaponStats(weaponType, cooldown, maxAmmo, baseDamage, damageScalar, spriteName);
             StatsHandler.AddToCollection(weaponStats);
         }
-
         void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
-            float shieldRegen, float speed, float damageScalar, int score)
+            float shieldRegen, float speed, int score, bool hasWeaponSprite)
         {
-            ShipStats spaceShipStats = new ShipStats(shipType, weaponType, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed, damageScalar, score);
+            ShipStats spaceShipStats = new ShipStats(shipType, weaponType, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed, score, hasWeaponSprite);
             StatsHandler.AddToCollection(spaceShipStats);
         }
-
-        void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffset)
+        void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffset, string spriteName)
         {
-            ProjectileStats projectileStats = new ProjectileStats(projectileType, damage, speed, projectileOffset);
+            ProjectileStats projectileStats = new ProjectileStats(projectileType, damage, speed, projectileOffset ,spriteName);
             StatsHandler.AddToCollection(projectileStats);
         }
 

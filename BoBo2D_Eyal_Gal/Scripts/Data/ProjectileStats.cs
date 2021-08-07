@@ -11,6 +11,7 @@ namespace BoBo2D_Eyal_Gal
         float _speed;
         float _projectileOffset;
         ProjectileType _projectileType;
+        string _spriteName;
         #endregion
 
         #region Properties
@@ -18,14 +19,16 @@ namespace BoBo2D_Eyal_Gal
         public float Speed => _speed;
         public float ProjectileOffset => _projectileOffset;
         public ProjectileType ProjectileType => _projectileType;
+        public string SpriteName => _spriteName;
         #endregion
 
-        public ProjectileStats(ProjectileType projectileType, float damage, float speed, float projectileOffset) : base(StatsType.Projectile)
+        public ProjectileStats(ProjectileType projectileType, float damage, float speed, float projectileOffset,string spriteName) : base(StatsType.Projectile)
         {
             _damage = damage;
             _speed = speed;
             _projectileOffset = projectileOffset;
             _projectileType = projectileType;
+            _spriteName = spriteName;
         }
     }
 }

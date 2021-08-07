@@ -22,6 +22,7 @@ namespace BoBo2D_Eyal_Gal
         float _projectileOffset;
         bool _flying = false;
         bool _isPlayerProjectile;
+        string _spriteName;
         Spaceship _spaceShip;
         #endregion
 
@@ -30,36 +31,20 @@ namespace BoBo2D_Eyal_Gal
         public bool Flying { set => _flying = value; }
         #endregion
 
-        public Projectile(string name, Vector2 flightDirectin,
+        public Projectile(string name, Vector2 flightDirectin,float damageScalar,
             WeaponType weaponType, Transform transform, bool isPlayerProjectile,Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
             AddToHirarcy();
             _spaceShip = spaceship;
-            Components.Add(new Sprite(this, StatsHandler.GetProjectileTextureName(weaponType)));
             LoadStats(projectileType);
-            _projectileDirection = flightDirectin*_speed* _spaceShip.Speed;
+            _damage *= damageScalar;
+            Components.Add(new Sprite(this, _spriteName));
+            _projectileDirection = flightDirectin*_speed * _spaceShip.CurrentSpeed;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
             _projectileTransform = GetComponent<Transform>();
             Vector2 pos = transform.Position;
-            //_projectileOffset = 27;
             _projectileTransform.Position = new Vector2(pos.X + _projectileOffset, pos.Y);
             _flying = true;
-            _isPlayerProjectile = isPlayerProjectile;
-        }
-
-        public Projectile(string name, float Damage, Vector2 flightDirectin,
-            WeaponType weaponType, Transform transform, float speed, float projectileOffset, bool isPlayerProjectile) : base(name)
-        {
-            AddToHirarcy();
-            Components.Add(new Sprite(this, StatsHandler.GetProjectileTextureName(weaponType)));
-            _damage = Damage;
-            SubscriptionManager.AddSubscriber<IUpdatable>(this);
-            _projectileDirection = flightDirectin * speed;
-            _projectileTransform = GetComponent<Transform>();
-            Vector2 pos = transform.Position;
-            _projectileTransform.Position = new Vector2(pos.X + projectileOffset, pos.Y);
-            _flying = true;
-            _speed = speed;
             _isPlayerProjectile = isPlayerProjectile;
         }
         public void Update()
@@ -67,10 +52,17 @@ namespace BoBo2D_Eyal_Gal
             if (_flying)
             {
                 if (_isPlayerProjectile)
-                    MovementHandler.Movement(MoveDirection.Up, this, _speed);
+                    if(_projectileDirection == new Vector2(0,0))
+                    {
+                        MovementHandler.Movement(MoveDirection.Up, this, 1);
+                    }
+                    else
+                    {
+                        MovementHandler.Movement(MoveDirection.Up, this, _projectileDirection);
+                    }
                 else
                 {
-                    MovementHandler.Movement(MoveDirection.Down, this, _speed);
+                    MovementHandler.Movement(MoveDirection.Down, this, _projectileDirection);
                 }
             }
             if (_projectileTransform.Position.Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height || _projectileTransform.Position.Y <0)
@@ -99,6 +91,7 @@ namespace BoBo2D_Eyal_Gal
             _damage = stats.Damage;
             _speed = stats.Speed;
             _projectileOffset = stats.ProjectileOffset;
+            _spriteName = stats.SpriteName;
         }
     }
 }
