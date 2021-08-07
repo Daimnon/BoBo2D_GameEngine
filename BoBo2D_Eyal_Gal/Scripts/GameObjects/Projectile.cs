@@ -52,7 +52,7 @@ namespace BoBo2D_Eyal_Gal
             if (_flying)
             {
                 if (_isPlayerProjectile)
-                    if(_projectileDirection == new Vector2(0,0))
+                    if(_projectileDirection.Y <=0)
                     {
                         MovementHandler.Movement(MoveDirection.Up, this, 1);
                     }
@@ -62,6 +62,10 @@ namespace BoBo2D_Eyal_Gal
                     }
                 else
                 {
+                    if (_projectileDirection.Y >= 0)
+                    {
+                        MovementHandler.Movement(MoveDirection.Down, this, 1);
+                    }
                     MovementHandler.Movement(MoveDirection.Down, this, _projectileDirection);
                 }
             }
