@@ -18,7 +18,7 @@ namespace BoBo2D_Eyal_Gal
         //Enemy Spawner is a gameObject that holds all of the enemy ships
 
         #region Fields
-        EnemySpawnManager _enemySpawnManager;
+        EnemySpawnHandler _enemySpawnManager;
         List<Wave> _waves = new List<Wave>();
         GameObject _enemySpawner;
         int _waveNumber = 0;
@@ -33,7 +33,7 @@ namespace BoBo2D_Eyal_Gal
         public WaveManager()
         {
             _enemySpawner = new GameObject("EnemySpawner");
-            _enemySpawnManager = new EnemySpawnManager(_enemySpawner);
+            _enemySpawnManager = new EnemySpawnHandler(_enemySpawner);
             _waveStatus = WaveStatus.StartOfWave;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }

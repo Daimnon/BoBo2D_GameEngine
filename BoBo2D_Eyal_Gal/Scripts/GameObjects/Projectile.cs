@@ -38,21 +38,26 @@ namespace BoBo2D_Eyal_Gal
             _spaceShip = spaceship;
             LoadStats(projectileType);
             _damage *= damageScalar;
-            Components.Add(new Sprite(this, _spriteName));
+            AddComponent(new Sprite(this, _spriteName));
+            AddComponent(new BoxCollider(this));
             _projectileDirection = flightDirectin*_speed * _spaceShip.CurrentSpeed;
-            SubscriptionManager.AddSubscriber<IUpdatable>(this);
             _projectileTransform = GetComponent<Transform>();
             Vector2 pos = transform.Position;
             _projectileTransform.Position = new Vector2(pos.X + _projectileOffset, pos.Y);
             _flying = true;
             _isPlayerProjectile = isPlayerProjectile;
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
         public void Update()
+        {
+            ProjectileMovement();
+        }
+        void ProjectileMovement()
         {
             if (_flying)
             {
                 if (_isPlayerProjectile)
-                    if(_projectileDirection.Y <=0)
+                    if (_projectileDirection.Y <= 0)
                     {
                         MovementHandler.Movement(MoveDirection.Up, this, 1);
                     }
@@ -69,9 +74,8 @@ namespace BoBo2D_Eyal_Gal
                     MovementHandler.Movement(MoveDirection.Down, this, _projectileDirection);
                 }
             }
-            if (_projectileTransform.Position.Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height || _projectileTransform.Position.Y <0)
+            if (_projectileTransform.Position.Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height || _projectileTransform.Position.Y < 0)
             {
-                SubscriptionManager.RemoveSubscriber<IUpdatable>(this);
                 GameObjectManager.Instance.DestroyGameObject(this);
             }
         }
@@ -96,6 +100,11 @@ namespace BoBo2D_Eyal_Gal
             _speed = stats.Speed;
             _projectileOffset = stats.ProjectileOffset;
             _spriteName = stats.SpriteName;
+        }
+        public override void Unsubscribe()
+        {
+            SubscriptionManager.RemoveSubscriber<IUpdatable>(this);
+
         }
     }
 }

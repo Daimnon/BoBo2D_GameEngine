@@ -8,6 +8,7 @@ namespace BoBo2D_Eyal_Gal
     public class Game1 : Game
     {
         #region Fields
+        private List<Scene> _allScenes = new List<Scene>(5);
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _gameFont = default;
@@ -20,6 +21,7 @@ namespace BoBo2D_Eyal_Gal
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
             _activeScene = new Scene(this);
+            _allScenes.Add(_activeScene);
             //can set window size here
         }
 
@@ -45,6 +47,8 @@ namespace BoBo2D_Eyal_Gal
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
             // TODO: Add your update logic here
+            Physics.SolveCollision();
+            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
             _activeScene.Update();
             base.Update(gameTime);
         }

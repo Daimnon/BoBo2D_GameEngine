@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class EnemySpawnManager: IUpdatable
+    public class EnemySpawnHandler: IUpdatable
     {
-        public EnemySpawnManager(GameObject enemySpawner)
+        public EnemySpawnHandler(GameObject enemySpawner)
         {
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
             GameObjectManager.Instance.AddGameObject(enemySpawner);

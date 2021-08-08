@@ -10,8 +10,9 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Field
         Game1 _game;
-        //private WaveManager _waveManager;
+        private WaveManager _waveManager;
         private Spaceship _player;
+        bool _isSceneAlive;
 
         #endregion
 
@@ -22,6 +23,8 @@ namespace BoBo2D_Eyal_Gal
         public Scene(Game1 game)
         {
             _game = game;
+            _waveManager = new WaveManager();
+            _isSceneAlive = true;
         }
 
         #region Methods
@@ -29,22 +32,30 @@ namespace BoBo2D_Eyal_Gal
         //initializing scene
         public void Init()
         {
+            //Create Player Projectile
             CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27, "Laser1");
+            //Create Basic Weapon
             CreateWeapon(WeaponType.BasicMainWeapon, 1, 10, 1, 1, null);
+            //Create Player Spaceship
             CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 100, 1, 0, 40, 1, 3, 100, false,"PlayerShip");
+            //Create Enemy Spaceship
             CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicMainWeapon, 30, 1, 0, 10, 1, 1, 100, false, "RebelShip");
+            //ger root Scene Game1 State
             DataManager.Game = _game;
+            //add all wanted sprites
             AddSprites();
+            //add all wanted sounds
             AddSounds();
+            //load all sprites and sounds
             DataManager.Instance.LoadAllExternalData();
+            //ger root Scene Game1 State
             DrawManager.Game = _game;
         }
         public void Start()
         {
             CreateBackGround("BackGround", "BG");
             CreatePlayer("Player");
-            WaveManager wm = new WaveManager();
-            wm.AddWave(500, 500, 5,SpaceshipType.BasicEnemySpaceship);
+            _waveManager.AddWave(500, 500, 5,SpaceshipType.BasicEnemySpaceship);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
         }

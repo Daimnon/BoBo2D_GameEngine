@@ -29,28 +29,28 @@ namespace BoBo2D_Eyal_Gal
             switch (direction)
             {
                 case MoveDirection.Up:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.Down:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.Right:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.Left:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.UpperRight:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.UpperLeft:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.LowerRight:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.LowerLeft:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 default:
                     break;
@@ -67,35 +67,34 @@ namespace BoBo2D_Eyal_Gal
             switch (direction)
             {
                 case MoveDirection.Up:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.Down:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.Right:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.Left:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.UpperRight:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.UpperLeft:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.LowerRight:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 case MoveDirection.LowerLeft:
-                    gameObject.MoveGameObject(GetVector(direction) * speed);
+                    gameObject.MoveGameObject(GetDirectionVector(direction) * speed);
                     break;
                 default:
                     break;
             }
-
         }
-        public static Vector2 GetVector(MoveDirection movementDirection)
+        public static Vector2 GetDirectionVector(MoveDirection movementDirection)
         {
             switch (movementDirection)
             {

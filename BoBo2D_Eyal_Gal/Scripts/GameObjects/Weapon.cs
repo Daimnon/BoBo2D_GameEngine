@@ -13,7 +13,6 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         Spaceship _spaceShip;
-
         float _currentCoolDown;
         float _maxCooldown;
         int _ammo;
@@ -63,19 +62,15 @@ namespace BoBo2D_Eyal_Gal
                 _currentCoolDown -= 1 * (Time.DeltaTime * 10);
             }
         }
-        public float CalculateDamage(float baseDamage, float damageScalar)
-        {
-            return baseDamage * damageScalar;
-        }
         public Vector2 Direction()
         {
             if(_isPlayer)
             {
-                return MovementHandler.GetVector(MoveDirection.Up);
+                return MovementHandler.GetDirectionVector(MoveDirection.Up);
             }
             else
             {
-                return MovementHandler.GetVector(MoveDirection.Down);
+                return MovementHandler.GetDirectionVector(MoveDirection.Down);
             }
         }
 

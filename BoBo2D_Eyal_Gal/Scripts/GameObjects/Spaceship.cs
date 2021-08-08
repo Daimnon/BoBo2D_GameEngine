@@ -56,9 +56,9 @@ namespace BoBo2D_Eyal_Gal
             _isPlayer = isPlayer;
             int scoreModifier;
             LoadStats(shipType);
-            AddComponent(new Rigidbooty(this));
-            AddComponent(new BoxCollider(this));
             AddComponent(new Sprite(this, _spriteName));
+            AddComponent(new BoxCollider(this));
+            AddComponent(new Rigidbooty(this));
             _lastFramePosition = new Vector2(0, 0);
             if (_isPlayer)
             {
