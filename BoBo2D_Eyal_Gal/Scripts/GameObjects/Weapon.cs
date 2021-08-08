@@ -56,7 +56,6 @@ namespace BoBo2D_Eyal_Gal
                 //error sound
             }
         }
-
         public void Update()
         {
             if(_currentCoolDown >0)
