@@ -1,6 +1,7 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/GameSpriteFont.spritefont","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/GameSpriteFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.2167273
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Background/BG.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Background/BG.xnb","TextureProcessor","Texture2DContent",25750,3686485,0.0934479
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Characters/EnemyBoss.xnb","TextureProcessor","Texture2DContent",968,14773,0.0016109
@@ -16,6 +17,8 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 =======
 =======
 >>>>>>> parent of a9715f9 (//)
+=======
+>>>>>>> parent of a9715f9 (//)
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/GameSpriteFont.spritefont","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/GameSpriteFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.1588095
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Background/BG.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Background/BG.xnb","TextureProcessor","Texture2DContent",25750,3686485,0.0953769
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Characters/EnemyBoss.xnb","TextureProcessor","Texture2DContent",968,14773,0.0009508
@@ -29,6 +32,9 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser1.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Laser1.xnb","TextureProcessor","Texture2DContent",186,325,0.0005182
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser2.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Laser2.xnb","TextureProcessor","Texture2DContent",180,325,0.0005218
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a9715f9 (//)
+=======
 >>>>>>> parent of a9715f9 (//)
 =======
 >>>>>>> parent of a9715f9 (//)

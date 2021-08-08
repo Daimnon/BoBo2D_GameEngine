@@ -2,6 +2,7 @@
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   <SourceFile>C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png</SourceFile>
   <SourceTime>2021-08-04T12:58:06.7228687+03:00</SourceTime>
   <DestFile>C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Characters/EnemyBoss.xnb</DestFile>
@@ -9,11 +10,16 @@
 =======
 =======
 >>>>>>> parent of a9715f9 (//)
+=======
+>>>>>>> parent of a9715f9 (//)
   <SourceFile>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png</SourceFile>
   <SourceTime>2021-08-04T10:13:29.4430938+03:00</SourceTime>
   <DestFile>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Characters/EnemyBoss.xnb</DestFile>
   <DestTime>2021-08-08T02:31:22.0651267+03:00</DestTime>
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of a9715f9 (//)
+=======
 >>>>>>> parent of a9715f9 (//)
 =======
 >>>>>>> parent of a9715f9 (//)
