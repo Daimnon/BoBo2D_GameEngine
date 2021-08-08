@@ -10,7 +10,8 @@ namespace BoBo2D_Eyal_Gal
 {
     public enum ProjectileType
     {
-        BasicProjectile
+        BasicProjectile,
+        EnemyProjectile
     }
     public class Projectile: GameObject, IUpdatable
     {
@@ -19,7 +20,8 @@ namespace BoBo2D_Eyal_Gal
         Vector2 _projectileDirection;
         float _damage;
         float _speed;
-        float _projectileOffset;
+        float _projectileOffsetX;
+        float _projectileOffsetY;
         bool _flying = false;
         bool _isPlayerProjectile;
         string _spriteName;
@@ -43,7 +45,7 @@ namespace BoBo2D_Eyal_Gal
             _projectileDirection = flightDirectin*_speed * _spaceShip.CurrentSpeed;
             _projectileTransform = GetComponent<Transform>();
             Vector2 pos = transform.Position;
-            _projectileTransform.Position = new Vector2(pos.X + _projectileOffset, pos.Y);
+            _projectileTransform.Position = new Vector2(pos.X + _projectileOffsetX, pos.Y + _projectileOffsetY);
             _flying = true;
             _isPlayerProjectile = isPlayerProjectile;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
@@ -98,7 +100,8 @@ namespace BoBo2D_Eyal_Gal
             ProjectileStats stats = StatsHandler.GetStats<ProjectileStats>(projectileType);
             _damage = stats.Damage;
             _speed = stats.Speed;
-            _projectileOffset = stats.ProjectileOffset;
+            _projectileOffsetX = stats.ProjectileOffsetX;
+            _projectileOffsetY = stats.ProjectileOffsetY;
             _spriteName = stats.SpriteName;
         }
 
