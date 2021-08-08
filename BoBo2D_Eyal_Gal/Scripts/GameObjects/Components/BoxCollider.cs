@@ -9,7 +9,6 @@ namespace BoBo2D_Eyal_Gal
     public class BoxCollider : Component , ICollidable
     {
         #region Fields
-        GameObject _gameObject;
         Vector2 _position = new Vector2();
         Vector2 _scale = new Vector2(1, 1);
         string _name;
@@ -26,7 +25,6 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
         public Vector2 Position { get => _position; set => _position = value; }
         public Vector2 Scale { get => _scale; set => _scale = value; }
         public Rectangle BoundingBox
