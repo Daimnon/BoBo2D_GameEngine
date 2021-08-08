@@ -2,6 +2,9 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 3ba4cab (Merge branch 'main' of https://github.com/Daimnon/BoBo2D_Eyal_Gal into main)
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/GameSpriteFont.spritefont","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/GameSpriteFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.2167273
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Background/BG.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Background/BG.xnb","TextureProcessor","Texture2DContent",25750,3686485,0.0934479
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Characters/EnemyBoss.xnb","TextureProcessor","Texture2DContent",968,14773,0.0016109
@@ -14,6 +17,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Bolt2.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Bolt2.xnb","TextureProcessor","Texture2DContent",166,185,0.0008094
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser1.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Laser1.xnb","TextureProcessor","Texture2DContent",186,325,0.0009353
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser2.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Laser2.xnb","TextureProcessor","Texture2DContent",180,325,0.0009876
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> parent of a9715f9 (//)
@@ -38,3 +42,5 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 >>>>>>> parent of a9715f9 (//)
 =======
 >>>>>>> parent of a9715f9 (//)
+=======
+>>>>>>> parent of 3ba4cab (Merge branch 'main' of https://github.com/Daimnon/BoBo2D_Eyal_Gal into main)
