@@ -19,8 +19,9 @@ namespace BoBo2D_Eyal_Gal
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            _activeScene = new Scene(this);
             //can set window size here
+
+            _activeScene = new Scene(this);
         }
 
         protected override void Initialize()
@@ -35,8 +36,9 @@ namespace BoBo2D_Eyal_Gal
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            _activeScene.Start();
+            
             // TODO: use this.Content to load your game content here
+            _activeScene.Start();
 
         }
 
@@ -44,6 +46,7 @@ namespace BoBo2D_Eyal_Gal
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+
             // TODO: Add your update logic here
             _activeScene.Update();
             base.Update(gameTime);
@@ -52,6 +55,7 @@ namespace BoBo2D_Eyal_Gal
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
+
             // TODO: Add your update logic here
             _spriteBatch.Begin();
             _activeScene.DrawScene();
@@ -71,7 +75,5 @@ namespace BoBo2D_Eyal_Gal
         {
             return Content.Load<T>(fileName);
         }
-
-
     }
 }

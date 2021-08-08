@@ -68,6 +68,26 @@ namespace BoBo2D_Eyal_Gal
             return false;
         }
 
+        public static bool CheckBoundingBox()
+        {
+            foreach (BoxCollider collider in AllBoxColliders)
+            {
+                if (!collider.IsEnabled)
+                    continue;
+
+                foreach (BoxCollider anotherCollider in AllBoxColliders)
+                {
+                    if (!collider.IsEnabled)
+                        continue;
+
+                    if (collider.BoundingBox.Intersects(anotherCollider.BoundingBox))
+                        return true;
+                }
+            }
+
+            return false;
+        }
+
         public static bool CheckCollision(BoxCollider collider, BoxCollider anotherCollider)
         {
             if (AABB(collider, anotherCollider))
@@ -484,6 +504,63 @@ namespace BoBo2D_Eyal_Gal
                         if (colider.BoxLeft >= anotherColider.BoxRight)
                             if (colider.BoxTop >= anotherColider.BoxBottom)
                                 colider.Position += (new Vector2(1, 1));
+                    }
+                }
+            }
+        }
+
+        public static void SolveIntersection()
+        {
+            foreach (BoxCollider collider in AllBoxColliders)
+            {
+                if (!collider.IsEnabled)
+                    continue;
+
+                foreach (BoxCollider anotherCollider in AllBoxColliders)
+                {
+                    if (!collider.IsEnabled)
+                        continue;
+
+                    //simple directional solutions: ← → ↑ ↓
+                    if (collider.BoundingBox.Intersects(anotherCollider.BoundingBox))
+                    {
+                        //bounce left
+                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
+                            collider.Position -= (new Vector2(1, 0));
+
+                        //bounce right
+                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
+                            collider.Position += (new Vector2(1, 0));
+
+                        //bounce up
+                        if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
+                            collider.Position -= (new Vector2(0, 1));
+
+                        //bounce down
+                        if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
+                            collider.Position += (new Vector2(0, 1));
+                        /*
+                        //simple diagonal direction solutions: ↖ ↗ ↙ ↘
+                        */
+                        //bounce top-left
+                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
+                            if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
+                                collider.Position -= (new Vector2(1, 1));
+
+                        //bounce top-right
+                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
+                            if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
+                                collider.Position += (new Vector2(1, -1));
+
+                        //bounce bottom-left
+                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
+                            if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
+                                collider.Position -= (new Vector2(1, -1));
+
+                        //bounce bottom-right
+                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
+                            if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
+                                collider.Position += (new Vector2(1, 1));
                     }
                 }
             }

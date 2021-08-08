@@ -15,6 +15,7 @@ namespace BoBo2D_Eyal_Gal
         int _spawnMinWidth;
         int _spawnMaxWidth;
         int _spawnHight;
+
         public EnemySpawnManager(GameObject enemySpawner)
         {
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
@@ -36,12 +37,14 @@ namespace BoBo2D_Eyal_Gal
             _spawnMinWidth = spawnMinWidth;
             _spawnMaxWidth = spawnMaxWidth;
         }
+
         //every wave the player will have more enemies that will spawn in a random time frame between every spawn
         //Enemies will shoot at a regular time frame
         public void AddEnemiesToSpawn(int enemyNumber)
         {
             _numberToSpawn = enemyNumber;
         }
+
         public void Update()
         {
             if(_numberToSpawn > 0)
@@ -53,6 +56,7 @@ namespace BoBo2D_Eyal_Gal
                 _timeTillNextSpawn = 0;
             }
         }
+
         void CheckForSpawn()
         {
             if (_timeTillNextSpawn <= 0)
@@ -69,14 +73,16 @@ namespace BoBo2D_Eyal_Gal
                 _timeTillNextSpawn -= Time.DeltaTime * 10;
             }
         }
+
         void SetNextTimeToSpawn()
         {
             Random random = new Random();
             _timeTillNextSpawn = random.Next(1, 5);
         }
+
         void Spawn()
         {
-            Spaceship EnemySpaceship = new Spaceship(SpaceshipType.BasicEnemySpaceship,$"Enemy{_numberToSpawn}",false);
+            Spaceship EnemySpaceship = new Spaceship(SpaceshipType.BasicEnemySpaceship, $"Enemy{_numberToSpawn}", false);
             EnemySpaceship.AddComponent(new Rigidbooty(EnemySpaceship));
             EnemySpaceship.AddComponent(new BoxCollider(EnemySpaceship));
             EnemySpaceship.AddComponent(new Sprite(EnemySpaceship, "RebelShip"));
