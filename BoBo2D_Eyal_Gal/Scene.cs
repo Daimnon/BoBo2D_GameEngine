@@ -10,7 +10,6 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Field
         Game1 _game;
-        LinkedList<Level> _levels = new LinkedList<Level>();
         //private WaveManager _waveManager;
         private Spaceship _player;
 
@@ -32,8 +31,8 @@ namespace BoBo2D_Eyal_Gal
         {
             CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27, "Laser1");
             CreateWeapon(WeaponType.BasicMainWeapon, 1, 10, 1, 1, null);
-            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 100, 1, 0, 40, 1, 3, 100, false);
-            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicMainWeapon, 30, 1, 0, 10, 1, 1, 100, false);
+            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 100, 1, 0, 40, 1, 3, 100, false,"PlayerShip");
+            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicMainWeapon, 30, 1, 0, 10, 1, 1, 100, false, "RebelShip");
             DataManager.Game = _game;
             AddSprites();
             AddSounds();
@@ -43,7 +42,9 @@ namespace BoBo2D_Eyal_Gal
         public void Start()
         {
             CreateBackGround("BackGround", "BG");
-            CreatePlayer("Player", "PlayerShip");
+            CreatePlayer("Player");
+            WaveManager wm = new WaveManager();
+            wm.AddWave(500, 500, 5,SpaceshipType.BasicEnemySpaceship);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
         }
@@ -64,9 +65,10 @@ namespace BoBo2D_Eyal_Gal
             StatsHandler.AddToCollection(weaponStats);
         }
         void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
-            float shieldRegen, float speed, int score, bool hasWeaponSprite)
+            float shieldRegen, float speed, int score, bool hasWeaponSprite, string spriteName)
         {
-            ShipStats spaceShipStats = new ShipStats(shipType, weaponType, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed, score, hasWeaponSprite);
+            ShipStats spaceShipStats = new ShipStats(shipType, weaponType, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed,
+                score, hasWeaponSprite, spriteName);
             StatsHandler.AddToCollection(spaceShipStats);
         }
         void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffset, string spriteName)
@@ -109,13 +111,10 @@ namespace BoBo2D_Eyal_Gal
             background.AddComponent(new Sprite(background, backgroundSprite));
         }
 
-        void CreatePlayer(string playerName, string playerSprite)
+        void CreatePlayer(string playerName)
         {
             _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship, playerName, true);
             GameObjectManager.Instance.AddGameObject(_player);
-            _player.AddComponent(new Rigidbooty(_player));
-            _player.AddComponent(new BoxCollider(_player));
-            _player.AddComponent(new Sprite(_player, playerSprite));
             //new InputManager(_player, _projectileOffset, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.Space, Keys.LeftControl, Keys.LeftShift);
             new InputManager(_player, false, false);
             /*
