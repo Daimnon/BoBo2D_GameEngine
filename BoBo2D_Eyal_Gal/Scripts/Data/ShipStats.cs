@@ -13,7 +13,6 @@
         bool _hasWeaponSprite;
         SpaceshipType _shipType;
         WeaponType _weaponType;
-        string _spriteName;
         #endregion
 
         #region Propeties
@@ -27,11 +26,11 @@
         public float Speed => _speed;
         public int Score => _score;
         public bool HasWeaponSprite => _hasWeaponSprite;
-        public string SpriteName => _spriteName;
+
         #endregion
 
         public ShipStats(SpaceshipType shipType,WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
-            float shieldRegen,float speed, int score, bool hasWeaponSprite, string spriteName) : base(StatsType.Ship)
+            float shieldRegen,float speed, int score, bool hasWeaponSprite) : base(StatsType.Ship)
         {
             _shipType = shipType;
             _weaponType = weaponType;
@@ -43,7 +42,6 @@
             _speed = speed;
             _score = score;
             _hasWeaponSprite = hasWeaponSprite;
-            _spriteName = spriteName;
         }
     }
 
