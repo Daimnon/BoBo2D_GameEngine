@@ -517,7 +517,7 @@ namespace BoBo2D_Eyal_Gal
                         if (collider.BoxRight >= anotherCollider.BoxLeft)
                             if (collider.BoxTop >= anotherCollider.BoxBottom)
                             {
-                                collider.Position -= (new Vector2 (1, -1));
+                                collider.Position -= (new Vector2(1, -1));
                                 collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
                             }
 

@@ -20,7 +20,6 @@ namespace BoBo2D_Eyal_Gal
         
         #region Properties
         //public Transform TransformP { get => _transform; set => _transform = value; }
-        //public string Name { get => _name; set => _name = value; }
         public Vector2 Position { get => _position; set => _position = value; }
         public Vector2 Scale { get => _scale; set => _scale = value; }
         public Vector2 XAxis { get => _xAxis; set => _xAxis = value; }
@@ -31,6 +30,7 @@ namespace BoBo2D_Eyal_Gal
         #region Constructors
         public Transform(GameObject gameObject)
         {
+            GameObjectP = gameObject;
             Name = gameObject.Name;
             GameObjectP = gameObject;
             Position = new Vector2(0, 0);

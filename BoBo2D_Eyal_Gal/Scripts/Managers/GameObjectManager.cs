@@ -27,7 +27,6 @@ namespace BoBo2D_Eyal_Gal
             }
         }
         #endregion
-
         #region Fields
         List<TreeOfGameObjects> _hirarchy = new List<TreeOfGameObjects>(10);
         #endregion
@@ -36,7 +35,7 @@ namespace BoBo2D_Eyal_Gal
         public List<TreeOfGameObjects> Hirarchy => _hirarchy;
         #endregion
 
-            #region Methods
+        #region Methods
         void AddChild(GameObject gameObject, GameObject parentGameObject)
         {
             Node node = new Node(gameObject, parentGameObject.Node);

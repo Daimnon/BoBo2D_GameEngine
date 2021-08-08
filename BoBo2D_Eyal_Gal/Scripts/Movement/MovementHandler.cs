@@ -93,7 +93,6 @@ namespace BoBo2D_Eyal_Gal
                 default:
                     break;
             }
-
         }
         public static Vector2 GetDirectionVector(MoveDirection movementDirection)
         {
