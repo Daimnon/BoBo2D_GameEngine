@@ -22,6 +22,7 @@ namespace BoBo2D_Eyal_Gal
         bool _isDefeatedByPlayer = false;
         bool _isDefeatedByEnemy = false;
         bool _hasWeaponSprite = false;
+        string _spriteName;
         Vector2 _lastFramePosition;
         Vector2 _currentSpeed;
         #endregion
@@ -45,6 +46,7 @@ namespace BoBo2D_Eyal_Gal
         public int Score { get => _score; set => _score = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
         public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
+        public string SpriteName => _spriteName;
         public Vector2 CurrentSpeed => _currentSpeed;
         #endregion
 
@@ -54,6 +56,9 @@ namespace BoBo2D_Eyal_Gal
             _isPlayer = isPlayer;
             int scoreModifier;
             LoadStats(shipType);
+            AddComponent(new Rigidbooty(this));
+            AddComponent(new BoxCollider(this));
+            AddComponent(new Sprite(this, _spriteName));
             _lastFramePosition = new Vector2(0, 0);
             if (_isPlayer)
             {
@@ -105,6 +110,7 @@ namespace BoBo2D_Eyal_Gal
                 _score = stats.Score;
                 _hasWeaponSprite = stats.HasWeaponSprite;
                 _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType, _hasWeaponSprite);
+                _spriteName = stats.SpriteName;
             }
         }
         void CheckEnemyPosition()
