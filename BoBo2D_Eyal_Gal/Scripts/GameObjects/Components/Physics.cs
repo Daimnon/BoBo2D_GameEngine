@@ -454,12 +454,12 @@ namespace BoBo2D_Eyal_Gal
         {
             foreach (BoxCollider collider in AllBoxColliders)
             {
-                if (!collider.IsEnabled)
+                if (collider.IsEnabled)
                     continue;
 
                 foreach (BoxCollider anotherCollider in AllBoxColliders)
                 {
-                    if (!collider.IsEnabled)
+                    if (collider.IsEnabled)
                         continue;
 
                     //simple directional solutions: ← → ↑ ↓
@@ -537,12 +537,12 @@ namespace BoBo2D_Eyal_Gal
         {
             foreach (BoxCollider collider in AllBoxColliders)
             {
-                if (!collider.IsEnabled)
+                if (collider.IsEnabled)
                     continue;
 
                 foreach (BoxCollider anotherCollider in AllBoxColliders)
                 {
-                    if (!collider.IsEnabled)
+                    if (collider.IsEnabled)
                         continue;
 
                     //simple directional solutions: ← → ↑ ↓

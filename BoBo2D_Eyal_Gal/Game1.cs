@@ -8,6 +8,7 @@ namespace BoBo2D_Eyal_Gal
     public class Game1 : Game
     {
         #region Fields
+        private List<Scene> _allScenes = new List<Scene>(5);
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _gameFont = default;
@@ -22,6 +23,7 @@ namespace BoBo2D_Eyal_Gal
             //can set window size here
 
             _activeScene = new Scene(this);
+            _allScenes.Add(_activeScene);
         }
 
         protected override void Initialize()
