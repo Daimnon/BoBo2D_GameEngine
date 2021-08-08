@@ -4,60 +4,50 @@ using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public enum WaveStatus
+    enum WaveStatus
     {
         StartOfWave,
         MiddleOfWave,
         EndOfWave
     }
+
     public class WaveManager : IUpdatable
     {
-        //WaveManager Manages all waves per scene
-        //EnemySpawnManager Manages Spawners
-        //Wave Holds the logic for the called wave
-        //Enemy Spawner is a gameObject that holds all of the enemy ships
-
-        #region Fields
         EnemySpawnManager _enemySpawnManager;
-        List<Wave> _waves = new List<Wave>();
-        GameObject _enemySpawner;
         int _waveNumber = 0;
         WaveStatus _waveStatus;
-
-        #endregion
-
-        #region Properties
-        List<Wave> Waves { get => _waves; set => _waves = value; }
-        #endregion
+        GameObject _enemySpawner;
 
         public WaveManager()
         {
-            _enemySpawner = new GameObject("EnemySpawner");
             _enemySpawnManager = new EnemySpawnManager(_enemySpawner);
+            _enemySpawner = new GameObject("EnemySpawner");
+            _waveNumber = 10;
             _waveStatus = WaveStatus.StartOfWave;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
-        public void AddWave(int spawnMinWidth, int spawnMaxWidth, int numberOfEnemies,SpaceshipType enemyShipType)
+
+        public WaveManager(int waveNumber, int spawnMinWidth, int spawnMaxWidth)
         {
-            _waves.Add(new Wave(spawnMinWidth, spawnMaxWidth, enemyShipType, numberOfEnemies));
+            _enemySpawner = new GameObject("EnemySpawner");
+            _enemySpawnManager = new EnemySpawnManager(_enemySpawner, spawnMinWidth, spawnMaxWidth);
+            _waveNumber = waveNumber;
+            _waveStatus = WaveStatus.StartOfWave;
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
-        public void Update()
+
+
+        void SpawnEnemies(int waveNumber)
         {
-            WaveState(_waveStatus);
+            //can make calculation acording to the wave number
+            _enemySpawnManager.AddEnemiesToSpawn(waveNumber);
         }
+
         void CallNextWave()
         {
             SpawnEnemies(_waveNumber);
         }
-        void SpawnEnemies(int waveNumber)
-        {
-            //can make calculation acording to the wave number
-            if (_waves != null)
-            {
-                _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
-                    _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
-            }
-        }
+
         void WaveState(WaveStatus waveStatus)
         {
             switch (waveStatus)
@@ -66,24 +56,29 @@ namespace BoBo2D_Eyal_Gal
                     CallNextWave();
                     _waveStatus = WaveStatus.MiddleOfWave;
                     break;
+                    
+                //check how many enemies are alive
                 case WaveStatus.MiddleOfWave:
-                    //wait for an anount of time
-
-                    //check how many enemies are alive
                     if (_enemySpawner.Node.Children.Count == 0)
                     {
                         _waveStatus = WaveStatus.EndOfWave;
                     }
                     break;
+
                 case WaveStatus.EndOfWave:
-                    //cooldown?/Powerup?/levelup?
                     _waveNumber++;
                     _waveStatus = WaveStatus.StartOfWave;
                     break;
+
                 default:
                     break;
             }
         }
+
+        public void Update()
+        {
+            WaveState(_waveStatus);
+        }
+
     }
 }
-
