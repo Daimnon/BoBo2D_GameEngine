@@ -9,11 +9,9 @@ namespace BoBo2D_Eyal_Gal
         #region Fields
         List<T> _updatablesList = new List<T>(5);
         #endregion
-
         #region Properties
         public List<T> GetUpdatableList => _updatablesList;
         #endregion
-
         #region Methods
         public void AddUpdatable(T updatableClass)
         {

@@ -27,18 +27,15 @@ namespace BoBo2D_Eyal_Gal
             }
         }
         #endregion
-
         #region Fields
         List<TreeOfGameObjects> _hirarchy = new List<TreeOfGameObjects>(10);
-        List<GameObject> _allGameObjects = new List<GameObject>(10);
         #endregion
 
         #region Properties
         public List<TreeOfGameObjects> Hirarchy => _hirarchy;
-        public List<GameObject> AllGameObjects => _allGameObjects;
         #endregion
 
-            #region Methods
+        #region Methods
         void AddChild(GameObject gameObject, GameObject parentGameObject)
         {
             Node node = new Node(gameObject, parentGameObject.Node);
@@ -51,7 +48,6 @@ namespace BoBo2D_Eyal_Gal
             Node node = new Node(go, null);
             TreeOfGameObjects togo = new TreeOfGameObjects(node);
             _hirarchy.Add(togo);
-            _allGameObjects.Add(go);
         }
         public void AddGameObject(GameObject gameObject, GameObject parentGameObject)
         {
@@ -63,7 +59,7 @@ namespace BoBo2D_Eyal_Gal
             GameObject go;
             foreach (var rootNode in Hirarchy)
             {
-                go = rootNode.Root.FindGameObjectByName(gameObjectName);
+                go = rootNode.Root.FindGameObject(gameObjectName);
 
                 if (go != null)
                     return go;

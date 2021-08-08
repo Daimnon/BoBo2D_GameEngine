@@ -68,26 +68,6 @@ namespace BoBo2D_Eyal_Gal
             return false;
         }
 
-        public static bool CheckBoundingBox()
-        {
-            foreach (BoxCollider collider in AllBoxColliders)
-            {
-                if (!collider.IsEnabled)
-                    continue;
-
-                foreach (BoxCollider anotherCollider in AllBoxColliders)
-                {
-                    if (!collider.IsEnabled)
-                        continue;
-
-                    if (collider.BoundingBox.Intersects(anotherCollider.BoundingBox))
-                        return true;
-                }
-            }
-
-            return false;
-        }
-
         public static bool CheckCollision(BoxCollider collider, BoxCollider anotherCollider)
         {
             if (AABB(collider, anotherCollider))
@@ -452,163 +432,58 @@ namespace BoBo2D_Eyal_Gal
 
         public static void SolveCollision()
         {
-            foreach (BoxCollider collider in AllBoxColliders)
+            foreach (BoxCollider colider in AllBoxColliders)
             {
-                if (collider.IsEnabled)
+                if (!colider.IsEnabled)
                     continue;
 
-                foreach (BoxCollider anotherCollider in AllBoxColliders)
+                foreach (BoxCollider anotherColider in AllBoxColliders)
                 {
-                    if (collider.IsEnabled)
+                    if (!colider.IsEnabled)
                         continue;
 
                     //simple directional solutions: ← → ↑ ↓
-                    if (AABB(collider, anotherCollider))
+                    if (AABB(colider, anotherColider))
                     {
                         //bounce left
-                        if (collider.BoxRight >= anotherCollider.BoxLeft)
-                        {
-                            collider.Position -= (new Vector2(1, 0));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
+                        if (colider.BoxRight >= anotherColider.BoxLeft)
+                            colider.Position -= (new Vector2(1, 0));
 
                         //bounce right
-                        if (collider.BoxLeft >= anotherCollider.BoxRight)
-                        {
-                            collider.Position += (new Vector2(1, 0));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
+                        if (colider.BoxLeft >= anotherColider.BoxRight)
+                            colider.Position += (new Vector2(1, 0));
 
                         //bounce up
-                        if (collider.BoxBottom >= anotherCollider.BoxTop)
-                        {
-                            collider.Position -= (new Vector2(0, 1));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
+                        if (colider.BoxBottom >= anotherColider.BoxTop)
+                            colider.Position -= (new Vector2(0, 1));
 
                         //bounce down
-                        if (collider.BoxTop >= anotherCollider.BoxBottom)
-                        {
-                            collider.Position += (new Vector2(0, 1));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
+                        if (colider.BoxTop >= anotherColider.BoxBottom)
+                            colider.Position += (new Vector2(0, 1));
                     }
 
                     //simple diagonal direction solutions: ↖ ↗ ↙ ↘
-                    if (AABB(collider, anotherCollider))
+                    if (AABB(colider, anotherColider))
                     {
                         //bounce top-left
-                        if (collider.BoxRight >= anotherCollider.BoxLeft)
-                            if (collider.BoxBottom >= anotherCollider.BoxTop)
-                            {
-                                collider.Position -= (new Vector2(1, 1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
+                        if (colider.BoxRight >= anotherColider.BoxLeft)
+                            if (colider.BoxBottom >= anotherColider.BoxTop)
+                                colider.Position -= (new Vector2(1, 1));
 
                         //bounce top-right
-                        if (collider.BoxLeft >= anotherCollider.BoxRight)
-                            if (collider.BoxBottom >= anotherCollider.BoxTop)
-                            {
-                                collider.Position += (new Vector2(1, -1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
+                        if (colider.BoxLeft >= anotherColider.BoxRight)
+                            if (colider.BoxBottom >= anotherColider.BoxTop)
+                                colider.Position += (new Vector2(1, -1));
 
                         //bounce bottom-left
-                        if (collider.BoxRight >= anotherCollider.BoxLeft)
-                            if (collider.BoxTop >= anotherCollider.BoxBottom)
-                            {
-                                collider.Position -= (new Vector2 (1, -1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
+                        if (colider.BoxRight >= anotherColider.BoxLeft)
+                            if (colider.BoxTop >= anotherColider.BoxBottom)
+                                colider.Position -= (new Vector2 (1, -1));
 
                         //bounce bottom-right
-                        if (collider.BoxLeft >= anotherCollider.BoxRight)
-                            if (collider.BoxTop >= anotherCollider.BoxBottom)
-                            {
-                                collider.Position += (new Vector2(1, 1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
-                    }
-                }
-            }
-        }
-
-        public static void SolveIntersection()
-        {
-            foreach (BoxCollider collider in AllBoxColliders)
-            {
-                if (collider.IsEnabled)
-                    continue;
-
-                foreach (BoxCollider anotherCollider in AllBoxColliders)
-                {
-                    if (collider.IsEnabled)
-                        continue;
-
-                    //simple directional solutions: ← → ↑ ↓
-                    if (collider.BoundingBox.Intersects(anotherCollider.BoundingBox))
-                    {
-                        //bounce left
-                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
-                        {
-                            collider.Position -= (new Vector2(1, 0));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
-
-                        //bounce right
-                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
-                        {
-                            collider.Position += (new Vector2(1, 0));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
-
-                        //bounce up
-                        if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
-                        {
-                            collider.Position -= (new Vector2(0, 1));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
-
-                        //bounce down
-                        if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
-                        {
-                            collider.Position += (new Vector2(0, 1));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
-                        /*
-                        //simple diagonal direction solutions: ↖ ↗ ↙ ↘
-                        */
-                        //bounce top-left
-                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
-                            if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
-                            {
-                                collider.Position -= (new Vector2(1, 1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
-
-                        //bounce top-right
-                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
-                            if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
-                            {
-                                collider.Position += (new Vector2(1, -1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
-
-                        //bounce bottom-left
-                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
-                            if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
-                            {
-                                collider.Position -= (new Vector2(1, -1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
-
-                        //bounce bottom-right
-                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
-                            if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
-                            {
-                                collider.Position += (new Vector2(1, 1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
+                        if (colider.BoxLeft >= anotherColider.BoxRight)
+                            if (colider.BoxTop >= anotherColider.BoxBottom)
+                                colider.Position += (new Vector2(1, 1));
                     }
                 }
             }

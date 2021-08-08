@@ -80,7 +80,6 @@ namespace BoBo2D_Eyal_Gal
                     break;
                 case true when typeof(T) == typeof(ICollidable):
                     Physics.SolveCollision();
-                    //Physics.SolveIntersection();
                     break;
                 default:
                     Console.WriteLine("Error in ActivateAllSubscribersOfType");

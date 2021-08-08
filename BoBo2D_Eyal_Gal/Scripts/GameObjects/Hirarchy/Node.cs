@@ -63,7 +63,7 @@ namespace BoBo2D_Eyal_Gal
                 DisableNode(child);
             }
         }
-        public GameObject FindGameObjectByName(string gameObjectName)
+        public GameObject FindGameObject(string gameObjectName)
         {
             Console.WriteLine($"Looking inside {_gameObject.Name}");
             if (gameObjectName == null || gameObjectName == "")
@@ -82,7 +82,7 @@ namespace BoBo2D_Eyal_Gal
             {
                 foreach (var child in Children)
                 {
-                    var gameObject = child.FindGameObjectByName(gameObjectName);
+                    var gameObject = child.FindGameObject(gameObjectName);
                     if (gameObject != null)
                     {
                         Console.WriteLine($"GameObject Found returning {gameObject.Name}");
@@ -95,7 +95,6 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine();
             return null;
         }
-
         public void DestroyNode()
         {
             if (_children.Count != 0)
