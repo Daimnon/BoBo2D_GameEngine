@@ -49,12 +49,12 @@ namespace BoBo2D_Eyal_Gal
         {
             foreach (BoxCollider collider in AllBoxColliders)
             {
-                if (!collider.IsEnabled)
+                if (collider.IsEnabled)
                     continue;
 
                 foreach (BoxCollider anotherCollider in AllBoxColliders)
                 {
-                    if (!collider.IsEnabled)
+                    if (collider.IsEnabled)
                         continue;
 
                     if (AABB(collider, anotherCollider))
@@ -72,12 +72,12 @@ namespace BoBo2D_Eyal_Gal
         {
             foreach (BoxCollider collider in AllBoxColliders)
             {
-                if (!collider.IsEnabled)
+                if (collider.IsEnabled)
                     continue;
 
                 foreach (BoxCollider anotherCollider in AllBoxColliders)
                 {
-                    if (!collider.IsEnabled)
+                    if (collider.IsEnabled)
                         continue;
 
                     if (collider.BoundingBox.Intersects(anotherCollider.BoundingBox))
@@ -105,12 +105,12 @@ namespace BoBo2D_Eyal_Gal
 
             foreach (BoxCollider collider in AllBoxColliders)
             {
-                if (!collider.IsEnabled)
+                if (collider.IsEnabled)
                     continue;
 
                 foreach (BoxCollider anotherCollider in AllBoxColliders)
                 {
-                    if (!collider.IsEnabled)
+                    if (collider.IsEnabled)
                         continue;
 
                     //simple directional solutions: ← → ↑ ↓
@@ -280,12 +280,12 @@ namespace BoBo2D_Eyal_Gal
 
             foreach (BoxCollider colider in AllBoxColliders)
             {
-                if (!colider.IsEnabled)
+                if (colider.IsEnabled)
                     continue;
 
                 foreach (BoxCollider anotherColider in AllBoxColliders)
                 {
-                    if (!colider.IsEnabled)
+                    if (colider.IsEnabled)
                         continue;
 
                     //simple directional solutions: ← → ↑ ↓

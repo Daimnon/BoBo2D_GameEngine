@@ -6,7 +6,8 @@ namespace BoBo2D_Eyal_Gal
 {
     public static class CombatManager
     {
-        public static void FireWeapon(Spaceship spaceship, SelectedWeapon type)//get the button and translate it to a weapon to shoot with
+        //get the button and translate it to a weapon to shoot with
+        public static void FireWeapon(Spaceship spaceship, SelectedWeapon type)
         {
             switch (type)
             {

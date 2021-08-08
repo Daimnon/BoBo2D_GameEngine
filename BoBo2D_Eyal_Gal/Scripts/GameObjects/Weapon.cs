@@ -25,16 +25,17 @@ namespace BoBo2D_Eyal_Gal
         WeaponType _weaponType;
         string _spriteName;
         #endregion
+
         public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType, bool hasSprite):base(weaponType.ToString())
         {
             _spaceShip = spaceShip;
             _isPlayer = isPlayer;
             LoadStats(weaponType);
             _projectileName = weaponType.ToString() + "Projectile";
+
             if(hasSprite)
-            {
                 AddComponent(new Sprite(this, _spriteName));
-            }
+
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
         public void Shoot(Vector2 currentSpeed)
@@ -59,24 +60,21 @@ namespace BoBo2D_Eyal_Gal
 
         public void Update()
         {
-            if(_currentCoolDown >0)
+            if(_currentCoolDown > 0)
             {
                 _currentCoolDown -= 1 * (Time.DeltaTime * 10);
             }
         }
-        public float CalculateDamage(float baseDamage, float damageScalar)
-        {
-            return baseDamage * damageScalar;
-        }
+
         public Vector2 Direction()
         {
             if(_isPlayer)
             {
-                return MovementHandler.GetVector(MoveDirection.Up);
+                return MovementHandler.GetDirectionVector(MoveDirection.Up);
             }
             else
             {
-                return MovementHandler.GetVector(MoveDirection.Down);
+                return MovementHandler.GetDirectionVector(MoveDirection.Down);
             }
         }
 

@@ -30,12 +30,10 @@ namespace BoBo2D_Eyal_Gal
 
         #region Fields
         List<TreeOfGameObjects> _hirarchy = new List<TreeOfGameObjects>(10);
-        List<GameObject> _allGameObjects = new List<GameObject>(10);
         #endregion
 
         #region Properties
         public List<TreeOfGameObjects> Hirarchy => _hirarchy;
-        public List<GameObject> AllGameObjects => _allGameObjects;
         #endregion
 
             #region Methods
@@ -51,7 +49,6 @@ namespace BoBo2D_Eyal_Gal
             Node node = new Node(go, null);
             TreeOfGameObjects togo = new TreeOfGameObjects(node);
             _hirarchy.Add(togo);
-            _allGameObjects.Add(go);
         }
         public void AddGameObject(GameObject gameObject, GameObject parentGameObject)
         {

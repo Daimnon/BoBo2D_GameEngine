@@ -31,6 +31,7 @@ namespace BoBo2D_Eyal_Gal
             _usingNumbersForGuns = numbersForGuns;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
+
         public InputManager(Spaceship player, bool numbersForGuns, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey)
         {
             _customMovementKeys = true;
@@ -42,6 +43,7 @@ namespace BoBo2D_Eyal_Gal
             _goRightKey = goRightKey;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
+
         public InputManager(Spaceship player, bool WASDMovement, Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)
         {
             _customWeaponKeys = true;
@@ -52,6 +54,7 @@ namespace BoBo2D_Eyal_Gal
             _thirdWeapon = thirdWeapon;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
+
         public InputManager(Spaceship player, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey,
                             Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)
         {
@@ -67,6 +70,7 @@ namespace BoBo2D_Eyal_Gal
             _thirdWeapon = thirdWeapon;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
+
         public void Update()
         {
             if (_usingWASD)
@@ -85,6 +89,7 @@ namespace BoBo2D_Eyal_Gal
                 FireWithDefaultKeys();
                 //FireWithDefaultKeys();
         }
+
         #region Movement
         void MoveWithKeyArrows()
         {

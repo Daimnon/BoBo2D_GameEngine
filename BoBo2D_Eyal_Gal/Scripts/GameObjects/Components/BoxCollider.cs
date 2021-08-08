@@ -11,7 +11,6 @@ namespace BoBo2D_Eyal_Gal
         #region Fields
         Vector2 _position = new Vector2();
         Vector2 _scale = new Vector2(1, 1);
-        string _name;
         // distance from center to horizontal edge
         float _cX;
         // distance from center to vertical edge
@@ -35,7 +34,6 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
-        public string Name { get => _name; set => _name = value; }
         public float CX { get => _cX; set => _cX = value; }
         public float CY { get => _cY; set => _cY = value; }
         public float CZ { get => _cZ; set => _cZ = value; }

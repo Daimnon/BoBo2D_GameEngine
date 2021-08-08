@@ -10,10 +10,7 @@ namespace BoBo2D_Eyal_Gal
     public class Transform : Component
     {
         #region Fields
-        GameObject _parent;
         //Transform _transform;
-
-        //string _name;
         Vector2 _position;
         Vector2 _scale;
         Vector2 _xAxis = new Vector2(1, 0);
@@ -22,7 +19,6 @@ namespace BoBo2D_Eyal_Gal
         #endregion
         
         #region Properties
-        public GameObject Parent { get => _parent; set => _parent = value; }
         //public Transform TransformP { get => _transform; set => _transform = value; }
         //public string Name { get => _name; set => _name = value; }
         public Vector2 Position { get => _position; set => _position = value; }
@@ -36,6 +32,7 @@ namespace BoBo2D_Eyal_Gal
         public Transform(GameObject gameObject)
         {
             Name = gameObject.Name;
+            GameObjectP = gameObject;
             Position = new Vector2(0, 0);
             Scale = new Vector2(1, 1);
             Console.WriteLine($"New Transform{this}");
@@ -67,7 +64,7 @@ namespace BoBo2D_Eyal_Gal
 
         public T GetComponent<T>() where T : Component
         {
-            foreach (Component component in Parent.Components)
+            foreach (Component component in GameObjectP.Components)
                 if (component is T)
                     return component as T;
 
@@ -76,7 +73,7 @@ namespace BoBo2D_Eyal_Gal
 
         public T GetComponents<T>() where T : Component
         {
-            foreach (Component component in Parent.Components)
+            foreach (Component component in GameObjectP.Components)
                 return component as T;
 
             return null;
@@ -146,7 +143,7 @@ namespace BoBo2D_Eyal_Gal
                    EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
                    EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
                    Name == transform.Name &&
-                   EqualityComparer<GameObject>.Default.Equals(_parent, transform._parent) &&
+                   EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
                    EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
                    Name == transform.Name &&
                    EqualityComparer<Vector2>.Default.Equals(_position, transform._position) &&
@@ -154,7 +151,7 @@ namespace BoBo2D_Eyal_Gal
                    EqualityComparer<Vector2>.Default.Equals(_xAxis, transform._xAxis) &&
                    EqualityComparer<Vector2>.Default.Equals(_yAxis, transform._yAxis) &&
                    //EqualityComparer<Vector3D>.Default.Equals(_zAxis, transform._zAxis) &&
-                   EqualityComparer<GameObject>.Default.Equals(Parent, transform.Parent) &&
+                   EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
                    EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
                    Name == transform.Name &&
                    EqualityComparer<Vector2>.Default.Equals(Position, transform.Position) &&

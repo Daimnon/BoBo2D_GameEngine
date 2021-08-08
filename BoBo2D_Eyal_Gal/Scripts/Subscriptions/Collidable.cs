@@ -11,7 +11,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public List<T> GetUpdatableList => _collidablesList;
+        public List<T> CollidableList => _collidablesList;
         #endregion
 
         #region Methods
@@ -32,6 +32,22 @@ namespace BoBo2D_Eyal_Gal
                 return;
             }
             _collidablesList.Remove(collidableClass);
+        }
+
+        public void ApplyCollisionLogics()
+        {
+            foreach (var collidable in _collidablesList)
+            {
+                for (int i = 0; i < _collidablesList.Count; i++)
+                {
+                    if (collidable as GameObject != _collidablesList[i] as GameObject)
+                    {
+                        collidable.OnCollision(_collidablesList[i] as GameObject);
+                        collidable.OnCollisionStart(_collidablesList[i] as GameObject);
+                        collidable.OnCollisionEnd(_collidablesList[i] as GameObject);
+                    }
+                }
+            }
         }
         #endregion
     }
