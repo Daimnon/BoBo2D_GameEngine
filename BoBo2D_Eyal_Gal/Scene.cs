@@ -33,13 +33,17 @@ namespace BoBo2D_Eyal_Gal
         public void Init()
         {
             //Create Player Projectile
-            CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27, "Laser1");
+            CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27,0, "Laser1");
+            //Create Enemy Projectiles
+            CreateProjectile(ProjectileType.EnemyProjectile, 1, 1, 12,25, "Laser2");
             //Create Basic Weapon
-            CreateWeapon(WeaponType.BasicMainWeapon, 1, 10, 1, 1, null);
+            CreateWeapon(WeaponType.BasicMainWeapon,ProjectileType.BasicProjectile ,1, 10, 1, 1, null);
+            //Create Basic Enemy Weapon
+            CreateWeapon(WeaponType.BasicEnemyWeapon, ProjectileType.EnemyProjectile, 3, 1000, 1, 1, null);
             //Create Player Spaceship
             CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 100, 1, 0, 40, 1, 3, 100, false,"PlayerShip");
             //Create Enemy Spaceship
-            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicMainWeapon, 30, 1, 0, 10, 1, 1, 100, false, "RebelShip");
+            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicEnemyWeapon, 30, 1, 0, 10, 1, 1, 100, false, "RebelShip");
             //ger root Scene Game1 State
             DataManager.Game = _game;
             //add all wanted sprites
@@ -70,9 +74,9 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
 
         }
-        void CreateWeapon(WeaponType weaponType, int cooldown, int maxAmmo, float baseDamage, float damageScalar, string spriteName)
+        void CreateWeapon(WeaponType weaponType,ProjectileType projectileType, int cooldown, int maxAmmo, float baseDamage, float damageScalar, string spriteName)
         {
-            WeaponStats weaponStats = new WeaponStats(weaponType, cooldown, maxAmmo, baseDamage, damageScalar, spriteName);
+            WeaponStats weaponStats = new WeaponStats(weaponType, projectileType,cooldown, maxAmmo, baseDamage, damageScalar, spriteName);
             StatsHandler.AddToCollection(weaponStats);
         }
         void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
@@ -82,9 +86,9 @@ namespace BoBo2D_Eyal_Gal
                 score, hasWeaponSprite, spriteName);
             StatsHandler.AddToCollection(spaceShipStats);
         }
-        void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffset, string spriteName)
+        void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffsetX, float projectileOffsetY, string spriteName)
         {
-            ProjectileStats projectileStats = new ProjectileStats(projectileType, damage, speed, projectileOffset ,spriteName);
+            ProjectileStats projectileStats = new ProjectileStats(projectileType, damage, speed, projectileOffsetX,projectileOffsetY ,spriteName);
             StatsHandler.AddToCollection(projectileStats);
         }
 

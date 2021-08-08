@@ -8,6 +8,7 @@ namespace BoBo2D_Eyal_Gal
     public enum WeaponType//list of all weapons that the developer created
     {
         BasicMainWeapon = 0,
+        BasicEnemyWeapon = 1
     }
     public class Weapon: GameObject ,IUpdatable
     {
@@ -22,6 +23,7 @@ namespace BoBo2D_Eyal_Gal
         string _projectileName;
         bool _isPlayer;
         WeaponType _weaponType;
+        ProjectileType _projectileType;
         string _spriteName;
         #endregion
         public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType, bool hasSprite):base(weaponType.ToString())
@@ -47,7 +49,7 @@ namespace BoBo2D_Eyal_Gal
                 {
                     _ammo -= 1;
                     _currentCoolDown = _maxCooldown;
-                    new Projectile(_projectileName, flightDirection,_damageScalar, _weaponType, transform, _isPlayer,_spaceShip, ProjectileType.BasicProjectile);
+                    new Projectile(_projectileName, flightDirection,_damageScalar, _weaponType, transform, _isPlayer,_spaceShip, _projectileType);
                 }
             }
             else
@@ -80,12 +82,14 @@ namespace BoBo2D_Eyal_Gal
             if(stats != null)
             {
                 _maxCooldown = stats.Cooldown;
+                _currentCoolDown = _maxCooldown;
                 _ammo = stats.MaxAmmo;
                 _maxAmmo = stats.MaxAmmo;
                 _baseDamage = stats.BaseDamage;
                 _damageScalar = stats.DamageScalar;
                 _weaponType = weaponType;
                 _spriteName = stats.SpriteName;
+                _projectileType = stats.ProjectileType;
             }   
         }       
                 

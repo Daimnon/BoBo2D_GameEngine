@@ -4,6 +4,7 @@
     {
         #region Fields
         WeaponType _weaponType;
+        ProjectileType _projectileType;
         float _cooldown;
         int _maxAmmo;
         float _baseDamage;
@@ -13,6 +14,7 @@
 
         #region Properties
         public WeaponType WeaponType => _weaponType;
+        public ProjectileType ProjectileType => _projectileType;
         public float Cooldown => _cooldown;
         public int MaxAmmo => _maxAmmo;
         public float BaseDamage => _baseDamage;
@@ -20,15 +22,17 @@
         public string SpriteName => _spriteName;
         #endregion
 
-        public WeaponStats(WeaponType weaponType, float cooldown, int maxAmmo, float baseDamage,
+        public WeaponStats(WeaponType weaponType,ProjectileType projectileType, float cooldown, int maxAmmo, float baseDamage,
             float damageScalar, string spriteName):base (StatsType.Weapon)
         {
             _weaponType = weaponType;
+            _projectileType = projectileType;
             _cooldown = cooldown;
             _maxAmmo = maxAmmo;
             _baseDamage = baseDamage;
             _damageScalar = damageScalar;
             _spriteName = spriteName;
+
         }
     }
 }
