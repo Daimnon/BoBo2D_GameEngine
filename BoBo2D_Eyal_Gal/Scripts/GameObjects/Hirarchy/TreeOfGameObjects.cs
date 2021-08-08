@@ -11,7 +11,7 @@ namespace BoBo2D_Eyal_Gal
         Node _root;
         #endregion
 
-        #region Fields
+        #region Properties
         public Node Root => _root;
         #endregion
 

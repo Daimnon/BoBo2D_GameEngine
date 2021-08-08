@@ -95,7 +95,6 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine();
             return null;
         }
-
         public void DestroyNode()
         {
             if (_children.Count != 0)
