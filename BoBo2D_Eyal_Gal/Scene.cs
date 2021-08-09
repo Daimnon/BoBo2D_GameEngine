@@ -146,31 +146,6 @@ namespace BoBo2D_Eyal_Gal
             new InputManager(_player, _projectileOffset, Keys.I, Keys.K, Keys.J, Keys.L, Keys.Z, Keys.X, Keys.C);
             */
         }
-
-        //GAL why do we have collisions outside of a physics? not supposed to be in game or scene im my opinion
-        public void OnCollision(GameObject gameObject, GameObject anotherGameObject)
-        {
-            if (Physics.CheckCollision(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
-            {
-
-            }
-        }
-
-        public void OnCollisionStart(GameObject gameObject, GameObject anotherGameObject)
-        {
-            if (Physics.CheckCollisionStart(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
-            {
-
-            }
-        }
-        
-        public void OnCollisionEnd(GameObject gameObject, GameObject anotherGameObject)
-        {
-            if (Physics.CheckCollisionEnd(gameObject.GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
-            {
-
-            }
-        }
         #endregion
     }
 }
