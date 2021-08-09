@@ -9,9 +9,8 @@ namespace BoBo2D_Eyal_Gal
     public class BoxCollider : Component , ICollidable
     {
         #region Fields
-        Vector2 _scale = new Vector2(1, 1);
         Vector2 _position = new Vector2();
-        string _name;
+        Vector2 _scale = new Vector2(1, 1);
         // distance from center to horizontal edge
         float _cX;
         // distance from center to vertical edge
@@ -25,9 +24,16 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public Vector2 Scale { get => _scale; set => _scale = value; }
         public Vector2 Position { get => _position; set => _position = value; }
-        public string Name { get => _name; set => _name = value; }
+        public Vector2 Scale { get => _scale; set => _scale = value; }
+        public Rectangle BoundingBox
+        {
+            get
+            {
+                return new Rectangle((int)Position.X, (int)Position.Y, (int)Scale.X, (int)Scale.Y);
+            }
+        }
+
         public float CX { get => _cX; set => _cX = value; }
         public float CY { get => _cY; set => _cY = value; }
         public float CZ { get => _cZ; set => _cZ = value; }
@@ -39,14 +45,13 @@ namespace BoBo2D_Eyal_Gal
         public float BoxBack { get => _boxBack; set => _boxBack = value; }
         public float CollisionTimer { get => _collisionTimer; set => _collisionTimer = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
+
         #endregion
 
         public BoxCollider(GameObject gameObject)
         {
-            SubscriptionManager.AddSubscriber<ICollidable>(this);
-            Physics.AllBoxColliders.Add(this);
+            GameObjectP = gameObject;
             Name = gameObject.Name + " Colider";
-
             float objX = gameObject.GetComponent<Transform>().Position.X;
             float objY = gameObject.GetComponent<Transform>().Position.Y;
             //float objZ = gameObject.GetComponent<Transform>().Position.Z;
@@ -73,6 +78,8 @@ namespace BoBo2D_Eyal_Gal
             BoxBottom = Position.Y + CY;
             //BoxFront = Position.Z - CZ;
             //BoxBack = Position.Z + CZ;
+            Physics.AllBoxColliders.Add(this);
+            SubscriptionManager.AddSubscriber<ICollidable>(this);
         }
 
         #region Methods
@@ -81,6 +88,7 @@ namespace BoBo2D_Eyal_Gal
             if (IsEnabled)
                 IsEnabled = false;
         }
+        
         public void Enable()
         {
             if (!IsEnabled)

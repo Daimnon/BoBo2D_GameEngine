@@ -11,12 +11,12 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         Texture2D _texture;
-        string _name;
+        string _spriteName;
         Color _color;
         #endregion
+
         #region Properties
         public Texture2D Texture => _texture;
-        public string Name { get => _name; set => _name = value; }
         #endregion
 
         public Sprite(GameObject gameObject, string spriteName, Color color)
@@ -24,7 +24,7 @@ namespace BoBo2D_Eyal_Gal
             _color = color;
             SubscriptionManager.AddSubscriber<IDrawable>(this);
             _texture = DataManager.Instance.GetTexture2D(spriteName);
-            _name = spriteName;
+            _spriteName = spriteName;
             GameObjectP = gameObject;
         }
         public Sprite(GameObject gameObject, string spriteName)
@@ -32,7 +32,7 @@ namespace BoBo2D_Eyal_Gal
             _color = Color.White;
             SubscriptionManager.AddSubscriber<IDrawable>(this);
             _texture = DataManager.Instance.GetTexture2D(spriteName);
-            _name = spriteName;
+            _spriteName = spriteName;
             GameObjectP = gameObject;
         }
         public void Draw()

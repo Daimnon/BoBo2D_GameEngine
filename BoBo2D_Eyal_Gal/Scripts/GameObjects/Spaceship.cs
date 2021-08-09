@@ -15,13 +15,16 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         Weapon _currentWeapon, _firstWeapon, _secondWeapon, _thirdWeapon;
-        Sprite _sprite;
         float _health, _maxHealth, _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
         int _currentLvl = 1;
         int _score;
         bool _isPlayer;
         bool _isDefeatedByPlayer = false;
         bool _isDefeatedByEnemy = false;
+        bool _hasWeaponSprite = false;
+        string _spriteName;
+        Vector2 _lastFramePosition;
+        Vector2 _currentSpeed;
         #endregion
 
         #region Propetries
@@ -43,6 +46,8 @@ namespace BoBo2D_Eyal_Gal
         public int Score { get => _score; set => _score = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
         public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
+        public string SpriteName => _spriteName;
+        public Vector2 CurrentSpeed => _currentSpeed;
         #endregion
 
         public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)
@@ -51,7 +56,10 @@ namespace BoBo2D_Eyal_Gal
             _isPlayer = isPlayer;
             int scoreModifier;
             LoadStats(shipType);
-
+            AddComponent(new Sprite(this, _spriteName));
+            AddComponent(new BoxCollider(this));
+            AddComponent(new Rigidbooty(this));
+            _lastFramePosition = new Vector2(0, 0);
             if (_isPlayer)
             {
                 //connect progression system to player
@@ -79,10 +87,16 @@ namespace BoBo2D_Eyal_Gal
              if(_isPlayer == false)
             {
                 CheckEnemyPosition();
-                MovementHandler.Movement(MoveDirection.Down, this, _speed);
+                MovementHandler.Movement(MoveDirection.Down, this, _speed);                    
+                FirstWeapon.Shoot(_currentSpeed);
             }
-        }
 
+        }
+        public void CalculateCurrentSpeed(Vector2 currentPosition)
+        {
+            _currentSpeed =  currentPosition - _lastFramePosition;
+            _lastFramePosition = currentPosition;
+        }
         void LoadStats(SpaceshipType shipType)
         {
             ShipStats stats = StatsHandler.GetStats<ShipStats>(shipType);
@@ -95,9 +109,10 @@ namespace BoBo2D_Eyal_Gal
                 _maxShield = stats.MaxShield;
                 _shieldRegen = stats.ShieldRegen;
                 _speed = stats.Speed;
-                _damageScalar = stats.DamageScalar;
                 _score = stats.Score;
-                _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType);
+                _hasWeaponSprite = stats.HasWeaponSprite;
+                _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType, _hasWeaponSprite);
+                _spriteName = stats.SpriteName;
             }
         }
         void CheckEnemyPosition()

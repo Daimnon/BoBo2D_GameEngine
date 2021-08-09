@@ -6,6 +6,7 @@ namespace BoBo2D_Eyal_Gal
 {
     public interface ICollidable
     {
+
         public virtual void OnCollision(GameObject anotherGameObject)
         {
             if (Physics.CheckCollision())

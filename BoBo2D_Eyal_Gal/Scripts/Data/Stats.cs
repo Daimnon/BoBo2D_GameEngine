@@ -12,8 +12,10 @@ namespace BoBo2D_Eyal_Gal
             Weapon = 1,
             Projectile =2,
         }
+
         StatsType _statsType;
         public StatsType GetStatsType => _statsType;
+
         public Stats(StatsType statsType)
         {
             _statsType = statsType;
