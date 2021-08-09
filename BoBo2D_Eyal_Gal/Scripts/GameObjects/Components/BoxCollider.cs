@@ -11,6 +11,7 @@ namespace BoBo2D_Eyal_Gal
         #region Fields
         Vector2 _position = new Vector2();
         Vector2 _scale = new Vector2(1, 1);
+        Vector2 _boxTop, _boxBottom, _boxLeft, _boxRight, _boxFront, _boxBack;
         // distance from center to horizontal edge
         float _cX;
         // distance from center to vertical edge
@@ -18,7 +19,6 @@ namespace BoBo2D_Eyal_Gal
         // distance from center to diagonal edge
         float _cZ;
 
-        float _boxTop, _boxBottom, _boxLeft, _boxRight, _boxFront, _boxBack;
         float _collisionTimer = 0;
         bool _isEnabled = true;
         #endregion
@@ -33,16 +33,15 @@ namespace BoBo2D_Eyal_Gal
                 return new Rectangle((int)Position.X, (int)Position.Y, (int)Scale.X, (int)Scale.Y);
             }
         }
-
+        public Vector2 BoxTop { get => _boxTop; set => _boxTop = value; }
+        public Vector2 BoxBottom { get => _boxBottom; set => _boxBottom = value; }
+        public Vector2 BoxLeft { get => _boxLeft; set => _boxLeft = value; }
+        public Vector2 BoxRight { get => _boxRight; set => _boxRight = value; }
+        public Vector2 BoxFront { get => _boxFront; set => _boxFront = value; }
+        public Vector2 BoxBack { get => _boxBack; set => _boxBack = value; }
         public float CX { get => _cX; set => _cX = value; }
         public float CY { get => _cY; set => _cY = value; }
         public float CZ { get => _cZ; set => _cZ = value; }
-        public float BoxTop { get => _boxTop; set => _boxTop = value; }
-        public float BoxBottom { get => _boxBottom; set => _boxBottom = value; }
-        public float BoxLeft { get => _boxLeft; set => _boxLeft = value; }
-        public float BoxRight { get => _boxRight; set => _boxRight = value; }
-        public float BoxFront { get => _boxFront; set => _boxFront = value; }
-        public float BoxBack { get => _boxBack; set => _boxBack = value; }
         public float CollisionTimer { get => _collisionTimer; set => _collisionTimer = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
 
@@ -51,7 +50,10 @@ namespace BoBo2D_Eyal_Gal
         public BoxCollider(GameObject gameObject)
         {
             GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
             Name = gameObject.Name + " Colider";
+
+
             float objX = gameObject.GetComponent<Transform>().Position.X;
             float objY = gameObject.GetComponent<Transform>().Position.Y;
             //float objZ = gameObject.GetComponent<Transform>().Position.Z;
@@ -72,12 +74,12 @@ namespace BoBo2D_Eyal_Gal
             Position = new Vector2(objX, objY);
 
             // set the exact points of box
-            BoxLeft = Position.X - CX;
-            BoxRight = Position.X + CX;
-            BoxTop = Position.Y - CY;
-            BoxBottom = Position.Y + CY;
-            //BoxFront = Position.Z - CZ;
-            //BoxBack = Position.Z + CZ;
+            BoxLeft = new Vector2(Position.X - CX, Position.Y);
+            BoxRight = new Vector2(Position.X + CX, Position.Y);
+            BoxTop = new Vector2(Position.X, Position.Y - CY);
+            BoxBottom = new Vector2(Position.X, Position.Y + CY);
+            //BoxFront = new Vector2(Position.X, Position.Y, Position.Z - CZ);
+            //BoxBack = new Vector2(Position.X, Position.Y, Position.Z + CZ);
             Physics.AllBoxColliders.Add(this);
             SubscriptionManager.AddSubscriber<ICollidable>(this);
         }
@@ -99,6 +101,8 @@ namespace BoBo2D_Eyal_Gal
         {
             SubscriptionManager.RemoveSubscriber<ICollidable>(this);
         }
+
+
         #endregion
 
         #region Overrides

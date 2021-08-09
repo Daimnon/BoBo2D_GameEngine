@@ -48,9 +48,11 @@ namespace BoBo2D_Eyal_Gal
         public GameObject(string name, Transform transform)
         {
             Name = name;
+            IsEnabled = true;
+
             Console.WriteLine($"New Game Object has been created {ToString()}");
             AddComponent(transform);
-            //transform.GetSetGameObject = this;
+            transform.GameObjectP = this;
         }
         #endregion
 

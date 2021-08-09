@@ -32,9 +32,9 @@ namespace BoBo2D_Eyal_Gal
 
         public Rigidbooty(GameObject gameObject)
         {
-            _gameObject = gameObject;
-            Name = _gameObject.Name;
-            TransformP = _gameObject.GetComponent<Transform>();
+            GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
+            Name = GameObjectP.Name + " Rigidbooty";
             //BoxColliderP = _gameObject.GetComponent<BoxCollider>();
         }
 
