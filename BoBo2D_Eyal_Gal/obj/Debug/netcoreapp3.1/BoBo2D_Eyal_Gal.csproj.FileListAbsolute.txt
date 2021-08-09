@@ -77,8 +77,6 @@ C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcor
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.dll
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.pdb
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.genruntimeconfig.cache
-D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\EnemyBoss.xnb
-D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\RebelShip.xnb
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\EnemyBoss.xnb
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\RebelShip.xnb
 C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\BG.xnb
@@ -113,9 +111,7 @@ C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreap
 C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\GameSpriteFont.xnb
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\GameSpriteFont.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\GameSpriteFont.xnb
-D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Characters\EnemyBoss.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Characters\PlayerShip.xnb
-D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Characters\RebelShip.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\JetBeams\EnemyBossJetBeam.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\JetBeams\PlayerJetBeam.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\JetBeams\RebelJetBeam.xnb
@@ -151,3 +147,7 @@ C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcor
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Bolt2.xnb
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Laser1.xnb
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Laser2.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Characters\EnemyBoss.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Characters\RebelShip.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\EnemyBoss.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\RebelShip.xnb
