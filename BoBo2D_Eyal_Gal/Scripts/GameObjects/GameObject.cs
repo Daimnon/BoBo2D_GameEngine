@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class GameObject
+    public class GameObject : ICollidable
     {
         #region Fields
         List<Component> _components = new List<Component>();
@@ -42,6 +42,8 @@ namespace BoBo2D_Eyal_Gal
             Transform transform = new Transform(this);
             AddComponent(transform);
             transform.GameObjectP = this;
+            transform.TransformP = transform;
+            SubscriptionManager.AddSubscriber<ICollidable>(this);
         }
 
         //Constructor with Transform that the player will enter
@@ -53,6 +55,8 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine($"New Game Object has been created {ToString()}");
             AddComponent(transform);
             transform.GameObjectP = this;
+            transform.TransformP = transform;
+            SubscriptionManager.AddSubscriber<ICollidable>(this);
         }
         #endregion
 
@@ -97,7 +101,7 @@ namespace BoBo2D_Eyal_Gal
         }
         public virtual void Unsubscribe()
         {
-
+            SubscriptionManager.RemoveSubscriber<ICollidable>(this);
         }
         //public void OnDisable()
         //{
@@ -217,7 +221,7 @@ namespace BoBo2D_Eyal_Gal
             BoxCollider boxCollider = GetComponent<BoxCollider>();
             if (boxCollider != null)
             {
-                boxCollider.Position = transform.Position;
+                boxCollider.TransformP = transform;
             }
             Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
             if(rigidbooty != null)
@@ -228,6 +232,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Overrides
+
         public override string ToString()
         {
             return $"Name:{Name}" + Environment.NewLine

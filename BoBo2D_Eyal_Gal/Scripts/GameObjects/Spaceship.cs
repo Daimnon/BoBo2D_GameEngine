@@ -52,7 +52,6 @@ namespace BoBo2D_Eyal_Gal
 
         public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)
         {
-            SubscriptionManager.AddSubscriber<IUpdatable>(this);
             _isPlayer = isPlayer;
             int scoreModifier;
             LoadStats(shipType);
@@ -60,9 +59,11 @@ namespace BoBo2D_Eyal_Gal
             AddComponent(new BoxCollider(this));
             AddComponent(new Rigidbooty(this));
             _lastFramePosition = new Vector2(0, 0);
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
 
             if (_isPlayer)
             {
+
                 //connect progression system to player
                 PlayerProgression.Player = this;
 
@@ -116,6 +117,7 @@ namespace BoBo2D_Eyal_Gal
                 _spriteName = stats.SpriteName;
             }
         }
+
         void CheckEnemyPosition()
         {
             Transform transform = GetComponent<Transform>();
@@ -125,6 +127,15 @@ namespace BoBo2D_Eyal_Gal
                 transform.Position = pos;
             }
         }
+
+        public void OnCollision(GameObject anotherGameObject)
+        {
+            if (Physics.CheckCollision(GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
+                Physics.SolveCollisions(this, anotherGameObject);
+            }
+        }
+
         public override void Unsubscribe()
         {
             SubscriptionManager.RemoveSubscriber<IUpdatable>(this);
