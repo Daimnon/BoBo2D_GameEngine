@@ -24,16 +24,20 @@ namespace BoBo2D_Eyal_Gal
         bool _isPlayerProjectile;
         string _spriteName;
         Spaceship _spaceShip;
+        GameObject _gameObject;
         #endregion
 
         #region Properties
         public Vector2 ProjectileDirection { set => _projectileDirection = value; }
+        public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
         public bool Flying { set => _flying = value; }
         #endregion
 
         public Projectile(string name, Vector2 flightDirectin,float damageScalar,
                           WeaponType weaponType, Transform transform, bool isPlayerProjectile,Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
+            Name = name;
+            GameObjectP = this;
             AddToHirarcy();
             _spaceShip = spaceship;
             LoadStats(projectileType);
