@@ -55,6 +55,7 @@ namespace BoBo2D_Eyal_Gal
             //ger root Scene Game1 State
             DrawManager.Game = _game;
         }
+
         public void Start()
         {
             CreateBackGround("BackGround", "BG");
@@ -63,22 +64,26 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
         }
+
         public void Update()
         {
             SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
             //check collisions need implementation
             SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
         }
+
         public void DrawScene()
         {
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
 
         }
+
         void CreateWeapon(WeaponType weaponType,ProjectileType projectileType, int cooldown, int maxAmmo, float baseDamage, float damageScalar, string spriteName)
         {
             WeaponStats weaponStats = new WeaponStats(weaponType, projectileType,cooldown, maxAmmo, baseDamage, damageScalar, spriteName);
             StatsHandler.AddToCollection(weaponStats);
         }
+
         void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
             float shieldRegen, float speed, int score, bool hasWeaponSprite, string spriteName)
         {
@@ -86,6 +91,7 @@ namespace BoBo2D_Eyal_Gal
                 score, hasWeaponSprite, spriteName);
             StatsHandler.AddToCollection(spaceShipStats);
         }
+
         void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffsetX, float projectileOffsetY, string spriteName)
         {
             ProjectileStats projectileStats = new ProjectileStats(projectileType, damage, speed, projectileOffsetX,projectileOffsetY ,spriteName);
@@ -119,6 +125,7 @@ namespace BoBo2D_Eyal_Gal
             };
             DataManager.Instance.SpriteDataHolder.SpriteNames = spriteNames;
         }
+
         void CreateBackGround(string backgroundName, string backgroundSprite)
         {
             GameObject background = new GameObject(backgroundName);
@@ -132,6 +139,7 @@ namespace BoBo2D_Eyal_Gal
             GameObjectManager.Instance.AddGameObject(_player);
             //new InputManager(_player, _projectileOffset, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.Space, Keys.LeftControl, Keys.LeftShift);
             new InputManager(_player, false, false);
+            
             /*
             //*onboard input system* - wasd scheme + shoot weapons with number keys
             new InputManager(_player, true, true);

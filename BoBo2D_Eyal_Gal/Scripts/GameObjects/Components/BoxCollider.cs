@@ -6,11 +6,10 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class BoxCollider : Component , ICollidable
+    public class BoxCollider : Component
     {
         #region Fields
-        Vector2 _position = new Vector2();
-        Vector2 _scale = new Vector2(1, 1);
+        Vector2 _scale;
         Vector2 _boxTop, _boxBottom, _boxLeft, _boxRight, _boxFront, _boxBack;
         // distance from center to horizontal edge
         float _cX;
@@ -24,15 +23,14 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Properties
-        public Vector2 Position { get => _position; set => _position = value; }
-        public Vector2 Scale { get => _scale; set => _scale = value; }
         public Rectangle BoundingBox
         {
             get
             {
-                return new Rectangle((int)Position.X, (int)Position.Y, (int)Scale.X, (int)Scale.Y);
+                return new Rectangle((int)TransformP.Position.X, (int)TransformP.Position.Y, (int)Scale.X, (int)Scale.Y);
             }
         }
+        public Vector2 Scale { get => _scale; set => _scale = value; }
         public Vector2 BoxTop { get => _boxTop; set => _boxTop = value; }
         public Vector2 BoxBottom { get => _boxBottom; set => _boxBottom = value; }
         public Vector2 BoxLeft { get => _boxLeft; set => _boxLeft = value; }
@@ -53,9 +51,6 @@ namespace BoBo2D_Eyal_Gal
             TransformP = gameObject.GetComponent<Transform>();
             Name = gameObject.Name + " Colider";
 
-
-            float transformX = gameObject.GetComponent<Transform>().Position.X;
-            float transformY = gameObject.GetComponent<Transform>().Position.Y;
             //float objZ = gameObject.GetComponent<Transform>().Position.Z;
 
             //width
@@ -71,18 +66,15 @@ namespace BoBo2D_Eyal_Gal
             CY = spriteHeight / 2;
             //CZ = objD / 2;
 
-            //set colider posiotion to object positino
-            Position = new Vector2(transformX, transformY);
-
             // set the exact points of box
-            BoxLeft = new Vector2(Position.X - CX, Position.Y);
-            BoxRight = new Vector2(Position.X + CX, Position.Y);
-            BoxTop = new Vector2(Position.X, Position.Y - CY);
-            BoxBottom = new Vector2(Position.X, Position.Y + CY);
+            BoxLeft = new Vector2(TransformP.Position.X - CX, TransformP.Position.Y);
+            BoxRight = new Vector2(TransformP.Position.X + CX, TransformP.Position.Y);
+            BoxTop = new Vector2(TransformP.Position.X, TransformP.Position.Y - CY);
+            BoxBottom = new Vector2(TransformP.Position.X, TransformP.Position.Y + CY);
             //BoxFront = new Vector2(Position.X, Position.Y, Position.Z - CZ);
             //BoxBack = new Vector2(Position.X, Position.Y, Position.Z + CZ);
             Physics.AllBoxColliders.Add(this);
-            SubscriptionManager.AddSubscriber<ICollidable>(this);
+            //SubscriptionManager.AddSubscriber<ICollidable>(this);
         }
 
         #region Methods
@@ -100,7 +92,7 @@ namespace BoBo2D_Eyal_Gal
 
         public override void Unsubscribe()
         {
-            SubscriptionManager.RemoveSubscriber<ICollidable>(this);
+            //SubscriptionManager.RemoveSubscriber<ICollidable>(this);
         }
 
 

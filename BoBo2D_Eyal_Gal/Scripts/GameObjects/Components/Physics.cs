@@ -54,6 +54,11 @@ namespace BoBo2D_Eyal_Gal
 
                 foreach (BoxCollider anotherCollider in AllBoxColliders)
                 {
+                    if (!anotherCollider.IsEnabled)
+                        continue;
+
+                    if (collider == anotherCollider)
+                        continue;
 
                     if (AABB(collider, anotherCollider))
                         Console.WriteLine(collider + " and " + anotherCollider + " are coliding");
@@ -149,45 +154,65 @@ namespace BoBo2D_Eyal_Gal
 
                     //simple diagonal direction solutions: ↖ ↗ ↙ ↘
 
-                        //check bottom-right
-                        if (BottomRightCollisionTimer == 0)
-                            if (collider.BoxRight == anotherCollider.BoxLeft)
-                                if (collider.BoxBottom == anotherCollider.BoxTop)
-                                {
-                                    Time.ContinueTimer(BottomRightCollisionTimer);
-                                    return true;
-                                }
+                    //check bottom-right
+                    if (BottomRightCollisionTimer == 0)
+                        if (collider.BoxRight == anotherCollider.BoxLeft)
+                            if (collider.BoxBottom == anotherCollider.BoxTop)
+                            {
+                                Time.ContinueTimer(BottomRightCollisionTimer);
+                                return true;
+                            }
 
-                        //check bottom-left
-                        if (BottomLeftCollisionTimer == 0)
-                            if (collider.BoxLeft == anotherCollider.BoxRight)
-                                if (collider.BoxBottom.Y >= anotherCollider.BoxTop.Y)
-                                {
-                                    Time.ContinueTimer(BottomLeftCollisionTimer);
-                                    return true;
-                                }
+                    //check bottom-left
+                    if (BottomLeftCollisionTimer == 0)
+                        if (collider.BoxLeft == anotherCollider.BoxRight)
+                            if (collider.BoxBottom.Y >= anotherCollider.BoxTop.Y)
+                            {
+                                Time.ContinueTimer(BottomLeftCollisionTimer);
+                                return true;
+                            }
 
-                        //check top-right
-                        if (TopRightCollisionTimer == 0)
-                            if (collider.BoxRight == anotherCollider.BoxLeft)
-                                if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
-                                {
-                                    Time.ContinueTimer(TopRightCollisionTimer);
-                                    return true;
-                                }
+                    //check top-right
+                    if (TopRightCollisionTimer == 0)
+                        if (collider.BoxRight == anotherCollider.BoxLeft)
+                            if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
+                            {
+                                Time.ContinueTimer(TopRightCollisionTimer);
+                                return true;
+                            }
 
-                        //check top-left
-                        if (TopLeftCollisionTimer == 0)
-                            if (collider.BoxLeft == anotherCollider.BoxRight)
-                                if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
-                                {
-                                    Time.ContinueTimer(TopLeftCollisionTimer);
-                                    return true;
-                                }
+                    //check top-left
+                    if (TopLeftCollisionTimer == 0)
+                        if (collider.BoxLeft == anotherCollider.BoxRight)
+                            if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
+                            {
+                                Time.ContinueTimer(TopLeftCollisionTimer);
+                                return true;
+                            }
                 }
             }
 
             return false;
+        }
+
+        public static void SolveCollisions<T>(GameObject gameObject, T anotherGameObject)
+        {
+            switch (true)
+            {
+                case true when typeof(T) == typeof(Spaceship):
+                    if (CheckCollision(gameObject.GetComponent<BoxCollider>(), (anotherGameObject as GameObject).GetComponent<BoxCollider>()))
+                    {
+                        SolveSpaceShipCollision(gameObject, (anotherGameObject as GameObject));
+                    }
+                    break;
+
+                case true when typeof(T) == typeof(Projectile):
+                    (anotherGameObject as GameObject).Destroy();
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         public static bool CheckCollisionStart(BoxCollider collider, BoxCollider anotherCollider)
@@ -230,41 +255,41 @@ namespace BoBo2D_Eyal_Gal
 
             //simple diagonal direction solutions: ↖ ↗ ↙ ↘
 
-                //check bottom-right
-                if (BottomRightCollisionTimer == 0)
-                    if (collider.BoxRight == anotherCollider.BoxLeft)
-                        if (collider.BoxBottom == anotherCollider.BoxTop)
-                        {
-                            Time.ContinueTimer(BottomRightCollisionTimer);
-                            return true;
-                        }
+            //check bottom-right
+            if (BottomRightCollisionTimer == 0)
+                if (collider.BoxRight == anotherCollider.BoxLeft)
+                    if (collider.BoxBottom == anotherCollider.BoxTop)
+                    {
+                        Time.ContinueTimer(BottomRightCollisionTimer);
+                        return true;
+                    }
 
-                //check bottom-left
-                if (BottomLeftCollisionTimer == 0)
-                    if (collider.BoxLeft == anotherCollider.BoxRight)
-                        if (collider.BoxBottom.Y >= anotherCollider.BoxTop.Y)
-                        {
-                            Time.ContinueTimer(BottomLeftCollisionTimer);
-                            return true;
-                        }
+            //check bottom-left
+            if (BottomLeftCollisionTimer == 0)
+                if (collider.BoxLeft == anotherCollider.BoxRight)
+                    if (collider.BoxBottom.Y >= anotherCollider.BoxTop.Y)
+                    {
+                        Time.ContinueTimer(BottomLeftCollisionTimer);
+                        return true;
+                    }
 
-                //check top-right
-                if (TopRightCollisionTimer == 0)
-                    if (collider.BoxRight == anotherCollider.BoxLeft)
-                        if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
-                        {
-                            Time.ContinueTimer(TopRightCollisionTimer);
-                            return true;
-                        }
+            //check top-right
+            if (TopRightCollisionTimer == 0)
+                if (collider.BoxRight == anotherCollider.BoxLeft)
+                    if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
+                    {
+                        Time.ContinueTimer(TopRightCollisionTimer);
+                        return true;
+                    }
 
-                //check top-left
-                if (TopLeftCollisionTimer == 0)
-                    if (collider.BoxLeft == anotherCollider.BoxRight)
-                        if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
-                        {
-                            Time.ContinueTimer(TopLeftCollisionTimer);
-                            return true;
-                        }
+            //check top-left
+            if (TopLeftCollisionTimer == 0)
+                if (collider.BoxLeft == anotherCollider.BoxRight)
+                    if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
+                    {
+                        Time.ContinueTimer(TopLeftCollisionTimer);
+                        return true;
+                    }
 
             return false;
         }
@@ -320,41 +345,41 @@ namespace BoBo2D_Eyal_Gal
 
                     //simple diagonal direction solutions: ↖ ↗ ↙ ↘
 
-                        //check bottom-right
-                        if (BottomRightCollisionTimer != 0)
-                            if (colider.BoxRight == anotherColider.BoxLeft)
-                                if (colider.BoxBottom == anotherColider.BoxTop)
-                                {
-                                    Time.ResetTimer(BottomRightCollisionTimer);
-                                    return true;
-                                }
+                    //check bottom-right
+                    if (BottomRightCollisionTimer != 0)
+                        if (colider.BoxRight == anotherColider.BoxLeft)
+                            if (colider.BoxBottom == anotherColider.BoxTop)
+                            {
+                                Time.ResetTimer(BottomRightCollisionTimer);
+                                return true;
+                            }
 
-                        //check bottom-left
-                        if (BottomLeftCollisionTimer != 0)
-                            if (colider.BoxLeft == anotherColider.BoxRight)
-                                if (colider.BoxBottom.Y >= anotherColider.BoxTop.Y)
-                                {
-                                    Time.ResetTimer(BottomLeftCollisionTimer);
-                                    return true;
-                                }
+                    //check bottom-left
+                    if (BottomLeftCollisionTimer != 0)
+                        if (colider.BoxLeft == anotherColider.BoxRight)
+                            if (colider.BoxBottom.Y >= anotherColider.BoxTop.Y)
+                            {
+                                Time.ResetTimer(BottomLeftCollisionTimer);
+                                return true;
+                            }
 
-                        //check top-right
-                        if (TopRightCollisionTimer != 0)
-                            if (colider.BoxRight == anotherColider.BoxLeft)
-                                if (colider.BoxTop.Y >= anotherColider.BoxBottom.Y)
-                                {
-                                    Time.ResetTimer(TopRightCollisionTimer);
-                                    return true;
-                                }
+                    //check top-right
+                    if (TopRightCollisionTimer != 0)
+                        if (colider.BoxRight == anotherColider.BoxLeft)
+                            if (colider.BoxTop.Y >= anotherColider.BoxBottom.Y)
+                            {
+                                Time.ResetTimer(TopRightCollisionTimer);
+                                return true;
+                            }
 
-                        //check top-left
-                        if (TopLeftCollisionTimer != 0)
-                            if (colider.BoxLeft == anotherColider.BoxRight)
-                                if (colider.BoxTop.Y >= anotherColider.BoxBottom.Y)
-                                {
-                                    Time.ResetTimer(TopLeftCollisionTimer);
-                                    return true;
-                                }
+                    //check top-left
+                    if (TopLeftCollisionTimer != 0)
+                        if (colider.BoxLeft == anotherColider.BoxRight)
+                            if (colider.BoxTop.Y >= anotherColider.BoxBottom.Y)
+                            {
+                                Time.ResetTimer(TopLeftCollisionTimer);
+                                return true;
+                            }
                 }
             }
 
@@ -401,41 +426,41 @@ namespace BoBo2D_Eyal_Gal
 
             //simple diagonal direction solutions: ↖ ↗ ↙ ↘
 
-                //check bottom-right
-                if (BottomRightCollisionTimer != 0)
-                    if (collider.BoxRight == anotherCollider.BoxLeft)
-                        if (collider.BoxBottom == anotherCollider.BoxTop)
-                        {
-                            Time.ResetTimer(BottomRightCollisionTimer);
-                            return true;
-                        }
+            //check bottom-right
+            if (BottomRightCollisionTimer != 0)
+                if (collider.BoxRight == anotherCollider.BoxLeft)
+                    if (collider.BoxBottom == anotherCollider.BoxTop)
+                    {
+                        Time.ResetTimer(BottomRightCollisionTimer);
+                        return true;
+                    }
 
-                //check bottom-left
-                if (BottomLeftCollisionTimer != 0)
-                    if (collider.BoxLeft == anotherCollider.BoxRight)
-                        if (collider.BoxBottom.Y >= anotherCollider.BoxTop.Y)
-                        {
-                            Time.ResetTimer(BottomLeftCollisionTimer);
-                            return true;
-                        }
+            //check bottom-left
+            if (BottomLeftCollisionTimer != 0)
+                if (collider.BoxLeft == anotherCollider.BoxRight)
+                    if (collider.BoxBottom.Y >= anotherCollider.BoxTop.Y)
+                    {
+                        Time.ResetTimer(BottomLeftCollisionTimer);
+                        return true;
+                    }
 
-                //check top-right
-                if (TopRightCollisionTimer != 0)
-                    if (collider.BoxRight == anotherCollider.BoxLeft)
-                        if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
-                        {
-                            Time.ResetTimer(TopRightCollisionTimer);
-                            return true;
-                        }
+            //check top-right
+            if (TopRightCollisionTimer != 0)
+                if (collider.BoxRight == anotherCollider.BoxLeft)
+                    if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
+                    {
+                        Time.ResetTimer(TopRightCollisionTimer);
+                        return true;
+                    }
 
-                //check top-left
-                if (TopLeftCollisionTimer != 0)
-                    if (collider.BoxLeft == anotherCollider.BoxRight)
-                        if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
-                        {
-                            Time.ResetTimer(TopLeftCollisionTimer);
-                            return true;
-                        }
+            //check top-left
+            if (TopLeftCollisionTimer != 0)
+                if (collider.BoxLeft == anotherCollider.BoxRight)
+                    if (collider.BoxTop.Y >= anotherCollider.BoxBottom.Y)
+                    {
+                        Time.ResetTimer(TopLeftCollisionTimer);
+                        return true;
+                    }
 
             return false;
         }
@@ -459,174 +484,239 @@ namespace BoBo2D_Eyal_Gal
                     if (CheckCollision(collider, anotherCollider))
                     {
                         //bounce left
-                        if (collider.Position.X + collider.BoxRight.X >= anotherCollider.Position.X - anotherCollider.BoxLeft.X)
+                        if (collider.TransformP.Position.X - collider.BoxLeft.X <= anotherCollider.TransformP.Position.X + anotherCollider.BoxRight.X)
                         {
-                            collider.Position -= (new Vector2(1, 0));
-                            collider.TransformP.Position = collider.Position;
-                            return;
+                            collider.TransformP.Position -= (new Vector2(1, 0));
+                            collider.TransformP.Position = collider.TransformP.Position;
+                            //return;
                         }
-
-                        //bounce right
-                        if (collider.Position.X - collider.BoxLeft.X >= anotherCollider.Position.X + anotherCollider.BoxRight.X)
-                        {
-                            collider.Position += (new Vector2(1, 0));
-                            collider.TransformP.Position = collider.Position;
-                            return;
-                        }
-
-                        //bounce up
-                        if (collider.Position.Y + collider.BoxBottom.Y >= anotherCollider.Position.Y - anotherCollider.BoxTop.Y)
-                        {
-                            collider.Position -= (new Vector2(0, 1));
-                            collider.TransformP.Position = collider.Position;
-                            return;
-                        }
-
-                        //bounce down
-                        if (collider.Position.Y - collider.BoxTop.Y >= anotherCollider.Position.Y + anotherCollider.BoxBottom.Y)
-                        {
-                            collider.Position += (new Vector2(0, 1));
-                            collider.TransformP.Position = collider.Position;
-                            return;
-                        }
-
-                      //simple diagonal direction solutions: ↖ ↗ ↙ ↘
-
-                        //bounce top-left
-                        if (collider.Position.X + collider.BoxRight.X >= anotherCollider.Position.X - anotherCollider.BoxLeft.X)
-                        {
-                            if (collider.Position.X + collider.BoxBottom.Y >= anotherCollider.Position.X - anotherCollider.BoxTop.Y)
-                            {
-                                collider.Position -= (new Vector2(1, 1));
-                                collider.TransformP.Position = collider.Position;
-                                return;
-                            }
-                        }
-                            
-                        //bounce top-right
-                        if (collider.Position.X - collider.BoxLeft.X >= anotherCollider.Position.X + anotherCollider.BoxRight.X)
-                        {
-                            if (collider.Position.X + collider.BoxBottom.Y >= anotherCollider.Position.X - anotherCollider.BoxTop.Y)
-                            {
-                                collider.Position += (new Vector2(1, -1));
-                                collider.TransformP.Position = collider.Position;
-                                return;
-                            }
-                        }
-                            
-                        //bounce bottom-left
-                        if (collider.Position.X + collider.BoxRight.X >= anotherCollider.Position.X - anotherCollider.BoxLeft.X)
-                        {
-                            if (collider.Position.X - collider.BoxTop.Y >= anotherCollider.Position.X + anotherCollider.BoxBottom.Y)
-                            {
-                                collider.Position -= (new Vector2(1, -1));
-                                collider.TransformP.Position = collider.Position;
-                                return;
-                            }
-                        }
-                            
-                        //bounce bottom-right
-                        if (collider.Position.X - collider.BoxLeft.X >= anotherCollider.Position.X + anotherCollider.BoxRight.X)
-                        {
-                            if (collider.Position.X - collider.BoxTop.Y >= anotherCollider.Position.X + anotherCollider.BoxBottom.Y)
-                            {
-                                collider.Position += (new Vector2(1, 1));
-                                collider.TransformP.Position = collider.Position;
-                                return;
-                            }
-                        }                         
                     }
 
-                    else
-                        continue;
+                    if (CheckCollision(collider, anotherCollider))
+                    {
+                        //bounce right
+                        if (collider.TransformP.Position.X + collider.BoxRight.X >= anotherCollider.TransformP.Position.X - anotherCollider.BoxLeft.X)
+                        {
+                            collider.TransformP.Position += (new Vector2(1, 0));
+                            collider.TransformP.Position = collider.TransformP.Position;
+                            //return;
+                        }
+                    }
+
+                    if (CheckCollision(collider, anotherCollider))
+                    {
+                        //bounce up
+                        if (collider.TransformP.Position.Y + collider.BoxBottom.Y >= anotherCollider.TransformP.Position.Y - anotherCollider.BoxTop.Y)
+                        {
+
+                            collider.TransformP.Position -= (new Vector2(0, 1));
+                            collider.TransformP.Position = collider.TransformP.Position;
+                            //return;
+                        }
+                    }
+
+                    if (CheckCollision(collider, anotherCollider))
+                    {
+                        //bounce down
+                        if (collider.TransformP.Position.Y - collider.BoxTop.Y <= anotherCollider.TransformP.Position.Y + anotherCollider.BoxBottom.Y)
+                        {          
+                            collider.TransformP.Position += (new Vector2(0, 1));
+                            collider.TransformP.Position = collider.TransformP.Position;
+                            //return;
+                        }
+                    }
+                            //simple diagonal direction solutions: ↖ ↗ ↙ ↘
+
+                            /*
+                            //bounce top-left
+                            if (collider.TransformP.Position.X + collider.BoxRight.X >= anotherCollider.TransformP.Position.X - anotherCollider.BoxLeft.X)
+                            {
+                                if (collider.TransformP.Position.X + collider.BoxBottom.Y >= anotherCollider.TransformP.Position.X - anotherCollider.BoxTop.Y)
+                                {
+                                    collider.TransformP.Position -= (new Vector2(1, 1));
+                                    collider.TransformP.Position = collider.TransformP.Position;
+                                    return;
+                                }
+                            }
+
+                            //bounce top-right
+                            if (collider.TransformP.Position.X - collider.BoxLeft.X >= anotherCollider.TransformP.Position.X + anotherCollider.BoxRight.X)
+                            {
+                                if (collider.TransformP.Position.X + collider.BoxBottom.Y >= anotherCollider.TransformP.Position.X - anotherCollider.BoxTop.Y)
+                                {
+                                    collider.TransformP.Position += (new Vector2(1, -1));
+                                    collider.TransformP.Position = collider.TransformP.Position;
+                                    return;
+                                }
+                            }
+
+                            //bounce bottom-left
+                            if (collider.TransformP.Position.X + collider.BoxRight.X >= anotherCollider.TransformP.Position.X - anotherCollider.BoxLeft.X)
+                            {
+                                if (collider.TransformP.Position.X - collider.BoxTop.Y >= anotherCollider.TransformP.Position.X + anotherCollider.BoxBottom.Y)
+                                {
+                                    collider.TransformP.Position -= (new Vector2(1, -1));
+                                    collider.TransformP.Position = collider.TransformP.Position;
+                                    return;
+                                }
+                            }
+
+                            //bounce bottom-right
+                            if (collider.TransformP.Position.X - collider.BoxLeft.X >= anotherCollider.TransformP.Position.X + anotherCollider.BoxRight.X)
+                            {
+                                if (collider.TransformP.Position.X - collider.BoxTop.Y >= anotherCollider.TransformP.Position.X + anotherCollider.BoxBottom.Y)
+                                {
+                                    collider.TransformP.Position += (new Vector2(1, 1));
+                                    collider.TransformP.Position = collider.TransformP.Position;
+                                    return;
+                                }
+                            }
+                            */
+
+                        else
+                            continue;
+                    }
+                }
+            }
+
+        public static void SolveSpaceShipCollision(GameObject gameObject, GameObject anotherGameObject)
+        {
+            Transform gameObjectTransform = gameObject.GetComponent<Transform>();
+            Transform anotherGameObjectTransform = anotherGameObject.GetComponent<Transform>();
+            BoxCollider gameObjectCollider = gameObject.GetComponent<BoxCollider>();
+            BoxCollider anotherGameObjectCollider = anotherGameObject.GetComponent<BoxCollider>();
+
+            if (CheckCollision(gameObjectCollider, anotherGameObjectCollider))
+            {
+                
+                //bounce left
+                if (gameObjectTransform.Position.X - gameObjectCollider.BoxLeft.X <= anotherGameObjectTransform.Position.X + anotherGameObjectCollider.BoxRight.X)
+                {
+                    gameObjectTransform.Position -= (new Vector2(1, 0));
+                    anotherGameObjectTransform.Position += (new Vector2(1, 0));
+                    //return;
+                }
+            }
+
+            if (CheckCollision(gameObjectCollider, anotherGameObjectCollider))
+            {
+                //bounce right
+                if (gameObjectTransform.Position.X + gameObjectCollider.BoxRight.X >= anotherGameObjectTransform.Position.X - anotherGameObjectCollider.BoxLeft.X)
+                {
+                    gameObjectTransform.Position += (new Vector2(1, 0));
+                    anotherGameObjectTransform.Position -= (new Vector2(1, 0));
+                    //return;
+                }
+            }
+
+            if (CheckCollision(gameObjectCollider, anotherGameObjectCollider))
+            {
+                //bounce up
+                if (gameObjectTransform.Position.Y + gameObjectCollider.BoxBottom.Y >= anotherGameObjectTransform.Position.Y - anotherGameObjectCollider.BoxTop.Y)
+                {
+
+                    gameObjectTransform.Position -= (new Vector2(0, 1));
+                    anotherGameObjectTransform.Position += (new Vector2(0, 1));
+                    //return;
+                }
+            }
+
+            if (CheckCollision(gameObjectCollider, anotherGameObjectCollider))
+            {
+                //bounce down
+                if (gameObjectTransform.Position.Y - gameObjectCollider.BoxTop.Y <= anotherGameObjectTransform.Position.Y + anotherGameObjectCollider.BoxBottom.Y)
+                {
+                    gameObjectTransform.Position += (new Vector2(0, 1));
+                    anotherGameObjectTransform.Position -= (new Vector2(0, 1));
+                    //return;
                 }
             }
         }
 
         public static void SolveIntersection()
-        {
-            for (int i = 0; i < AllBoxColliders.Count; i++)
             {
-                BoxCollider collider = AllBoxColliders[i];
-                if (!collider.IsEnabled)
-                    continue;
-
-                foreach (BoxCollider anotherCollider in AllBoxColliders)
+                for (int i = 0; i < AllBoxColliders.Count; i++)
                 {
-                    if (!anotherCollider.IsEnabled)
+                    BoxCollider collider = AllBoxColliders[i];
+                    if (!collider.IsEnabled)
                         continue;
 
-                    //simple directional solutions: ← → ↑ ↓
-                    if (anotherCollider.BoundingBox.Intersects(collider.BoundingBox))
+                    foreach (BoxCollider anotherCollider in AllBoxColliders)
                     {
-                        //bounce left
-                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
-                        {
-                            collider.Position -= (new Vector2(1, 0));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
+                        if (!anotherCollider.IsEnabled)
+                            continue;
 
-                        //bounce right
-                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
+                        //simple directional solutions: ← → ↑ ↓
+                        if (anotherCollider.BoundingBox.Intersects(collider.BoundingBox))
                         {
-                            collider.Position += (new Vector2(1, 0));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
+                            //bounce left
+                            if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
+                            {
+                                collider.TransformP.Position -= (new Vector2(1, 0));
+                                collider.GameObjectP.GetComponent<Transform>().Position = collider.TransformP.Position;
+                            }
 
-                        //bounce up
-                        if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
-                        {
-                            collider.Position -= (new Vector2(0, 1));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
+                            //bounce right
+                            if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
+                            {
+                                collider.TransformP.Position += (new Vector2(1, 0));
+                                collider.GameObjectP.GetComponent<Transform>().Position = collider.TransformP.Position;
+                            }
 
-                        //bounce down
-                        if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
-                        {
-                            collider.Position += (new Vector2(0, 1));
-                            collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                        }
-                        /*
-                        //simple diagonal direction solutions: ↖ ↗ ↙ ↘
-                        */
-                        //bounce top-left
-                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
+                            //bounce up
                             if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
                             {
-                                collider.Position -= (new Vector2(1, 1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
+                                collider.TransformP.Position -= (new Vector2(0, 1));
+                                collider.GameObjectP.GetComponent<Transform>().Position = collider.TransformP.Position;
                             }
 
-                        //bounce top-right
-                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
-                            if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
-                            {
-                                collider.Position += (new Vector2(1, -1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
-
-                        //bounce bottom-left
-                        if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
+                            //bounce down
                             if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
                             {
-                                collider.Position -= (new Vector2(1, -1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
+                                collider.TransformP.Position += (new Vector2(0, 1));
+                                collider.GameObjectP.GetComponent<Transform>().Position = collider.TransformP.Position;
                             }
+                            /*
+                            //simple diagonal direction solutions: ↖ ↗ ↙ ↘
+                            */
+                            //bounce top-left
+                            if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
+                                if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
+                                {
+                                    collider.TransformP.Position -= (new Vector2(1, 1));
+                                    collider.GameObjectP.GetComponent<Transform>().Position = collider.TransformP.Position;
+                                }
 
-                        //bounce bottom-right
-                        if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
-                            if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
-                            {
-                                collider.Position += (new Vector2(1, 1));
-                                collider.GameObjectP.GetComponent<Transform>().Position = collider.Position;
-                            }
+                            //bounce top-right
+                            if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
+                                if (collider.BoundingBox.Bottom >= anotherCollider.BoundingBox.Top)
+                                {
+                                    collider.TransformP.Position += (new Vector2(1, -1));
+                                    collider.GameObjectP.GetComponent<Transform>().Position = collider.TransformP.Position;
+                                }
+
+                            //bounce bottom-left
+                            if (collider.BoundingBox.Right >= anotherCollider.BoundingBox.Left)
+                                if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
+                                {
+                                    collider.TransformP.Position -= (new Vector2(1, -1));
+                                    collider.GameObjectP.GetComponent<Transform>().Position = collider.TransformP.Position;
+                                }
+
+                            //bounce bottom-right
+                            if (collider.BoundingBox.Left >= anotherCollider.BoundingBox.Right)
+                                if (collider.BoundingBox.Top >= anotherCollider.BoundingBox.Bottom)
+                                {
+                                    collider.TransformP.Position += (new Vector2(1, 1));
+                                    collider.GameObjectP.GetComponent<Transform>().Position = collider.TransformP.Position;
+                                }
+                        }
                     }
                 }
             }
-        }
         #endregion
 
         #region Overrides
         #endregion
+        }
     }
-}

@@ -19,8 +19,8 @@ namespace BoBo2D_Eyal_Gal
 
         #region Properties
         public Texture2D Texture => _texture;
-        public float SpriteWidth => _spriteWidth;
-        public float SpriteHeight => _spriteHeight;
+        public float SpriteWidth { get => _spriteWidth; set => _spriteWidth = value; }
+        public float SpriteHeight { get => _spriteHeight; set => _spriteHeight = value; }
         #endregion
 
         public Sprite(GameObject gameObject, string spriteName, Color color)
@@ -30,8 +30,8 @@ namespace BoBo2D_Eyal_Gal
             Name = gameObject.Name;
             _spriteName = spriteName;
             _texture = DataManager.Instance.GetTexture2D(spriteName);
-            _spriteWidth = _texture.Width;
-            _spriteHeight = _texture.Height;
+            SpriteWidth = _texture.Width;
+            SpriteHeight = _texture.Height;
             _color = color;
             SubscriptionManager.AddSubscriber<IDrawable>(this);
         }
@@ -42,6 +42,8 @@ namespace BoBo2D_Eyal_Gal
             Name = gameObject.Name;
             _color = Color.White;
             _texture = DataManager.Instance.GetTexture2D(spriteName);
+            SpriteWidth = _texture.Width;
+            SpriteHeight = _texture.Height;
             _spriteName = spriteName;
             SubscriptionManager.AddSubscriber<IDrawable>(this);
         }

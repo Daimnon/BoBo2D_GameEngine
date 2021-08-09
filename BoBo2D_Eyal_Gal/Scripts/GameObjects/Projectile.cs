@@ -43,13 +43,14 @@ namespace BoBo2D_Eyal_Gal
             AddToHirarcy();
             _spaceShip = spaceship;
             LoadStats(projectileType);
-            _damage *= damageScalar;
+            Vector2 pos = transform.Position;
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
+            AddComponent(new Rigidbooty(this));
             _projectileDirection = flightDirectin*_speed * _spaceShip.CurrentSpeed;
             _projectileTransform = GetComponent<Transform>();
-            Vector2 pos = transform.Position;
             _projectileTransform.Position = new Vector2(pos.X + _projectileOffsetX, pos.Y + _projectileOffsetY);
+            _damage *= damageScalar;
             _flying = true;
             _isPlayerProjectile = isPlayerProjectile;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
@@ -107,6 +108,14 @@ namespace BoBo2D_Eyal_Gal
             _projectileOffsetX = stats.ProjectileOffsetX;
             _projectileOffsetY = stats.ProjectileOffsetY;
             _spriteName = stats.SpriteName;
+        }
+
+        public void OnCollision(GameObject anotherGameObject)
+        {
+            if (Physics.CheckCollision(GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
+                Physics.SolveCollisions(this, anotherGameObject);
+            }
         }
 
         public override void Unsubscribe()
