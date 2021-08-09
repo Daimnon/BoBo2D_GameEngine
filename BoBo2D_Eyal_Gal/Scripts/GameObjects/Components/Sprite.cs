@@ -21,19 +21,23 @@ namespace BoBo2D_Eyal_Gal
 
         public Sprite(GameObject gameObject, string spriteName, Color color)
         {
+            GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
+            Name = gameObject.Name;
             _color = color;
-            SubscriptionManager.AddSubscriber<IDrawable>(this);
             _texture = DataManager.Instance.GetTexture2D(spriteName);
             _spriteName = spriteName;
-            GameObjectP = gameObject;
+            SubscriptionManager.AddSubscriber<IDrawable>(this);
         }
         public Sprite(GameObject gameObject, string spriteName)
         {
+            GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
+            Name = gameObject.Name;
             _color = Color.White;
-            SubscriptionManager.AddSubscriber<IDrawable>(this);
             _texture = DataManager.Instance.GetTexture2D(spriteName);
             _spriteName = spriteName;
-            GameObjectP = gameObject;
+            SubscriptionManager.AddSubscriber<IDrawable>(this);
         }
         public void Draw()
         {

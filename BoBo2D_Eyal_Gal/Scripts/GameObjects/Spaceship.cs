@@ -60,6 +60,7 @@ namespace BoBo2D_Eyal_Gal
             AddComponent(new BoxCollider(this));
             AddComponent(new Rigidbooty(this));
             _lastFramePosition = new Vector2(0, 0);
+
             if (_isPlayer)
             {
                 //connect progression system to player

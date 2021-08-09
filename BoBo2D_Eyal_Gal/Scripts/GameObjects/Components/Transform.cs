@@ -31,16 +31,18 @@ namespace BoBo2D_Eyal_Gal
         public Transform(GameObject gameObject)
         {
             GameObjectP = gameObject;
+            TransformP = this;
             Name = gameObject.Name;
-            GameObjectP = gameObject;
             Position = new Vector2(0, 0);
             Scale = new Vector2(1, 1);
             Console.WriteLine($"New Transform{this}");
         }
 
-        public Transform(Vector2 position, Vector2 scale)
+        public Transform(GameObject gameObject, Vector2 position, Vector2 scale)
         {
-            //Name = base.Name;
+            GameObjectP = gameObject;
+            TransformP = this;
+            Name = gameObject.Name + " Transform";
             Position = position;
             Scale = scale;
             Console.WriteLine(Environment.NewLine + $"New Transform{this}" + Environment.NewLine);
@@ -141,10 +143,10 @@ namespace BoBo2D_Eyal_Gal
         {
             return obj is Transform transform &&
                    EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
-                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
+                   EqualityComparer<Transform>.Default.Equals(TransformP, transform.TransformP) &&
                    Name == transform.Name &&
                    EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
-                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
+                   EqualityComparer<Transform>.Default.Equals(TransformP, transform.TransformP) &&
                    Name == transform.Name &&
                    EqualityComparer<Vector2>.Default.Equals(_position, transform._position) &&
                    EqualityComparer<Vector2>.Default.Equals(_scale, transform._scale) &&
@@ -152,7 +154,7 @@ namespace BoBo2D_Eyal_Gal
                    EqualityComparer<Vector2>.Default.Equals(_yAxis, transform._yAxis) &&
                    //EqualityComparer<Vector3D>.Default.Equals(_zAxis, transform._zAxis) &&
                    EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
-                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
+                   EqualityComparer<Transform>.Default.Equals(TransformP, transform.TransformP) &&
                    Name == transform.Name &&
                    EqualityComparer<Vector2>.Default.Equals(Position, transform.Position) &&
                    EqualityComparer<Vector2>.Default.Equals(Scale, transform.Scale) &&
