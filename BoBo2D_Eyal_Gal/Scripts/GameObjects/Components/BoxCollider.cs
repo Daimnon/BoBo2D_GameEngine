@@ -54,24 +54,25 @@ namespace BoBo2D_Eyal_Gal
             Name = gameObject.Name + " Colider";
 
 
-            float objX = gameObject.GetComponent<Transform>().Position.X;
-            float objY = gameObject.GetComponent<Transform>().Position.Y;
+            float transformX = gameObject.GetComponent<Transform>().Position.X;
+            float transformY = gameObject.GetComponent<Transform>().Position.Y;
             //float objZ = gameObject.GetComponent<Transform>().Position.Z;
 
             //width
-            float objW = gameObject.GetComponent<Transform>().Scale.X;
+            float spriteWidth = gameObject.GetComponent<Sprite>().SpriteWidth;
             //height
-            float objH = gameObject.GetComponent<Transform>().Scale.Y;
+            float spriteHeight = gameObject.GetComponent<Sprite>().SpriteHeight;
             //depth
             //float objD = gameObject.GetComponent<Transform>().Scale.Z;
+            Scale = new Vector2(spriteWidth, spriteHeight);
 
             //determain distance of every side from center
-            CX = objW / 2;
-            CY = objH / 2;
+            CX = spriteWidth / 2;
+            CY = spriteHeight / 2;
             //CZ = objD / 2;
 
             //set colider posiotion to object positino
-            Position = new Vector2(objX, objY);
+            Position = new Vector2(transformX, transformY);
 
             // set the exact points of box
             BoxLeft = new Vector2(Position.X - CX, Position.Y);
