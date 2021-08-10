@@ -10,10 +10,7 @@ namespace BoBo2D_Eyal_Gal
     public class Transform : Component
     {
         #region Fields
-        GameObject _parent;
         //Transform _transform;
-
-        //string _name;
         Vector2 _position;
         Vector2 _scale;
         Vector2 _xAxis = new Vector2(1, 0);
@@ -22,9 +19,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
         
         #region Properties
-        public GameObject Parent { get => _parent; set => _parent = value; }
         //public Transform TransformP { get => _transform; set => _transform = value; }
-        //public string Name { get => _name; set => _name = value; }
         public Vector2 Position { get => _position; set => _position = value; }
         public Vector2 Scale { get => _scale; set => _scale = value; }
         public Vector2 XAxis { get => _xAxis; set => _xAxis = value; }
@@ -35,15 +30,19 @@ namespace BoBo2D_Eyal_Gal
         #region Constructors
         public Transform(GameObject gameObject)
         {
+            GameObjectP = gameObject;
+            TransformP = this;
             Name = gameObject.Name;
             Position = new Vector2(0, 0);
             Scale = new Vector2(1, 1);
             Console.WriteLine($"New Transform{this}");
         }
 
-        public Transform(Vector2 position, Vector2 scale)
+        public Transform(GameObject gameObject, Vector2 position, Vector2 scale)
         {
-            //Name = base.Name;
+            GameObjectP = gameObject;
+            TransformP = this;
+            Name = gameObject.Name + " Transform";
             Position = position;
             Scale = scale;
             Console.WriteLine(Environment.NewLine + $"New Transform{this}" + Environment.NewLine);
@@ -67,7 +66,7 @@ namespace BoBo2D_Eyal_Gal
 
         public T GetComponent<T>() where T : Component
         {
-            foreach (Component component in Parent.Components)
+            foreach (Component component in GameObjectP.Components)
                 if (component is T)
                     return component as T;
 
@@ -76,7 +75,7 @@ namespace BoBo2D_Eyal_Gal
 
         public T GetComponents<T>() where T : Component
         {
-            foreach (Component component in Parent.Components)
+            foreach (Component component in GameObjectP.Components)
                 return component as T;
 
             return null;
@@ -144,18 +143,18 @@ namespace BoBo2D_Eyal_Gal
         {
             return obj is Transform transform &&
                    EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
-                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
+                   EqualityComparer<Transform>.Default.Equals(TransformP, transform.TransformP) &&
                    Name == transform.Name &&
-                   EqualityComparer<GameObject>.Default.Equals(_parent, transform._parent) &&
-                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
+                   EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
+                   EqualityComparer<Transform>.Default.Equals(TransformP, transform.TransformP) &&
                    Name == transform.Name &&
                    EqualityComparer<Vector2>.Default.Equals(_position, transform._position) &&
                    EqualityComparer<Vector2>.Default.Equals(_scale, transform._scale) &&
                    EqualityComparer<Vector2>.Default.Equals(_xAxis, transform._xAxis) &&
                    EqualityComparer<Vector2>.Default.Equals(_yAxis, transform._yAxis) &&
                    //EqualityComparer<Vector3D>.Default.Equals(_zAxis, transform._zAxis) &&
-                   EqualityComparer<GameObject>.Default.Equals(Parent, transform.Parent) &&
-                   EqualityComparer<Transform>.Default.Equals(Transform, transform.Transform) &&
+                   EqualityComparer<GameObject>.Default.Equals(GameObjectP, transform.GameObjectP) &&
+                   EqualityComparer<Transform>.Default.Equals(TransformP, transform.TransformP) &&
                    Name == transform.Name &&
                    EqualityComparer<Vector2>.Default.Equals(Position, transform.Position) &&
                    EqualityComparer<Vector2>.Default.Equals(Scale, transform.Scale) &&

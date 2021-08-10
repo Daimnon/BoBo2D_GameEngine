@@ -59,7 +59,7 @@ namespace BoBo2D_Eyal_Gal
             GameObject go;
             foreach (var rootNode in Hirarchy)
             {
-                go = rootNode.Root.FindGameObject(gameObjectName);
+                go = rootNode.Root.FindGameObjectByName(gameObjectName);
 
                 if (go != null)
                     return go;

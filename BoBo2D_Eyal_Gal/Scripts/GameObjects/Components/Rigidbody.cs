@@ -12,7 +12,6 @@ namespace BoBo2D_Eyal_Gal
         Transform _transform;
         BoxCollider _boxCollider;
         Vector3D _position;
-        string _name;
         float _velocity, _gravityScale, _mass, _drag;
         bool _useGravity, _isKinematic, _freezRotation;
         #endregion
@@ -22,7 +21,6 @@ namespace BoBo2D_Eyal_Gal
         public Transform TransformP { get => _transform; set => _transform = value; }
         public BoxCollider BoxColliderP { get => _boxCollider; set => _boxCollider = value; }
         public Vector3D Position { get => _position; set => _position = value; }
-        public string Name { get => _name; set => _name = value; }
         public float Velocity { get => _velocity; set => _velocity = value; }
         public float GravityScale { get => _gravityScale; set => _gravityScale = value; }
         public float Mass { get => _mass; set => _mass = value; }
@@ -34,9 +32,9 @@ namespace BoBo2D_Eyal_Gal
 
         public Rigidbooty(GameObject gameObject)
         {
-            _gameObject = gameObject;
-            Name = _gameObject.Name;
-            TransformP = _gameObject.GetComponent<Transform>();
+            GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
+            Name = GameObjectP.Name + " Rigidbooty";
             //BoxColliderP = _gameObject.GetComponent<BoxCollider>();
         }
 

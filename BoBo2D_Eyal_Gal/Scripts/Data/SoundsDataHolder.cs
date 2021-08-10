@@ -16,13 +16,16 @@ namespace BoBo2D_Eyal_Gal
                 //add sounds names
             };
         }
+
         #region Fields
         Dictionary<string, SoundEffect> _sounds = new Dictionary<string, SoundEffect>();
         List<string> _soundNames;
         #endregion
+
         #region Properties
         public List<string> SoundNames { get => _soundNames; set => _soundNames = value; }
         #endregion
+
         public void LoadSoundData(Game1 game)
         {
             if(game != null)

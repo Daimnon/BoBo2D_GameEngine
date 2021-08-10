@@ -11,29 +11,41 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         Texture2D _texture;
-        string _name;
+        float _spriteWidth;
+        float _spriteHeight;
+        string _spriteName;
         Color _color;
         #endregion
+
         #region Properties
         public Texture2D Texture => _texture;
-        public string Name { get => _name; set => _name = value; }
+        public float SpriteWidth { get => _spriteWidth; set => _spriteWidth = value; }
+        public float SpriteHeight { get => _spriteHeight; set => _spriteHeight = value; }
         #endregion
 
         public Sprite(GameObject gameObject, string spriteName, Color color)
         {
+            GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
+            Name = gameObject.Name;
+            _spriteName = spriteName;
+            _texture = DataManager.Instance.GetTexture2D(spriteName);
+            SpriteWidth = _texture.Width;
+            SpriteHeight = _texture.Height;
             _color = color;
             SubscriptionManager.AddSubscriber<IDrawable>(this);
-            _texture = DataManager.Instance.GetTexture2D(spriteName);
-            _name = spriteName;
-            GameObjectP = gameObject;
         }
         public Sprite(GameObject gameObject, string spriteName)
         {
-            _color = Color.White;
-            SubscriptionManager.AddSubscriber<IDrawable>(this);
-            _texture = DataManager.Instance.GetTexture2D(spriteName);
-            _name = spriteName;
             GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
+            Name = gameObject.Name;
+            _color = Color.White;
+            _texture = DataManager.Instance.GetTexture2D(spriteName);
+            SpriteWidth = _texture.Width;
+            SpriteHeight = _texture.Height;
+            _spriteName = spriteName;
+            SubscriptionManager.AddSubscriber<IDrawable>(this);
         }
         public void Draw()
         {

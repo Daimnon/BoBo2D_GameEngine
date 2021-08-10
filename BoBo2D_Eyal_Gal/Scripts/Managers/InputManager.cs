@@ -19,32 +19,23 @@ namespace BoBo2D_Eyal_Gal
         Spaceship _player;
         Keys _goUpKey, _goDownKey, _goLeftKey, _goRightKey;
         Keys _firstWeapon, _secondWeapon, _thirdWeapon;
-        float _projectileOffset;
         bool _usingWASD = false;
         bool _usingNumbersForGuns = false;
         bool _customMovementKeys = false;
         bool _customWeaponKeys = false;
 
-        public InputManager(Spaceship player, bool WASD, bool numbersForGuns)
+        public InputManager(Spaceship player, bool WASDMovement, bool numbersForGuns)
         {
             _player = player;
-            _usingWASD = WASD;
+            _usingWASD = WASDMovement;
             _usingNumbersForGuns = numbersForGuns;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
 
-        public InputManager(Spaceship player, float projectileOffset, bool WASD, bool numbersForGuns)
-        {
-            _player = player;
-            _projectileOffset = projectileOffset;
-            _usingWASD = WASD;
-            _usingNumbersForGuns = numbersForGuns;
-            SubscriptionManager.AddSubscriber<IUpdatable>(this);
-        }
-
-        public InputManager(Spaceship player, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey)
+        public InputManager(Spaceship player, bool numbersForGuns, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey)
         {
             _customMovementKeys = true;
+            _usingNumbersForGuns = numbersForGuns;
             _player = player;
             _goUpKey = goUpKey;
             _goDownKey = goDownKey;
@@ -53,9 +44,10 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
 
-        public InputManager(Spaceship player, Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)
+        public InputManager(Spaceship player, bool WASDMovement, Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)
         {
             _customWeaponKeys = true;
+            _usingWASD = WASDMovement;
             _player = player;
             _firstWeapon = firstWeapon;
             _secondWeapon = secondWeapon;
@@ -63,18 +55,7 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
 
-        public InputManager(Spaceship player, float projectileOffset, Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)
-        {
-            _customWeaponKeys = true;
-            _projectileOffset = projectileOffset;
-            _player = player;
-            _firstWeapon = firstWeapon;
-            _secondWeapon = secondWeapon;
-            _thirdWeapon = thirdWeapon;
-            SubscriptionManager.AddSubscriber<IUpdatable>(this);
-        }
-
-        public InputManager(Spaceship player, float projectileOffset, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey,
+        public InputManager(Spaceship player, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey,
                             Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)
         {
             _customMovementKeys = true;
@@ -84,7 +65,6 @@ namespace BoBo2D_Eyal_Gal
             _goDownKey = goDownKey;
             _goLeftKey = goLeftKey;
             _goRightKey = goRightKey;
-            _projectileOffset = projectileOffset;
             _firstWeapon = firstWeapon;
             _secondWeapon = secondWeapon;
             _thirdWeapon = thirdWeapon;
@@ -98,19 +78,16 @@ namespace BoBo2D_Eyal_Gal
 
             if (_customMovementKeys)
                 MoveWithCustomKeys(_goUpKey, _goDownKey, _goLeftKey, _goRightKey);
-
             else
                 MoveWithKeyArrows();
 
             if (_usingNumbersForGuns)
                 FireWithNumbers();
-
-            if (_customWeaponKeys)
-                FireWithCustomKeys(_projectileOffset, _firstWeapon, _secondWeapon, _thirdWeapon);
+            else if (_customWeaponKeys)
+                FireWithCustomKeys(_firstWeapon, _secondWeapon, _thirdWeapon);
             else
-                FireWithDefaultKeys(_projectileOffset);
+                FireWithDefaultKeys();
                 //FireWithDefaultKeys();
-
         }
 
         #region Movement
@@ -225,18 +202,6 @@ namespace BoBo2D_Eyal_Gal
                 CombatManager.FireWeapon(_player, SelectedWeapon.MainWeapon);
         }
 
-        void FireWithDefaultKeys(float projectileOffset)
-        {
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SeconderyWeapon, projectileOffset);
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) || Keyboard.GetState().IsKeyDown(Keys.RightControl))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon, projectileOffset);
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                CombatManager.FireWeapon(_player, SelectedWeapon.MainWeapon, projectileOffset);
-        }
-
         //1,2,3
         void FireWithNumbers()
         {
@@ -249,29 +214,16 @@ namespace BoBo2D_Eyal_Gal
             else if (Keyboard.GetState().IsKeyDown(Keys.D3))
                 CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon);
         }
-
-        void FireWithNumbers(float projectileOffset)
-        {
-            if (Keyboard.GetState().IsKeyDown(Keys.D1))
-                CombatManager.FireWeapon(_player, SelectedWeapon.MainWeapon, projectileOffset);
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.D2))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SeconderyWeapon, projectileOffset);
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.D3))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon, projectileOffset);
-        }
-
-        void FireWithCustomKeys(float projectileOffset, Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)//1,2,3
+        void FireWithCustomKeys(Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)//1,2,3
         {
             if (Keyboard.GetState().IsKeyDown(firstWeapon))
-                CombatManager.FireWeapon(_player, SelectedWeapon.MainWeapon, projectileOffset);
+                CombatManager.FireWeapon(_player, SelectedWeapon.MainWeapon);
 
             else if (Keyboard.GetState().IsKeyDown(secondWeapon))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SeconderyWeapon, projectileOffset);
+                CombatManager.FireWeapon(_player, SelectedWeapon.SeconderyWeapon);
 
             else if (Keyboard.GetState().IsKeyDown(thirdWeapon))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon, projectileOffset);
+                CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon);
         }
         #endregion
     }
