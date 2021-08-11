@@ -6,81 +6,70 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class BoxCollider : Component , ICollidable
+    public class BoxCollider : Component
     {
         #region Fields
-        Vector2 _position = new Vector2();
-        Vector2 _scale = new Vector2(1, 1);
+        Vector2 _scale;
         // distance from center to horizontal edge
         float _cX;
         // distance from center to vertical edge
         float _cY;
-        // distance from center to diagonal edge
-        float _cZ;
 
-        float _boxTop, _boxBottom, _boxLeft, _boxRight, _boxFront, _boxBack;
         float _collisionTimer = 0;
         bool _isEnabled = true;
+        bool _isColliding = false;
         #endregion
 
         #region Properties
-        public Vector2 Position { get => _position; set => _position = value; }
         public Vector2 Scale { get => _scale; set => _scale = value; }
-        public Rectangle BoundingBox
-        {
-            get
-            {
-                return new Rectangle((int)Position.X, (int)Position.Y, (int)Scale.X, (int)Scale.Y);
-            }
-        }
-
+        public float BoxLeft => TransformP.Position.X - CX;
+        public float BoxRight => TransformP.Position.X + CX;
+        public float BoxTop => TransformP.Position.Y - CY;
+        public float BoxBottom => TransformP.Position.Y + CY;
         public float CX { get => _cX; set => _cX = value; }
         public float CY { get => _cY; set => _cY = value; }
-        public float CZ { get => _cZ; set => _cZ = value; }
-        public float BoxTop { get => _boxTop; set => _boxTop = value; }
-        public float BoxBottom { get => _boxBottom; set => _boxBottom = value; }
-        public float BoxLeft { get => _boxLeft; set => _boxLeft = value; }
-        public float BoxRight { get => _boxRight; set => _boxRight = value; }
-        public float BoxFront { get => _boxFront; set => _boxFront = value; }
-        public float BoxBack { get => _boxBack; set => _boxBack = value; }
         public float CollisionTimer { get => _collisionTimer; set => _collisionTimer = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
+        public bool IsColliding { get => _isColliding; set => _isColliding = value; }
+
+        #region 3D
+            //public float BoxFront => Position.Z - CZ;
+            //public float BoxBack => Position.Z + CZ;
+            //public float CZ { get => _cZ; set => _cZ = value; }
+            #endregion
 
         #endregion
 
+        #region Events
+        public event Action<BoxCollider> OnCollision;
+        public event Action<BoxCollider> OnCollisionStart;
+        public event Action<BoxCollider> OnCollisionEnd;
+        #endregion
+
+        #region Constructor
         public BoxCollider(GameObject gameObject)
         {
             GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
             Name = gameObject.Name + " Colider";
-            float objX = gameObject.GetComponent<Transform>().Position.X;
-            float objY = gameObject.GetComponent<Transform>().Position.Y;
-            //float objZ = gameObject.GetComponent<Transform>().Position.Z;
 
             //width
-            float objW = gameObject.GetComponent<Transform>().Scale.X;
+            float spriteWidth = gameObject.GetComponent<Sprite>().SpriteWidth;
             //height
-            float objH = gameObject.GetComponent<Transform>().Scale.Y;
+            float spriteHeight = gameObject.GetComponent<Sprite>().SpriteHeight;
             //depth
             //float objD = gameObject.GetComponent<Transform>().Scale.Z;
 
+            Scale = new Vector2(spriteWidth, spriteHeight);
+
             //determain distance of every side from center
-            CX = objW / 2;
-            CY = objH / 2;
+            CX = spriteWidth / 2;
+            CY = spriteHeight / 2;
             //CZ = objD / 2;
 
-            //set colider posiotion to object positino
-            Position = new Vector2(objX, objY);
-
-            // set the exact points of box
-            BoxLeft = Position.X - CX;
-            BoxRight = Position.X + CX;
-            BoxTop = Position.Y - CY;
-            BoxBottom = Position.Y + CY;
-            //BoxFront = Position.Z - CZ;
-            //BoxBack = Position.Z + CZ;
             Physics.AllBoxColliders.Add(this);
-            SubscriptionManager.AddSubscriber<ICollidable>(this);
         }
+        #endregion
 
         #region Methods
         public void Disable()
@@ -95,9 +84,24 @@ namespace BoBo2D_Eyal_Gal
                 IsEnabled = true;
         }
 
-        public override void Unsubscribe()
+        public void CollidesWith(BoxCollider anotherCollider)
         {
-            SubscriptionManager.RemoveSubscriber<ICollidable>(this);
+            OnCollision?.Invoke(anotherCollider);
+            IsColliding = true;
+        }
+
+        public void StartCollidingWith(BoxCollider anotherCollider)
+        {
+            OnCollisionStart?.Invoke(anotherCollider);
+            IsColliding = true;
+            Time.ContinueTimer(CollisionTimer);
+        }
+
+        public void FinishedCollidingWith(BoxCollider anotherCollider)
+        {
+            OnCollisionEnd?.Invoke(anotherCollider);
+            IsColliding = true;
+            Time.StopTimer(CollisionTimer);
         }
         #endregion
 
@@ -105,6 +109,11 @@ namespace BoBo2D_Eyal_Gal
         public override string ToString()
         {
             return $"BoxCollider of {Name}" + Environment.NewLine;
+        }
+
+        public override void Unsubscribe()
+        {
+
         }
         #endregion
     }

@@ -42,15 +42,20 @@ namespace BoBo2D_Eyal_Gal
             Transform transform = new Transform(this);
             AddComponent(transform);
             transform.GameObjectP = this;
+            transform.TransformP = transform;
         }
 
         //Constructor with Transform that the player will enter
         public GameObject(string name, Transform transform)
         {
             Name = name;
+            IsEnabled = true;
+
             Console.WriteLine($"New Game Object has been created {ToString()}");
             AddComponent(transform);
-            //transform.GetSetGameObject = this;
+            transform.GameObjectP = this;
+            transform.TransformP = transform;
+
         }
         #endregion
 
@@ -215,7 +220,7 @@ namespace BoBo2D_Eyal_Gal
             BoxCollider boxCollider = GetComponent<BoxCollider>();
             if (boxCollider != null)
             {
-                boxCollider.Position = transform.Position;
+                boxCollider.TransformP = transform;
             }
             Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
             if(rigidbooty != null)
@@ -226,6 +231,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Overrides
+
         public override string ToString()
         {
             return $"Name:{Name}" + Environment.NewLine

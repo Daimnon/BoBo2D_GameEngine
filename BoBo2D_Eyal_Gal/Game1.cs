@@ -50,9 +50,10 @@ namespace BoBo2D_Eyal_Gal
                 Exit();
 
             // TODO: Add your update logic here
-            Physics.SolveCollision();
+            //SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
+            Physics.Update();
+            //Physics.SolveCollision();
             //Physics.SolveIntersection();
-            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
             _activeScene.Update();
             base.Update(gameTime);
         }

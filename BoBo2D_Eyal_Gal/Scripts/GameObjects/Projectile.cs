@@ -26,26 +26,31 @@ namespace BoBo2D_Eyal_Gal
         bool _isPlayerProjectile;
         string _spriteName;
         Spaceship _spaceShip;
+        GameObject _gameObject;
         #endregion
 
         #region Properties
         public Vector2 ProjectileDirection { set => _projectileDirection = value; }
+        public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
         public bool Flying { set => _flying = value; }
         #endregion
 
         public Projectile(string name, Vector2 flightDirectin,float damageScalar,
                           WeaponType weaponType, Transform transform, bool isPlayerProjectile,Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
+            Name = name;
+            GameObjectP = this;
             AddToHirarcy();
             _spaceShip = spaceship;
             LoadStats(projectileType);
-            _damage *= damageScalar;
+            Vector2 pos = transform.Position;
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
+            AddComponent(new Rigidbooty(this));
             _projectileDirection = flightDirectin*_speed * _spaceShip.CurrentSpeed;
             _projectileTransform = GetComponent<Transform>();
-            Vector2 pos = transform.Position;
             _projectileTransform.Position = new Vector2(pos.X + _projectileOffsetX, pos.Y + _projectileOffsetY);
+            _damage *= damageScalar;
             _flying = true;
             _isPlayerProjectile = isPlayerProjectile;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
