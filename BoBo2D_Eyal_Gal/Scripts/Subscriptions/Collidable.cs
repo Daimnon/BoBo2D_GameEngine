@@ -49,6 +49,24 @@ namespace BoBo2D_Eyal_Gal
                 }
             }
         }
+        /*
+        public void ApplyCollisionLogics()
+        {
+            foreach (var collidable in _collidablesList)
+            {
+                for (int i = 0; i < _collidablesList.Count; i++)
+                {
+
+                    if (collidable as GameObject != _collidablesList[i] as GameObject)
+                    {
+                        collidable.OnCollision(_collidablesList[i]);
+                        collidable.OnCollisionStart(_collidablesList[i]);
+                        collidable.OnCollisionEnd(_collidablesList[i]);
+                    }
+                }
+            }
+        }*/
+
         #endregion
+        }
     }
-}

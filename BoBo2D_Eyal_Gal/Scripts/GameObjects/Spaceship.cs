@@ -57,6 +57,44 @@ namespace BoBo2D_Eyal_Gal
             LoadStats(shipType);
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
+            GetComponent<BoxCollider>().OnCollision += CollidesWith;
+            AddComponent(new Rigidbooty(this));
+            _lastFramePosition = new Vector2(0, 0);
+            SubscriptionManager.AddSubscriber<IUpdatable>(this);
+
+            if (_isPlayer)
+            {
+
+                //connect progression system to player
+                PlayerProgression.Player = this;
+
+                //starting position
+                PlayerProgression.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
+            }
+
+            if (!_isPlayer)
+            {
+                //connect progression system to player
+                if (CurrentLvl == 1)
+                    scoreModifier = 17 * (CurrentLvl / 1);
+                else
+                    scoreModifier = 28 * (CurrentLvl / 2);
+
+                Score = CurrentLvl + scoreModifier;
+
+                //starting position
+            }
+        }
+
+        public Spaceship(SpaceshipType shipType, string name, bool isPlayer, Vector2 position) : base(name)
+        {
+            _isPlayer = isPlayer;
+            int scoreModifier;
+            GetComponent<Transform>().Position = position;
+            LoadStats(shipType);
+            AddComponent(new Sprite(this, _spriteName));
+            AddComponent(new BoxCollider(this));
+            GetComponent<BoxCollider>().OnCollision += CollidesWith;
             AddComponent(new Rigidbooty(this));
             _lastFramePosition = new Vector2(0, 0);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
@@ -128,12 +166,13 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
-        public void OnCollision(GameObject anotherGameObject)
+        public void CollidesWith(BoxCollider collider)
         {
-            if (Physics.CheckCollision(GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
-            {
-                Physics.SolveCollisions(this, anotherGameObject);
-            }
+            Console.WriteLine("collission");
+            //Physics.SolveSpaceShipCollision(this, collider.GameObjectP);
+            //solve collision
+            //take dmg
+            //etc..
         }
 
         public override void Unsubscribe()
