@@ -139,6 +139,7 @@ namespace BoBo2D_Eyal_Gal
                  + $"Scale: {Scale}" + Environment.NewLine;
         }
 
+        /*
         public override bool Equals(object obj)
         {
             return obj is Transform transform &&
@@ -160,8 +161,8 @@ namespace BoBo2D_Eyal_Gal
                    EqualityComparer<Vector2>.Default.Equals(Scale, transform.Scale) &&
                    EqualityComparer<Vector2>.Default.Equals(XAxis, transform.XAxis) &&
                    EqualityComparer<Vector2>.Default.Equals(YAxis, transform.YAxis);
-                   //EqualityComparer<Vector3D>.Default.Equals(ZAxis, transform.ZAxis);
-        }
+        //EqualityComparer<Vector3D>.Default.Equals(ZAxis, transform.ZAxis);
+        }*/
 
         public override int GetHashCode()
         {

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class GameObject : ICollidable
+    public class GameObject
     {
         #region Fields
         List<Component> _components = new List<Component>();
@@ -43,7 +43,6 @@ namespace BoBo2D_Eyal_Gal
             AddComponent(transform);
             transform.GameObjectP = this;
             transform.TransformP = transform;
-            SubscriptionManager.AddSubscriber<ICollidable>(this);
         }
 
         //Constructor with Transform that the player will enter
@@ -56,7 +55,7 @@ namespace BoBo2D_Eyal_Gal
             AddComponent(transform);
             transform.GameObjectP = this;
             transform.TransformP = transform;
-            SubscriptionManager.AddSubscriber<ICollidable>(this);
+
         }
         #endregion
 
@@ -101,7 +100,7 @@ namespace BoBo2D_Eyal_Gal
         }
         public virtual void Unsubscribe()
         {
-            SubscriptionManager.RemoveSubscriber<ICollidable>(this);
+
         }
         //public void OnDisable()
         //{
