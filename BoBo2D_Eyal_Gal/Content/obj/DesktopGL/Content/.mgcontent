@@ -4,18 +4,18 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/GameSpriteFont.spritefont</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Background/BG.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/PlayerShip.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/RebelShip.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/JetBeams/EnemyBossJetBeam.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/JetBeams/PlayerJetBeam.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/JetBeams/RebelJetBeam.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Bolt1.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Bolt2.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser1.png</File>
-    <File>C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser2.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/GameSpriteFont.spritefont</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Background/BG.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/PlayerShip.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/RebelShip.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/JetBeams/EnemyBossJetBeam.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/JetBeams/PlayerJetBeam.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/JetBeams/RebelJetBeam.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Bolt1.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Bolt2.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser1.png</File>
+    <File>D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser2.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
