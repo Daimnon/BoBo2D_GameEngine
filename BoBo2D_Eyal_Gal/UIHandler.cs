@@ -97,6 +97,8 @@ namespace BoBo2D_Eyal_Gal
             //create ammo text
             _ammoText = new GameObject("AmmoText",new Vector2(700, 410));
             _ammoText.AddComponent(new TextSprite(_ammoText, _ammoFontName));
+            GameObjectManager.Instance.AddGameObject(_ammoText, ammoUI);
+
         }
 
         public void UpdateAmmo(int ammoNumber)
@@ -109,9 +111,12 @@ namespace BoBo2D_Eyal_Gal
             GameObject scoreUI = new GameObject("ScoreUI");
             GameObjectManager.Instance.AddGameObject(scoreUI, _canvas);
 
+
             //create ammo text
             _scoreText = new GameObject("ScoreText", new Vector2(700, 10));
             _scoreText.AddComponent(new TextSprite(_scoreText, _scoreFontName));
+            GameObjectManager.Instance.AddGameObject(_scoreText,scoreUI);
+
         }
 
         public void UpdateScore(int score)
