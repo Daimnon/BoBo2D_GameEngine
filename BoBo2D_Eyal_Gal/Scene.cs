@@ -25,10 +25,9 @@ namespace BoBo2D_Eyal_Gal
             _game = game;
             _waveManager = new WaveManager();
             _isSceneAlive = true;
+            UIManager._uiHandler = new UIHandler("HealthBar");
         }
-
         #region Methods
-
         //initializing scene
         public void Init()
         {
@@ -65,7 +64,6 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
         }
-
         public void Update()
         {
             SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
@@ -76,7 +74,6 @@ namespace BoBo2D_Eyal_Gal
         public void DrawScene()
         {
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
-
         }
 
         void CreateWeapon(WeaponType weaponType,ProjectileType projectileType, int cooldown, int maxAmmo, float baseDamage, float damageScalar, string spriteName)
@@ -137,15 +134,9 @@ namespace BoBo2D_Eyal_Gal
         }
         void CreateUI(string healthBarName, string AmmoSpriteName)
         {
-            GameObject healthBar = new GameObject(healthBarName,new Vector2(10,10));
-            healthBar.AddComponent(new Sprite(healthBar, healthBarName));
-            GameObject healthBar2 = new GameObject(healthBarName, new Vector2(50, 10));
-            healthBar.AddComponent(new Sprite(healthBar2, healthBarName));
-            GameObject healthBar3 = new GameObject(healthBarName, new Vector2(90, 10));
-            healthBar.AddComponent(new Sprite(healthBar3, healthBarName));
+
             GameObject AmmoIcon = new GameObject(AmmoSpriteName, new Vector2(750, 400));
             AmmoIcon.AddComponent(new Sprite(AmmoIcon, AmmoSpriteName));
-            healthBar3.IsEnabled = false;
         }
 
         void CreatePlayer(string playerName)
