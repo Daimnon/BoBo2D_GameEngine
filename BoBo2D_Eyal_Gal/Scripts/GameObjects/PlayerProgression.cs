@@ -9,6 +9,7 @@ namespace BoBo2D_Eyal_Gal
         #region Fields
         static Spaceship _player;
         static bool _isLevelingUp = false;
+        static int _currentScore = 0;
         #endregion
 
         #region Properties
@@ -21,7 +22,8 @@ namespace BoBo2D_Eyal_Gal
                     _player = value;
             }
         }
-        static bool IsLevelingUp { get => _isLevelingUp; set => _isLevelingUp = value; }
+        public static bool IsLevelingUp { get => _isLevelingUp; set => _isLevelingUp = value; }
+        public static int CurrentScore => _currentScore;
         #endregion
 
         #region Methods
@@ -73,6 +75,10 @@ namespace BoBo2D_Eyal_Gal
                 default:
                     break;
             }
+        }
+        public static void AddScore(int scoreCount)
+        {
+            _currentScore += scoreCount;
         }
         #endregion
     }
