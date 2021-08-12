@@ -18,13 +18,13 @@ namespace BoBo2D_Eyal_Gal
                 _uiHandler.ReduceHealth();
             }
         }
-        public static void AddMainWeaponAmmo()
+        public static void UpdateAmmoCount(int ammoCount)
         {
-
+            _uiHandler.UpdateAmmo(ammoCount);
         }
-        public static void ReduceMainWeaponAmmo()
+        public static void UpdateScore(int scoreCount)
         {
-
+            _uiHandler.UpdateScore(scoreCount);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace BoBo2D_Eyal_Gal
 
         float _currentCoolDown;
         float _maxCooldown;
-        int _ammo;
+        int _currentAmmo = 0;
         int _maxAmmo;
         float _baseDamage;
         float _damageScalar;
@@ -28,6 +28,9 @@ namespace BoBo2D_Eyal_Gal
         string _spriteName;
         #endregion
 
+        #region Properties
+        public int CurrentAmmo => _currentAmmo;
+        #endregion
         public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType, bool hasSprite):base(weaponType.ToString())
         {
             _spaceShip = spaceShip;
@@ -43,13 +46,13 @@ namespace BoBo2D_Eyal_Gal
         public void Shoot(Vector2 currentSpeed)
         {
             //check for cooldown and ammo
-            if(_currentCoolDown <= 0 && _ammo > 0)
+            if(_currentCoolDown <= 0 && _currentAmmo > 0)
             {
                 Vector2 flightDirection = Direction();
                 Transform transform = _spaceShip.GetComponent<Transform>();
                 if (transform != null && _projectileName != null)
                 {
-                    _ammo -= 1;
+                    _currentAmmo -= 1;
                     _currentCoolDown = _maxCooldown;
                     new Projectile(_projectileName, flightDirection,_damageScalar, _weaponType, transform, _isPlayer,_spaceShip, _projectileType);
                 }
@@ -87,7 +90,7 @@ namespace BoBo2D_Eyal_Gal
             {
                 _maxCooldown = stats.Cooldown;
                 _currentCoolDown = _maxCooldown;
-                _ammo = stats.MaxAmmo;
+                _currentAmmo = stats.MaxAmmo;
                 _maxAmmo = stats.MaxAmmo;
                 _baseDamage = stats.BaseDamage;
                 _damageScalar = stats.DamageScalar;

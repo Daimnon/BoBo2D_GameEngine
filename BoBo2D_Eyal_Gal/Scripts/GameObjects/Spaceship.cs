@@ -135,6 +135,10 @@ namespace BoBo2D_Eyal_Gal
                 MovementHandler.Movement(MoveDirection.Down, this, _speed);                    
                 FirstWeapon.Shoot(_currentSpeed);
             }
+            else
+            {
+                UIManager.UpdateAmmoCount(_currentWeapon.CurrentAmmo);
+            }
         }
 
         public void CalculateCurrentSpeed(Vector2 currentPosition)
@@ -150,6 +154,7 @@ namespace BoBo2D_Eyal_Gal
             {
                 _hasWeaponSprite = stats.HasWeaponSprite;
                 _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType, _hasWeaponSprite);
+                _currentWeapon = _firstWeapon;
                 _spriteName = stats.SpriteName;
                 _health = stats.MaxHealth;
                 _maxHealth = stats.MaxHealth;

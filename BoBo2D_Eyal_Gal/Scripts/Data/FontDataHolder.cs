@@ -22,7 +22,7 @@ namespace BoBo2D_Eyal_Gal
         {
             _fontNames = new List<string>()
             {
-                //add sounds names
+                //add Font names
             };
         }
 
