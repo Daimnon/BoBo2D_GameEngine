@@ -25,7 +25,7 @@ namespace BoBo2D_Eyal_Gal
             _game = game;
             _waveManager = new WaveManager();
             _isSceneAlive = true;
-            UIManager._uiHandler = new UIHandler("HealthBar","Ammo","Player");
+            UIManager._uiHandler = new UIHandler("HealthBar","Ammo","GameSpriteFont","GameSpriteFont", "Player");
         }
         #region Methods
         //initializing scene
@@ -36,7 +36,7 @@ namespace BoBo2D_Eyal_Gal
             //Create Enemy Projectiles
             CreateProjectile(ProjectileType.EnemyProjectile, 1, 1, 12,25, "Laser2");
             //Create Basic Weapon
-            CreateWeapon(WeaponType.BasicMainWeapon,ProjectileType.BasicProjectile ,1, 10, 1, 1, null);
+            CreateWeapon(WeaponType.BasicMainWeapon,ProjectileType.BasicProjectile ,1, 100, 1, 1, null);
             //Create Basic Enemy Weapon
             CreateWeapon(WeaponType.BasicEnemyWeapon, ProjectileType.EnemyProjectile, 3, 1000, 1, 1, null);
             //Create Player Spaceship

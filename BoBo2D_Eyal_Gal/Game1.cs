@@ -78,7 +78,7 @@ namespace BoBo2D_Eyal_Gal
         }
         public void DrawText(SpriteFont spritefont,string text, Vector2 position,Color color )
         {
-            if(spritefont != null || position != null || color != null)
+            if(spritefont != null ||text!= null || position != null || color != null)
             {
                 _spriteBatch.DrawString(spritefont, text, position, color);
             }

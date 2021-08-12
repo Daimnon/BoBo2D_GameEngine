@@ -56,6 +56,10 @@ namespace BoBo2D_Eyal_Gal
 
             if(_soundDataHolder!=null)
                 _soundDataHolder.LoadSoundData(_game);
+
+            if (_fontDataHolder != null)
+                _fontDataHolder.LoadFontData(_game);
+            
         }
         public Texture2D GetTexture2D(string dataName)
         {
