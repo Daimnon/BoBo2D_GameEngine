@@ -1,4 +1,5 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/Ammo.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/Ammo.xnb","TextureProcessor","Texture2DContent",289,765,0.1140821
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/GameSpriteFont.spritefont","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/GameSpriteFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.1802876
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/HealthBar.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/HealthBar.xnb","TextureProcessor","Texture2DContent",873,2261,0.0067369
 "C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Background/BG.png","C:/Users/edeya/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Background/BG.xnb","TextureProcessor","Texture2DContent",25750,3686485,0.0755741

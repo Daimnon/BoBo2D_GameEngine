@@ -49,8 +49,11 @@ namespace BoBo2D_Eyal_Gal
         }
         public void Draw()
         {
-            Transform transform = GameObjectP.GetComponent<Transform>();
-            DrawManager.Instance.DrawSprite(_texture, transform.Position,_color);
+            if (GameObjectP.IsEnabled)
+            {
+                Transform transform = GameObjectP.GetComponent<Transform>();
+                DrawManager.Instance.DrawSprite(_texture, transform.Position,_color);
+            }
         }
         public override void Unsubscribe()
         {
