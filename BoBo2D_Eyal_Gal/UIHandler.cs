@@ -113,6 +113,7 @@ namespace BoBo2D_Eyal_Gal
             _scoreText = new GameObject("ScoreText", new Vector2(700, 10));
             _scoreText.AddComponent(new TextSprite(_scoreText, _scoreFontName));
         }
+
         public void UpdateScore(int score)
         {
             _scoreText.GetComponent<TextSprite>().Text = score.ToString();

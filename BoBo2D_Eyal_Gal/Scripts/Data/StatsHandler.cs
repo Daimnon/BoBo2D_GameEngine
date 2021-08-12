@@ -24,8 +24,8 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Spaceship Properties
-        public static int EndOfScreenHightPosition = 600;
-        public static int StartOfScreenHightPosition = 10;
+        public static int EndOfScreenHightPosition = 500;
+        public static int StartOfScreenHightPosition = -10;
         #endregion
 
         public static void AddToCollection(ShipStats shipStats)
