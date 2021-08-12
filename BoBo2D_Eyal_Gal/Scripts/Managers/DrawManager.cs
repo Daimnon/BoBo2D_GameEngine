@@ -43,5 +43,9 @@ namespace BoBo2D_Eyal_Gal
         {
             Game.DrawSprite(texture, position, color);
         }
+        public void DrawString(SpriteFont spritefont,string text,Vector2 position, Color color)
+        {
+            Game.DrawText(spritefont,text, position, color);
+        }
     }
 }

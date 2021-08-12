@@ -25,7 +25,7 @@ namespace BoBo2D_Eyal_Gal
             _game = game;
             _waveManager = new WaveManager();
             _isSceneAlive = true;
-            UIManager._uiHandler = new UIHandler("HealthBar");
+            UIManager._uiHandler = new UIHandler("HealthBar","Ammo","Player");
         }
         #region Methods
         //initializing scene
@@ -49,7 +49,9 @@ namespace BoBo2D_Eyal_Gal
             AddSprites();
             //add all wanted sounds
             AddSounds();
-            //load all sprites and sounds
+            //load all sounds
+            AddFonts();
+            //load all fonts
             DataManager.Instance.LoadAllExternalData();
             //ger root Scene Game1 State
             DrawManager.Game = _game;
@@ -58,7 +60,6 @@ namespace BoBo2D_Eyal_Gal
         public void Start()
         {
             CreateBackGround("BackGround", "BG");
-            CreateUI("HealthBar", "Ammo");
             CreatePlayer("Player");
             _waveManager.AddWave(500, 500, 5,SpaceshipType.BasicEnemySpaceship);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
@@ -104,6 +105,14 @@ namespace BoBo2D_Eyal_Gal
             };
             DataManager.Instance.SoundDataHolder.SoundNames = soundNames;
         }
+        void AddFonts()
+        {
+            List<string> fontNames = new List<string>()
+            {
+                "GameSpriteFont"
+            };
+            DataManager.Instance.FontDataHolder.FontNames = fontNames;
+        }
 
         void AddSprites()
         {
@@ -131,12 +140,6 @@ namespace BoBo2D_Eyal_Gal
             GameObject background = new GameObject(backgroundName);
             GameObjectManager.Instance.AddGameObject(background);
             background.AddComponent(new Sprite(background, backgroundSprite));
-        }
-        void CreateUI(string healthBarName, string AmmoSpriteName)
-        {
-
-            GameObject AmmoIcon = new GameObject(AmmoSpriteName, new Vector2(750, 400));
-            AmmoIcon.AddComponent(new Sprite(AmmoIcon, AmmoSpriteName));
         }
 
         void CreatePlayer(string playerName)

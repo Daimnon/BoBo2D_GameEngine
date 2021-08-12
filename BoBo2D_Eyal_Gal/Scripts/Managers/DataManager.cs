@@ -30,6 +30,7 @@ namespace BoBo2D_Eyal_Gal
             }
             _soundDataHolder = new SoundsDataHolder(); 
             _spriteDataHolder = new SpritesDataHolder();
+            _fontDataHolder = new FontDataHolder();
         }
         #endregion
 
@@ -37,14 +38,14 @@ namespace BoBo2D_Eyal_Gal
         static Game1 _game;
         SpritesDataHolder _spriteDataHolder;
         SoundsDataHolder _soundDataHolder;
+        FontDataHolder _fontDataHolder;
         #endregion
 
         #region Properties
         public static Game1 Game { get => _game; set => _game = value; }
         public SpritesDataHolder SpriteDataHolder => _spriteDataHolder;
         public SoundsDataHolder SoundDataHolder => _soundDataHolder;
-        //Stores the current game
-        //public SpriteDataHolder SpriteDataHolder => _spriteDataHolder;
+        public FontDataHolder FontDataHolder => _fontDataHolder;
         #endregion
 
         #region Methods
@@ -55,7 +56,6 @@ namespace BoBo2D_Eyal_Gal
 
             if(_soundDataHolder!=null)
                 _soundDataHolder.LoadSoundData(_game);
-
         }
         public Texture2D GetTexture2D(string dataName)
         {
@@ -64,6 +64,10 @@ namespace BoBo2D_Eyal_Gal
         public SoundEffect GetSound(string dataName)
         {
             return _soundDataHolder.GetSoundEffect(dataName);
+        }
+        public SpriteFont GetFont(string dataName)
+        {
+            return _fontDataHolder.GetSpriteFont(dataName);
         }
         #endregion
 
