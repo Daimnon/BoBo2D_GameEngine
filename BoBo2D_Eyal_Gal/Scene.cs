@@ -59,6 +59,7 @@ namespace BoBo2D_Eyal_Gal
         public void Start()
         {
             CreateBackGround("BackGround", "BG");
+            CreateUI("HealthBar");
             CreatePlayer("Player");
             _waveManager.AddWave(500, 500, 5,SpaceshipType.BasicEnemySpaceship);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
@@ -121,7 +122,8 @@ namespace BoBo2D_Eyal_Gal
                 "Bolt1",
                 "Bolt2",
                 "Laser1",
-                "Laser2"
+                "Laser2",
+                "HealthBar"
             };
             DataManager.Instance.SpriteDataHolder.SpriteNames = spriteNames;
         }
@@ -131,6 +133,15 @@ namespace BoBo2D_Eyal_Gal
             GameObject background = new GameObject(backgroundName);
             GameObjectManager.Instance.AddGameObject(background);
             background.AddComponent(new Sprite(background, backgroundSprite));
+        }
+        void CreateUI(string healthBarName)
+        {
+            GameObject healthBar = new GameObject(healthBarName,new Vector2(10,10));
+            healthBar.AddComponent(new Sprite(healthBar, healthBarName));
+            GameObject healthBar2 = new GameObject(healthBarName, new Vector2(50, 10));
+            healthBar.AddComponent(new Sprite(healthBar2, healthBarName));
+            GameObject healthBar3 = new GameObject(healthBarName, new Vector2(90, 10));
+            healthBar.AddComponent(new Sprite(healthBar3, healthBarName));
         }
 
         void CreatePlayer(string playerName)
