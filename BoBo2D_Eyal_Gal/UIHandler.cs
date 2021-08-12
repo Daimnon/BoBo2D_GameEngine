@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -9,17 +11,22 @@ namespace BoBo2D_Eyal_Gal
     {
         string _healthBarSpriteName;
         string _ammoSpriteName;
+        string _playerName;
+
         GameObject _player;
         List<GameObject> _healthBars = new List<GameObject>(3);
-        public UIHandler(string healthBarSpriteName)
+        public UIHandler(string healthBarSpriteName, string ammoSpriteName, string playerName)
         {
             SubscriptionManager.AddSubscriber<IStartable>(this);
             _healthBarSpriteName = healthBarSpriteName;
+            _ammoSpriteName = ammoSpriteName;
+            _playerName = playerName;
         }
         public void Start()
         {
-            _player = GameObjectManager.Instance.FindGameObjectByName("Player");
+            _player = GameObjectManager.Instance.FindGameObjectByName(_playerName);
             CreateHealthBar(_healthBarSpriteName);
+            CreateAmmoBar(_ammoSpriteName);
 
         }
         void CreateHealthBar(string healthBarName)
@@ -59,7 +66,9 @@ namespace BoBo2D_Eyal_Gal
         }
         void CreateAmmoBar(string ammoSpriteName)
         {
-
+            GameObject AmmoIcon = new GameObject(ammoSpriteName, new Vector2(750, 400));
+            AmmoIcon.AddComponent(new Sprite(AmmoIcon, ammoSpriteName));
+            //SpriteFont spriteFont = new SpriteFont();
         }
     }
 }
