@@ -19,7 +19,7 @@ namespace BoBo2D_Eyal_Gal
         Vector2 _currentSpeed;
         string _spriteName;
         int _currentLvl = 1;
-        int _score;
+        int _score = 0;
         float _health, _maxHealth, _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
         bool _isPlayer;
         bool _isDefeatedByPlayer = false;
@@ -72,7 +72,7 @@ namespace BoBo2D_Eyal_Gal
                 PlayerProgression.Player = this;
 
                 //starting position
-                PlayerProgression.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
+                GetComponent<Transform>().Position = new Vector2(320, 300);
             }
 
             if (!_isPlayer)
@@ -135,6 +135,11 @@ namespace BoBo2D_Eyal_Gal
                 MovementHandler.Movement(MoveDirection.Down, this, _speed);                    
                 FirstWeapon.Shoot(_currentSpeed);
             }
+            else
+            {
+                UIManager.UpdateAmmoCount(_currentWeapon.CurrentAmmo);
+                UIManager.UpdateScore(PlayerProgression.CurrentScore);
+            }
         }
 
         public void CalculateCurrentSpeed(Vector2 currentPosition)
@@ -150,6 +155,7 @@ namespace BoBo2D_Eyal_Gal
             {
                 _hasWeaponSprite = stats.HasWeaponSprite;
                 _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType, _hasWeaponSprite);
+                _currentWeapon = _firstWeapon;
                 _spriteName = stats.SpriteName;
                 _health = stats.MaxHealth;
                 _maxHealth = stats.MaxHealth;
