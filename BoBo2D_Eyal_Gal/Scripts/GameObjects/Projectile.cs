@@ -46,6 +46,7 @@ namespace BoBo2D_Eyal_Gal
             Vector2 pos = transform.Position;
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
+            GetComponent<BoxCollider>().OnCollision += CollidesWith;
             AddComponent(new Rigidbooty(this));
             _projectileDirection = flightDirectin*_speed * _spaceShip.CurrentSpeed;
             _projectileTransform = GetComponent<Transform>();
@@ -113,6 +114,13 @@ namespace BoBo2D_Eyal_Gal
         public override void Unsubscribe()
         {
             SubscriptionManager.RemoveSubscriber<IUpdatable>(this);
+        }
+
+        public void CollidesWith(BoxCollider anotherCollider)
+        {
+            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    Destroy();
         }
     }
 }
