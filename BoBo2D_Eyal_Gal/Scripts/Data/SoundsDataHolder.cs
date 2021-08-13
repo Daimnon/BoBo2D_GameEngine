@@ -9,6 +9,14 @@ namespace BoBo2D_Eyal_Gal
 {
     public class SoundsDataHolder
     {
+        public SoundsDataHolder()
+        {
+            _soundNames = new List<string>()
+            {
+                //add sounds names
+            };
+        }
+
         #region Fields
         Dictionary<string, SoundEffect> _sounds = new Dictionary<string, SoundEffect>();
         List<string> _soundNames;
@@ -17,14 +25,6 @@ namespace BoBo2D_Eyal_Gal
         #region Properties
         public List<string> SoundNames { get => _soundNames; set => _soundNames = value; }
         #endregion
-
-        public SoundsDataHolder()
-        {
-            _soundNames = new List<string>()
-            {
-                //add sounds names
-            };
-        }
 
         public void LoadSoundData(Game1 game)
         {
@@ -40,10 +40,10 @@ namespace BoBo2D_Eyal_Gal
         public SoundEffect GetSoundEffect(string dataName)
         {
             SoundEffect soundEffect;
-
             if(_sounds.TryGetValue(dataName, out soundEffect))
+            {
                 return soundEffect;
-
+            }
             return null;
         }
     }

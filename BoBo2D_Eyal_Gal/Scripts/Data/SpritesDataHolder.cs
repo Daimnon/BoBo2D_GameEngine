@@ -49,13 +49,39 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
+        public void UpdateSpriteName(string spriteName)
+        {
+            _spriteNames.Add(spriteName);
+        }
+
+        public void UpdateSpriteName(string firstSpriteName, string secondSpriteName)
+        {
+            _spriteNames.Add(firstSpriteName);
+            _spriteNames.Add(secondSpriteName);
+        }
+
+        public void UpdateSpriteName(string firstSpriteName, string secondSpriteName, string thirdSpriteName)
+        {
+            _spriteNames.Add(firstSpriteName);
+            _spriteNames.Add(secondSpriteName);
+            _spriteNames.Add(thirdSpriteName);
+        }
+
+        public void UpdateSpriteName(string firstSpriteName, string secondSpriteName, string thirdSpriteName, string fourthSpriteName)
+        {
+            _spriteNames.Add(firstSpriteName);
+            _spriteNames.Add(secondSpriteName);
+            _spriteNames.Add(thirdSpriteName);
+            _spriteNames.Add(fourthSpriteName);
+        }
+
         public Texture2D GetTexture2D(string dataName)
         {
             Texture2D texture;
-
             if(_sprites.TryGetValue(dataName, out texture))
+            {
                 return texture;
-
+            }
             return null;
         }
     }

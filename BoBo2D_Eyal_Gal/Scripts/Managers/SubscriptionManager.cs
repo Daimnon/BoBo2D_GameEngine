@@ -78,7 +78,9 @@ namespace BoBo2D_Eyal_Gal
                 case true when typeof(T) == typeof(IDrawable):
                     _drawable.DrawAll();
                     break;
-
+                /*case true when typeof(T) == typeof(ICollidable):
+                    _collidable.ApplyCollisionLogics();
+                    break;*/
                 default:
                     Console.WriteLine("Error in ActivateAllSubscribersOfType");
                     break;
