@@ -81,7 +81,7 @@ namespace BoBo2D_Eyal_Gal
                 }
             }
 
-            if (_projectileTransform.Position.Y > GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height || _projectileTransform.Position.Y < 0)
+            if (_projectileTransform.Position.Y > StatsHandler.EndOfScreenHightPosition || _projectileTransform.Position.Y < 0)
                 GameObjectManager.Instance.DestroyGameObject(this);
         }
 

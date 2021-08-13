@@ -25,10 +25,9 @@ namespace BoBo2D_Eyal_Gal
             _game = game;
             _waveManager = new WaveManager();
             _isSceneAlive = true;
+            UIManager._uiHandler = new UIHandler("HealthBar","Ammo","GameSpriteFont","GameSpriteFont", "Player");
         }
-
         #region Methods
-
         //initializing scene
         public void Init()
         {
@@ -37,7 +36,7 @@ namespace BoBo2D_Eyal_Gal
             //Create Enemy Projectiles
             CreateProjectile(ProjectileType.EnemyProjectile, 1, 1, 12,25, "Laser2");
             //Create Basic Weapon
-            CreateWeapon(WeaponType.BasicMainWeapon,ProjectileType.BasicProjectile ,1, 10, 1, 1, null);
+            CreateWeapon(WeaponType.BasicMainWeapon,ProjectileType.BasicProjectile ,1, 100, 1, 1, null);
             //Create Basic Enemy Weapon
             CreateWeapon(WeaponType.BasicEnemyWeapon, ProjectileType.EnemyProjectile, 3, 1000, 1, 1, null);
             //Create Player Spaceship
@@ -50,7 +49,9 @@ namespace BoBo2D_Eyal_Gal
             AddSprites();
             //add all wanted sounds
             AddSounds();
-            //load all sprites and sounds
+            //load all sounds
+            AddFonts();
+            //load all fonts
             DataManager.Instance.LoadAllExternalData();
             //ger root Scene Game1 State
             DrawManager.Game = _game;
@@ -64,7 +65,6 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
         }
-
         public void Update()
         {
             SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
@@ -75,7 +75,6 @@ namespace BoBo2D_Eyal_Gal
         public void DrawScene()
         {
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
-
         }
 
         void CreateWeapon(WeaponType weaponType,ProjectileType projectileType, int cooldown, int maxAmmo, float baseDamage, float damageScalar, string spriteName)
@@ -106,6 +105,14 @@ namespace BoBo2D_Eyal_Gal
             };
             DataManager.Instance.SoundDataHolder.SoundNames = soundNames;
         }
+        void AddFonts()
+        {
+            List<string> fontNames = new List<string>()
+            {
+                "GameSpriteFont"
+            };
+            DataManager.Instance.FontDataHolder.FontNames = fontNames;
+        }
 
         void AddSprites()
         {
@@ -121,7 +128,9 @@ namespace BoBo2D_Eyal_Gal
                 "Bolt1",
                 "Bolt2",
                 "Laser1",
-                "Laser2"
+                "Laser2",
+                "HealthBar",
+                "Ammo",
             };
             DataManager.Instance.SpriteDataHolder.SpriteNames = spriteNames;
         }

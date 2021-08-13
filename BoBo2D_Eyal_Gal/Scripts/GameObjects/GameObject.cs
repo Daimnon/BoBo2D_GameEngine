@@ -47,12 +47,13 @@ namespace BoBo2D_Eyal_Gal
         }
 
         //Constructor with Transform that the player will enter
-        public GameObject(string name, Transform transform)
+        public GameObject(string name, Vector2 position)
         {
             Name = name;
             IsEnabled = true;
 
             Console.WriteLine($"New Game Object has been created {ToString()}");
+            Transform transform = new Transform(this,position, new Vector2(1,1));
             AddComponent(transform);
             transform.GameObjectP = this;
             transform.TransformP = transform;

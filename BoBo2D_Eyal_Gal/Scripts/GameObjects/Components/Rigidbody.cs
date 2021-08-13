@@ -2,25 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class Rigidbooty : Component
+    public class Rigidbooty : Component, IUpdatable
     {
         #region Fields
-        GameObject _gameObject;
-        Transform _transform;
-        BoxCollider _boxCollider;
-        Vector3D _position;
         float _velocity, _gravityScale, _mass, _drag;
         bool _useGravity, _isKinematic, _freezRotation;
         #endregion
 
         #region Properties
-        public GameObject GameObject{ get => _gameObject; set => _gameObject = value; }
-        public Transform TransformP { get => _transform; set => _transform = value; }
-        public BoxCollider BoxColliderP { get => _boxCollider; set => _boxCollider = value; }
-        public Vector3D Position { get => _position; set => _position = value; }
         public float Velocity { get => _velocity; set => _velocity = value; }
         public float GravityScale { get => _gravityScale; set => _gravityScale = value; }
         public float Mass { get => _mass; set => _mass = value; }
@@ -35,19 +28,22 @@ namespace BoBo2D_Eyal_Gal
             GameObjectP = gameObject;
             TransformP = gameObject.GetComponent<Transform>();
             Name = GameObjectP.Name + " Rigidbooty";
+            UseGravity = true;
+            IsKinematic = false;
+            FreezRotation = false;
             //BoxColliderP = _gameObject.GetComponent<BoxCollider>();
         }
 
         //need fixes
         #region Methods
-        public void AddForce(Vector3D force)
+        public void AddForce(Vector2 force)
         {/*
             //Apply a force to this Rigidbody in direction of this GameObjects up axis
             m_Rigidbody.AddForce(transform.up * m_Thrust);
         */
         }
 
-        public void MovePosition(Vector3D position)
+        public void MovePosition(Vector2 position)
         {/*
             //Store user input as a movement vector
             Vector3 m_Input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -58,34 +54,18 @@ namespace BoBo2D_Eyal_Gal
         */
         }
 
-        public void ApplyConstantForce(Vector3D vector3, float amount)
+        public void ApplyConstantForce(Vector2 vector3, float amount)
         {
             throw new System.NotImplementedException();
         }
 
         public void ApplyGravity()
         {
+            Vector2 position = TransformP.Position;
+            position = new Vector2(position.X, position.Y - Physics.Gravity);
             //need to add another condition for checking collision from the bottom
             if (UseGravity)
-                //need to happen on each update
-                Position = new Vector3D(Position.X, Position.Y - Physics.Gravity, Position.Z);
-        }
-
-        public T GetComponent<T>() where T : Component
-        {
-            foreach (Component component in _gameObject.Components)
-                if (component is T)
-                    return component as T;
-
-            return null;
-        }
-
-        public T GetComponents<T>() where T : Component
-        {
-            foreach (Component component in _gameObject.Components)
-                return component as T;
-
-            return null;
+                TransformP.Position = position;
         }
         #endregion
 
@@ -111,10 +91,9 @@ namespace BoBo2D_Eyal_Gal
             Destroy(parentComponent);
         }
 
-        /*
+        /* removes an asset.
         public static void Destroy(Assest parentAssest)
         {
-            //removes an asset.
             Destroy(parentAssest);
         }
         */
@@ -148,28 +127,15 @@ namespace BoBo2D_Eyal_Gal
         }
         #endregion
 
-        //empty for now
-        #region Massages
-        public void OnCollisionEnter()
-        {
-
-        }
-
-        public void OnColissionStay()
-        {
-
-        }
-
-        public void OnCollisionExit()
-        {
-
-        }
-        #endregion
-
         #region Overrides
         public override string ToString()
         {
             return $"Rigidbody of {Name}" + Environment.NewLine;
+        }
+
+        public void Update()
+        {
+            ApplyGravity();
         }
         #endregion
     }
