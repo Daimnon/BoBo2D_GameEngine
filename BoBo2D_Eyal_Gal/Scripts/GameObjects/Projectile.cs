@@ -110,6 +110,14 @@ namespace BoBo2D_Eyal_Gal
             _spriteName = stats.SpriteName;
         }
 
+        public void OnCollision(GameObject anotherGameObject)
+        {
+            if (Physics.CheckCollision(GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            {
+                Physics.SolveCollisions(this, anotherGameObject);
+            }
+        }
+
         public override void Unsubscribe()
         {
             SubscriptionManager.RemoveSubscriber<IUpdatable>(this);

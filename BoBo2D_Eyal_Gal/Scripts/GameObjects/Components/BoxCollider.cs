@@ -10,6 +10,7 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         Vector2 _scale;
+        Vector2 _boxTop, _boxBottom, _boxLeft, _boxRight, _boxFront, _boxBack;
         // distance from center to horizontal edge
         float _cX;
         // distance from center to vertical edge
@@ -30,16 +31,12 @@ namespace BoBo2D_Eyal_Gal
             }
         }
         public Vector2 Scale { get => _scale; set => _scale = value; }
-
-        // set the exact points of box
-        public float BoxLeft => TransformP.Position.X - CX;
-        public float BoxRight => TransformP.Position.X + CX;
-        public float BoxTop => TransformP.Position.Y - CY;
-        public float BoxBottom => TransformP.Position.Y + CY;
-        //public float BoxFront { get => _boxFront; set => _boxFront = value; }
-        //public float BoxBack { get => _boxBack; set => _boxBack = value; }
-
-        public event Action<BoxCollider> OnCollision;
+        public Vector2 BoxTop { get => _boxTop; set => _boxTop = value; }
+        public Vector2 BoxBottom { get => _boxBottom; set => _boxBottom = value; }
+        public Vector2 BoxLeft { get => _boxLeft; set => _boxLeft = value; }
+        public Vector2 BoxRight { get => _boxRight; set => _boxRight = value; }
+        public Vector2 BoxFront { get => _boxFront; set => _boxFront = value; }
+        public Vector2 BoxBack { get => _boxBack; set => _boxBack = value; }
         public float CX { get => _cX; set => _cX = value; }
         public float CY { get => _cY; set => _cY = value; }
         public float CZ { get => _cZ; set => _cZ = value; }
@@ -69,9 +66,15 @@ namespace BoBo2D_Eyal_Gal
             CY = spriteHeight / 2;
             //CZ = objD / 2;
 
+            // set the exact points of box
+            BoxLeft = new Vector2(TransformP.Position.X - CX, TransformP.Position.Y);
+            BoxRight = new Vector2(TransformP.Position.X + CX, TransformP.Position.Y);
+            BoxTop = new Vector2(TransformP.Position.X, TransformP.Position.Y - CY);
+            BoxBottom = new Vector2(TransformP.Position.X, TransformP.Position.Y + CY);
             //BoxFront = new Vector2(Position.X, Position.Y, Position.Z - CZ);
             //BoxBack = new Vector2(Position.X, Position.Y, Position.Z + CZ);
             Physics.AllBoxColliders.Add(this);
+            //SubscriptionManager.AddSubscriber<ICollidable>(this);
         }
 
         #region Methods
@@ -92,10 +95,7 @@ namespace BoBo2D_Eyal_Gal
             //SubscriptionManager.RemoveSubscriber<ICollidable>(this);
         }
 
-        public void CollidesWith(BoxCollider collider)
-        {
-            OnCollision?.Invoke(collider);
-        }
+
         #endregion
 
         #region Overrides
