@@ -19,8 +19,12 @@ namespace BoBo2D_Eyal_Gal
         int _currentLvl = 1;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         int _score = 0;
         float _health, _maxHealth, _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
+=======
+        int _score;
+>>>>>>> parent of 2f475e3 (Smothing code)
 =======
         int _score;
 >>>>>>> parent of 2f475e3 (Smothing code)
@@ -141,12 +145,15 @@ namespace BoBo2D_Eyal_Gal
             }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             else
             {
                 UIManager.UpdateAmmoCount(_currentWeapon.CurrentAmmo);
                 UIManager.UpdateScore(PlayerProgression.CurrentScore);
             }
         }
+=======
+>>>>>>> parent of 2f475e3 (Smothing code)
 =======
 >>>>>>> parent of 2f475e3 (Smothing code)
 =======
@@ -165,10 +172,13 @@ namespace BoBo2D_Eyal_Gal
             {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 _hasWeaponSprite = stats.HasWeaponSprite;
                 _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType, _hasWeaponSprite);
                 _currentWeapon = _firstWeapon;
                 _spriteName = stats.SpriteName;
+=======
+>>>>>>> parent of 2f475e3 (Smothing code)
 =======
 >>>>>>> parent of 2f475e3 (Smothing code)
 =======

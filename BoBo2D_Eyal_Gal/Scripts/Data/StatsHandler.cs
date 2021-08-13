@@ -22,12 +22,15 @@ namespace BoBo2D_Eyal_Gal
         };
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         #endregion
 
         #region Spaceship Properties
         public static int EndOfScreenHightPosition = 500;
         public static int StartOfScreenHightPosition = -10;
         #endregion
+=======
+>>>>>>> parent of 2f475e3 (Smothing code)
 =======
 >>>>>>> parent of 2f475e3 (Smothing code)
 =======
