@@ -76,6 +76,13 @@ namespace BoBo2D_Eyal_Gal
                 _spriteBatch.Draw(texture, position, color);
             }
         }
+        public void DrawText(SpriteFont spritefont,string text, Vector2 position,Color color )
+        {
+            if(spritefont != null ||text!= null || position != null || color != null)
+            {
+                _spriteBatch.DrawString(spritefont, text, position, color);
+            }
+        }
 
         public T LoadData<T>(string fileName)
         {

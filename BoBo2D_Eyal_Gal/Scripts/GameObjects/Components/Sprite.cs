@@ -13,7 +13,6 @@ namespace BoBo2D_Eyal_Gal
         Texture2D _texture;
         float _spriteWidth;
         float _spriteHeight;
-        string _spriteName;
         Color _color;
         #endregion
 
@@ -28,7 +27,6 @@ namespace BoBo2D_Eyal_Gal
             GameObjectP = gameObject;
             TransformP = gameObject.GetComponent<Transform>();
             Name = gameObject.Name;
-            _spriteName = spriteName;
             _texture = DataManager.Instance.GetTexture2D(spriteName);
             SpriteWidth = _texture.Width;
             SpriteHeight = _texture.Height;
@@ -44,13 +42,15 @@ namespace BoBo2D_Eyal_Gal
             _texture = DataManager.Instance.GetTexture2D(spriteName);
             SpriteWidth = _texture.Width;
             SpriteHeight = _texture.Height;
-            _spriteName = spriteName;
             SubscriptionManager.AddSubscriber<IDrawable>(this);
         }
         public void Draw()
         {
-            Transform transform = GameObjectP.GetComponent<Transform>();
-            DrawManager.Instance.DrawSprite(_texture, transform.Position,_color);
+            if (GameObjectP.IsEnabled)
+            {
+                Transform transform = GameObjectP.GetComponent<Transform>();
+                DrawManager.Instance.DrawSprite(_texture, transform.Position,_color);
+            }
         }
         public override void Unsubscribe()
         {
