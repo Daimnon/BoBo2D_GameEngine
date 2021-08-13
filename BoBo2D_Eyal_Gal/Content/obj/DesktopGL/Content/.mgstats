@@ -1,5 +1,6 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
 <<<<<<< HEAD
+<<<<<<< HEAD
 "C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/GameSpriteFont.spritefont","C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/GameSpriteFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.2223158
 "C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Background/BG.png","C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Background/BG.xnb","TextureProcessor","Texture2DContent",25750,3686485,0.1081207
 "C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png","C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Characters/EnemyBoss.xnb","TextureProcessor","Texture2DContent",962,14773,0.0016758
@@ -13,6 +14,8 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser1.png","C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Laser1.xnb","TextureProcessor","Texture2DContent",186,325,0.001275
 "C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser2.png","C:/Users/new-hp/source/repos/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Laser2.xnb","TextureProcessor","Texture2DContent",180,325,0.0027143
 =======
+=======
+>>>>>>> parent of 2084daa (Merge branch 'Gal_Branch' into Main)
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/GameSpriteFont.spritefont","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/GameSpriteFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21538,0.2064417
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Background/BG.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Background/BG.xnb","TextureProcessor","Texture2DContent",25750,3686485,0.1093109
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Characters/EnemyBoss.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Characters/EnemyBoss.xnb","TextureProcessor","Texture2DContent",962,14773,0.0034765
@@ -25,4 +28,7 @@ Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Siz
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Bolt2.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Bolt2.xnb","TextureProcessor","Texture2DContent",166,185,0.0024916
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser1.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Laser1.xnb","TextureProcessor","Texture2DContent",186,325,0.0024489
 "D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/sprites/Projectiles/Laser2.png","D:/Users/Daimnon's/Documents/GitHub/BoBo2D_Eyal_Gal/BoBo2D_Eyal_Gal/Content/bin/DesktopGL/Content/sprites/Projectiles/Laser2.xnb","TextureProcessor","Texture2DContent",180,325,0.0025121
+<<<<<<< HEAD
+>>>>>>> parent of 2084daa (Merge branch 'Gal_Branch' into Main)
+=======
 >>>>>>> parent of 2084daa (Merge branch 'Gal_Branch' into Main)
