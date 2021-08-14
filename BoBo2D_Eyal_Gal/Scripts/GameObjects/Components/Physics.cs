@@ -77,19 +77,23 @@ namespace BoBo2D_Eyal_Gal
                 if (!collider.IsEnabled)
                     continue;
 
-                foreach (BoxCollider anotherCollider in AllBoxColliders)
+                for (int i = 0; i < AllBoxColliders.Count; i++)
                 {
-                    if (!anotherCollider.IsEnabled)
+                    int count = AllBoxColliders.Count;
+                    if (!AllBoxColliders[i].IsEnabled)
                         continue;
-
-                    if (collider == anotherCollider)
+                    if (collider == AllBoxColliders[i])
                         continue;
-
-                    if (AABB(collider, anotherCollider))
+                    if (AABB(collider, AllBoxColliders[i]))
                     {
-                        collider.CollidesWith(anotherCollider);
-                        collider.StartCollidingWith(anotherCollider);
-                        collider.FinishedCollidingWith(anotherCollider);
+                        collider.CollidesWith(AllBoxColliders[i]);
+                        //collider.StartCollidingWith(AllBoxColliders[i]);
+                        //collider.FinishedCollidingWith(AllBoxColliders[i]);
+                        return;
+                    }
+                    if(count != AllBoxColliders.Count)
+                    {
+                        return;
                     }
                 }
             }
