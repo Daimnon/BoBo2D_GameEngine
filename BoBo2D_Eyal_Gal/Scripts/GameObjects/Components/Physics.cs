@@ -39,6 +39,9 @@ namespace BoBo2D_Eyal_Gal
         #region Methods
         public static bool AABB(BoxCollider collider, BoxCollider anotherCollider)
         {
+            if (collider == null || anotherCollider == null)
+                return false;
+
             return collider.BoxLeft < anotherCollider.BoxRight &&
                    collider.BoxRight > anotherCollider.BoxLeft &&
                    collider.BoxTop < anotherCollider.BoxBottom &&

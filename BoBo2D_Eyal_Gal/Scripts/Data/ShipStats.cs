@@ -47,5 +47,4 @@
             _spriteName = spriteName;
         }
     }
-
 }

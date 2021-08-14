@@ -13,30 +13,31 @@ namespace BoBo2D_Eyal_Gal
         BasicProjectile,
         EnemyProjectile
     }
-    public class Projectile: GameObject, IUpdatable
+    public class Projectile : GameObject, IUpdatable
     {
         #region Fields
+        Spaceship _spaceShip;
+        GameObject _gameObject;
         Transform _projectileTransform;
         Vector2 _projectileDirection;
+        string _spriteName;
         float _damage;
         float _speed;
         float _projectileOffsetX;
         float _projectileOffsetY;
         bool _flying = false;
         bool _isPlayerProjectile;
-        string _spriteName;
-        Spaceship _spaceShip;
-        GameObject _gameObject;
         #endregion
 
         #region Properties
         public Vector2 ProjectileDirection { set => _projectileDirection = value; }
         public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
         public bool Flying { set => _flying = value; }
+        public bool IsPlayerProjectile { get => _isPlayerProjectile; set => _isPlayerProjectile = value; }
         #endregion
 
-        public Projectile(string name, Vector2 flightDirectin,float damageScalar,
-                          WeaponType weaponType, Transform transform, bool isPlayerProjectile,Spaceship spaceship, ProjectileType projectileType) : base(name)
+        public Projectile(string name, Vector2 flightDirectin, float damageScalar,
+            WeaponType weaponType, Transform transform, bool isPlayerProjectile, Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
             Name = name;
             GameObjectP = this;
@@ -46,8 +47,11 @@ namespace BoBo2D_Eyal_Gal
             Vector2 pos = transform.Position;
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
+            GetComponent<BoxCollider>().OnCollision += CollidesWith;
+            GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
+            GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
             AddComponent(new Rigidbooty(this));
-            _projectileDirection = flightDirectin*_speed * _spaceShip.CurrentSpeed;
+            _projectileDirection = flightDirectin * _speed * _spaceShip.CurrentSpeed;
             _projectileTransform = GetComponent<Transform>();
             _projectileTransform.Position = new Vector2(pos.X + _projectileOffsetX, pos.Y + _projectileOffsetY);
             _damage *= damageScalar;
@@ -66,11 +70,13 @@ namespace BoBo2D_Eyal_Gal
             if (_flying)
             {
                 if (_isPlayerProjectile)
+                {
                     if (_projectileDirection.Y <= 0)
                         MovementHandler.Movement(MoveDirection.Up, this, 1);
 
                     else
                         MovementHandler.Movement(MoveDirection.Up, this, _projectileDirection);
+                }
 
                 else
                 {
@@ -95,9 +101,7 @@ namespace BoBo2D_Eyal_Gal
                 GameObjectManager.Instance.AddGameObject(this, projectileHolder);
             }
             else
-            {
                 GameObjectManager.Instance.AddGameObject(this, projectile);
-            }
         }
 
         void LoadStats(ProjectileType projectileType)
@@ -110,12 +114,54 @@ namespace BoBo2D_Eyal_Gal
             _spriteName = stats.SpriteName;
         }
 
-        public void OnCollision(GameObject anotherGameObject)
+        public void CollidesWith(BoxCollider anotherCollider)
         {
-            if (Physics.CheckCollision(GetComponent<BoxCollider>(), anotherGameObject.GetComponent<BoxCollider>()))
+            //be spesific about what type of object I collide with
+            if (anotherCollider.GameObjectP as Spaceship == null)
+                return;
+
+            if (!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer))
             {
-                Physics.SolveCollisions(this, anotherGameObject);
+                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                {
+                    if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    {
+                        //UIManager.DisableHealthIcons();
+                        GameObjectManager.Instance.DestroyGameObject(this);
+                    }
+                }
+
+                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                {
+                    if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    {
+                        (anotherCollider.GameObjectP as Spaceship).Health--;
+                        GameObjectManager.Instance.DestroyGameObject(this);
+                    }
+                }
             }
+            else if (IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+            {
+                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                {
+                    if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    {
+                        //UIManager.DisableHealthIcons();
+                        DisableGameObject();
+                        GameObjectManager.Instance.DestroyGameObject(this);
+                    }
+                }
+
+                if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                {
+                    (anotherCollider.GameObjectP as Spaceship).Health--;
+                    DisableGameObject();
+                    GameObjectManager.Instance.DestroyGameObject(this);
+                }
+            }
+
+            else if (IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                return;
         }
 
         public override void Unsubscribe()

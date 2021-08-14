@@ -21,14 +21,6 @@ namespace BoBo2D_Eyal_Gal
         public Node Node { get => _node; set => _node = value; }
         public string Name { get => _name; set => _name = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
-        public bool IsActive
-        {
-            get => _isActive; set
-            { // if changing set active to value it will also change isEnabled 
-                _isActive = value;
-                _isEnabled = value;
-            }
-        }
         #endregion
 
         #region Constructors
