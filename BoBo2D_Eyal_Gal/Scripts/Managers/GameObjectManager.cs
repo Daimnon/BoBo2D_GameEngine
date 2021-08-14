@@ -40,8 +40,7 @@ namespace BoBo2D_Eyal_Gal
         void AddChild(GameObject gameObject, GameObject parentGameObject)
         {
             Node node = new Node(gameObject, parentGameObject.Node);
-            parentGameObject.Node.AddChild(node);
-
+            //parentGameObject.Node.AddChild(node);
         }
         public void AddGameObject(GameObject gameObject)
         {
@@ -69,7 +68,7 @@ namespace BoBo2D_Eyal_Gal
             return null;
         }
         public void DestroyGameObject(GameObject gameObject)
-        {
+          {
             if(gameObject == null)
             {
                 Console.WriteLine("Game Object Does not exsists");
