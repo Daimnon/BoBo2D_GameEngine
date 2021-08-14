@@ -123,10 +123,13 @@ namespace BoBo2D_Eyal_Gal
                     Destroy();
                 }
 
-            Console.WriteLine("collission");
-            //solve collision
-            //take dmg
-            //etc..
+            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                {
+                    (anotherCollider.GameObjectP as Spaceship).Health--;
+                    Destroy();
+                }
+
         }
 
         public override void Unsubscribe()

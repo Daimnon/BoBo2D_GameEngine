@@ -8,6 +8,11 @@ namespace BoBo2D_Eyal_Gal
     {
         public static UIHandler UiHandler;
 
+        public static void ChangeHpBarSpacing(float spaceBy)
+        {
+            UiHandler.HealthBarSpacing = spaceBy;
+        }
+
         public static void AddHealth()
         {
             UiHandler.AddHealth();

@@ -9,27 +9,27 @@ namespace BoBo2D_Eyal_Gal
 {
     public class UIHandler : IStartable
     {
-        string _healthBarSpriteName;
-        string _ammoSpriteName;
-        string _ammoFontName;
-        string _scoreFontName;
-        string _playerName;
-        GameObject _canvas;
-        GameObject _ammoText;
-        GameObject _scoreText;
+        List<GameObject> _healthIcons = new List<GameObject>(3);
+        GameObject _player, _canvas, _ammoText, _scoreText, _healthBar;
+        string _healthBarSpriteName, _ammoSpriteName, _ammoFontName, _scoreFontName, _playerName;
+        float _healthBarSpacing;
+        bool _isHpRegenerating = false, _isHpReducing = false;
 
-        GameObject _player;
-        List<GameObject> _healthBars = new List<GameObject>(3);
+        public float HealthBarSpacing { get => _healthBarSpacing; set => _healthBarSpacing = value; }
+        public bool IsHpRegenerating { get => _isHpRegenerating; set => _isHpRegenerating = value; }
+        public bool IsHpReducing { get => _isHpReducing; set => _isHpReducing = value; }
+
         public UIHandler(string healthBarSpriteName, string ammoSpriteName,string ammoFontName,string scoreFontName , string playerName)
         {
             _canvas = new GameObject("Canvas");
-            GameObjectManager.Instance.AddGameObject(_canvas);
-            SubscriptionManager.AddSubscriber<IStartable>(this);
             _healthBarSpriteName = healthBarSpriteName;
             _ammoSpriteName = ammoSpriteName;
             _ammoFontName = ammoFontName;
             _scoreFontName = scoreFontName;
             _playerName = playerName;
+            HealthBarSpacing = 40;
+            GameObjectManager.Instance.AddGameObject(_canvas);
+            SubscriptionManager.AddSubscriber<IStartable>(this);
         }
 
         public void Start()
@@ -40,6 +40,7 @@ namespace BoBo2D_Eyal_Gal
             CreateScoreBar();
         }
 
+        /* Previous HpBar
         void CreateHealthBar(string healthBarName)
         {
             GameObject healthBarsUI = new GameObject("HealthBarsUI");
@@ -66,14 +67,55 @@ namespace BoBo2D_Eyal_Gal
             _healthBars.Add(healthBar3);
             healthBar3.IsEnabled = true;
         }
+        */
+
+        void CreateHealthBar(string healthIconName)
+        {
+            GameObject healthBarsUI = new GameObject("HealthBarsUI");
+            GameObjectManager.Instance.AddGameObject(healthBarsUI, _canvas);
+
+            GameObject healthBar = new GameObject(healthIconName, new Vector2(10, 10));
+            healthBar.AddComponent(new Sprite(healthBar, healthIconName));
+            GameObjectManager.Instance.AddGameObject(healthBar, healthBarsUI);
+            _healthIcons.Add(healthBar);
+            healthBar.IsEnabled = true;
+
+            for (int i = 1; i < (_player as Spaceship).MaxHealth; i++)
+            {
+                Vector2 healthBarPos = healthBar.GetComponent<Transform>().Position;
+                _healthBar = new GameObject(healthIconName + i + 1, new Vector2(healthBarPos.X + (HealthBarSpacing * i), 10));
+                healthBar.AddComponent(new Sprite(_healthBar, healthIconName));
+                GameObjectManager.Instance.AddGameObject(_healthBar, healthBarsUI);
+                _healthIcons.Add(_healthBar);
+                healthBar.IsEnabled = true;
+            }
+
+        }
+
+        void UpdateHealthBar()
+        {
+            if (IsHpReducing)
+                for (int i = (_player as Spaceship).Health; i < _healthIcons.Count; i++)
+                    if (_healthIcons[i].IsEnabled)
+                        _healthIcons[i].IsEnabled = false;
+
+            else if (IsHpRegenerating)
+                    for (int j = (_player as Spaceship).Health; j < _healthIcons.Count; j++)
+                            if (!_healthIcons[i].IsEnabled && j <= (_player as Spaceship).Health)
+                                _healthIcons[i].IsEnabled = true;
+        }
 
         public void AddHealth()
         {
-            for (int i = 0; i < _healthBars.Count; i++)
+            for (int i = 0; i < _healthIcons.Count; i++)
             {
-                if (!_healthBars[i].IsEnabled)
+                if (!_healthIcons[i].IsEnabled)
                 {
-                    _healthBars[i].IsEnabled = true;
+                    IsHpRegenerating = true;
+                    bool tempBool = IsHpRegenerating;
+                    _healthIcons[i].IsEnabled = true;
+                    tempBool = !tempBool;
+                    tempBool = IsHpRegenerating;
                     return;
                 }
             }
@@ -81,13 +123,15 @@ namespace BoBo2D_Eyal_Gal
 
         public void ReduceHealth()
         {
-            Spaceship player = (_player as Spaceship);
-            for (int i = player.Health - 1; i <= _healthBars.Count - 1; i--)
+            for (int i = _healthIcons.Count - 1; i >= 0; i--)
             {
-                if (_healthBars[i].IsEnabled)
+                if(_healthIcons[i].IsEnabled)
                 {
-                    _healthBars[i].IsEnabled = false;
-                    player.Health--;
+                    IsHpReducing = true;
+                    bool tempBool = IsHpReducing;
+                    _healthIcons[i].IsEnabled = false;
+                    tempBool = !tempBool;
+                    tempBool = IsHpReducing;
                     return;
                 }
             }

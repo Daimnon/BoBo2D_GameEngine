@@ -4,22 +4,33 @@ using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public static class PlayerProgression
+    public static class PlayerLevelManager
     {
         #region Fields
-        static Spaceship _player;
+        static GameObject _player;
+        static Spaceship _playerShip = Player as Spaceship;
         static bool _isLevelingUp = false;
         static int _currentScore = 0;
         #endregion
 
         #region Properties
-        public static Spaceship Player
+        public static GameObject Player
         {
             get => _player;
             set
             {
                 if (_player == null)
                     _player = value;
+            }
+        }
+
+        public static Spaceship PlayerShip
+        {
+            get => _playerShip;
+            set
+            {
+                if (_playerShip == null)
+                    _playerShip = value;
             }
         }
         public static bool IsLevelingUp { get => _isLevelingUp; set => _isLevelingUp = value; }
@@ -29,7 +40,7 @@ namespace BoBo2D_Eyal_Gal
         #region Methods
         public static void LvlUp()
         {
-            if (_player.Exp >= _player.MaxExp)
+            if (PlayerShip.Exp >= PlayerShip.MaxExp)
             {
                 StatUpdate();
                 ResetExp();
@@ -40,42 +51,44 @@ namespace BoBo2D_Eyal_Gal
 
         public static void StatUpdate()
         {
-            Player.CurrentLvl++;
-            Player.MaxHealth += 1;
-            Player.HealthRegen += 0.5f;
-            Player.MaxShield += 1;
-            Player.ShieldRegen += 1;
-            Player.DamageScalar += 0.1f;
+            PlayerShip.CurrentLvl++;
+            PlayerShip.MaxHealth += 1;
+            PlayerShip.Health = PlayerShip.MaxHealth;
+            PlayerShip.HealthRegen += 0.5f;
+            PlayerShip.MaxShield += 1;
+            PlayerShip.ShieldRegen += 1;
+            PlayerShip.DamageScalar += 0.1f;
         }
 
         public static void ResetExp()
         {
             float tempExp;
-            tempExp = Player.Exp - Player.MaxExp;
-            Player.Exp = tempExp;
-            Player.MaxExp *= 1.5f;
+            tempExp = PlayerShip.Exp - PlayerShip.MaxExp;
+            PlayerShip.Exp = tempExp;
+            PlayerShip.MaxExp *= 1.5f;
         }
 
         public static void UpgradeWeapon()
         {
             switch (true)
             {
-                case true when Player.CurrentLvl < 3:
-                    Player.CurrentWeapon = Player.FirstWeapon;
+                case true when PlayerShip.CurrentLvl < 3:
+                    PlayerShip.CurrentWeapon = PlayerShip.FirstWeapon;
                     break;
 
-                case true when Player.CurrentLvl < 6 && Player.CurrentLvl > 3:
-                    Player.CurrentWeapon = Player.SecondWeapon;
+                case true when PlayerShip.CurrentLvl < 6 && PlayerShip.CurrentLvl > 3:
+                    PlayerShip.CurrentWeapon = PlayerShip.SecondWeapon;
                     break;
 
-                case true when Player.CurrentLvl < 10 && Player.CurrentLvl > 6:
-                    Player.CurrentWeapon = Player.ThirdWeapon;
+                case true when PlayerShip.CurrentLvl < 10 && PlayerShip.CurrentLvl > 6:
+                    PlayerShip.CurrentWeapon = PlayerShip.ThirdWeapon;
                     break;
 
                 default:
                     break;
             }
         }
+
         public static void AddScore(int scoreCount)
         {
             _currentScore += scoreCount;
