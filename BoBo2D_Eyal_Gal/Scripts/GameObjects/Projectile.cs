@@ -126,7 +126,6 @@ namespace BoBo2D_Eyal_Gal
                 {
                     if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
                     {
-                        //UIManager.DisableHealthIcons();
                         GameObjectManager.Instance.DestroyGameObject(this);
                     }
                 }
@@ -135,7 +134,6 @@ namespace BoBo2D_Eyal_Gal
                 {
                     if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
                     {
-                        (anotherCollider.GameObjectP as Spaceship).Health--;
                         GameObjectManager.Instance.DestroyGameObject(this);
                     }
                 }
@@ -146,7 +144,6 @@ namespace BoBo2D_Eyal_Gal
                 {
                     if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
                     {
-                        //UIManager.DisableHealthIcons();
                         DisableGameObject();
                         GameObjectManager.Instance.DestroyGameObject(this);
                     }
@@ -154,7 +151,6 @@ namespace BoBo2D_Eyal_Gal
 
                 if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
                 {
-                    (anotherCollider.GameObjectP as Spaceship).Health--;
                     DisableGameObject();
                     GameObjectManager.Instance.DestroyGameObject(this);
                 }
