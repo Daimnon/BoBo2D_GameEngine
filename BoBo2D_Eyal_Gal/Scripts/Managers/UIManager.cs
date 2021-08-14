@@ -6,32 +6,31 @@ namespace BoBo2D_Eyal_Gal
 {
     public static class UIManager
     {
-        public static UIHandler _uiHandler;
+        public static UIHandler UiHandler;
 
-        public static void AddHealth(int amount)
+        public static void ChangeHpBarSpacing(float spaceBy)
         {
-            for (int i = 0; i < amount; i++)
-            {
-                _uiHandler.AddHealth();
-            }
+            UiHandler.HealthBarSpacing = spaceBy;
         }
 
-        public static void ReduceHealth(int amount)
+        public static void AddHealth()
         {
-            for (int i = 0; i < amount; i++)
-            {
-                _uiHandler.ReduceHealth();
-            }
+            UiHandler.AddHealth();
+        }
+
+        public static void ReduceHealth()
+        {
+            UiHandler.ReduceHealth();
         }
 
         public static void UpdateAmmoCount(int ammoCount)
         {
-            _uiHandler.UpdateAmmo(ammoCount);
+            UiHandler.UpdateAmmo(ammoCount);
         }
 
         public static void UpdateScore(int scoreCount)
         {
-            _uiHandler.UpdateScore(scoreCount);
+            UiHandler.UpdateScore(scoreCount);
         }
     }
 }
