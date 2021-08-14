@@ -21,7 +21,7 @@ namespace BoBo2D_Eyal_Gal
         int _currentLvl = 1;
         int _score = 0;
         float _health, _maxHealth, _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
-        bool _isPlayer;
+        bool _isPlayer, _isAlive;
         bool _isDefeatedByPlayer = false;
         bool _isDefeatedByEnemy = false;
         bool _hasWeaponSprite = false;
@@ -46,6 +46,7 @@ namespace BoBo2D_Eyal_Gal
         public float DamageScalar { get => _damageScalar; set => _damageScalar = value; } 
         public float Exp { get => _exp; set => _exp = value; }
         public float MaxExp { get => _maxExp; set => _maxExp = value; }
+        public bool IsAlive { get => _isAlive; set => _isAlive = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
         public bool IsDefeatedByEnemy { get => _isDefeatedByEnemy; set => _isDefeatedByEnemy = value; }
         public bool IsPlayer { get => _isPlayer; set => _isPlayer = value; }
@@ -55,6 +56,7 @@ namespace BoBo2D_Eyal_Gal
         public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)
         {
             _isPlayer = isPlayer;
+            IsAlive = true;
             int scoreModifier;
             LoadStats(shipType);
             AddComponent(new Sprite(this, _spriteName));
@@ -92,6 +94,7 @@ namespace BoBo2D_Eyal_Gal
         public Spaceship(SpaceshipType shipType, string name, bool isPlayer, Vector2 position) : base(name)
         {
             _isPlayer = isPlayer;
+            IsAlive = true;
             int scoreModifier;
             GetComponent<Transform>().Position = position;
             LoadStats(shipType);
@@ -154,7 +157,7 @@ namespace BoBo2D_Eyal_Gal
             if (stats != null)
             {
                 _hasWeaponSprite = stats.HasWeaponSprite;
-                _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType, _hasWeaponSprite);
+                _firstWeapon = new Weapon(_isPlayer, this, stats.WeaponType, _hasWeaponSprite);
                 _currentWeapon = _firstWeapon;
                 _spriteName = stats.SpriteName;
                 _health = stats.MaxHealth;
@@ -191,7 +194,7 @@ namespace BoBo2D_Eyal_Gal
                 if (gameObjectTransform.Position.X - gameObjectCollider.BoxLeft <= anotherGameObjectTransform.Position.X + anotherGameObjectCollider.BoxRight)
                 {
                     gameObjectTransform.Position -= (new Vector2(1, 0));
-                    anotherGameObjectTransform.Position += (new Vector2(1, 0));
+                    //anotherGameObjectTransform.Position += (new Vector2(1, 0));
                 }
             }
 
@@ -201,7 +204,7 @@ namespace BoBo2D_Eyal_Gal
                 if (gameObjectTransform.Position.X + gameObjectCollider.BoxRight >= anotherGameObjectTransform.Position.X - anotherGameObjectCollider.BoxLeft)
                 {
                     gameObjectTransform.Position += (new Vector2(1, 0));
-                    anotherGameObjectTransform.Position -= (new Vector2(1, 0));
+                    //anotherGameObjectTransform.Position -= (new Vector2(1, 0));
                 }
             }
 
@@ -211,7 +214,7 @@ namespace BoBo2D_Eyal_Gal
                 if (gameObjectTransform.Position.Y + gameObjectCollider.BoxBottom >= anotherGameObjectTransform.Position.Y - anotherGameObjectCollider.BoxTop)
                 {
                     gameObjectTransform.Position -= (new Vector2(0, 1));
-                    anotherGameObjectTransform.Position += (new Vector2(0, 1));
+                    //anotherGameObjectTransform.Position += (new Vector2(0, 1));
                     //return;
                 }
             }
@@ -222,21 +225,9 @@ namespace BoBo2D_Eyal_Gal
                 if (gameObjectTransform.Position.Y - gameObjectCollider.BoxTop <= anotherGameObjectTransform.Position.Y + anotherGameObjectCollider.BoxBottom)
                 {
                     gameObjectTransform.Position += (new Vector2(0, 1));
-                    anotherGameObjectTransform.Position -= (new Vector2(0, 1));
+                    //anotherGameObjectTransform.Position -= (new Vector2(0, 1));
                 }
             }
-        }
-
-        public void CollidesWith(BoxCollider anotherCollider)
-        {
-            //be spesific about what type of object I collide with
-            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
-                SolveCollision(this, anotherCollider.GameObjectP);
-
-            Console.WriteLine("collission");
-            //solve collision
-            //take dmg
-            //etc..
         }
 
         public void StartCollidingWith(BoxCollider anotherCollider)
@@ -247,6 +238,25 @@ namespace BoBo2D_Eyal_Gal
         public void FinishedCollidingWith(BoxCollider anotherCollider)
         {
             //implement client logic
+        }
+
+        public void CollidesWith(BoxCollider anotherCollider)
+        {
+            //be spesific about what type of object I collide with
+            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                SolveCollision(this, anotherCollider.GameObjectP);
+
+            if (anotherCollider.GameObjectP is Projectile && !(anotherCollider.GameObjectP is Spaceship))
+                if (IsAlive)
+                    UIManager.ReduceHealth(1);
+
+                else if (Health < 1)
+                {
+                    IsAlive = false;
+                    Destroy();
+                }
+
+            Console.WriteLine("collission");
         }
         #endregion
 

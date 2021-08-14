@@ -42,5 +42,4 @@
             _hasWeaponSprite = hasWeaponSprite;
         }
     }
-
 }

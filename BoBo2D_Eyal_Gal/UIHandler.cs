@@ -17,8 +17,10 @@ namespace BoBo2D_Eyal_Gal
         GameObject _canvas;
         GameObject _ammoText;
         GameObject _scoreText;
-
         GameObject _player;
+
+        public GameObject Player => _player;
+
         List<GameObject> _healthBars = new List<GameObject>(3);
         public UIHandler(string healthBarSpriteName, string ammoSpriteName,string ammoFontName,string scoreFontName , string playerName)
         {
@@ -43,36 +45,38 @@ namespace BoBo2D_Eyal_Gal
             GameObject healthBarsUI = new GameObject("HealthBarsUI");
             GameObjectManager.Instance.AddGameObject(healthBarsUI, _canvas);
 
-            //add left most healthBar
-            GameObject healthBar = new GameObject(healthBarName, new Vector2(10, 10));
-            healthBar.AddComponent(new Sprite(healthBar, healthBarName));
-            GameObjectManager.Instance.AddGameObject(healthBar,healthBarsUI);
-            _healthBars.Add(healthBar);
+            //add first most health Icon
+            GameObject healthIcon = new GameObject(healthBarName, new Vector2(10, 10));
+            healthIcon.AddComponent(new Sprite(healthIcon, healthBarName));
+            GameObjectManager.Instance.AddGameObject(healthIcon,healthBarsUI);
+            _healthBars.Add(healthIcon);
 
-            //add Middle Health Bar
-            GameObject healthBar2 = new GameObject(healthBarName, new Vector2(50, 10));
-            healthBar.AddComponent(new Sprite(healthBar2, healthBarName));
-            GameObjectManager.Instance.AddGameObject(healthBar2,healthBarsUI);
-            _healthBars.Add(healthBar2);
+            //add second health Icon
+            GameObject secondHealthIcon = new GameObject(healthBarName, new Vector2(50, 10));
+            healthIcon.AddComponent(new Sprite(secondHealthIcon, healthBarName));
+            GameObjectManager.Instance.AddGameObject(secondHealthIcon,healthBarsUI);
+            _healthBars.Add(secondHealthIcon);
 
-            //add Right healthBar
-            GameObject healthBar3 = new GameObject(healthBarName, new Vector2(90, 10));
-            healthBar.AddComponent(new Sprite(healthBar3, healthBarName));
-            GameObjectManager.Instance.AddGameObject(healthBar3,healthBarsUI);
-            _healthBars.Add(healthBar3);
-
+            //add third health Icon
+            GameObject thirdHealthIcon = new GameObject(healthBarName, new Vector2(90, 10));
+            healthIcon.AddComponent(new Sprite(thirdHealthIcon, healthBarName));
+            GameObjectManager.Instance.AddGameObject(thirdHealthIcon,healthBarsUI);
+            _healthBars.Add(thirdHealthIcon);
         }
+
         public void ReduceHealth()
         {
             for (int i = _healthBars.Count - 1; i >= 0; i--)
             {
                 if(_healthBars[i].IsEnabled)
                 {
+                    (Player as Spaceship).Health -= 1;
                     _healthBars[i].IsEnabled = false;
                     return;
                 }
             }
         }
+
         public void AddHealth()
         {
             for (int i = 0; i < _healthBars.Count; i++)
@@ -80,10 +84,12 @@ namespace BoBo2D_Eyal_Gal
                 if (!_healthBars[i].IsEnabled)
                 {
                     _healthBars[i].IsEnabled = true;
+                    (Player as Spaceship).Health += 1;
                     return;
                 }
             }
         }
+
         void CreateAmmoBar(string ammoSpriteName)
         {
             GameObject ammoUI = new GameObject("AmmoUI");
@@ -98,7 +104,6 @@ namespace BoBo2D_Eyal_Gal
             _ammoText = new GameObject("AmmoText",new Vector2(700, 410));
             _ammoText.AddComponent(new TextSprite(_ammoText, _ammoFontName));
             GameObjectManager.Instance.AddGameObject(_ammoText, ammoUI);
-
         }
 
         public void UpdateAmmo(int ammoNumber)
@@ -111,12 +116,10 @@ namespace BoBo2D_Eyal_Gal
             GameObject scoreUI = new GameObject("ScoreUI");
             GameObjectManager.Instance.AddGameObject(scoreUI, _canvas);
 
-
             //create ammo text
             _scoreText = new GameObject("ScoreText", new Vector2(700, 10));
             _scoreText.AddComponent(new TextSprite(_scoreText, _scoreFontName));
             GameObjectManager.Instance.AddGameObject(_scoreText,scoreUI);
-
         }
 
         public void UpdateScore(int score)
