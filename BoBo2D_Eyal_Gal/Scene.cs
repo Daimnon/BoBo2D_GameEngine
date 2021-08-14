@@ -10,8 +10,9 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Field
         Game1 _game;
-        private WaveManager _waveManager;
-        private Spaceship _player;
+        WaveManager _waveManager;
+        Spaceship _player;
+        int _gameState;
         bool _isSceneAlive;
 
         #endregion
@@ -32,16 +33,54 @@ namespace BoBo2D_Eyal_Gal
         //initializing scene
         public void Init()
         {
+            switch (_gameState)
+            {
+                case 1:
+                    InitializeLevel1();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        public void Start()
+        {
+            switch (_gameState)
+            {
+                case 1:
+                    StartLevel1();
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        public void Update()
+        {
+            SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
+            //check collisions need implementation
+            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
+        }
+
+        public void DrawScene()
+        {
+            SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
+        }
+
+        public void InitializeLevel1()
+        {
             //Create Player Projectile
-            CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27,0, "Laser1");
+            CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27, 0, "Laser1");
             //Create Enemy Projectiles
-            CreateProjectile(ProjectileType.EnemyProjectile, 1, 1, 12,25, "Laser2");
+            CreateProjectile(ProjectileType.EnemyProjectile, 1, 1, 12, 25, "Laser2");
             //Create Basic Weapon
-            CreateWeapon(WeaponType.BasicMainWeapon,ProjectileType.BasicProjectile ,1, 100, 1, 1, null);
+            CreateWeapon(WeaponType.BasicMainWeapon, ProjectileType.BasicProjectile, 1, 100, 1, 1, null);
             //Create Basic Enemy Weapon
             CreateWeapon(WeaponType.BasicEnemyWeapon, ProjectileType.EnemyProjectile, 3, 1000, 1, 1, null);
             //Create Player Spaceship
-            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 3, 1, 0, 40, 1, 3, 100, false,"PlayerShip");
+            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 3, 1, 0, 40, 1, 3, 100, false, "PlayerShip");
             //Create Enemy Spaceship
             CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicEnemyWeapon, 1, 1, 0, 10, 1, 1, 100, false, "RebelShip");
             //ger root Scene Game1 State
@@ -58,24 +97,13 @@ namespace BoBo2D_Eyal_Gal
             DrawManager.Game = _game;
         }
 
-        public void Start()
+        public void StartLevel1()
         {
             CreateBackGround("BackGround", "BG");
             CreatePlayer("Player");
-            _waveManager.AddWave(500, 500, 5,SpaceshipType.BasicEnemySpaceship);
+            _waveManager.AddWave(500, 500, 5, SpaceshipType.BasicEnemySpaceship);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
-        }
-        public void Update()
-        {
-            SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
-            //check collisions need implementation
-            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
-        }
-
-        public void DrawScene()
-        {
-            SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
         }
 
         void CreateWeapon(WeaponType weaponType,ProjectileType projectileType, int cooldown, int maxAmmo, float baseDamage, float damageScalar, string spriteName)
@@ -106,6 +134,7 @@ namespace BoBo2D_Eyal_Gal
             };
             DataManager.Instance.SoundDataHolder.SoundNames = soundNames;
         }
+
         void AddFonts()
         {
             List<string> fontNames = new List<string>()

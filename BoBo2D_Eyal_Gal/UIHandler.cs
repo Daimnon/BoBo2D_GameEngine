@@ -89,7 +89,6 @@ namespace BoBo2D_Eyal_Gal
                 _healthIcons.Add(_healthBar);
                 healthBar.IsEnabled = true;
             }
-
         }
 
         void UpdateHealthBar()
@@ -127,7 +126,6 @@ namespace BoBo2D_Eyal_Gal
             {
                 if(_healthIcons[i].IsEnabled)
                 {
-                    //(_player as Spaceship).Health--;
                     IsHpReducing = true;
                     bool tempBool = IsHpReducing;
                     _healthIcons[i].IsEnabled = false;
