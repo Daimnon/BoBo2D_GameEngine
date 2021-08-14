@@ -40,7 +40,6 @@ namespace BoBo2D_Eyal_Gal
             WeaponType weaponType, Transform transform, bool isPlayerProjectile, Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
             Name = name;
-            GameObjectP = this;
             AddToHirarcy();
             _spaceShip = spaceship;
             LoadStats(projectileType);
@@ -57,6 +56,7 @@ namespace BoBo2D_Eyal_Gal
             _damage *= damageScalar;
             _flying = true;
             _isPlayerProjectile = isPlayerProjectile;
+            GameObjectP = this;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
 
@@ -120,7 +120,7 @@ namespace BoBo2D_Eyal_Gal
             if (anotherCollider.GameObjectP as Spaceship == null)
                 return;
 
-            if (!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer))
+            if ((!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer))&&(!IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer))
             {
                 if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
                 {

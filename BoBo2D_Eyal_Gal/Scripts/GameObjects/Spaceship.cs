@@ -251,7 +251,7 @@ namespace BoBo2D_Eyal_Gal
                 if (Health <= 0)
                 {
                     IsDefeatedByEnemy = true;
-                    DisableGameObject();
+                    //DisableGameObject();
                     GameObjectManager.Instance.DestroyGameObject(this);
                 }
             }
