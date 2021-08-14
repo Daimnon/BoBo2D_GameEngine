@@ -20,6 +20,7 @@ namespace BoBo2D_Eyal_Gal
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+            Scene.GameState = -1;
             //can set window size here
 
             _activeScene = new SceneManager(this);
@@ -29,7 +30,6 @@ namespace BoBo2D_Eyal_Gal
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             _activeScene.Init();
 
             base.Initialize();
