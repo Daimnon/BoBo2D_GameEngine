@@ -83,6 +83,24 @@ namespace BoBo2D_Eyal_Gal
 
         public void DrawScene()
         {
+            switch (_gameState)
+            {
+                case -1:
+                    DrawSplashScreen();
+                    break;
+
+                case 0:
+                    DrawMainMenu();
+                    break;
+
+                case 1:
+                    DrawLevel1();
+                    break;
+
+                default:
+                    break;
+            }
+
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
         }
 
@@ -96,12 +114,22 @@ namespace BoBo2D_Eyal_Gal
 
         }
 
+        public void DrawSplashScreen()
+        {
+            SplashScreen.DrawSplashScreen();
+        }
+
         public void InitializeMainMenu()
         {
 
         }
 
         public void StartMainMenu()
+        {
+
+        }
+
+        public void DrawMainMenu()
         {
 
         }
@@ -141,6 +169,11 @@ namespace BoBo2D_Eyal_Gal
             _waveManager.AddWave(500, 500, 5, SpaceshipType.BasicEnemySpaceship);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
+        }
+
+        public void DrawLevel1()
+        {
+
         }
         #endregion
     }
