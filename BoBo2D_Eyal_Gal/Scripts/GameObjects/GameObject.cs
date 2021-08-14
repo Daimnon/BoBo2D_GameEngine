@@ -83,10 +83,10 @@ namespace BoBo2D_Eyal_Gal
             int index = _components.Count;
             for (int i = index - 1; i >= 0; i--)
             {
-                Unsubscribe();
                 _components[i].Unsubscribe();
                 _components.Remove(_components[i]);
             }
+            Unsubscribe();
             //OnDisable();
             Console.WriteLine($"{Name} is Destroyed");
             Console.WriteLine();

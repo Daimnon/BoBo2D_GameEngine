@@ -113,7 +113,7 @@ namespace BoBo2D_Eyal_Gal
 
         public override void Unsubscribe()
         {
-
+            Physics.AllBoxColliders.Remove(this);
         }
         #endregion
     }
