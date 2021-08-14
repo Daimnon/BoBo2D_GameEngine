@@ -30,6 +30,7 @@ namespace BoBo2D_Eyal_Gal
 
         #region Properties
         public int CurrentAmmo => _currentAmmo;
+        public float BaseDamage => _baseDamage;
         #endregion
         public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType, bool hasSprite):base(weaponType.ToString())
         {
@@ -38,7 +39,7 @@ namespace BoBo2D_Eyal_Gal
             LoadStats(weaponType);
             _projectileName = weaponType.ToString() + "Projectile";
 
-            if(hasSprite)
+            if (hasSprite)
                 AddComponent(new Sprite(this, _spriteName));
 
             SubscriptionManager.AddSubscriber<IUpdatable>(this);

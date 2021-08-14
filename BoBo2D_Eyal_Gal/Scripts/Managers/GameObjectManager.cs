@@ -27,6 +27,7 @@ namespace BoBo2D_Eyal_Gal
             }
         }
         #endregion
+
         #region Fields
         List<TreeOfGameObjects> _hirarchy = new List<TreeOfGameObjects>(10);
         #endregion

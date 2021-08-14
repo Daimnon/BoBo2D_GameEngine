@@ -20,7 +20,8 @@ namespace BoBo2D_Eyal_Gal
         string _spriteName;
         int _currentLvl = 1;
         int _score = 0;
-        float _health, _maxHealth, _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
+        int _health, _maxHealth;
+        float _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
         bool _isPlayer;
         bool _isDefeatedByPlayer = false;
         bool _isDefeatedByEnemy = false;
@@ -36,14 +37,14 @@ namespace BoBo2D_Eyal_Gal
         public string SpriteName => _spriteName;
         public int CurrentLvl { get => _currentLvl; set => _currentLvl = value; }
         public int Score { get => _score; set => _score = value; }
-        public float Health { get => _health; set => _health = value; }
-        public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+        public int Health { get => _health; set => _health = value; }
+        public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
         public float HealthRegen { get => _healthRegen; set => _healthRegen = value; }
         public float Shield { get => _shield; set => _shield = value; }
         public float MaxShield { get => _maxShield; set => _maxShield = value; }
         public float ShieldRegen { get => _shieldRegen; set => _shieldRegen = value; }
         public float Speed { get => _speed; set => _speed = value; }
-        public float DamageScalar { get => _damageScalar; set => _damageScalar = value; } 
+        public float DamageScalar { get => _damageScalar; set => _damageScalar = value; }
         public float Exp { get => _exp; set => _exp = value; }
         public float MaxExp { get => _maxExp; set => _maxExp = value; }
         public bool IsDefeatedByPlayer { get => _isDefeatedByPlayer; set => _isDefeatedByPlayer = value; }
@@ -52,7 +53,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Constructors
-        public Spaceship(SpaceshipType shipType,string name,bool isPlayer) : base(name)
+        public Spaceship(SpaceshipType shipType, string name, bool isPlayer) : base(name)
         {
             _isPlayer = isPlayer;
             int scoreModifier;
@@ -63,13 +64,14 @@ namespace BoBo2D_Eyal_Gal
             GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
             GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
             AddComponent(new Rigidbooty(this));
+            Health = MaxHealth;
             _lastFramePosition = new Vector2(0, 0);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
 
             if (_isPlayer)
             {
                 //connect progression system to player
-                PlayerProgression.Player = this;
+                PlayerLevelManager.Player = this;
 
                 //starting position
                 GetComponent<Transform>().Position = new Vector2(320, 300);
@@ -99,16 +101,17 @@ namespace BoBo2D_Eyal_Gal
             AddComponent(new BoxCollider(this));
             GetComponent<BoxCollider>().OnCollision += CollidesWith;
             AddComponent(new Rigidbooty(this));
+            Health = MaxHealth;
             _lastFramePosition = new Vector2(0, 0);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
 
             if (_isPlayer)
             {
                 //connect progression system to player
-                PlayerProgression.Player = this;
+                PlayerLevelManager.Player = this;
 
                 //starting position
-                PlayerProgression.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
+                PlayerLevelManager.Player.GetComponent<Transform>().Position = new Vector2(320, 300);
             }
 
             if (!_isPlayer)
@@ -129,22 +132,23 @@ namespace BoBo2D_Eyal_Gal
         #region Methods
         public void Update()
         {
-            if(_isPlayer == false)
+            if (_isPlayer == false)
             {
                 CheckEnemyPosition();
-                MovementHandler.Movement(MoveDirection.Down, this, _speed);                    
+                MovementHandler.Movement(MoveDirection.Down, this, _speed);
                 FirstWeapon.Shoot(_currentSpeed);
             }
             else
             {
+                Exp += 1 * CurrentLvl;
                 UIManager.UpdateAmmoCount(_currentWeapon.CurrentAmmo);
-                UIManager.UpdateScore(PlayerProgression.CurrentScore);
+                UIManager.UpdateScore(PlayerLevelManager.CurrentScore);
             }
         }
 
         public void CalculateCurrentSpeed(Vector2 currentPosition)
         {
-            _currentSpeed =  currentPosition - _lastFramePosition;
+            _currentSpeed = currentPosition - _lastFramePosition;
             _lastFramePosition = currentPosition;
         }
 
@@ -154,7 +158,7 @@ namespace BoBo2D_Eyal_Gal
             if (stats != null)
             {
                 _hasWeaponSprite = stats.HasWeaponSprite;
-                _firstWeapon = new Weapon(_isPlayer,this,stats.WeaponType, _hasWeaponSprite);
+                _firstWeapon = new Weapon(_isPlayer, this, stats.WeaponType, _hasWeaponSprite);
                 _currentWeapon = _firstWeapon;
                 _spriteName = stats.SpriteName;
                 _health = stats.MaxHealth;
@@ -230,13 +234,37 @@ namespace BoBo2D_Eyal_Gal
         public void CollidesWith(BoxCollider anotherCollider)
         {
             //be spesific about what type of object I collide with
-            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
-                SolveCollision(this, anotherCollider.GameObjectP);
+            if (anotherCollider.GameObjectP == null)
+                return;
 
-            Console.WriteLine("collission");
-            //solve collision
-            //take dmg
-            //etc..
+            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+            {
+                SolveCollision(this, anotherCollider.GameObjectP);
+                CombatManager.ReduceHealth(CurrentWeapon);
+                if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    (anotherCollider.GameObjectP as Spaceship).Health--;
+            }
+
+            if (IsPlayer && anotherCollider.GameObjectP is Projectile && !(anotherCollider.GameObjectP as Projectile).IsPlayerProjectile)
+            {
+                CombatManager.ReduceHealth(CurrentWeapon);
+                if (Health <= 0)
+                {
+                    IsDefeatedByEnemy = true;
+                    DisableGameObject();
+                    GameObjectManager.Instance.DestroyGameObject(this);
+                }
+            }
+
+            if (!IsPlayer && anotherCollider.GameObjectP is Projectile && (anotherCollider.GameObjectP as Projectile).IsPlayerProjectile)
+            {
+                Health--;
+                if (Health <= 0)
+                {
+                    IsDefeatedByPlayer = true;
+                    GameObjectManager.Instance.DestroyGameObject(this);
+                }
+            }
         }
 
         public void StartCollidingWith(BoxCollider anotherCollider)

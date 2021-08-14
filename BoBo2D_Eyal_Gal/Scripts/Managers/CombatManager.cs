@@ -6,6 +6,7 @@ namespace BoBo2D_Eyal_Gal
 {
     public static class CombatManager
     {
+        static GameObject _player = GameObjectManager.Instance.FindGameObjectByName("Player");
         //get the button and translate it to a weapon to shoot with
         public static void FireWeapon(Spaceship spaceship, SelectedWeapon type)
         {
@@ -27,6 +28,18 @@ namespace BoBo2D_Eyal_Gal
                     Console.WriteLine("Unrecognized Weapon");
                     break;
             }
+        }
+
+        public static void ReduceHealth(Weapon weapon)
+        {
+            (_player as Spaceship).Health -= (int)weapon.BaseDamage;
+            UIManager.DisableHealthIcons();
+        }
+
+        public static void AddHealth(Weapon weapon)
+        {
+            (_player as Spaceship).Health += (int)weapon.BaseDamage;
+            UIManager.EnableHealthIcons();
         }
     }
 }

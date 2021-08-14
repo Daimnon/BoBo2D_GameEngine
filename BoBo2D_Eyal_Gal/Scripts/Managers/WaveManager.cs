@@ -52,10 +52,28 @@ namespace BoBo2D_Eyal_Gal
         void SpawnEnemies(int waveNumber)
         {
             //can make calculation acording to the wave number
+            /*if (waveNumber < 0)
+                waveNumber++;
+
+            if (waveNumber > _waves.Count)
+                waveNumber--;*/
+
             if (_waves != null)
             {
+                try
+                {
+                    _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
+                    _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
+                }
+                catch(ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("No Enemies.");
+                }
+
+                /*
                 _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
                     _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
+                */
             }
         }
         void WaveState(WaveStatus waveStatus)

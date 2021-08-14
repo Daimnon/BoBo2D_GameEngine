@@ -25,8 +25,9 @@ namespace BoBo2D_Eyal_Gal
             _game = game;
             _waveManager = new WaveManager();
             _isSceneAlive = true;
-            UIManager._uiHandler = new UIHandler("HealthBar","Ammo","GameSpriteFont","GameSpriteFont", "Player");
+            UIManager.UiHandler = new UIHandler("HealthBar","Ammo","GameSpriteFont","GameSpriteFont", "Player");
         }
+
         #region Methods
         //initializing scene
         public void Init()
@@ -40,9 +41,9 @@ namespace BoBo2D_Eyal_Gal
             //Create Basic Enemy Weapon
             CreateWeapon(WeaponType.BasicEnemyWeapon, ProjectileType.EnemyProjectile, 3, 1000, 1, 1, null);
             //Create Player Spaceship
-            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 100, 1, 0, 40, 1, 3, 100, false,"PlayerShip");
+            CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 3, 1, 0, 40, 1, 3, 100, false,"PlayerShip");
             //Create Enemy Spaceship
-            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicEnemyWeapon, 30, 1, 0, 10, 1, 1, 100, false, "RebelShip");
+            CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicEnemyWeapon, 1, 1, 0, 10, 1, 1, 100, false, "RebelShip");
             //ger root Scene Game1 State
             DataManager.Game = _game;
             //add all wanted sprites

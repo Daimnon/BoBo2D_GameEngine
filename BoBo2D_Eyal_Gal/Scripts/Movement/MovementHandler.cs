@@ -24,7 +24,12 @@ namespace BoBo2D_Eyal_Gal
             Transform transform = gameObject.GetComponent<Transform>();
 
             if (gameObject is Spaceship ship)
+            {
+                if (transform == null)
+                    return;
+
                 ship.CalculateCurrentSpeed(transform.Position);
+            }
 
             switch (direction)
             {
