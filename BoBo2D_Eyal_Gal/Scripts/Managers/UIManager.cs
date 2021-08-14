@@ -13,14 +13,14 @@ namespace BoBo2D_Eyal_Gal
             UiHandler.HealthBarSpacing = spaceBy;
         }
 
-        public static void AddHealth()
+        public static void EnableHealthIcons()
         {
-            UiHandler.AddHealth();
+            UiHandler.EnableHealthIcons();
         }
 
-        public static void ReduceHealth()
+        public static void DisableHealthIcons()
         {
-            UiHandler.ReduceHealth();
+            UiHandler.DisableHealthIcons();
         }
 
         public static void UpdateAmmoCount(int ammoCount)

@@ -140,6 +140,7 @@ namespace BoBo2D_Eyal_Gal
             }
             else
             {
+                Exp += 1 * CurrentLvl;
                 UIManager.UpdateAmmoCount(_currentWeapon.CurrentAmmo);
                 UIManager.UpdateScore(PlayerLevelManager.CurrentScore);
             }
@@ -233,12 +234,37 @@ namespace BoBo2D_Eyal_Gal
         public void CollidesWith(BoxCollider anotherCollider)
         {
             //be spesific about what type of object I collide with
-            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
-                SolveCollision(this, anotherCollider.GameObjectP);
+            if (anotherCollider.GameObjectP == null)
+                return;
 
-            if (anotherCollider.GameObjectP is Projectile && !(anotherCollider.GameObjectP is Spaceship))
-                if (Health == 0)
-                    Destroy();
+            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+            {
+                SolveCollision(this, anotherCollider.GameObjectP);
+                CombatManager.ReduceHealth(CurrentWeapon);
+                if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    (anotherCollider.GameObjectP as Spaceship).Health--;
+            }
+
+            if (IsPlayer && anotherCollider.GameObjectP is Projectile && !(anotherCollider.GameObjectP as Projectile).IsPlayerProjectile)
+            {
+                CombatManager.ReduceHealth(CurrentWeapon);
+                if (Health <= 0)
+                {
+                    IsDefeatedByEnemy = true;
+                    DisableGameObject();
+                    GameObjectManager.Instance.DestroyGameObject(this);
+                }
+            }
+
+            if (!IsPlayer && anotherCollider.GameObjectP is Projectile && (anotherCollider.GameObjectP as Projectile).IsPlayerProjectile)
+            {
+                Health--;
+                if (Health <= 0)
+                {
+                    IsDefeatedByPlayer = true;
+                    GameObjectManager.Instance.DestroyGameObject(this);
+                }
+            }
         }
 
         public void StartCollidingWith(BoxCollider anotherCollider)

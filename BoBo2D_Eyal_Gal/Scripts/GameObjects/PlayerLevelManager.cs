@@ -60,6 +60,11 @@ namespace BoBo2D_Eyal_Gal
             PlayerShip.DamageScalar += 0.1f;
         }
 
+        public static void GainExp(GameObject enemy)
+        {
+            PlayerShip.Exp += (enemy as Spaceship).Exp;
+        }
+
         public static void ResetExp()
         {
             float tempExp;

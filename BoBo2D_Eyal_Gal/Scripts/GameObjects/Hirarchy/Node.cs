@@ -27,6 +27,7 @@ namespace BoBo2D_Eyal_Gal
             _gameObject = gameObject;
             _gameObject.Node = this;
             _children = new List<Node>();
+
             if (parent != null)
             {
                 _isRoot = false;
@@ -34,23 +35,24 @@ namespace BoBo2D_Eyal_Gal
                 parent.AddChild(this);
             }
         }
+
         public void AddChild(Node child)
         {
             child.Parant = this;
             _children.Add(child);
         }
+
         public void RemoveChild(Node child)
         {
             _children.Remove(child);
         }
+
         public void EnableNode(Node node)//enabling all nodes
         {
             Console.WriteLine($"Enabling {node}");
             node.GameObjectP.EnableGameObject();
             foreach (var child in node.Children)
-            {
                 EnableNode(child);
-            }
 
             Console.WriteLine();
         }
@@ -59,9 +61,7 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine($"Disabling {node}");
             node.GameObjectP.DisableGameObject();
             foreach (var child in node.Children)
-            {
                 DisableNode(child);
-            }
         }
         public GameObject FindGameObjectByName(string gameObjectName)
         {
@@ -105,16 +105,20 @@ namespace BoBo2D_Eyal_Gal
                     RemoveChild(child);
                 }
             }
+
             GameObjectP.Destroy();
             if (IsRoot)
             {
+                if (_tree == null)
+                    //game over logic
+                    return;
+
                 _tree.DestroyTree();
             }
             else
-            {
                 Parant.RemoveChild(this);
-            }
         }
+
         public override string ToString()
         {
             return GameObjectP.Name.ToString() + Environment.NewLine;

@@ -105,7 +105,7 @@ namespace BoBo2D_Eyal_Gal
                                 _healthIcons[i].IsEnabled = true;
         }
 
-        public void AddHealth()
+        public void EnableHealthIcons()
         {
             for (int i = 0; i < _healthIcons.Count; i++)
             {
@@ -121,12 +121,13 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
-        public void ReduceHealth()
+        public void DisableHealthIcons()
         {
-            for (int i = _healthIcons.Count - 1; i >= 0; i--)
+            for (int i = _healthIcons.Count -1; i >= 0; i--)
             {
                 if(_healthIcons[i].IsEnabled)
                 {
+                    //(_player as Spaceship).Health--;
                     IsHpReducing = true;
                     bool tempBool = IsHpReducing;
                     _healthIcons[i].IsEnabled = false;

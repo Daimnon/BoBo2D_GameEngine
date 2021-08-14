@@ -37,7 +37,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         public Projectile(string name, Vector2 flightDirectin, float damageScalar,
-                          WeaponType weaponType, Transform transform, bool isPlayerProjectile, Spaceship spaceship, ProjectileType projectileType) : base(name)
+            WeaponType weaponType, Transform transform, bool isPlayerProjectile, Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
             Name = name;
             GameObjectP = this;
@@ -70,11 +70,13 @@ namespace BoBo2D_Eyal_Gal
             if (_flying)
             {
                 if (_isPlayerProjectile)
+                {
                     if (_projectileDirection.Y <= 0)
                         MovementHandler.Movement(MoveDirection.Up, this, 1);
 
                     else
                         MovementHandler.Movement(MoveDirection.Up, this, _projectileDirection);
+                }
 
                 else
                 {
@@ -99,9 +101,7 @@ namespace BoBo2D_Eyal_Gal
                 GameObjectManager.Instance.AddGameObject(this, projectileHolder);
             }
             else
-            {
                 GameObjectManager.Instance.AddGameObject(this, projectile);
-            }
         }
 
         void LoadStats(ProjectileType projectileType)
@@ -117,14 +117,17 @@ namespace BoBo2D_Eyal_Gal
         public void CollidesWith(BoxCollider anotherCollider)
         {
             //be spesific about what type of object I collide with
+            if (anotherCollider.GameObjectP as Spaceship == null)
+                return;
+
             if (!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer))
             {
                 if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
                 {
                     if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
                     {
-                        UIManager.ReduceHealth();
-                        Destroy();
+                        //UIManager.DisableHealthIcons();
+                        GameObjectManager.Instance.DestroyGameObject(this);
                     }
                 }
 
@@ -133,7 +136,7 @@ namespace BoBo2D_Eyal_Gal
                     if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
                     {
                         (anotherCollider.GameObjectP as Spaceship).Health--;
-                        Destroy();
+                        GameObjectManager.Instance.DestroyGameObject(this);
                     }
                 }
             }
@@ -141,21 +144,23 @@ namespace BoBo2D_Eyal_Gal
             {
                 if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
                 {
-                    if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
                     {
-                        UIManager.ReduceHealth();
-                        Destroy();
+                        //UIManager.DisableHealthIcons();
+                        DisableGameObject();
+                        GameObjectManager.Instance.DestroyGameObject(this);
                     }
                 }
 
                 if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
                 {
                     (anotherCollider.GameObjectP as Spaceship).Health--;
-                    Destroy();
+                    DisableGameObject();
+                    GameObjectManager.Instance.DestroyGameObject(this);
                 }
             }
 
-            else if ((IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer))
+            else if (IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
                 return;
         }
 
