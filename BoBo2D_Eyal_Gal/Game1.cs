@@ -8,11 +8,11 @@ namespace BoBo2D_Eyal_Gal
     public class Game1 : Game
     {
         #region Fields
-        private List<Scene> _allScenes = new List<Scene>(5);
+        private List<SceneManager> _allScenes = new List<SceneManager>(5);
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
         private SpriteFont _gameFont = default;
-        private Scene _activeScene;
+        private SceneManager _activeScene;
         #endregion
 
         public Game1()
@@ -22,7 +22,7 @@ namespace BoBo2D_Eyal_Gal
             IsMouseVisible = true;
             //can set window size here
 
-            _activeScene = new Scene(this);
+            _activeScene = new SceneManager(this);
             _allScenes.Add(_activeScene);
         }
 

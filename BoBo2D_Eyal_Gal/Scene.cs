@@ -1,110 +1,112 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Microsoft.Xna.Framework;
-
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class Scene
+    public static class Scene
     {
         #region Field
-        Game1 _game;
-        WaveManager _waveManager;
-        Spaceship _player;
-        int _gameState;
-        bool _isSceneAlive;
-
+        static Game1 _game;
+        static WaveManager _waveManager;
+        static Spaceship _player;
+        static int _gameState;
+        static bool _isSceneAlive;
         #endregion
 
         #region Properties
-
+        public static int GameState { get => _gameState; set => _gameState = value; }
         #endregion
 
-        public Scene(Game1 game)
-        {
-            _gameState = 1;
-            _game = game;
-            _waveManager = new WaveManager();
-            _isSceneAlive = true;
-            UIManager.UiHandler = new UIHandler("HealthBar","Ammo","GameSpriteFont","GameSpriteFont", "Player");
-        }
-
         #region Methods
-        //initializing scene
-        public void Init()
+        public static void AddFonts()
         {
-            switch (_gameState)
+            List<string> fontNames = new List<string>()
             {
-                case 1:
-                    InitializeLevel1();
-                    break;
+                "GameSpriteFont"
+            };
 
-                default:
-                    break;
-            }
+            DataManager.Instance.FontDataHolder.FontNames = fontNames;
         }
 
-        public void Start()
+        public static void AddSprites()
         {
-            switch (_gameState)
+            List<string> spriteNames = new List<string>()
             {
-                case 1:
-                    StartLevel1();
-                    break;
+                "BG",
+                "PlayerShip",
+                "EnemyBoss",
+                "RebelShip",
+                "EnemyBossJetBeam",
+                "PlayerJetBeam",
+                "RebelJetBeam",
+                "Bolt1",
+                "Bolt2",
+                "Laser1",
+                "Laser2",
+                "HealthBar",
+                "Ammo",
+            };
 
-                default:
-                    break;
-            }
+            DataManager.Instance.SpriteDataHolder.SpriteNames = spriteNames;
         }
 
-        public void Update()
+        public static void AddSounds()
         {
-            SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
-            //check collisions need implementation
-            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
+            List<string> soundNames = new List<string>()
+            {
+                //sound names
+            };
+            DataManager.Instance.SoundDataHolder.SoundNames = soundNames;
         }
 
-        public void DrawScene()
+        public static void CreateBackGround(string backgroundName, string backgroundSprite)
         {
-            SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
+            GameObject background = new GameObject(backgroundName);
+            GameObjectManager.Instance.AddGameObject(background);
+            background.AddComponent(new Sprite(background, backgroundSprite));
         }
 
-        public void InitializeLevel1()
+        public static void CreatePlayer(string playerName)
         {
-            //Create Player Projectile
-            SceneManager.CreateProjectile(ProjectileType.BasicProjectile, 1, 1, 27, 0, "Laser1");
-            //Create Enemy Projectiles
-            SceneManager.CreateProjectile(ProjectileType.EnemyProjectile, 1, 1, 12, 25, "Laser2");
-            //Create Basic Weapon
-            SceneManager.CreateWeapon(WeaponType.BasicMainWeapon, ProjectileType.BasicProjectile, 1, 100, 1, 1, null);
-            //Create Basic Enemy Weapon
-            SceneManager.CreateWeapon(WeaponType.BasicEnemyWeapon, ProjectileType.EnemyProjectile, 3, 1000, 1, 1, null);
-            //Create Player Spaceship
-            SceneManager.CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 3, 1, 0, 40, 1, 3, 100, false, "PlayerShip");
-            //Create Enemy Spaceship
-            SceneManager.CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicEnemyWeapon, 1, 1, 0, 10, 1, 1, 100, false, "RebelShip");
-            //ger root Scene Game1 State
-            DataManager.Game = _game;
-            //add all wanted sprites
-            SceneManager.AddSprites();
-            //add all wanted sounds
-            SceneManager.AddSounds();
-            //load all sounds
-            SceneManager.AddFonts();
-            //load all fonts
-            DataManager.Instance.LoadAllExternalData();
-            //ger root Scene Game1 State
-            DrawManager.Game = _game;
+            _player = new Spaceship(SpaceshipType.BasicPlayerSpaceship, playerName, true);
+            GameObjectManager.Instance.AddGameObject(_player);
+            //new InputManager(_player, _projectileOffset, Keys.Up, Keys.Down, Keys.Left, Keys.Right, Keys.Space, Keys.LeftControl, Keys.LeftShift);
+            new InputManager(_player, false, false);
+
+            /*
+            //*onboard input system* - wasd scheme + shoot weapons with number keys
+            new InputManager(_player, true, true);
+            /
+            //custom set of movement input keys - *!use only with onboard input systems!*
+            new InputManager(_player, Keys.I, Keys.K, Keys.J, Keys.L);
+            /
+            //custom set of weapon input keys + projectile transform offset - *!use only with onboard input systems!*
+            new InputManager(_player, _projectileOffset, Keys.Z, Keys.X, Keys.C);
+            /
+            //custom set of movement & weapon input keys with projectile transform offset
+            new InputManager(_player, _projectileOffset, Keys.I, Keys.K, Keys.J, Keys.L, Keys.Z, Keys.X, Keys.C);
+            */
         }
 
-        public void StartLevel1()
+        public static void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
+            float shieldRegen, float speed, int score, bool hasWeaponSprite, string spriteName)
         {
-            SceneManager.CreateBackGround("BackGround", "BG");
-            SceneManager.CreatePlayer("Player");
-            _waveManager.AddWave(500, 500, 5, SpaceshipType.BasicEnemySpaceship);
-            SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
-            //_waveManager = new WaveManager(0, 750);
+            ShipStats spaceShipStats = new ShipStats(shipType, weaponType, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed,
+                score, hasWeaponSprite, spriteName);
+            StatsHandler.AddToCollection(spaceShipStats);
+        }
+
+        public static void CreateWeapon(WeaponType weaponType, ProjectileType projectileType, int cooldown, int maxAmmo, float baseDamage, float damageScalar, string spriteName)
+        {
+            WeaponStats weaponStats = new WeaponStats(weaponType, projectileType, cooldown, maxAmmo, baseDamage, damageScalar, spriteName);
+            StatsHandler.AddToCollection(weaponStats);
+        }
+
+        public static void CreateProjectile(ProjectileType projectileType, float damage, float speed, float projectileOffsetX, float projectileOffsetY, string spriteName)
+        {
+            ProjectileStats projectileStats = new ProjectileStats(projectileType, damage, speed, projectileOffsetX, projectileOffsetY, spriteName);
+            StatsHandler.AddToCollection(projectileStats);
         }
         #endregion
     }
