@@ -1,11 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "pN24hFY7z0ypcscW/lTEkxUacvx6uyZpjLlpiarw441vYFA0ahJSXLlZj+estQi7fWv0j80/QZJ2IXd+/i41NQ==",
+  "dgSpecHash": "LERf1cvZXnLaA/bLZtASzN/fjK8508mXh+ih1RYHZugdQ3joyUK/EplnM+NNY0WxXX+StWGFg05p2DtkfgVmTQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\edeya\\Documents\\GitHub\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj",
+  "projectFilePath": "C:\\Users\\new-hp\\source\\repos\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal\\BoBo2D_Eyal_Gal.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\edeya\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
-    "C:\\Users\\edeya\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+    "C:\\Users\\new-hp\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\new-hp\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
   ],
   "logs": []
 }

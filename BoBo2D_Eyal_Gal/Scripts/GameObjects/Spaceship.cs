@@ -20,7 +20,8 @@ namespace BoBo2D_Eyal_Gal
         string _spriteName;
         int _currentLvl = 1;
         int _score = 0;
-        float _health, _maxHealth, _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
+        int _health, _maxHealth;
+        float _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
         bool _isPlayer;
         bool _isDefeatedByPlayer = false;
         bool _isDefeatedByEnemy = false;
@@ -36,8 +37,8 @@ namespace BoBo2D_Eyal_Gal
         public string SpriteName => _spriteName;
         public int CurrentLvl { get => _currentLvl; set => _currentLvl = value; }
         public int Score { get => _score; set => _score = value; }
-        public float Health { get => _health; set => _health = value; }
-        public float MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+        public int Health { get => _health; set => _health = value; }
+        public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
         public float HealthRegen { get => _healthRegen; set => _healthRegen = value; }
         public float Shield { get => _shield; set => _shield = value; }
         public float MaxShield { get => _maxShield; set => _maxShield = value; }
@@ -63,6 +64,7 @@ namespace BoBo2D_Eyal_Gal
             GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
             GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
             AddComponent(new Rigidbooty(this));
+            Health = MaxHealth;
             _lastFramePosition = new Vector2(0, 0);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
 
@@ -99,6 +101,7 @@ namespace BoBo2D_Eyal_Gal
             AddComponent(new BoxCollider(this));
             GetComponent<BoxCollider>().OnCollision += CollidesWith;
             AddComponent(new Rigidbooty(this));
+            Health = MaxHealth;
             _lastFramePosition = new Vector2(0, 0);
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
 
@@ -233,6 +236,9 @@ namespace BoBo2D_Eyal_Gal
             if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
                 SolveCollision(this, anotherCollider.GameObjectP);
 
+            if (anotherCollider.GameObjectP is Projectile && !(anotherCollider.GameObjectP is Spaceship))
+                if (Health == 0)
+                    Destroy();
             Console.WriteLine("collission");
             //solve collision
             //take dmg

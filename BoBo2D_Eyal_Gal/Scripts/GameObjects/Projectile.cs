@@ -46,6 +46,9 @@ namespace BoBo2D_Eyal_Gal
             Vector2 pos = transform.Position;
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
+            GetComponent<BoxCollider>().OnCollision += CollidesWith;
+            GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
+            GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
             AddComponent(new Rigidbooty(this));
             _projectileDirection = flightDirectin*_speed * _spaceShip.CurrentSpeed;
             _projectileTransform = GetComponent<Transform>();
@@ -108,6 +111,22 @@ namespace BoBo2D_Eyal_Gal
             _projectileOffsetX = stats.ProjectileOffsetX;
             _projectileOffsetY = stats.ProjectileOffsetY;
             _spriteName = stats.SpriteName;
+        }
+
+        public void CollidesWith(BoxCollider anotherCollider)
+        {
+            //be spesific about what type of object I collide with
+            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                {
+                    UIManager.ReduceHealth();
+                    Destroy();
+                }
+
+            Console.WriteLine("collission");
+            //solve collision
+            //take dmg
+            //etc..
         }
 
         public override void Unsubscribe()
