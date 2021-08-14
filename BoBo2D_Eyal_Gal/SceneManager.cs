@@ -23,7 +23,7 @@ namespace BoBo2D_Eyal_Gal
 
         public SceneManager(Game1 game)
         {
-            _gameState = Scene.GameState;
+            _gameState = 1;
             _game = game;
             _waveManager = new WaveManager();
             _isSceneAlive = true;

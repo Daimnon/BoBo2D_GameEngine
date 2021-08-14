@@ -144,14 +144,12 @@ namespace BoBo2D_Eyal_Gal
                 {
                     if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
                     {
-                        DisableGameObject();
                         GameObjectManager.Instance.DestroyGameObject(this);
                     }
                 }
 
                 if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
                 {
-                    DisableGameObject();
                     GameObjectManager.Instance.DestroyGameObject(this);
                 }
             }
