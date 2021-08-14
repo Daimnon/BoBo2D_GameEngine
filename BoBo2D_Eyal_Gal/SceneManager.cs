@@ -116,7 +116,7 @@ namespace BoBo2D_Eyal_Gal
 
         public void DrawSplashScreen()
         {
-            SplashScreen.DrawSplashScreen();
+            //SplashScreen.DrawSplashScreen();
         }
 
         public void InitializeMainMenu()

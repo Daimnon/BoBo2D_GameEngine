@@ -11,21 +11,21 @@ namespace BoBo2D_Eyal_Gal
         private List<SceneManager> _allScenes = new List<SceneManager>(5);
         private GraphicsDeviceManager _graphics;
         private SceneManager _activeScene;
-        private static SpriteBatch _spriteBatch;
-        private static GameObject _gameFont;
-        private static string _gameFontName;
+        private SpriteBatch _spriteBatch;
+        private GameObject _gameFont = default;
+        private string _gameFontName;
         #endregion
 
-        public static SpriteBatch SpriteBatch => _spriteBatch;
-        public static GameObject  GameFont => _gameFont;
-        public static string  GameFontName => _gameFontName;
+        public SpriteBatch SpriteBatch => _spriteBatch;
+        public GameObject  GameFont => _gameFont;
+        public string  GameFontName => _gameFontName;
         public Game1()
         {
             GameFont.AddComponent(new TextSprite(_gameFont, _gameFontName));
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            Scene.GameState = -1;
+            Scene.GameState = 1;
             //can set window size here
 
             _activeScene = new SceneManager(this);
