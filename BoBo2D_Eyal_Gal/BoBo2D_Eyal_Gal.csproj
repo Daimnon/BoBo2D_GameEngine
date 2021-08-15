@@ -11,8 +11,29 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Content\bin\DesktopGL\BG.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\Ammo.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\BG.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\Bolt1.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\Bolt2.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\EnemyBoss.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\EnemyBossJetBeam.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\GameSpriteFont.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\HealthBar.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\Laser1.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\Laser2.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\PlayerJetBeam.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\PlayerShip.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\RebelJetBeam.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\RebelShip.xnb" />
+    <None Remove="Content\bin\DesktopGL\Content\Ship4.xnb" />
+    <None Remove="Content\bin\DesktopGL\Scripts\Spawners\WaveData" />
+    <None Remove="Content\bin\DesktopGL\Ship4.xnb" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Content\bin\DesktopGL\Scripts\Spawners\WaveData" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -29,6 +50,7 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\bin\DesktopGL\Content\" />
     <Folder Include="Gal%27s Tests\" />
   </ItemGroup>
 </Project>

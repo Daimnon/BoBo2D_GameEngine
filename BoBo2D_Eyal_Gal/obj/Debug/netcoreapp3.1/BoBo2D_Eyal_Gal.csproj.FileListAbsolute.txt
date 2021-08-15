@@ -116,10 +116,8 @@ D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\ne
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\JetBeams\RebelJetBeam.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Bolt1.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Bolt2.xnb
-D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Bolts.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Laser1.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Laser2.xnb
-D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Lasers.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Bolt1.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Bolt2.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Laser1.xnb
@@ -150,7 +148,6 @@ D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\ne
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Characters\RebelShip.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\EnemyBoss.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\RebelShip.xnb
-D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.csproj.AssemblyReference.cache
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\HealthBar.xnb
 C:\Users\edeya\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Ammo.xnb
 C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Bolt1.xnb
