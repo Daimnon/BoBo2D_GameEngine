@@ -23,6 +23,7 @@ namespace BoBo2D_Eyal_Gal
         GameObject _enemySpawner;
         int _waveNumber = 0;
         WaveStatus _waveStatus;
+        bool _isWaveManagerActive;
 
         #endregion
 
@@ -36,10 +37,12 @@ namespace BoBo2D_Eyal_Gal
             _enemySpawnManager = new EnemySpawnHandler(_enemySpawner);
             _waveStatus = WaveStatus.StartOfWave;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
+            _isWaveManagerActive = false;
         }
         public void AddWave(int spawnMinWidth, int spawnMaxWidth, int numberOfEnemies, SpaceshipType enemyShipType)
         {
             _waves.Add(new Wave(spawnMinWidth, spawnMaxWidth, enemyShipType, numberOfEnemies));
+            _isWaveManagerActive = true;
         }
         public void Update()
         {
@@ -52,28 +55,28 @@ namespace BoBo2D_Eyal_Gal
         void SpawnEnemies(int waveNumber)
         {
             //can make calculation acording to the wave number
-            /*if (waveNumber < 0)
-                waveNumber++;
+            //if (waveNumber < 0)
+            //    waveNumber++;
 
-            if (waveNumber > _waves.Count)
-                waveNumber--;*/
+            //if (waveNumber > _waves.Count)
+            //    waveNumber--;
 
-            if (_waves != null)
+            if (_waves != null && _waves.Count > 0 )
             {
-                try
-                {
-                    _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
-                    _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
-                }
-                catch(ArgumentOutOfRangeException)
-                {
-                    Console.WriteLine("No Enemies.");
-                }
+                //try
+                //{
+                //    _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
+                //    _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
+                //}
+                //catch(ArgumentOutOfRangeException)
+                //{
+                //    Console.WriteLine("No Enemies.");
+                //}
 
-                /*
+                
                 _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
                     _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
-                */
+                
             }
         }
         void WaveState(WaveStatus waveStatus)
@@ -81,8 +84,11 @@ namespace BoBo2D_Eyal_Gal
             switch (waveStatus)
             {
                 case WaveStatus.StartOfWave:
-                    CallNextWave();
-                    _waveStatus = WaveStatus.MiddleOfWave;
+                    if (_isWaveManagerActive)
+                    {
+                        CallNextWave();
+                        _waveStatus = WaveStatus.MiddleOfWave;
+                    }
                     break;
                 case WaveStatus.MiddleOfWave:
                     //wait for an anount of time
@@ -94,8 +100,8 @@ namespace BoBo2D_Eyal_Gal
                     }
                     break;
                 case WaveStatus.EndOfWave:
-                    //cooldown?/Powerup?/levelup?
                     _waveNumber++;
+                    //cooldown?/Powerup?/levelup?
                     _waveStatus = WaveStatus.StartOfWave;
                     break;
                 default:
