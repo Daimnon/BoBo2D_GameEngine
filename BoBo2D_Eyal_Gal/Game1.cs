@@ -12,30 +12,29 @@ namespace BoBo2D_Eyal_Gal
         private GraphicsDeviceManager _graphics;
         private SceneManager _activeScene;
         private SpriteBatch _spriteBatch;
-        //private static GameObject _gameFont;
-        //private static string _gameFontName;
         #endregion
 
+        #region Properties
         public SpriteBatch SpriteBatch => _spriteBatch;
-        //public static GameObject  GameFont => _gameFont;
-        //public static string  GameFontName => _gameFontName;
+        #endregion
+
+        #region Constructor
         public Game1()
         {
-            //GameFont.AddComponent(new TextSprite(_gameFont, _gameFontName));
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
-            Scene.GameState = -1;
-            //can set window size here
 
             _activeScene = new SceneManager(this);
             _allScenes.Add(_activeScene);
         }
+        #endregion
 
+        #region Core Overrides
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            _activeScene.Init();
+            _activeScene.Initialize();
 
             base.Initialize();
         }
@@ -43,10 +42,9 @@ namespace BoBo2D_Eyal_Gal
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-            
+
             // TODO: use this.Content to load your game content here
             _activeScene.Start();
-
         }
 
         protected override void Update(GameTime gameTime)
@@ -55,11 +53,9 @@ namespace BoBo2D_Eyal_Gal
                 Exit();
 
             // TODO: Add your update logic here
-            //SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
             Physics.Update();
-            //Physics.SolveCollision();
-            //Physics.SolveIntersection();
             _activeScene.Update();
+
             base.Update(gameTime);
         }
 
@@ -71,27 +67,28 @@ namespace BoBo2D_Eyal_Gal
             _spriteBatch.Begin();
             _activeScene.DrawScene();
             _spriteBatch.End();
+
             base.Draw(gameTime);
+        }
+        #endregion
+
+        #region Methods
+        public void DrawText(SpriteFont spritefont,string text, Vector2 position,Color color )
+        {
+            if(spritefont != null ||text!= null || position != null || color != null)
+                _spriteBatch.DrawString(spritefont, text, position, color);
         }
 
         public void DrawSprite(Texture2D texture,Vector2 position, Color color )
         {
             if (texture != null || position != null || color != null)
-            {
                 _spriteBatch.Draw(texture, position, color);
-            }
-        }
-        public void DrawText(SpriteFont spritefont,string text, Vector2 position,Color color )
-        {
-            if(spritefont != null ||text!= null || position != null || color != null)
-            {
-                _spriteBatch.DrawString(spritefont, text, position, color);
-            }
         }
 
         public T LoadData<T>(string fileName)
         {
             return Content.Load<T>(fileName);
         }
+        #endregion
     }
 }

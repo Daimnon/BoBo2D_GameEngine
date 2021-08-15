@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using Microsoft.Xna.Framework;
 
 
@@ -11,19 +8,22 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         //Transform _transform;
-        Vector2 _position;
-        Vector2 _scale;
+        Vector2 _position, _scale;
         Vector2 _xAxis = new Vector2(1, 0);
         Vector2 _yAxis = new Vector2(0, 1);
+
+        #region 3D
         //Vector3D _zAxis = new Vector3D(0, 0, 1);
         #endregion
-        
+
+        #endregion
+
         #region Properties
         //public Transform TransformP { get => _transform; set => _transform = value; }
         public Vector2 Position { get => _position; set => _position = value; }
         public Vector2 Scale { get => _scale; set => _scale = value; }
-        public Vector2 XAxis { get => _xAxis; set => _xAxis = value; }
-        public Vector2 YAxis { get => _yAxis; set => _yAxis = value; }
+        public Vector2 XAxis => _xAxis;
+        public Vector2 YAxis => _yAxis;
         //public Vector3D ZAxis { get => _zAxis; set => _zAxis = value; }
         #endregion
 
@@ -33,8 +33,10 @@ namespace BoBo2D_Eyal_Gal
             GameObjectP = gameObject;
             TransformP = this;
             Name = gameObject.Name;
+
             Position = new Vector2(0, 0);
             Scale = new Vector2(1, 1);
+
             Console.WriteLine($"New Transform{this}");
         }
 
@@ -42,9 +44,11 @@ namespace BoBo2D_Eyal_Gal
         {
             GameObjectP = gameObject;
             TransformP = this;
-            Name = gameObject.Name + " Transform";
+            Name = gameObject.Name;
+
             Position = position;
             Scale = scale;
+
             Console.WriteLine(Environment.NewLine + $"New Transform{this}" + Environment.NewLine);
         }
         #endregion
@@ -63,23 +67,6 @@ namespace BoBo2D_Eyal_Gal
         //    //not good
         //    Position.Add(new Vector2(x, y));
         //}
-
-        public T GetComponent<T>() where T : Component
-        {
-            foreach (Component component in GameObjectP.Components)
-                if (component is T)
-                    return component as T;
-
-            return null;
-        }
-
-        public T GetComponents<T>() where T : Component
-        {
-            foreach (Component component in GameObjectP.Components)
-                return component as T;
-
-            return null;
-        }
         #endregion
 
         //need fixes
@@ -94,40 +81,9 @@ namespace BoBo2D_Eyal_Gal
             Destroy(parentGameObject);
         }
 
-        /*
-        public static void Destroy(Assest parentAssest)
-        {
-            //removes an asset.
-            Destroy(parentAssest);
-        }
-        */
-
         public static void DontDestroyOnLoad()
         {
             //do not destroy the target Object when loading a new Scene.
-        }
-
-        public static T FindObjectOfType<T>(List<T> listOfAllLoadedObjects)
-        {
-            //check if list empty
-            if (listOfAllLoadedObjects.Count == 0)
-                Console.WriteLine("No objects have loaded yet.");
-
-            //returns first loaded object
-            return listOfAllLoadedObjects.First();
-        }
-
-        public static T FindObjectsOfType<T>(List<T> listOfAllLoadedObjects)
-        {
-            //check if list empty
-            if (listOfAllLoadedObjects.Count == 0)
-                Console.WriteLine("No objects have loaded yet.");
-
-            //returns all loaded objects
-            foreach (T obj in listOfAllLoadedObjects)
-                return obj;
-
-            return default;
         }
         #endregion
 
@@ -139,7 +95,12 @@ namespace BoBo2D_Eyal_Gal
                  + $"Scale: {Scale}" + Environment.NewLine;
         }
 
-        /*
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        /* Equals
         public override bool Equals(object obj)
         {
             return obj is Transform transform &&
@@ -163,11 +124,6 @@ namespace BoBo2D_Eyal_Gal
                    EqualityComparer<Vector2>.Default.Equals(YAxis, transform.YAxis);
         //EqualityComparer<Vector3D>.Default.Equals(ZAxis, transform.ZAxis);
         }*/
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
         #endregion
 
         #region Operators

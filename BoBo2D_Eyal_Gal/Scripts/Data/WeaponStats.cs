@@ -20,6 +20,7 @@
         public float DamageScalar => _damageScalar;
         #endregion
 
+        #region Constructor
         public WeaponStats(WeaponType weaponType,ProjectileType projectileType, float cooldown, int maxAmmo, float baseDamage,
             float damageScalar, string spriteName):base (StatsType.Weapon)
         {
@@ -30,7 +31,7 @@
             _maxAmmo = maxAmmo;
             _baseDamage = baseDamage;
             _damageScalar = damageScalar;
-
         }
+        #endregion
     }
 }

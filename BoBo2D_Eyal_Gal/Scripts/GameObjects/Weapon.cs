@@ -1,92 +1,54 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public enum WeaponType//list of all weapons that the developer created
+    //list of all weapons that the developer created
+    public enum WeaponType
     {
         BasicMainWeapon = 0,
         BasicEnemyWeapon = 1
     }
+
     public class Weapon: GameObject ,IUpdatable
     {
         #region Fields
         Spaceship _spaceShip;
-
-        float _currentCoolDown;
-        float _maxCooldown;
-        int _currentAmmo = 0;
-        int _maxAmmo;
-        float _baseDamage;
-        float _damageScalar;
-        string _projectileName;
-        bool _isPlayer;
         WeaponType _weaponType;
         ProjectileType _projectileType;
-        string _spriteName;
+
+        string _projectileName, _spriteName;
+        int _maxAmmo;
+        int _currentAmmo = 0;
+        float _currentCoolDown, _maxCooldown, _baseDamage, _damageScalar;
+        bool _isPlayer;
         #endregion
 
         #region Properties
         public int CurrentAmmo => _currentAmmo;
         public float BaseDamage => _baseDamage;
         #endregion
+
+        #region Constructor
         public Weapon(bool isPlayer,Spaceship spaceShip, WeaponType weaponType, bool hasSprite):base(weaponType.ToString())
         {
             _spaceShip = spaceShip;
             _isPlayer = isPlayer;
-            LoadStats(weaponType);
             _projectileName = weaponType.ToString() + "Projectile";
 
+            LoadStats(weaponType);
+            
             if (hasSprite)
                 AddComponent(new Sprite(this, _spriteName));
 
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
-        public void Shoot(Vector2 currentSpeed)
-        {
-            //check for cooldown and ammo
-            if(_currentCoolDown <= 0 && _currentAmmo > 0)
-            {
-                Vector2 flightDirection = Direction();
-                Transform transform = _spaceShip.GetComponent<Transform>();
-                if (transform != null && _projectileName != null)
-                {
-                    _currentAmmo -= 1;
-                    _currentCoolDown = _maxCooldown;
-                    new Projectile(_projectileName, flightDirection,_damageScalar, _weaponType, transform, _isPlayer,_spaceShip, _projectileType);
-                }
-            }
-            else
-            {
-                //error sound
-            }
-        }
+        #endregion
 
-        public void Update()
-        {
-            if(_currentCoolDown > 0)
-            {
-                _currentCoolDown -= 1 * (Time.DeltaTime * 10);
-            }
-        }
-
-        public Vector2 Direction()
-        {
-            if(_isPlayer)
-            {
-                return MovementHandler.GetDirectionVector(MoveDirection.Up);
-            }
-            else
-            {
-                return MovementHandler.GetDirectionVector(MoveDirection.Down);
-            }
-        }
-
+        #region Methods
         void LoadStats(WeaponType weaponType)
         {
             WeaponStats stats = StatsHandler.GetStats<WeaponStats>(weaponType);
+
             if(stats != null)
             {
                 _maxCooldown = stats.Cooldown;
@@ -100,8 +62,48 @@ namespace BoBo2D_Eyal_Gal
                 _projectileType = stats.ProjectileType;
             }   
         }       
-                
-    }           
+
+        public Vector2 Direction()
+        {
+            if(_isPlayer)
+                return MovementHandler.GetDirectionVector(MoveDirection.Up);
+            else
+                return MovementHandler.GetDirectionVector(MoveDirection.Down);
+        }
+
+        public void Shoot(Vector2 currentSpeed)
+        {
+            //check for cooldown and ammo
+            if(_currentCoolDown <= 0 && _currentAmmo > 0)
+            {
+                Vector2 flightDirection = Direction();
+                Transform transform = _spaceShip.GetComponent<Transform>();
+
+                if (transform != null && _projectileName != null)
+                {
+                    _currentAmmo -= 1;
+                    _currentCoolDown = _maxCooldown;
+                    new Projectile(_projectileName, flightDirection, _damageScalar, _weaponType, transform, _isPlayer, _spaceShip, _projectileType);
+                }
+            }
+            else
+            {
+                //error sound
+            }
+        }
+        #endregion
+
+        #region Overrides
+        public void Update()
+        {
+            if(_currentCoolDown > 0)
+            {
+                _currentCoolDown -= 1 * (Time.DeltaTime * 10);
+            }
+        }
+        #endregion
+
+    }
 }               
                 
                 

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BoBo2D_Eyal_Gal
+﻿namespace BoBo2D_Eyal_Gal
 {
     public class ProjectileStats : Stats
     {
@@ -21,6 +17,7 @@ namespace BoBo2D_Eyal_Gal
         public float ProjectileOffsetY => _projectileOffsetY;
         #endregion
 
+        #region Constructor
         public ProjectileStats(ProjectileType projectileType, float damage, float speed, float projectileOffsetX, float projectileOffsetY, string spriteName) : base(StatsType.Projectile)
         {
             _spriteName = spriteName;
@@ -30,5 +27,6 @@ namespace BoBo2D_Eyal_Gal
             _projectileOffsetY = projectileOffsetY;
             _projectileType = projectileType;
         }
+        #endregion
     }
 }

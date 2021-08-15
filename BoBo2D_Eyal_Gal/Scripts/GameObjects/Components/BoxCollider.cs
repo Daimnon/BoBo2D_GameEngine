@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 
 
@@ -22,12 +20,12 @@ namespace BoBo2D_Eyal_Gal
 
         #region Properties
         public Vector2 Scale { get => _scale; set => _scale = value; }
+        public float CX { get => _cX; set => _cX = value; }
+        public float CY { get => _cY; set => _cY = value; }
         public float BoxLeft => TransformP.Position.X - CX;
         public float BoxRight => TransformP.Position.X + CX;
         public float BoxTop => TransformP.Position.Y - CY;
         public float BoxBottom => TransformP.Position.Y + CY;
-        public float CX { get => _cX; set => _cX = value; }
-        public float CY { get => _cY; set => _cY = value; }
         public float CollisionTimer { get => _collisionTimer; set => _collisionTimer = value; }
         public bool IsEnabled { get => _isEnabled; set => _isEnabled = value; }
         public bool IsColliding { get => _isColliding; set => _isColliding = value; }
@@ -57,17 +55,21 @@ namespace BoBo2D_Eyal_Gal
             float spriteWidth = gameObject.GetComponent<Sprite>().SpriteWidth;
             //height
             float spriteHeight = gameObject.GetComponent<Sprite>().SpriteHeight;
-            //depth
-            //float objD = gameObject.GetComponent<Transform>().Scale.Z;
-
+            
             Scale = new Vector2(spriteWidth, spriteHeight);
 
-            //determain distance of every side from center
+            //determain distance of horizontal axis from center
             CX = spriteWidth / 2;
             CY = spriteHeight / 2;
-            //CZ = objD / 2;
 
             Physics.AllBoxColliders.Add(this);
+
+            #region 3D
+            //depth
+            //float objD = gameObject.GetComponent<Transform>().Scale.Z;
+            //determain distance of diagonal axis from center
+            //CZ = objD / 2;
+            #endregion
         }
         #endregion
 
@@ -106,14 +108,14 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Overrides
-        public override string ToString()
-        {
-            return $"BoxCollider of {Name}" + Environment.NewLine;
-        }
-
         public override void Unsubscribe()
         {
             Physics.AllBoxColliders.Remove(this);
+        }
+
+        public override string ToString()
+        {
+            return $"BoxCollider of {Name}" + Environment.NewLine;
         }
         #endregion
     }

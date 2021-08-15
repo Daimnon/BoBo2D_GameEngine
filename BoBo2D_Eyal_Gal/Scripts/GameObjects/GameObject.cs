@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
 
 
@@ -30,11 +29,12 @@ namespace BoBo2D_Eyal_Gal
             Name = name;
             IsEnabled = true;
 
-            Console.WriteLine($"New Game Object has been created {ToString()}");
             Transform transform = new Transform(this);
             AddComponent(transform);
             transform.GameObjectP = this;
             transform.TransformP = transform;
+            
+            Console.WriteLine($"New Game Object has been created {ToString()}");
         }
 
         //Constructor with Transform that the player will enter
@@ -43,28 +43,20 @@ namespace BoBo2D_Eyal_Gal
             Name = name;
             IsEnabled = true;
 
-            Console.WriteLine($"New Game Object has been created {ToString()}");
             Transform transform = new Transform(this,position, new Vector2(1,1));
             AddComponent(transform);
             transform.GameObjectP = this;
             transform.TransformP = transform;
 
+            Console.WriteLine($"New Game Object has been created {ToString()}");
         }
         #endregion
 
         #region Methods
-        public void DisableGameObject()
-        {
-            Console.WriteLine($"Disabling GameObject{ToString()}");
-            IsEnabled = false;
-
-            //need implementation
-            Console.WriteLine($"GameObject Disabled {ToString()}");
-        }
-
         public void EnableGameObject()
         {
             Console.WriteLine($"Enabling GameObject {ToString()}");
+
             if (_isActive == false)
             {
                 Console.WriteLine($"Not enabling {ToString()}");
@@ -77,39 +69,39 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine($"GameObject Enabled {ToString()}");
         }
 
+        public void DisableGameObject()
+        {
+            Console.WriteLine($"Disabling GameObject{ToString()}");
+            IsEnabled = false;
+
+            //need implementation
+            Console.WriteLine($"GameObject Disabled {ToString()}");
+        }
+
         public void Destroy()
         {
             Console.WriteLine($"Destroying {this}");
+
             int index = _components.Count;
+
             for (int i = index - 1; i >= 0; i--)
             {
                 _components[i].Unsubscribe();
                 _components.Remove(_components[i]);
             }
+
             Unsubscribe();
-            //OnDisable();
+
             Console.WriteLine($"{Name} is Destroyed");
             Console.WriteLine();
         }
-        public virtual void Unsubscribe()
-        {
 
-        }
-        //public void OnDisable()
-        //{
-        //    Console.WriteLine($"Removing all Components from {this} GameObject");
-        //    foreach (var component in Components)
-        //    {
-        //        component.Unsubscribe();
-        //        Components.Remove(component);
-        //    }
-        //    Console.WriteLine($"All Components Are Removed from {this}");
-        //    Console.WriteLine();
-        //}
+        public virtual void Unsubscribe() { }
 
         public void AddComponent(Component component)
         {
             Console.WriteLine("Trying to add Componnent");
+
             if (component == null)
             {
                 Console.WriteLine("Error in AddComponent");
@@ -125,6 +117,7 @@ namespace BoBo2D_Eyal_Gal
             }
 
             Components.Add(component);
+
             //component.GetSetGameObject = this;
             Console.WriteLine("Component added");
             Console.WriteLine();
@@ -132,6 +125,8 @@ namespace BoBo2D_Eyal_Gal
 
         public void RemoveComponent(Component component)
         {
+            bool isTransform = component is Transform;
+            
             //if the spechific component exists inside of the componnenst it will be removed
             //cant really be null but still good to check
             if (_components == null)
@@ -141,7 +136,6 @@ namespace BoBo2D_Eyal_Gal
                 return;
             }
 
-            bool isTransform = component is Transform;
             if (component != null || isTransform != true)
             {
                 Console.WriteLine("Attempting to remove Component");
@@ -206,16 +200,16 @@ namespace BoBo2D_Eyal_Gal
 
         public void MoveGameObject(Vector2 direction)
         {
-            
             Transform transform = GetComponent<Transform>();
+            BoxCollider boxCollider = GetComponent<BoxCollider>();
+            Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
             transform.Position += direction;
 
-            BoxCollider boxCollider = GetComponent<BoxCollider>();
             if (boxCollider != null)
             {
                 boxCollider.TransformP = transform;
             }
-            Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
+
             if(rigidbooty != null)
             {
                 rigidbooty.TransformP.Position = transform.Position;
@@ -224,7 +218,6 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Overrides
-
         public override string ToString()
         {
             return $"Name:{Name}" + Environment.NewLine

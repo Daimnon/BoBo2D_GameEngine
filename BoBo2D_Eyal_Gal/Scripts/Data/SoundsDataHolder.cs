@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -18,6 +15,7 @@ namespace BoBo2D_Eyal_Gal
         public List<string> SoundNames { get => _soundNames; set => _soundNames = value; }
         #endregion
 
+        #region Constructor
         public SoundsDataHolder()
         {
             _soundNames = new List<string>()
@@ -25,7 +23,18 @@ namespace BoBo2D_Eyal_Gal
                 //add sounds names
             };
         }
+        #endregion
 
+        #region Methods
+        public SoundEffect GetSoundEffect(string dataName)
+        {
+            SoundEffect soundEffect;
+
+            if(_sounds.TryGetValue(dataName, out soundEffect))
+                return soundEffect;
+
+            return null;
+        }
         public void LoadSoundData(Game1 game)
         {
             if(game != null)
@@ -37,14 +46,6 @@ namespace BoBo2D_Eyal_Gal
                 }
             }
         }
-        public SoundEffect GetSoundEffect(string dataName)
-        {
-            SoundEffect soundEffect;
-
-            if(_sounds.TryGetValue(dataName, out soundEffect))
-                return soundEffect;
-
-            return null;
-        }
+        #endregion
     }
 }

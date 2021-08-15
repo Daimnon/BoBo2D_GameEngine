@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BoBo2D_Eyal_Gal
+﻿namespace BoBo2D_Eyal_Gal
 {
     public static class PlayerLevelManager
     {
         #region Fields
         static GameObject _player;
         static Spaceship _playerShip = Player as Spaceship;
-        static bool _isLevelingUp = false;
         static int _currentScore = 0;
+        static bool _isLevelingUp = false;
         #endregion
 
         #region Properties
@@ -23,7 +19,6 @@ namespace BoBo2D_Eyal_Gal
                     _player = value;
             }
         }
-
         public static Spaceship PlayerShip
         {
             get => _playerShip;
@@ -33,8 +28,8 @@ namespace BoBo2D_Eyal_Gal
                     _playerShip = value;
             }
         }
-        public static bool IsLevelingUp { get => _isLevelingUp; set => _isLevelingUp = value; }
         public static int CurrentScore => _currentScore;
+        public static bool IsLevelingUp { get => _isLevelingUp; set => _isLevelingUp = value; }
         #endregion
 
         #region Methods
@@ -68,6 +63,7 @@ namespace BoBo2D_Eyal_Gal
         public static void ResetExp()
         {
             float tempExp;
+            
             tempExp = PlayerShip.Exp - PlayerShip.MaxExp;
             PlayerShip.Exp = tempExp;
             PlayerShip.MaxExp *= 1.5f;

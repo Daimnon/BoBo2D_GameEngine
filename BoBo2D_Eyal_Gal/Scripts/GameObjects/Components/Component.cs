@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -19,15 +16,13 @@ namespace BoBo2D_Eyal_Gal
         public string Name { get => _name; set => _name = value; }
         #endregion
 
-        #region Methods
-        public virtual void Unsubscribe() { }
-        #endregion
-
         #region Overrides
         public override string ToString()
         {
             return $"{Name}" + Environment.NewLine;
         }
+
+        public virtual void Unsubscribe() { }
         #endregion
     }
 }

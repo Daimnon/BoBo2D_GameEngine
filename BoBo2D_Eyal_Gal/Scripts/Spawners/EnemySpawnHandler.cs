@@ -1,35 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
     public class EnemySpawnHandler : IUpdatable
     {
+        //every wave the player will have more enemies that will spawn in a random time frame between every spawn
+        //Enemies will shoot at a regular time frame
+
+        #region Field
+        GameObject _enemySpawner;
+        SpaceshipType _shipType;
+        
+        int _numberToSpawn, _spawnMinWidth, _spawnMaxWidth, _spawnHight;
+        float _timeTillNextSpawn;
+        #endregion
+
+        #region Constructor
         public EnemySpawnHandler(GameObject enemySpawner)
         {
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
             GameObjectManager.Instance.AddGameObject(enemySpawner);
+
             _enemySpawner = enemySpawner;
-            _spawnHight = StatsHandler.StartOfScreenHightPosition;
-            //_spawnMaxWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            _spawnHight = StatsHandler.StartOfScreenHeightPosition;
         }
-        #region Field
-        float _timeTillNextSpawn;
-        int _numberToSpawn;
-        GameObject _enemySpawner;
-        int _spawnMinWidth;
-        int _spawnMaxWidth;
-        int _spawnHight;
         #endregion
-        #region Properties
-        SpaceshipType _shipType;
-        #endregion
-        //every wave the player will have more enemies that will spawn in a random time frame between every spawn
-        //Enemies will shoot at a regular time frame
+
+        #region Methods
         public void AddEnemiesToSpawn(SpaceshipType shipType, int enemyNumber, int spawnMinWidth, int spawnMaxWidth)
         {
             _shipType = shipType;
@@ -37,38 +35,21 @@ namespace BoBo2D_Eyal_Gal
             _spawnMinWidth = spawnMinWidth;
             _spawnMaxWidth = spawnMaxWidth;
         }
-        public void Update()
-        {
-            if (_numberToSpawn > 0)
-            {
-                CheckForSpawn();
-            }
-            else
-            {
-                _timeTillNextSpawn = 0;
-            }
-        }
+
         void CheckForSpawn()
         {
             if (_timeTillNextSpawn <= 0)
             {
                 Spawn();
                 _numberToSpawn--;
+
                 if (_numberToSpawn > 0)
-                {
                     SetNextTimeToSpawn();
-                }
             }
             else
-            {
                 _timeTillNextSpawn -= Time.DeltaTime * 10;
-            }
         }
-        void SetNextTimeToSpawn()
-        {
-            Random random = new Random();
-            _timeTillNextSpawn = random.Next(1, 5);
-        }
+
         void Spawn()
         {
             Spaceship EnemySpaceship = new Spaceship(_shipType, $"Enemy{_numberToSpawn}", false, new Vector2(-1, -1));
@@ -78,5 +59,22 @@ namespace BoBo2D_Eyal_Gal
             EnemySpaceship.GetComponent<Transform>().Position = enemyPos;
             GameObjectManager.Instance.AddGameObject(EnemySpaceship, _enemySpawner);
         }
+
+        void SetNextTimeToSpawn()
+        {
+            Random random = new Random();
+            _timeTillNextSpawn = random.Next(1, 5);
+        }
+        #endregion
+
+        #region Override
+        public void Update()
+        {
+            if (_numberToSpawn > 0)
+                CheckForSpawn();
+            else
+                _timeTillNextSpawn = 0;
+        }
+        #endregion
     }
 }

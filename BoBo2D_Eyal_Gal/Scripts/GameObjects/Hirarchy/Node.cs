@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -9,19 +8,21 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         List<Node> _children;
-        Node _parent;
         GameObject _gameObject;
-        bool _isRoot = true;
+        Node _parent;
         TreeOfGameObjects _tree;
+
+        bool _isRoot = true;
         #endregion
 
         #region Properties
-        public GameObject GameObjectP => _gameObject;
-        public bool IsRoot => _isRoot;
         public List<Node> Children => _children;
+        public GameObject GameObjectP => _gameObject;
         public Node Parant { get => _parent; set => _parent = value; }
+        public bool IsRoot => _isRoot;
         #endregion
 
+        #region Constructor
         public Node(GameObject gameObject, Node parent)
         {
             _gameObject = gameObject;
@@ -35,7 +36,9 @@ namespace BoBo2D_Eyal_Gal
                 parent.AddChild(this);
             }
         }
+        #endregion
 
+        #region Methods
         public void AddChild(Node child)
         {
             child.Parant = this;
@@ -47,25 +50,31 @@ namespace BoBo2D_Eyal_Gal
             _children.Remove(child);
         }
 
-        public void EnableNode(Node node)//enabling all nodes
+        //enabling all nodes
+        public void EnableNode(Node node)
         {
             Console.WriteLine($"Enabling {node}");
             node.GameObjectP.EnableGameObject();
+
             foreach (var child in node.Children)
                 EnableNode(child);
 
             Console.WriteLine();
         }
+
         public void DisableNode(Node node)
         {
             Console.WriteLine($"Disabling {node}");
             node.GameObjectP.DisableGameObject();
+
             foreach (var child in node.Children)
                 DisableNode(child);
         }
+
         public GameObject FindGameObjectByName(string gameObjectName)
         {
             Console.WriteLine($"Looking inside {_gameObject.Name}");
+
             if (gameObjectName == null || gameObjectName == "")
             {
                 Console.WriteLine("Error in FindGameObject Name");
@@ -83,6 +92,7 @@ namespace BoBo2D_Eyal_Gal
                 foreach (var child in Children)
                 {
                     var gameObject = child.FindGameObjectByName(gameObjectName);
+
                     if (gameObject != null)
                     {
                         Console.WriteLine($"GameObject Found returning {gameObject.Name}");
@@ -91,10 +101,12 @@ namespace BoBo2D_Eyal_Gal
                     }
                 }
             }
-            Console.WriteLine("There are no gameobjects of the name in this root");
+
+            Console.WriteLine("There are no gameObjects of the name in this root");
             Console.WriteLine();
             return null;
         }
+
         public void DestroyNode()
         {
             if (_children.Count != 0)
@@ -107,6 +119,7 @@ namespace BoBo2D_Eyal_Gal
             }
 
             GameObjectP.Destroy();
+
             if (IsRoot)
             {
                 if (_tree == null)
@@ -118,10 +131,13 @@ namespace BoBo2D_Eyal_Gal
             else
                 Parant.RemoveChild(this);
         }
+        #endregion
 
+        #region Overrides
         public override string ToString()
         {
             return GameObjectP.Name.ToString() + Environment.NewLine;
         }
+        #endregion
     }
 }

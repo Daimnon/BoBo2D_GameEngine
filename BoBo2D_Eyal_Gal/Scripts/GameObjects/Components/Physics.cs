@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
 
 
 namespace BoBo2D_Eyal_Gal
@@ -82,8 +79,10 @@ namespace BoBo2D_Eyal_Gal
                     int count = AllBoxColliders.Count;
                     if (!AllBoxColliders[i].IsEnabled)
                         continue;
+
                     if (collider == AllBoxColliders[i])
                         continue;
+
                     if (AABB(collider, AllBoxColliders[i]))
                     {
                         collider.CollidesWith(AllBoxColliders[i]);
@@ -91,10 +90,9 @@ namespace BoBo2D_Eyal_Gal
                         collider.FinishedCollidingWith(AllBoxColliders[i]);
                         return;
                     }
+
                     if(count != AllBoxColliders.Count)
-                    {
                         return;
-                    }
                 }
 
                 /*
@@ -114,7 +112,6 @@ namespace BoBo2D_Eyal_Gal
                     }
                 }
                 */
-
             }
         }
         
@@ -215,9 +212,5 @@ namespace BoBo2D_Eyal_Gal
         }
         */
         #endregion
-
-        #region Overrides
-        #endregion
-
-        }
     }
+}

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-
+﻿using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -13,6 +7,7 @@ namespace BoBo2D_Eyal_Gal
         BasicProjectile,
         EnemyProjectile
     }
+
     public class Projectile : GameObject, IUpdatable
     {
         #region Fields
@@ -20,50 +15,64 @@ namespace BoBo2D_Eyal_Gal
         GameObject _gameObject;
         Transform _projectileTransform;
         Vector2 _projectileDirection;
+
         string _spriteName;
-        float _damage;
-        float _speed;
-        float _projectileOffsetX;
-        float _projectileOffsetY;
-        bool _flying = false;
+        float _damage, _speed, _projectileOffsetX, _projectileOffsetY;
         bool _isPlayerProjectile;
+        bool _flying = false;
         #endregion
 
         #region Properties
-        public Vector2 ProjectileDirection { set => _projectileDirection = value; }
         public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
+        public Vector2 ProjectileDirection { set => _projectileDirection = value; }
         public float Damage { get => _damage; set => _damage = value; }
-        public bool Flying { set => _flying = value; }
         public bool IsPlayerProjectile { get => _isPlayerProjectile; set => _isPlayerProjectile = value; }
+        public bool Flying { set => _flying = value; }
         #endregion
 
+        #region Constructor
         public Projectile(string name, Vector2 flightDirectin, float damageScalar,
             WeaponType weaponType, Transform transform, bool isPlayerProjectile, Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
             Name = name;
-            AddToHirarcy();
             _spaceShip = spaceship;
-            LoadStats(projectileType);
             Vector2 pos = transform.Position;
+            GameObjectP = this;
+
+            AddToHirarcy();
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
             GetComponent<BoxCollider>().OnCollision += CollidesWith;
             GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
             GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
             AddComponent(new Rigidbooty(this));
+            LoadStats(projectileType);
+
             _projectileDirection = flightDirectin * _speed * _spaceShip.CurrentSpeed;
             _projectileTransform = GetComponent<Transform>();
             _projectileTransform.Position = new Vector2(pos.X + _projectileOffsetX, pos.Y + _projectileOffsetY);
             _damage *= damageScalar;
             _flying = true;
             _isPlayerProjectile = isPlayerProjectile;
-            GameObjectP = this;
+
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
+        #endregion
 
-        public void Update()
+        #region Methods
+        void AddToHirarcy()
         {
-            ProjectileMovement();
+            GameObject projectile = GameObjectManager.Instance.FindGameObjectByName("ProjectileHolder");
+
+            if (projectile == null)
+            {
+                GameObject projectileHolder = new GameObject("ProjectileHolder");
+                GameObjectManager.Instance.AddGameObject(projectileHolder);
+                GameObjectManager.Instance.AddGameObject(this, projectileHolder);
+            }
+
+            else
+                GameObjectManager.Instance.AddGameObject(this, projectile);
         }
 
         void ProjectileMovement()
@@ -88,26 +97,14 @@ namespace BoBo2D_Eyal_Gal
                 }
             }
 
-            if (_projectileTransform.Position.Y > StatsHandler.EndOfScreenHightPosition || _projectileTransform.Position.Y < 0)
+            if (_projectileTransform.Position.Y > StatsHandler.EndOfScreenHeightPosition || _projectileTransform.Position.Y < 0)
                 GameObjectManager.Instance.DestroyGameObject(this);
-        }
-
-        void AddToHirarcy()
-        {
-            GameObject projectile = GameObjectManager.Instance.FindGameObjectByName("ProjectileHolder");
-            if (projectile == null)
-            {
-                GameObject projectileHolder = new GameObject("ProjectileHolder");
-                GameObjectManager.Instance.AddGameObject(projectileHolder);
-                GameObjectManager.Instance.AddGameObject(this, projectileHolder);
-            }
-            else
-                GameObjectManager.Instance.AddGameObject(this, projectile);
         }
 
         void LoadStats(ProjectileType projectileType)
         {
             ProjectileStats stats = StatsHandler.GetStats<ProjectileStats>(projectileType);
+
             _damage = stats.Damage;
             _speed = stats.Speed;
             _projectileOffsetX = stats.ProjectileOffsetX;
@@ -159,10 +156,18 @@ namespace BoBo2D_Eyal_Gal
                     GameObjectManager.Instance.DestroyGameObject(this);
             }
         }
+        #endregion
+
+        #region Override
+        public void Update()
+        {
+            ProjectileMovement();
+        }
 
         public override void Unsubscribe()
         {
             SubscriptionManager.RemoveSubscriber<IUpdatable>(this);
         }
+        #endregion
     }
 }

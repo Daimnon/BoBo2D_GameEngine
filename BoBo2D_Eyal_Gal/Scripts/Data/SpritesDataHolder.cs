@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 
 
@@ -15,9 +13,8 @@ namespace BoBo2D_Eyal_Gal
             get
             {
                 if (_instance == null)
-                {
                     _instance = new SpritesDataHolder();
-                }
+
                 return _instance;
             }
         }
@@ -31,10 +28,23 @@ namespace BoBo2D_Eyal_Gal
         #region Properties
         public List<string> SpriteNames { get => _spriteNames; set => _spriteNames = value; }
         #endregion
-        
+
+        #region Constructor
         public SpritesDataHolder()
         {
             _spriteNames = new List<string>(10);
+        }
+        #endregion
+
+        #region Methods
+        public Texture2D GetTexture2D(string dataName)
+        {
+            Texture2D texture;
+
+            if (_sprites.TryGetValue(dataName, out texture))
+                return texture;
+
+            return null;
         }
 
         public void LoadSpriteData(Game1 game)
@@ -43,20 +53,11 @@ namespace BoBo2D_Eyal_Gal
             {
                 for (int i = 0; i < _spriteNames.Count; i++)
                 {
-                    if(!_sprites.ContainsKey(_spriteNames[i]))
+                    if (!_sprites.ContainsKey(_spriteNames[i]))
                     _sprites.Add(_spriteNames[i], game.LoadData<Texture2D>(_spriteNames[i]));
                 }
             }
         }
-
-        public Texture2D GetTexture2D(string dataName)
-        {
-            Texture2D texture;
-
-            if(_sprites.TryGetValue(dataName, out texture))
-                return texture;
-
-            return null;
-        }
+        #endregion
     }
 }

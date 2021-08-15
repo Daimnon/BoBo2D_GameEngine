@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -15,21 +13,28 @@ namespace BoBo2D_Eyal_Gal
         public Node Root => _root;
         #endregion
 
+        #region Constructor
         public TreeOfGameObjects(Node root)
         {
             _root = root;
         }
+        #endregion
+
+        #region Methods
         public IEnumerator<Node> GetEnumerator()
         {
             return new TreeDepthEnumerator(this);
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
         }
+
         public void DestroyTree()
         {
             GameObjectManager.Instance.Hirarchy.Remove(this);
         }
+        #endregion
     }
 }

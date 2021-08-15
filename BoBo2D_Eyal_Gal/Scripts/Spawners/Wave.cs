@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BoBo2D_Eyal_Gal
+﻿namespace BoBo2D_Eyal_Gal
 {
     public class Wave
     {
         #region Field
         SpaceshipType _enemyShipType;
-        int _spawnMinWidth;
-        int _spawnMaxWidth;
-        int _numberOfEnemies;
+
+        int _spawnMinWidth, _spawnMaxWidth, _numberOfEnemies;
         #endregion
         
         #region Properties
@@ -19,7 +14,8 @@ namespace BoBo2D_Eyal_Gal
         public int SpawnMaxWidth => _spawnMaxWidth;
         public int NumberOfEnemies => _numberOfEnemies;
         #endregion
-        
+
+        #region Constructor
         public Wave(int spawnMinWidth, int spawnMaxWidth, SpaceshipType enemyShipType, int numberOfEnemies)
         {
             _spawnMinWidth = spawnMinWidth;
@@ -27,5 +23,6 @@ namespace BoBo2D_Eyal_Gal
             _enemyShipType = enemyShipType;
             _numberOfEnemies = numberOfEnemies;
         }
+        #endregion
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+﻿using Microsoft.Xna.Framework.Input;
 
 
 namespace BoBo2D_Eyal_Gal
@@ -16,19 +11,24 @@ namespace BoBo2D_Eyal_Gal
     }
     class InputManager : IUpdatable
     {
+        #region Fields
         Spaceship _player;
         Keys _goUpKey, _goDownKey, _goLeftKey, _goRightKey;
         Keys _firstWeapon, _secondWeapon, _thirdWeapon;
+
         bool _usingWASD = false;
         bool _usingNumbersForGuns = false;
         bool _customMovementKeys = false;
         bool _customWeaponKeys = false;
+        #endregion
 
+        #region Constructor
         public InputManager(Spaceship player, bool WASDMovement, bool numbersForGuns)
         {
             _player = player;
             _usingWASD = WASDMovement;
             _usingNumbersForGuns = numbersForGuns;
+
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
 
@@ -41,6 +41,7 @@ namespace BoBo2D_Eyal_Gal
             _goDownKey = goDownKey;
             _goLeftKey = goLeftKey;
             _goRightKey = goRightKey;
+
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
 
@@ -52,6 +53,7 @@ namespace BoBo2D_Eyal_Gal
             _firstWeapon = firstWeapon;
             _secondWeapon = secondWeapon;
             _thirdWeapon = thirdWeapon;
+
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
 
@@ -68,27 +70,12 @@ namespace BoBo2D_Eyal_Gal
             _firstWeapon = firstWeapon;
             _secondWeapon = secondWeapon;
             _thirdWeapon = thirdWeapon;
+
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
+        #endregion
 
-        public void Update()
-        {
-            if (_usingWASD)
-                MoveWithWASD();
-
-            if (_customMovementKeys)
-                MoveWithCustomKeys(_goUpKey, _goDownKey, _goLeftKey, _goRightKey);
-            else
-                MoveWithKeyArrows();
-
-            if (_usingNumbersForGuns)
-                FireWithNumbers();
-            else if (_customWeaponKeys)
-                FireWithCustomKeys(_firstWeapon, _secondWeapon, _thirdWeapon);
-            else
-                FireWithDefaultKeys();
-                //FireWithDefaultKeys();
-        }
+        #region Methods
 
         #region Movement
         void MoveWithKeyArrows()
@@ -214,6 +201,7 @@ namespace BoBo2D_Eyal_Gal
             else if (Keyboard.GetState().IsKeyDown(Keys.D3))
                 CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon);
         }
+
         void FireWithCustomKeys(Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)//1,2,3
         {
             if (Keyboard.GetState().IsKeyDown(firstWeapon))
@@ -224,6 +212,29 @@ namespace BoBo2D_Eyal_Gal
 
             else if (Keyboard.GetState().IsKeyDown(thirdWeapon))
                 CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon);
+        }
+        #endregion
+
+        #endregion
+
+        #region Overrieds
+        public void Update()
+        {
+            if (_usingWASD)
+                MoveWithWASD();
+
+            if (_customMovementKeys)
+                MoveWithCustomKeys(_goUpKey, _goDownKey, _goLeftKey, _goRightKey);
+            else
+                MoveWithKeyArrows();
+
+            if (_usingNumbersForGuns)
+                FireWithNumbers();
+            else if (_customWeaponKeys)
+                FireWithCustomKeys(_firstWeapon, _secondWeapon, _thirdWeapon);
+            else
+                FireWithDefaultKeys();
+                //FireWithDefaultKeys();
         }
         #endregion
     }

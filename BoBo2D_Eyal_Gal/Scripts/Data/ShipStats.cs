@@ -5,7 +5,6 @@
         #region Fields
         SpaceshipType _shipType;
         WeaponType _weaponType;
-        string _name;
         string _spriteName;
         int _maxHealth, _maxShield, _score, _currentLvl;
         float _healthRegen, _shield, _shieldRegen, _shieldPower, _speed;
@@ -26,9 +25,9 @@
         public float ShieldPower { get => _shieldPower; set => _shieldPower = value; }
         public float Speed => _speed;
         public bool HasWeaponSprite => _hasWeaponSprite;
-
         #endregion
 
+        #region Constructor
         public ShipStats(SpaceshipType shipType,WeaponType weaponType, int currentLvl, int maxHealth, float healthRegen, int shield, int maxShield,
             float shieldRegen,float speed, int score, bool hasWeaponSprite, string spriteName) : base(StatsType.Ship)
         {
@@ -46,5 +45,6 @@
             _score = score;
             _hasWeaponSprite = hasWeaponSprite;
         }
+        #endregion
     }
 }

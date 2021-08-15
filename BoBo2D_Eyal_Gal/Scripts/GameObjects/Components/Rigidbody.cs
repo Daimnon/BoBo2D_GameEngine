@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
@@ -23,6 +20,7 @@ namespace BoBo2D_Eyal_Gal
         public bool FreezRotation { get => _freezRotation; set => _freezRotation = value; }
         #endregion
 
+        #region Constructor
         public Rigidbooty(GameObject gameObject)
         {
             GameObjectP = gameObject;
@@ -32,8 +30,8 @@ namespace BoBo2D_Eyal_Gal
             UseGravity = true;
             IsKinematic = false;
             FreezRotation = false;
-            //BoxColliderP = _gameObject.GetComponent<BoxCollider>();
         }
+        #endregion
 
         //need fixes
         #region Methods
@@ -64,6 +62,7 @@ namespace BoBo2D_Eyal_Gal
         {
             Vector2 position = TransformP.Position;
             position = new Vector2(position.X, position.Y - Physics.Gravity);
+
             //need to add another condition for checking collision from the bottom
             if (UseGravity)
                 TransformP.Position = position;
@@ -92,51 +91,21 @@ namespace BoBo2D_Eyal_Gal
             Destroy(parentComponent);
         }
 
-        /* removes an asset.
-        public static void Destroy(Assest parentAssest)
-        {
-            Destroy(parentAssest);
-        }
-        */
-
         public static void DontDestroyOnLoad()
         {
             //do not destroy the target Object when loading a new Scene.
         }
-
-        public static T FindObjectOfType<T>(List<T> listOfAllLoadedObjects)
-        {
-            //check if list empty
-            if (listOfAllLoadedObjects.Count == 0)
-                Console.WriteLine("No objects have loaded yet.");
-
-            //returns first loaded object
-            return listOfAllLoadedObjects.First();
-        }
-
-        public static T FindObjectsOfType<T>(List<T> listOfAllLoadedObjects)
-        {
-            //check if list empty
-            if (listOfAllLoadedObjects.Count == 0)
-                Console.WriteLine("No objects have loaded yet.");
-
-            //returns all loaded objects
-            foreach (T obj in listOfAllLoadedObjects)
-                return obj;
-
-            return default;
-        }
         #endregion
 
         #region Overrides
-        public override string ToString()
-        {
-            return $"Rigidbody of {Name}" + Environment.NewLine;
-        }
-
         public void Update()
         {
             ApplyGravity();
+        }
+
+        public override string ToString()
+        {
+            return $"Rigidbody of {Name}" + Environment.NewLine;
         }
         #endregion
     }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 
 
@@ -16,18 +13,16 @@ namespace BoBo2D_Eyal_Gal
             get
             {
                 if(_instance == null)
-                {
                     _instance = new DataManager();
-                }
+
                 return _instance;
             }
         }
         public DataManager()
         {
             if(_instance == null)
-            {
                 _instance = this;
-            }
+
             _soundDataHolder = new SoundsDataHolder(); 
             _spriteDataHolder = new SpritesDataHolder();
             _fontDataHolder = new FontDataHolder();
@@ -36,6 +31,7 @@ namespace BoBo2D_Eyal_Gal
 
         #region Fields
         static Game1 _game;
+
         SpritesDataHolder _spriteDataHolder;
         SoundsDataHolder _soundDataHolder;
         FontDataHolder _fontDataHolder;
@@ -59,21 +55,22 @@ namespace BoBo2D_Eyal_Gal
 
             if (_fontDataHolder != null)
                 _fontDataHolder.LoadFontData(_game);
-            
         }
+
         public Texture2D GetTexture2D(string dataName)
         {
            return _spriteDataHolder.GetTexture2D(dataName);
         }
+
         public SoundEffect GetSound(string dataName)
         {
             return _soundDataHolder.GetSoundEffect(dataName);
         }
+
         public SpriteFont GetFont(string dataName)
         {
             return _fontDataHolder.GetSpriteFont(dataName);
         }
         #endregion
-
     }
 }

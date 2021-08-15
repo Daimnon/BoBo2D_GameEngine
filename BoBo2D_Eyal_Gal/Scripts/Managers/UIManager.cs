@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BoBo2D_Eyal_Gal
+﻿namespace BoBo2D_Eyal_Gal
 {
     public static class UIManager
     {
+        #region Fields
         public static UIHandler UiHandler;
+        #endregion
 
-        public static void ChangeHpBarSpacing(float spaceBy)
-        {
-            UiHandler.HealthBarSpacing = spaceBy;
-        }
-
+        #region Methods
         public static void EnableHealthIcons()
         {
             UiHandler.EnableHealthIcons();
@@ -21,6 +15,11 @@ namespace BoBo2D_Eyal_Gal
         public static void DisableHealthIcons()
         {
             UiHandler.DisableHealthIcons();
+        }
+
+        public static void ChangeHpBarSpacing(float spaceBy)
+        {
+            UiHandler.HealthBarSpacing = spaceBy;
         }
 
         public static void UpdateAmmoCount(int ammoCount)
@@ -32,5 +31,6 @@ namespace BoBo2D_Eyal_Gal
         {
             UiHandler.UpdateScore(scoreCount);
         }
+        #endregion
     }
 }
