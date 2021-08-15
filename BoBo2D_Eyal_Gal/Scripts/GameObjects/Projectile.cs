@@ -120,42 +120,36 @@ namespace BoBo2D_Eyal_Gal
             if (anotherCollider.GameObjectP as Spaceship == null)
                 return;
 
-            if ((!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer))&&(!IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer))
+            if (!((IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer) && (!IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)))
             {
-                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
-                {
-                    if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                    {
-                        GameObjectManager.Instance.DestroyGameObject(this);
-                    }
-                }
-
-                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
-                {
-                    if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                    {
-                        GameObjectManager.Instance.DestroyGameObject(this);
-                    }
-                }
-            }
-            else if (IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
-            {
-                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
-                {
-                    if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                    {
-                        GameObjectManager.Instance.DestroyGameObject(this);
-                    }
-                }
-
-                if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                if (!IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && (anotherCollider.GameObjectP as Spaceship).IsPlayer)
                 {
                     GameObjectManager.Instance.DestroyGameObject(this);
-                }
-            }
 
-            else if (IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                return;
+                    if ((anotherCollider.GameObjectP as Spaceship).Health <= 0)
+                    {
+                        (anotherCollider.GameObjectP as Spaceship).IsDefeatedByEnemy = true;
+                        GameObjectManager.Instance.DestroyGameObject(anotherCollider.GameObjectP);
+                    }
+                }
+
+                if (!IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    GameObjectManager.Instance.DestroyGameObject(this);
+
+                if (IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                {
+                    GameObjectManager.Instance.DestroyGameObject(this);
+
+                    if ((anotherCollider.GameObjectP as Spaceship).Health <= 0)
+                    {
+                        (anotherCollider.GameObjectP as Spaceship).IsDefeatedByPlayer = true;
+                        GameObjectManager.Instance.DestroyGameObject(anotherCollider.GameObjectP);
+                    }
+                }
+
+                if (IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && (anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                    GameObjectManager.Instance.DestroyGameObject(this);
+            }
         }
 
         public override void Unsubscribe()

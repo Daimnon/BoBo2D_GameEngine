@@ -96,6 +96,24 @@ namespace BoBo2D_Eyal_Gal
                         return;
                     }
                 }
+
+                foreach (BoxCollider anotherCollider in AllBoxColliders)
+                {
+                    List<BoxCollider> tempColliderList1 = AllBoxColliders;
+
+                    if (!anotherCollider.IsEnabled)
+                        continue;
+
+                    if (collider == anotherCollider)
+                        continue;
+
+                    if (AABB(collider, anotherCollider))
+                    {
+                        collider.CollidesWith(anotherCollider);
+                        collider.StartCollidingWith(anotherCollider);
+                        collider.FinishedCollidingWith(anotherCollider);
+                    }
+                }
             }
         }
         
