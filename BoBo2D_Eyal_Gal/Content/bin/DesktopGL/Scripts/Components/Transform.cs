@@ -4,6 +4,18 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
+    public enum MoveDirection
+    {
+        Up,
+        Down,
+        Right,
+        Left,
+        UpperRight,
+        UpperLeft,
+        LowerRight,
+        LowerLeft
+    }
+
     public class Transform : Component
     {
         #region Fields
@@ -53,20 +65,132 @@ namespace BoBo2D_Eyal_Gal
         }
         #endregion
 
-        //need fixes
         #region Methods
+        public Vector2 GetVelocity(MoveDirection movementDirection)
+        {
+            switch (movementDirection)
+            {
+                case MoveDirection.Up:
+                    return new Vector2(0, -1);
 
-        //public void Translate(Vector2 translation)
-        //{
-        //    //not good
-        //    Position.Add(translation);
-        //}
+                case MoveDirection.Down:
+                    return new Vector2(0, 1);
 
-        //public void Translate(float x, float y)
-        //{
-        //    //not good
-        //    Position.Add(new Vector2(x, y));
-        //}
+                case MoveDirection.Right:
+                    return new Vector2(1, 0);
+
+                case MoveDirection.Left:
+                    return new Vector2(-1, 0);
+
+                case MoveDirection.UpperRight:
+                    return new Vector2(1, -1);
+
+                case MoveDirection.UpperLeft:
+                    return new Vector2(-1, -1);
+
+                case MoveDirection.LowerRight:
+                    return new Vector2(1, 1);
+
+                case MoveDirection.LowerLeft:
+                    return new Vector2(-1, 1);
+
+                default:
+                    return new Vector2(0, 0);
+            }
+        }
+
+        public void Translate(MoveDirection direction, GameObject gameObject, float speed)
+        {
+            if (gameObject is Spaceship ship)
+            {
+                if (this == null)
+                    return;
+
+                ship.CalculateCurrentSpeed(Position);
+            }
+
+            switch (direction)
+            {
+                case MoveDirection.Up:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.Down:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.Right:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.Left:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.UpperRight:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.UpperLeft:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.LowerRight:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.LowerLeft:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+        
+        public void Translate(MoveDirection direction, GameObject gameObject, Vector2 speed)
+        {
+            if (gameObject is Spaceship ship)
+                ship.CalculateCurrentSpeed(Position);
+
+            switch (direction)
+            {
+                case MoveDirection.Up:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.Down:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.Right:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.Left:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.UpperRight:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.UpperLeft:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.LowerRight:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                case MoveDirection.LowerLeft:
+                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
+                    break;
+
+                default:
+                    break;
+            }
+        }
         #endregion
 
         //need fixes

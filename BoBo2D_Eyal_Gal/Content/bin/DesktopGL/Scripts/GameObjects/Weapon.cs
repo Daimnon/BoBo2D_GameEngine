@@ -63,12 +63,12 @@ namespace BoBo2D_Eyal_Gal
             }   
         }       
 
-        public Vector2 Direction()
+        public Vector2 DirectionOfShot()
         {
             if(_isPlayer)
-                return MovementHandler.GetDirectionVector(MoveDirection.Up);
+                return GetComponent<Transform>().GetVelocity(MoveDirection.Up);
             else
-                return MovementHandler.GetDirectionVector(MoveDirection.Down);
+                return GetComponent<Transform>().GetVelocity(MoveDirection.Down);
         }
 
         public void Shoot(Vector2 currentSpeed)
@@ -76,7 +76,7 @@ namespace BoBo2D_Eyal_Gal
             //check for cooldown and ammo
             if(_currentCoolDown <= 0 && _currentAmmo > 0)
             {
-                Vector2 flightDirection = Direction();
+                Vector2 flightDirection = DirectionOfShot();
                 Transform transform = _spaceShip.GetComponent<Transform>();
 
                 if (transform != null && _projectileName != null)

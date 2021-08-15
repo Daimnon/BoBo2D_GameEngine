@@ -1,6 +1,6 @@
 ﻿namespace BoBo2D_Eyal_Gal
 {
-    public class Wave
+    public class WaveData
     {
         #region Field
         SpaceshipType _enemyShipType;
@@ -16,7 +16,7 @@
         #endregion
 
         #region Constructor
-        public Wave(int spawnMinWidth, int spawnMaxWidth, SpaceshipType enemyShipType, int numberOfEnemies)
+        public WaveData(int spawnMinWidth, int spawnMaxWidth, SpaceshipType enemyShipType, int numberOfEnemies)
         {
             _spawnMinWidth = spawnMinWidth;
             _spawnMaxWidth = spawnMaxWidth;

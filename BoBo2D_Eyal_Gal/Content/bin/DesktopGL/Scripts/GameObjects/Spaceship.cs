@@ -256,7 +256,7 @@ namespace BoBo2D_Eyal_Gal
             if (_isPlayer == false)
             {
                 CheckEnemyPosition();
-                MovementHandler.Movement(MoveDirection.Down, this, _speed);
+                GetComponent<Transform>().Translate(MoveDirection.Down, this, _speed);
                 FirstWeapon.Shoot(_currentSpeed);
             }
             else

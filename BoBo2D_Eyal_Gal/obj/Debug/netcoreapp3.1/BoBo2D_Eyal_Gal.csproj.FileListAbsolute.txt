@@ -173,3 +173,4 @@ C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreap
 C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Projectiles\Laser2.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Ammo.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\HealthBar.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.csproj.AssemblyReference.cache

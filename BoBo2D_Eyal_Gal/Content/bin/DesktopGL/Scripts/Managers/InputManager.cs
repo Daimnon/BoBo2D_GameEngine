@@ -1,5 +1,7 @@
-﻿using Microsoft.Xna.Framework.Input;
-
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace BoBo2D_Eyal_Gal
 {
@@ -9,10 +11,13 @@ namespace BoBo2D_Eyal_Gal
         SeconderyWeapon = 1,
         SpecialWeapon = 2,
     }
+
     class InputManager : IUpdatable
     {
         #region Fields
-        Spaceship _player;
+        GameObject _playerGameObject;
+        Spaceship _playerShip;
+        Transform _playerTransform;
         Keys _goUpKey, _goDownKey, _goLeftKey, _goRightKey;
         Keys _firstWeapon, _secondWeapon, _thirdWeapon;
 
@@ -25,7 +30,9 @@ namespace BoBo2D_Eyal_Gal
         #region Constructor
         public InputManager(Spaceship player, bool WASDMovement, bool numbersForGuns)
         {
-            _player = player;
+            _playerGameObject = player;
+            _playerShip = player;
+            _playerTransform = player.GetComponent<Transform>();
             _usingWASD = WASDMovement;
             _usingNumbersForGuns = numbersForGuns;
 
@@ -34,9 +41,12 @@ namespace BoBo2D_Eyal_Gal
 
         public InputManager(Spaceship player, bool numbersForGuns, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey)
         {
+            _playerGameObject = player;
+            _playerShip = player;
+            _playerTransform = player.GetComponent<Transform>();
+            
             _customMovementKeys = true;
             _usingNumbersForGuns = numbersForGuns;
-            _player = player;
             _goUpKey = goUpKey;
             _goDownKey = goDownKey;
             _goLeftKey = goLeftKey;
@@ -47,9 +57,12 @@ namespace BoBo2D_Eyal_Gal
 
         public InputManager(Spaceship player, bool WASDMovement, Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)
         {
+            _playerGameObject = player;
+            _playerShip = player;
+            _playerTransform = player.GetComponent<Transform>();
+
             _customWeaponKeys = true;
             _usingWASD = WASDMovement;
-            _player = player;
             _firstWeapon = firstWeapon;
             _secondWeapon = secondWeapon;
             _thirdWeapon = thirdWeapon;
@@ -60,9 +73,12 @@ namespace BoBo2D_Eyal_Gal
         public InputManager(Spaceship player, Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey,
                             Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)
         {
+            _playerGameObject = player;
+            _playerShip = player;
+            _playerTransform = player.GetComponent<Transform>();
+
             _customMovementKeys = true;
             _customWeaponKeys = true;
-            _player = player;
             _goUpKey = goUpKey;
             _goDownKey = goDownKey;
             _goLeftKey = goLeftKey;
@@ -75,34 +91,32 @@ namespace BoBo2D_Eyal_Gal
         }
         #endregion
 
-        #region Methods
-
-        #region Movement
+        #region Movement Methods
         void MoveWithKeyArrows()
         {
             if(Keyboard.GetState().IsKeyDown(Keys.Up) && Keyboard.GetState().IsKeyDown(Keys.Right))
-                MovementHandler.Movement(MoveDirection.UpperRight, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.UpperRight, _playerShip, _playerShip.Speed);
 
             else if(Keyboard.GetState().IsKeyDown(Keys.Up) && Keyboard.GetState().IsKeyDown(Keys.Left))
-                MovementHandler.Movement(MoveDirection.UpperLeft, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.UpperLeft, _playerShip, _playerShip.Speed);
 
             else if(Keyboard.GetState().IsKeyDown(Keys.Down) && Keyboard.GetState().IsKeyDown(Keys.Right))
-                MovementHandler.Movement(MoveDirection.LowerRight, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.LowerRight, _playerShip, _playerShip.Speed);
 
             else if(Keyboard.GetState().IsKeyDown(Keys.Down) && Keyboard.GetState().IsKeyDown(Keys.Left))
-                MovementHandler.Movement(MoveDirection.LowerLeft, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.LowerLeft, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Up))
-                MovementHandler.Movement(MoveDirection.Up, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Up, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Down))
-                MovementHandler.Movement(MoveDirection.Down, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Down, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                MovementHandler.Movement(MoveDirection.Right, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Right, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Left))
-                MovementHandler.Movement(MoveDirection.Left, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Left, _playerShip, _playerShip.Speed);
 
             else
             {
@@ -113,28 +127,28 @@ namespace BoBo2D_Eyal_Gal
         void MoveWithWASD()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.D))
-                MovementHandler.Movement(MoveDirection.UpperRight, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.UpperRight, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.W) && Keyboard.GetState().IsKeyDown(Keys.A))
-                MovementHandler.Movement(MoveDirection.UpperLeft, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.UpperLeft, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.D))
-                MovementHandler.Movement(MoveDirection.LowerRight, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.LowerRight, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.S) && Keyboard.GetState().IsKeyDown(Keys.A))
-                MovementHandler.Movement(MoveDirection.LowerLeft, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.LowerLeft, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.W))
-                MovementHandler.Movement(MoveDirection.Up, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Up, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.S))
-                MovementHandler.Movement(MoveDirection.Down, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Down, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.D))
-                MovementHandler.Movement(MoveDirection.Right, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Right, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.A))
-                MovementHandler.Movement(MoveDirection.Left, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Left, _playerShip, _playerShip.Speed);
 
             else
             {
@@ -145,28 +159,28 @@ namespace BoBo2D_Eyal_Gal
         void MoveWithCustomKeys(Keys goUpKey, Keys goDownKey, Keys goLeftKey, Keys goRightKey)
         {
             if (Keyboard.GetState().IsKeyDown(goUpKey) && Keyboard.GetState().IsKeyDown(goRightKey))
-                MovementHandler.Movement(MoveDirection.UpperRight, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.UpperRight, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(goUpKey) && Keyboard.GetState().IsKeyDown(goLeftKey))
-                MovementHandler.Movement(MoveDirection.UpperLeft, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.UpperLeft, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(goDownKey) && Keyboard.GetState().IsKeyDown(goRightKey))
-                MovementHandler.Movement(MoveDirection.LowerRight, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.LowerRight, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(goDownKey) && Keyboard.GetState().IsKeyDown(goLeftKey))
-                MovementHandler.Movement(MoveDirection.LowerLeft, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.LowerLeft, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(goUpKey))
-                MovementHandler.Movement(MoveDirection.Up, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Up, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(goDownKey))
-                MovementHandler.Movement(MoveDirection.Down, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Down, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(goRightKey))
-                MovementHandler.Movement(MoveDirection.Right, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Right, _playerShip, _playerShip.Speed);
 
             else if (Keyboard.GetState().IsKeyDown(goLeftKey))
-                MovementHandler.Movement(MoveDirection.Left, _player, _player.Speed);
+                _playerTransform.Translate(MoveDirection.Left, _playerShip, _playerShip.Speed);
 
             else
             {
@@ -175,46 +189,44 @@ namespace BoBo2D_Eyal_Gal
         }
         #endregion
 
-        #region FireArm
+        #region FireArm Methods
         //Shift Ctrl, Space
         void FireWithDefaultKeys()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift) || Keyboard.GetState().IsKeyDown(Keys.LeftShift))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SeconderyWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.SeconderyWeapon);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.LeftControl) || Keyboard.GetState().IsKeyDown(Keys.RightControl))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.SpecialWeapon);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Space))
-                CombatManager.FireWeapon(_player, SelectedWeapon.MainWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.MainWeapon);
         }
 
         //1,2,3
         void FireWithNumbers()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
-                CombatManager.FireWeapon(_player, SelectedWeapon.MainWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.MainWeapon);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.D2))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SeconderyWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.SeconderyWeapon);
 
             else if (Keyboard.GetState().IsKeyDown(Keys.D3))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.SpecialWeapon);
         }
 
         void FireWithCustomKeys(Keys firstWeapon, Keys secondWeapon, Keys thirdWeapon)//1,2,3
         {
             if (Keyboard.GetState().IsKeyDown(firstWeapon))
-                CombatManager.FireWeapon(_player, SelectedWeapon.MainWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.MainWeapon);
 
             else if (Keyboard.GetState().IsKeyDown(secondWeapon))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SeconderyWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.SeconderyWeapon);
 
             else if (Keyboard.GetState().IsKeyDown(thirdWeapon))
-                CombatManager.FireWeapon(_player, SelectedWeapon.SpecialWeapon);
+                CombatManager.FireWeapon(_playerShip, SelectedWeapon.SpecialWeapon);
         }
-        #endregion
-
         #endregion
 
         #region Overrieds

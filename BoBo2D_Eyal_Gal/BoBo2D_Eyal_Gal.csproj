@@ -27,13 +27,9 @@
     <None Remove="Content\bin\DesktopGL\Content\RebelJetBeam.xnb" />
     <None Remove="Content\bin\DesktopGL\Content\RebelShip.xnb" />
     <None Remove="Content\bin\DesktopGL\Content\Ship4.xnb" />
-    <None Remove="Content\bin\DesktopGL\Scripts\Spawners\WaveData" />
     <None Remove="Content\bin\DesktopGL\Ship4.xnb" />
     <None Remove="Icon.ico" />
     <None Remove="Icon.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Content\bin\DesktopGL\Scripts\Spawners\WaveData" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
