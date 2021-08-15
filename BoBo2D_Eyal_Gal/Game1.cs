@@ -11,12 +11,12 @@ namespace BoBo2D_Eyal_Gal
         private List<SceneManager> _allScenes = new List<SceneManager>(5);
         private GraphicsDeviceManager _graphics;
         private SceneManager _activeScene;
-        private static SpriteBatch _spriteBatch;
+        private SpriteBatch _spriteBatch;
         //private static GameObject _gameFont;
         //private static string _gameFontName;
         #endregion
 
-        public static SpriteBatch SpriteBatch => _spriteBatch;
+        public SpriteBatch SpriteBatch => _spriteBatch;
         //public static GameObject  GameFont => _gameFont;
         //public static string  GameFontName => _gameFontName;
         public Game1()
