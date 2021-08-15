@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BoBo2D_Eyal_Gal
 {
     static public class Time
     {
-        static float _deltaTime = DeltaTimeAsFloat();
-        static public float DeltaTime => _deltaTime;
+        #region Fields
+        static public float DeltaTime => DeltaTimeAsFloat();
+        #endregion
 
+        #region Methods
         public static void DeltaTimeAsDateTime()
         {
             DateTime time1 = DateTime.Now;
@@ -36,8 +36,10 @@ namespace BoBo2D_Eyal_Gal
                 return deltaTime;
             }
         }
+        #endregion
 
-        public static void StartTimer(float timer)
+        #region Timers
+        public static void RestartTimer(float timer)
         {
             timer = 0;
             timer = timer + (1 * DeltaTime);
@@ -64,5 +66,6 @@ namespace BoBo2D_Eyal_Gal
                 timer = 0;
             }
         }
+        #endregion
     }
 }
