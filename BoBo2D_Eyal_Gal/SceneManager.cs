@@ -12,32 +12,50 @@ namespace BoBo2D_Eyal_Gal
         Game1 _game;
         WaveManager _waveManager;
         Spaceship _player;
+        SplashScreen _splashScreen;
         int _gameState;
         bool _isSceneAlive;
+
+
 
         #endregion
 
         #region Properties
+        public int GameState { get => _gameState; set => _gameState = value; }
 
         #endregion
 
         public SceneManager(Game1 game)
         {
-            _gameState = 1;
+            _gameState = -1;
             _game = game;
             _waveManager = new WaveManager();
             _isSceneAlive = true;
             UIManager.UiHandler = new UIHandler("HealthBar","Ammo","GameSpriteFont","GameSpriteFont", "Player");
+            _splashScreen = new SplashScreen(_game,this);
+
         }
 
         #region Methods
         //initializing scene
         public void Init()
         {
+            DataManager.Game = _game;
+            //add all wanted sprites
+            Scene.AddSprites();
+            //add all wanted sounds
+            Scene.AddSounds();
+            //load all sounds
+            Scene.AddFonts();
+            //load all fonts
+            DataManager.Instance.LoadAllExternalData();
+            //ger root Scene Game1 State
+            DrawManager.Game = _game;
             switch (_gameState)
             {
                 case -1:
                     InitializeSplashScreen();
+
                     break;
 
                 case 0:
@@ -78,7 +96,6 @@ namespace BoBo2D_Eyal_Gal
         {
             SubscriptionManager.ActivateAllSubscribersOfType<IUpdatable>();
             //check collisions need implementation
-            SubscriptionManager.ActivateAllSubscribersOfType<ICollidable>();
         }
 
         public void DrawScene()
@@ -87,16 +104,14 @@ namespace BoBo2D_Eyal_Gal
             {
                 case -1:
                     DrawSplashScreen();
-                    break;
 
+                    break;
                 case 0:
                     DrawMainMenu();
                     break;
-
                 case 1:
                     DrawLevel1();
                     break;
-
                 default:
                     break;
             }
@@ -106,18 +121,18 @@ namespace BoBo2D_Eyal_Gal
 
         public void InitializeSplashScreen()
         {
+            
 
         }
 
         public void StartSplashScreen()
         {
-
         }
 
         public void DrawSplashScreen()
         {
-            SplashScreen splashScreen = new SplashScreen(_game);
-            splashScreen.DrawSplashScreen();
+            _splashScreen.DrawSplashScreen();
+
         }
 
         public void InitializeMainMenu()
@@ -150,17 +165,9 @@ namespace BoBo2D_Eyal_Gal
             //Create Enemy Spaceship
             Scene.CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicEnemyWeapon, 1, 1, 0, 10, 1, 1, 100, false, "RebelShip");
             //ger root Scene Game1 State
-            DataManager.Game = _game;
-            //add all wanted sprites
-            Scene.AddSprites();
-            //add all wanted sounds
-            Scene.AddSounds();
-            //load all sounds
-            Scene.AddFonts();
-            //load all fonts
-            DataManager.Instance.LoadAllExternalData();
-            //ger root Scene Game1 State
-            DrawManager.Game = _game;
+
+
+
         }
 
         public void StartLevel1()
