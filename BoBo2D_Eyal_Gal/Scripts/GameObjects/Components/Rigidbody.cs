@@ -27,7 +27,8 @@ namespace BoBo2D_Eyal_Gal
         {
             GameObjectP = gameObject;
             TransformP = gameObject.GetComponent<Transform>();
-            Name = GameObjectP.Name + " Rigidbooty";
+            Name = GameObjectP.Name;
+
             UseGravity = true;
             IsKinematic = false;
             FreezRotation = false;

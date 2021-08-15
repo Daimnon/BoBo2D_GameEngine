@@ -27,6 +27,7 @@ namespace BoBo2D_Eyal_Gal
             GameObjectP = gameObject;
             TransformP = gameObject.GetComponent<Transform>();
             Name = gameObject.Name;
+
             _texture = DataManager.Instance.GetTexture2D(spriteName);
             SpriteWidth = _texture.Width;
             SpriteHeight = _texture.Height;

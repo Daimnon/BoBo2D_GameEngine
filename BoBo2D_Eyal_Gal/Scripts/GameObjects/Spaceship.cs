@@ -15,17 +15,13 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         Weapon _currentWeapon, _firstWeapon, _secondWeapon, _thirdWeapon;
-        Vector2 _lastFramePosition;
-        Vector2 _currentSpeed;
+        Vector2 _lastFramePosition, _currentSpeed;
         string _spriteName;
-        int _currentLvl = 1;
         int _score = 0;
-        int _health, _maxHealth;
+        int _health, _maxHealth, _currentLvl, _shieldPower;
         float _healthRegen, _shield, _maxShield, _shieldRegen, _speed, _damageScalar, _exp, _maxExp;
         bool _isPlayer;
-        bool _isDefeatedByPlayer = false;
-        bool _isDefeatedByEnemy = false;
-        bool _hasWeaponSprite = false;
+        bool _isDefeatedByPlayer = false, _isDefeatedByEnemy = false, _hasWeaponSprite = false;
         #endregion
 
         #region Propetries
@@ -39,6 +35,7 @@ namespace BoBo2D_Eyal_Gal
         public int Score { get => _score; set => _score = value; }
         public int Health { get => _health; set => _health = value; }
         public int MaxHealth { get => _maxHealth; set => _maxHealth = value; }
+        public int ShieldPower { get => _shieldPower; set => _shieldPower = value; }
         public float HealthRegen { get => _healthRegen; set => _healthRegen = value; }
         public float Shield { get => _shield; set => _shield = value; }
         public float MaxShield { get => _maxShield; set => _maxShield = value; }
@@ -236,32 +233,18 @@ namespace BoBo2D_Eyal_Gal
             //be spesific about what type of object I collide with
             if (anotherCollider.GameObjectP == null)
                 return;
-
-            if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                              // Gets nothing, never catching the right projectile;
+            if (!(IsPlayer && (anotherCollider.GameObjectP as Projectile).IsPlayerProjectile && !IsPlayer && !(anotherCollider.GameObjectP as Projectile).IsPlayerProjectile))
             {
-                SolveCollision(this, anotherCollider.GameObjectP);
-                CombatManager.ReduceHealth(CurrentWeapon);
-                if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                    (anotherCollider.GameObjectP as Spaceship).Health--;
-            }
-
-            if (IsPlayer && anotherCollider.GameObjectP is Projectile && !(anotherCollider.GameObjectP as Projectile).IsPlayerProjectile)
-            {
-                CombatManager.ReduceHealth(CurrentWeapon);
-                if (Health <= 0)
+                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
                 {
-                    IsDefeatedByEnemy = true;
-                    GameObjectManager.Instance.DestroyGameObject(this);
-                }
-            }
+                    SolveCollision(this, anotherCollider.GameObjectP);
 
-            if (!IsPlayer && anotherCollider.GameObjectP is Projectile && (anotherCollider.GameObjectP as Projectile).IsPlayerProjectile)
-            {
-                Health--;
-                if (Health <= 0)
-                {
-                    IsDefeatedByPlayer = true;
-                    GameObjectManager.Instance.DestroyGameObject(this);
+                    if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                        CombatManager.DamagedByPlayerBash(anotherCollider.GameObjectP as Spaceship);
+
+                    if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                        CombatManager.DamagedByEnemyBash(anotherCollider.GameObjectP as Spaceship);
                 }
             }
         }

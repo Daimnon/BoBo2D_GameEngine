@@ -65,7 +65,7 @@ namespace BoBo2D_Eyal_Gal
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
 
             // TODO: Add your update logic here
             _spriteBatch.Begin();

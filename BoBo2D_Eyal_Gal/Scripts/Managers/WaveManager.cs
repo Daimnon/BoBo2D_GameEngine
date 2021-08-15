@@ -63,20 +63,15 @@ namespace BoBo2D_Eyal_Gal
 
             if (_waves != null && _waves.Count > 0 )
             {
-                //try
-                //{
-                //    _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
-                //    _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
-                //}
-                //catch(ArgumentOutOfRangeException)
-                //{
-                //    Console.WriteLine("No Enemies.");
-                //}
-
-                
-                _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
-                    _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
-                
+                try
+                {
+                    _enemySpawnManager.AddEnemiesToSpawn(_waves[waveNumber].EnemyShipType, _waves[waveNumber].NumberOfEnemies,
+                _waves[waveNumber].SpawnMinWidth, _waves[waveNumber].SpawnMaxWidth);
+                }
+                catch(ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("No Enemies.");
+                }
             }
         }
         void WaveState(WaveStatus waveStatus)

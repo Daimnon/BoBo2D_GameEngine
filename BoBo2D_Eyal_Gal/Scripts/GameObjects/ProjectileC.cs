@@ -4,21 +4,12 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-
+/*
 namespace BoBo2D_Eyal_Gal
 {
-    public enum ProjectileType
-    {
-        BasicProjectile,
-        EnemyProjectile
-    }
-    public class Projectile : GameObject, IUpdatable
+    class ProjectileC : Component
     {
         #region Fields
-        Spaceship _spaceShip;
-        GameObject _gameObject;
-        Transform _projectileTransform;
         Vector2 _projectileDirection;
         string _spriteName;
         float _damage;
@@ -31,34 +22,30 @@ namespace BoBo2D_Eyal_Gal
 
         #region Properties
         public Vector2 ProjectileDirection { set => _projectileDirection = value; }
-        public GameObject GameObjectP { get => _gameObject; set => _gameObject = value; }
         public float Damage { get => _damage; set => _damage = value; }
         public bool Flying { set => _flying = value; }
         public bool IsPlayerProjectile { get => _isPlayerProjectile; set => _isPlayerProjectile = value; }
         #endregion
 
-        public Projectile(string name, Vector2 flightDirectin, float damageScalar,
-            WeaponType weaponType, Transform transform, bool isPlayerProjectile, Spaceship spaceship, ProjectileType projectileType) : base(name)
+        public ProjectileC(GameObject gameObject)
         {
-            Name = name;
-            AddToHirarcy();
-            _spaceShip = spaceship;
+            GameObjectP = gameObject;
+            TransformP = gameObject.GetComponent<Transform>();
+            Name = GameObjectP.Name;
+
             LoadStats(projectileType);
-            Vector2 pos = transform.Position;
-            AddComponent(new Sprite(this, _spriteName));
-            AddComponent(new BoxCollider(this));
-            GetComponent<BoxCollider>().OnCollision += CollidesWith;
-            GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
-            GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
-            AddComponent(new Rigidbooty(this));
+            
             _projectileDirection = flightDirectin * _speed * _spaceShip.CurrentSpeed;
-            _projectileTransform = GetComponent<Transform>();
-            _projectileTransform.Position = new Vector2(pos.X + _projectileOffsetX, pos.Y + _projectileOffsetY);
+            _transform = GetComponent<Transform>();
+            _transform.Position = new Vector2(pos.X + _projectileOffsetX, pos.Y + _projectileOffsetY);
             _damage *= damageScalar;
             _flying = true;
             _isPlayerProjectile = isPlayerProjectile;
+            ProjectileP = this;
             GameObjectP = this;
+            SpaceshipP = spaceship;
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
+            
         }
 
         public void Update()
@@ -88,7 +75,7 @@ namespace BoBo2D_Eyal_Gal
                 }
             }
 
-            if (_projectileTransform.Position.Y > StatsHandler.EndOfScreenHightPosition || _projectileTransform.Position.Y < 0)
+            if (_transform.Position.Y > StatsHandler.EndOfScreenHightPosition || _transform.Position.Y < 0)
                 GameObjectManager.Instance.DestroyGameObject(this);
         }
 
@@ -166,3 +153,4 @@ namespace BoBo2D_Eyal_Gal
         }
     }
 }
+*/

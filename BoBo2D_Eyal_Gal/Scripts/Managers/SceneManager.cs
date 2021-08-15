@@ -40,17 +40,8 @@ namespace BoBo2D_Eyal_Gal
         //initializing scene
         public void Init()
         {
-            DataManager.Game = _game;
-            //add all wanted sprites
-            Scene.AddSprites();
-            //add all wanted sounds
-            Scene.AddSounds();
-            //load all sounds
-            Scene.AddFonts();
-            //load all fonts
-            DataManager.Instance.LoadAllExternalData();
-            //ger root Scene Game1 State
-            DrawManager.Game = _game;
+            InitializeGame();
+
             switch (_gameState)
             {
                 case -1:
@@ -119,6 +110,21 @@ namespace BoBo2D_Eyal_Gal
             SubscriptionManager.ActivateAllSubscribersOfType<IDrawable>();
         }
 
+        public void InitializeGame()
+        {
+            DataManager.Game = _game;
+            //add all wanted sprites
+            Scene.AddSprites();
+            //add all wanted sounds
+            Scene.AddSounds();
+            //load all sounds
+            Scene.AddFonts();
+            //load all fonts
+            DataManager.Instance.LoadAllExternalData();
+            //ger root Scene Game1 State
+            DrawManager.Game = _game;
+        }
+
         public void InitializeSplashScreen()
         {
             
@@ -161,13 +167,9 @@ namespace BoBo2D_Eyal_Gal
             //Create Basic Enemy Weapon
             Scene.CreateWeapon(WeaponType.BasicEnemyWeapon, ProjectileType.EnemyProjectile, 3, 1000, 1, 1, null);
             //Create Player Spaceship
-            Scene.CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 3, 1, 0, 40, 1, 3, 100, false, "PlayerShip");
+            Scene.CreateSpaceship(SpaceshipType.BasicPlayerSpaceship, WeaponType.BasicMainWeapon, 1, 3, 1, 0, 40, 1, 3, 100, false, "PlayerShip");
             //Create Enemy Spaceship
-            Scene.CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicEnemyWeapon, 1, 1, 0, 10, 1, 1, 100, false, "RebelShip");
-            //ger root Scene Game1 State
-
-
-
+            Scene.CreateSpaceship(SpaceshipType.BasicEnemySpaceship, WeaponType.BasicEnemyWeapon, 1, 1, 1, 0, 10, 1, 1, 100, false, "RebelShip");
         }
 
         public void StartLevel1()

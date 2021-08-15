@@ -30,9 +30,27 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
-        public static void ReduceHealth(Weapon weapon)
+        public static void DamagedByPlayerShot(Weapon weapon, Spaceship playerShip)
         {
-            (_player as Spaceship).Health -= (int)weapon.BaseDamage;
+            playerShip.Health -= (int)weapon.BaseDamage;
+            UIManager.DisableHealthIcons();
+        }
+
+        public static void DamagedByEnemyShot(Projectile enemyProjectile)
+        {
+            (_player as Spaceship).Health -= (int)Math.Ceiling(enemyProjectile.Damage);
+            UIManager.DisableHealthIcons();
+        }
+
+        public static void DamagedByEnemyBash(Spaceship spaceship)
+        {
+            (_player as Spaceship).Health -= spaceship.ShieldPower;
+            UIManager.DisableHealthIcons();
+        }
+
+        public static void DamagedByPlayerBash(Spaceship spaceship)
+        {
+            spaceship.Health -= (_player as Spaceship).ShieldPower;
             UIManager.DisableHealthIcons();
         }
 

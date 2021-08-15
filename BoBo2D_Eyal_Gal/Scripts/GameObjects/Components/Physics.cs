@@ -87,8 +87,8 @@ namespace BoBo2D_Eyal_Gal
                     if (AABB(collider, AllBoxColliders[i]))
                     {
                         collider.CollidesWith(AllBoxColliders[i]);
-                        //collider.StartCollidingWith(AllBoxColliders[i]);
-                        //collider.FinishedCollidingWith(AllBoxColliders[i]);
+                        collider.StartCollidingWith(AllBoxColliders[i]);
+                        collider.FinishedCollidingWith(AllBoxColliders[i]);
                         return;
                     }
                     if(count != AllBoxColliders.Count)
@@ -97,10 +97,9 @@ namespace BoBo2D_Eyal_Gal
                     }
                 }
 
+                /*
                 foreach (BoxCollider anotherCollider in AllBoxColliders)
                 {
-                    List<BoxCollider> tempColliderList1 = AllBoxColliders;
-
                     if (!anotherCollider.IsEnabled)
                         continue;
 
@@ -114,6 +113,8 @@ namespace BoBo2D_Eyal_Gal
                         collider.FinishedCollidingWith(anotherCollider);
                     }
                 }
+                */
+
             }
         }
         

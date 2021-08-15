@@ -89,10 +89,10 @@ namespace BoBo2D_Eyal_Gal
             */
         }
 
-        public static void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int maxHealth, float healthRegen, int shield, int maxShield,
+        public static void CreateSpaceship(SpaceshipType shipType, WeaponType weaponType, int currentLvl, int maxHealth, float healthRegen, int shield, int maxShield,
             float shieldRegen, float speed, int score, bool hasWeaponSprite, string spriteName)
         {
-            ShipStats spaceShipStats = new ShipStats(shipType, weaponType, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed,
+            ShipStats spaceShipStats = new ShipStats(shipType, weaponType, currentLvl, maxHealth, healthRegen, shield, maxShield, shieldRegen, speed,
                 score, hasWeaponSprite, spriteName);
             StatsHandler.AddToCollection(spaceShipStats);
         }

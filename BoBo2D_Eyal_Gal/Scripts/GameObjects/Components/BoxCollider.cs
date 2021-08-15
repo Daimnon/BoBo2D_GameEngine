@@ -51,7 +51,7 @@ namespace BoBo2D_Eyal_Gal
         {
             GameObjectP = gameObject;
             TransformP = gameObject.GetComponent<Transform>();
-            Name = gameObject.Name + " Colider";
+            Name = gameObject.Name;
 
             //width
             float spriteWidth = gameObject.GetComponent<Sprite>().SpriteWidth;

@@ -32,7 +32,7 @@ namespace BoBo2D_Eyal_Gal
             while (true)
             {
                 time2 = DateTime.Now;
-                float deltaTime = (time2.Ticks - time1.Ticks) / 10000000f;
+                float deltaTime = (time2.Ticks - time1.Ticks) / 100000f;
                 return deltaTime;
             }
         }

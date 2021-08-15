@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class SplashScreen
+    public class SplashScreen : IUpdatable
     {
         #region Fields
         Game1 _game;
@@ -17,6 +17,7 @@ namespace BoBo2D_Eyal_Gal
             _game = game;
             _spriteBatch = game.SpriteBatch;
             _sceneManager = sceneManager;
+            _timer += Time.DeltaTime;
         }
         public void DrawSplashScreen()
         {
@@ -31,13 +32,18 @@ namespace BoBo2D_Eyal_Gal
             _splashFont.AddComponent(new TextSprite(_splashFont, "GameSpriteFont"));
             _splashFont.GetComponent<TextSprite>().Text = "BoBo2D By Eyal Deutscher & Gal Erez";
             _spriteBatch.DrawString(_splashFont.GetComponent<TextSprite>().SpriteFont, Time.DeltaTime.ToString(), new Vector2 (250,200), Color.White);
-            _timer += Time.DeltaTime*100;
-            if (_timer >= 5)
+           
+        }
+
+        public void Update()
+        {
+            if (_timer >= 3)
             {
-                Scene.GameState=1;
-                _sceneManager.GameState = 1;
+                Scene.GameState = 1;
+                _sceneManager.GameState++;
                 _sceneManager.Init();
                 _sceneManager.Start();
+                Time.StopTimer(_timer);
             }
         }
     }
