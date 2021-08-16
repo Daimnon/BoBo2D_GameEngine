@@ -74,7 +74,7 @@ namespace BoBo2D_Eyal_Gal
         public void Shoot(Vector2 currentSpeed)
         {
             //check for cooldown and ammo
-            if(_currentCoolDown <= 0 && _currentAmmo > 0)
+            if(_currentCoolDown < 1 && _currentAmmo > 0)
             {
                 Vector2 flightDirection = DirectionOfShot();
                 Transform transform = _spaceShip.GetComponent<Transform>();

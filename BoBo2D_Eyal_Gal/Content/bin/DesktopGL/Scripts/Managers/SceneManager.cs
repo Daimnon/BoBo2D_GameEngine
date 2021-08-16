@@ -20,9 +20,9 @@
         #region Constructor
         public SceneManager(Game1 game)
         {
-            UIManager.UiHandler = new UIHandler("HealthBar","Ammo","GameSpriteFont","GameSpriteFont", "Player");
+            UIManager.UiHandler = new UIHandler("HealthBar", "Ammo", "GameSpriteFont", "GameSpriteFont", "Player");
             
-            _gameState = -1;
+            _gameState = 1;
             _game = game;
             _waveManager = new WaveManager();
             _splashScreen = new SplashScreen(_game,this);

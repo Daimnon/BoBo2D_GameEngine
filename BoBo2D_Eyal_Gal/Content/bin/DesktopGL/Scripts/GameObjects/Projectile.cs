@@ -44,13 +44,13 @@ namespace BoBo2D_Eyal_Gal
             _gameObject = this;
 
             AddToHirarcy();
+            LoadStats(projectileType);
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
             GetComponent<BoxCollider>().OnCollision += CollidesWith;
             GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
             GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
             AddComponent(new Rigidbooty(this));
-            LoadStats(projectileType);
 
             _transform = GetComponent<Transform>();
             _transform.Position = new Vector2(pos.X + _projectileOffsetX, pos.Y + _projectileOffsetY);
