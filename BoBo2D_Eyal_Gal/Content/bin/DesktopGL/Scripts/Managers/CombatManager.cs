@@ -41,7 +41,6 @@ namespace BoBo2D_Eyal_Gal
         public static void DamagedByPlayerShot(Weapon weapon, Spaceship playerShip)
         {
             playerShip.Health -= (int)weapon.BaseDamage;
-            UIManager.DisableHealthIcons();
         }
 
         public static void DamagedByEnemyShot(Projectile enemyProjectile)
@@ -59,7 +58,6 @@ namespace BoBo2D_Eyal_Gal
         public static void DamagedByPlayerBash(Spaceship spaceship)
         {
             spaceship.Health -= (_player as Spaceship).ShieldPower;
-            UIManager.DisableHealthIcons();
         }
     }
 }
