@@ -12,6 +12,7 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         Weapon _currentWeapon, _firstWeapon, _secondWeapon, _thirdWeapon;
+        Projectile _spaceShipProjectile;
         Vector2 _lastFramePosition, _currentSpeed;
 
         string _spriteName;
@@ -27,6 +28,7 @@ namespace BoBo2D_Eyal_Gal
         public Weapon FirstWeapon => _firstWeapon;
         public Weapon SecondWeapon => _secondWeapon;
         public Weapon ThirdWeapon => _thirdWeapon;
+        public Projectile SpaceShipProjectile { get => _spaceShipProjectile; set => _spaceShipProjectile = value; }
         public Vector2 CurrentSpeed => _currentSpeed;
         public string SpriteName => _spriteName;
         public int CurrentLvl { get => _currentLvl; set => _currentLvl = value; }
@@ -58,6 +60,7 @@ namespace BoBo2D_Eyal_Gal
 
             LoadStats(shipType);
             AddComponent(new Sprite(this, _spriteName));
+            GetComponent<Transform>().Scale = new Vector2(GetComponent<Sprite>().SpriteWidth, GetComponent<Sprite>().SpriteHeight);
             AddComponent(new BoxCollider(this));
             GetComponent<BoxCollider>().OnCollision += CollidesWith;
             GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
@@ -224,7 +227,7 @@ namespace BoBo2D_Eyal_Gal
             if (anotherCollider.GameObjectP == null)
                 return;
                               // Gets nothing, never catching the right projectile;
-             if (!(IsPlayer && (anotherCollider.GameObjectP as Projectile).IsPlayerProjectile && !IsPlayer && !(anotherCollider.GameObjectP as Projectile).IsPlayerProjectile))
+             if (!(IsPlayer && _spaceShipProjectile.IsPlayerProjectile && !IsPlayer && !_spaceShipProjectile.IsPlayerProjectile))
             {
                 if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
                 {

@@ -11,6 +11,11 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Gal%27s Tests\**" />
+    <EmbeddedResource Remove="Gal%27s Tests\**" />
+    <None Remove="Gal%27s Tests\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="Content\bin\DesktopGL\BG.xnb" />
     <None Remove="Content\bin\DesktopGL\Content\Ammo.xnb" />
     <None Remove="Content\bin\DesktopGL\Content\BG.xnb" />
@@ -47,6 +52,5 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\bin\DesktopGL\Content\" />
-    <Folder Include="Gal%27s Tests\" />
   </ItemGroup>
 </Project>

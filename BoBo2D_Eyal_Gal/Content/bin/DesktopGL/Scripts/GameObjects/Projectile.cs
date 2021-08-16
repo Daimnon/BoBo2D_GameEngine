@@ -118,18 +118,19 @@ namespace BoBo2D_Eyal_Gal
 
         public void CollidesWith(BoxCollider anotherCollider)
         {
+            GameObject playerObject = GameObjectManager.Instance.FindGameObjectByName("Player");
+            Spaceship playerShip = GameObjectManager.Instance.FindGameObjectByName("Player") as Spaceship;
+
             //be spesific about what type of object I collide with
             if (anotherCollider.GameObjectP as Spaceship == null)
                 return;
 
-            if (!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer || !IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer))
-            {
-                GameObject playerObject = GameObjectManager.Instance.FindGameObjectByName("Player");
-                Spaceship playerShip = GameObjectManager.Instance.FindGameObjectByName("Player") as Spaceship;
+            if (!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer && !IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer))
+             {
 
                 if (!IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && (anotherCollider.GameObjectP as Spaceship).IsPlayer)
                 {
-                    CombatManager.DamagedByEnemyShot(anotherCollider.GameObjectP as Projectile);
+                    CombatManager.DamagedByEnemyShot((anotherCollider.GameObjectP as Spaceship).SpaceShipProjectile);
                     GameObjectManager.Instance.DestroyGameObject(this);
 
                     if ((anotherCollider.GameObjectP as Spaceship).Health <= 0)
