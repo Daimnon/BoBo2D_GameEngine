@@ -1,4 +1,6 @@
-﻿namespace BoBo2D_Eyal_Gal
+﻿using Microsoft.Xna.Framework;
+
+namespace BoBo2D_Eyal_Gal
 {
     public class SceneManager
     {
@@ -129,7 +131,7 @@
 
         public void InitializeMainMenu()
         {
-
+            Game1.Instance.IsMouseVisible = true;
         }
 
         public void InitializeLevel1()
