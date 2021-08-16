@@ -122,7 +122,7 @@ namespace BoBo2D_Eyal_Gal
             if (anotherCollider.GameObjectP as Spaceship == null)
                 return;
 
-            if (!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer && !IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer))
+            if (!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer || !IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer))
             {
                 GameObject playerObject = GameObjectManager.Instance.FindGameObjectByName("Player");
                 Spaceship playerShip = GameObjectManager.Instance.FindGameObjectByName("Player") as Spaceship;
