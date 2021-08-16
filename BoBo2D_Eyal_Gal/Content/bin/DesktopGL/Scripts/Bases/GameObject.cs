@@ -203,17 +203,17 @@ namespace BoBo2D_Eyal_Gal
             Transform transform = GetComponent<Transform>();
             BoxCollider boxCollider = GetComponent<BoxCollider>();
             Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
+            /*
+            if (transform == null)
+                return;
+            */
             transform.Position += direction;
 
             if (boxCollider != null)
-            {
                 boxCollider.TransformP = transform;
-            }
 
             if(rigidbooty != null)
-            {
                 rigidbooty.TransformP.Position = transform.Position;
-            }
         }
         #endregion
 

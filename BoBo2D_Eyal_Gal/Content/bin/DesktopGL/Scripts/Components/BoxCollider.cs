@@ -57,6 +57,7 @@ namespace BoBo2D_Eyal_Gal
             float spriteHeight = gameObject.GetComponent<Sprite>().SpriteHeight;
             
             Scale = new Vector2(spriteWidth, spriteHeight);
+            TransformP.Scale = Scale;
 
             //determain distance of horizontal axis from center
             CX = spriteWidth / 2;

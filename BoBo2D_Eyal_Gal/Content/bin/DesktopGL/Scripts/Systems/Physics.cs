@@ -85,10 +85,19 @@ namespace BoBo2D_Eyal_Gal
 
                     if (AABB(collider, AllBoxColliders[i]))
                     {
-                        collider.CollidesWith(AllBoxColliders[i]);
-                        collider.StartCollidingWith(AllBoxColliders[i]);
-                        collider.FinishedCollidingWith(AllBoxColliders[i]);
+                            collider.CollidesWith(AllBoxColliders[i]);
+                        /*
+                        try
+                        {
+                            //collider.StartCollidingWith(AllBoxColliders[i]);
+                            //collider.FinishedCollidingWith(AllBoxColliders[i]);
+                        }
+                        catch (System.ArgumentOutOfRangeException)
+                        {
+                            AllBoxColliders.Remove(AllBoxColliders[i]);
+                        }
                         return;
+                        */
                     }
 
                     if(count != AllBoxColliders.Count)

@@ -227,17 +227,20 @@ namespace BoBo2D_Eyal_Gal
             if (anotherCollider.GameObjectP == null)
                 return;
                               // Gets nothing, never catching the right projectile;
-             if (!(IsPlayer && _spaceShipProjectile.IsPlayerProjectile && !IsPlayer && !_spaceShipProjectile.IsPlayerProjectile))
+            if (_spaceShipProjectile != null && !_spaceShipProjectile.IsPlayerProjectile)
             {
-                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                if (!(IsPlayer && _spaceShipProjectile.IsPlayerProjectile && !IsPlayer))
                 {
-                    SolveCollision(this, anotherCollider.GameObjectP);
+                    if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                    {
+                        SolveCollision(this, anotherCollider.GameObjectP);
 
-                    if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                        CombatManager.DamagedByPlayerBash(anotherCollider.GameObjectP as Spaceship);
+                        if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                            CombatManager.DamagedByPlayerBash(anotherCollider.GameObjectP as Spaceship);
 
-                    if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                        CombatManager.DamagedByEnemyBash(anotherCollider.GameObjectP as Spaceship);
+                        if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                            CombatManager.DamagedByEnemyBash(anotherCollider.GameObjectP as Spaceship);
+                    }
                 }
             }
         }

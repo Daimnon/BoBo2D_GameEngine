@@ -34,14 +34,14 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Constructor
-        public Projectile(string name, Vector2 flightDirectin, float damageScalar,
+        public Projectile(GameObject gameObject, string name, Vector2 flightDirectin, float damageScalar,
             WeaponType weaponType, Transform transform, bool isPlayerProjectile, Spaceship spaceship, ProjectileType projectileType) : base(name)
         {
             Vector2 pos = transform.Position;
             
-            Name = name;
+            Name = gameObject.Name;
             _spaceShip = spaceship;
-            _gameObject = this;
+            _gameObject = gameObject;
 
             AddToHirarcy();
             LoadStats(projectileType);
@@ -122,17 +122,19 @@ namespace BoBo2D_Eyal_Gal
             Spaceship playerShip = GameObjectManager.Instance.FindGameObjectByName("Player") as Spaceship;
 
             //be spesific about what type of object I collide with
-            if (anotherCollider.GameObjectP as Spaceship == null)
-                return;
+            //if (anotherCollider.GameObjectP as Spaceship == null)
+            //    return;
 
+            //player projectile dont hits enemy projectile
             if (!(IsPlayerProjectile && (anotherCollider.GameObjectP as Spaceship).IsPlayer && !IsPlayerProjectile && !(anotherCollider.GameObjectP as Spaceship).IsPlayer))
-             {
-
+              {
+                //enemy projectile hits player
                 if (!IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && (anotherCollider.GameObjectP as Spaceship).IsPlayer)
                 {
                     CombatManager.DamagedByEnemyShot((anotherCollider.GameObjectP as Spaceship).SpaceShipProjectile);
                     GameObjectManager.Instance.DestroyGameObject(this);
 
+                    //if player died
                     if ((anotherCollider.GameObjectP as Spaceship).Health <= 0)
                     {
                         (anotherCollider.GameObjectP as Spaceship).IsDefeatedByEnemy = true;
@@ -141,14 +143,17 @@ namespace BoBo2D_Eyal_Gal
                     }
                 }
 
+                //enemy projectile hit enemy spaceship
                 else if (!IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
                     GameObjectManager.Instance.DestroyGameObject(this);
 
+                //player projectile hit enemy spaceship
                 else if (IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && !(anotherCollider.GameObjectP as Spaceship).IsPlayer)
                 {
                     CombatManager.DamagedByPlayerShot((GameObjectP as Spaceship).CurrentWeapon, playerShip);
                     GameObjectManager.Instance.DestroyGameObject(this);
 
+                    //if enemy died
                     if ((anotherCollider.GameObjectP as Spaceship).Health <= 0)
                     {
                         (anotherCollider.GameObjectP as Spaceship).IsDefeatedByPlayer = true;
@@ -157,8 +162,11 @@ namespace BoBo2D_Eyal_Gal
                     }
                 }
 
+                //player projectile hits player
                 else if (IsPlayerProjectile && (anotherCollider.GameObjectP is Spaceship) && (anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                    GameObjectManager.Instance.DestroyGameObject(this);
+                {
+
+                }
             }
         }
         #endregion
