@@ -100,7 +100,7 @@ namespace BoBo2D_Eyal_Gal
         public static void CreateWeapon(WeaponType weaponType, ProjectileType projectileType,
             int cooldown,int maxAmmo, float baseDamage, float damageScalar, string spriteName)
         {
-            WeaponStats weaponStats = new WeaponStats(weaponType, projectileType, cooldown,maxAmmo, baseDamage, damageScalar, spriteName);
+            WeaponStats weaponStats = new WeaponStats(weaponType, projectileType, cooldown, maxAmmo, baseDamage, damageScalar, spriteName);
             StatsHandler.AddToCollection(weaponStats);
         }
 

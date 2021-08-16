@@ -5,7 +5,8 @@ namespace BoBo2D_Eyal_Gal
     static public class Time
     {
         #region Fields
-        static public float DeltaTime => DeltaTimeAsFloat();
+        static float _deltaTime = DeltaTimeAsFloat();
+        static public float DeltaTime => _deltaTime;
         #endregion
 
         #region Methods
