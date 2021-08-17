@@ -38,6 +38,9 @@ namespace BoBo2D_Eyal_Gal
 
         public void RunUpdate()
         {
+            if (Time.FreezeGame == true)
+                return;
+
             for (int i = 0; i < _updatablesList.Count; i++)
                 _updatablesList[i].Update();
         }

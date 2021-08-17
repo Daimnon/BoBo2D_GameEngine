@@ -21,6 +21,20 @@ namespace BoBo2D_Eyal_Gal
         }
         #endregion
 
+        #region Game1 Singleton
+        static Game1 _game1Instance = null;
+        public static Game1 Game1Instance
+        {
+            get
+            {
+                if (_game1Instance == null)
+                    _game1Instance = new Game1();
+
+                return _game1Instance;
+            }
+        }
+        #endregion
+
         #region Fields
         private List<SceneManager> _allScenes = new List<SceneManager>(5);
         private GraphicsDeviceManager _graphics;

@@ -6,8 +6,8 @@
         SpaceshipType _shipType;
         WeaponType _weaponType;
         string _spriteName;
-        int _maxHealth, _maxShield, _score, _currentLvl;
-        float _healthRegen, _shield, _shieldRegen, _shieldPower, _speed;
+        int _maxHealth, _maxShield, _score, _currentLvl, _shieldPower;
+        float _healthRegen, _shield, _shieldRegen, _speed;
         bool _hasWeaponSprite;
         #endregion
 
@@ -19,17 +19,17 @@
         public int MaxShield => _maxShield;
         public int Score => _score;
         public int CurrentLvl => _currentLvl;
+        public int ShieldPower { get => _shieldPower; set => _shieldPower = value; }
         public float HealthRegen => _healthRegen;
         public float Shield => _shield;
         public float ShieldRegen => _shieldRegen;
-        public float ShieldPower { get => _shieldPower; set => _shieldPower = value; }
         public float Speed => _speed;
         public bool HasWeaponSprite => _hasWeaponSprite;
         #endregion
 
         #region Constructor
         public ShipStats(SpaceshipType shipType,WeaponType weaponType, int currentLvl, int maxHealth, float healthRegen, int shield, int maxShield,
-            float shieldRegen,float speed, int score, bool hasWeaponSprite, string spriteName) : base(StatsType.Ship)
+            float shieldRegen, float speed, int score, bool hasWeaponSprite, string spriteName) : base(StatsType.Ship)
         {
             _currentLvl = currentLvl;
             _weaponType = weaponType;

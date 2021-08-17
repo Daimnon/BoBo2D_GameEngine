@@ -8,6 +8,7 @@ namespace BoBo2D_Eyal_Gal
         static Game1 _game;
         static WaveManager _waveManager;
         static Spaceship _player;
+        static SplashScreen _splashScreen;
 
         static int _gameState;
         static bool _isSceneAlive;
@@ -15,6 +16,7 @@ namespace BoBo2D_Eyal_Gal
 
         #region Properties
         public static int GameState { get => _gameState; set => _gameState = value; }
+        public static SplashScreen SplashScreen { get => _splashScreen; set => _splashScreen = value; }
         #endregion
 
         #region Game Assets Initialization Methods

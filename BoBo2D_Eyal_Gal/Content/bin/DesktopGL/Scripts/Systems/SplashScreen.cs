@@ -41,7 +41,7 @@ namespace BoBo2D_Eyal_Gal
             _splashFont.AddComponent(new Transform(_splashFont));
             _splashFont.AddComponent(new TextSprite(_splashFont, "GameSpriteFont"));
             _splashFont.GetComponent<TextSprite>().Text = "BoBo2D By Eyal Deutscher & Gal Erez";
-            _spriteBatch.DrawString(_splashFont.GetComponent<TextSprite>().SpriteFont, Time.DeltaTime.ToString(), new Vector2 (250,200), Color.White);
+            //_spriteBatch.DrawString(_splashFont.GetComponent<TextSprite>().SpriteFont, Time.DeltaTime.ToString(), new Vector2 (250,200), Color.White);
         }
         #endregion
 

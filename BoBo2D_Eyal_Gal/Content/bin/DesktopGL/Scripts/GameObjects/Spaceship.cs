@@ -150,6 +150,7 @@ namespace BoBo2D_Eyal_Gal
                 _shield = stats.Shield;
                 _maxShield = stats.MaxShield;
                 _shieldRegen = stats.ShieldRegen;
+                _shieldPower = stats.ShieldPower;
                 _speed = stats.Speed;
                 _score = stats.Score;
             }
@@ -259,7 +260,8 @@ namespace BoBo2D_Eyal_Gal
         {
             if (IsPlayer)
             {
-                Game1.Instance.
+                Scene.CreateBackGround("GameOverScreen", "BG");
+                Time.FreezeGame = true;
             }
         }
         #endregion
