@@ -68,11 +68,11 @@ namespace BoBo2D_Eyal_Gal
         public void Update()
         {
             _timer++;
+
             if (_startBtnCollider == null || _exitBtnCollider == null)
                 return;
 
-
-            // Check if the mouse position is inside the rectangle
+            // Check if the mouse position is inside the other collider
             if (Physics.AABB(_mouseCollider, _startBtnCollider))
             {
                 if (_mouseState.LeftButton == ButtonState.Pressed)
