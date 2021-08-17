@@ -83,7 +83,8 @@ namespace BoBo2D_Eyal_Gal
                 {
                     _currentAmmo -= 1;
                     _currentCoolDown = _maxCooldown;
-                    new Projectile(_projectileName, flightDirection, _damageScalar, _weaponType, transform, _isPlayer, _spaceShip, _projectileType);
+                    Projectile projectile = new Projectile(_spaceShip, _projectileName, flightDirection, _damageScalar, _weaponType, transform, _isPlayer, _spaceShip, _projectileType);
+                    _spaceShip.SpaceShipProjectile = projectile;
                 }
             }
             else

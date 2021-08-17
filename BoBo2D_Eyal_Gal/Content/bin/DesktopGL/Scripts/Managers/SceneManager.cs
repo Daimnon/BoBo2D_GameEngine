@@ -1,4 +1,6 @@
-﻿namespace BoBo2D_Eyal_Gal
+﻿using Microsoft.Xna.Framework;
+
+namespace BoBo2D_Eyal_Gal
 {
     public class SceneManager
     {
@@ -7,6 +9,7 @@
         WaveManager _waveManager;
         Spaceship _player;
         SplashScreen _splashScreen;
+        MainMenu _mainMenu;
 
         int _gameState;
         bool _isSceneAlive;
@@ -20,14 +23,14 @@
         #region Constructor
         public SceneManager(Game1 game)
         {
-            UIManager.UiHandler = new UIHandler("HealthBar","Ammo","GameSpriteFont","GameSpriteFont", "Player");
+            UIManager.UiHandler = new UIHandler("HealthBar", "Ammo", "GameSpriteFont", "GameSpriteFont", "Player");
             
             _gameState = -1;
             _game = game;
             _waveManager = new WaveManager();
-            _splashScreen = new SplashScreen(_game,this);
+            _splashScreen = new SplashScreen(_game, this);
+            _mainMenu = new MainMenu(_game, this, _splashScreen);
             _isSceneAlive = true;
-
         }
         #endregion
 
@@ -129,7 +132,7 @@
 
         public void InitializeMainMenu()
         {
-
+            Game1.Instance.IsMouseVisible = true;
         }
 
         public void InitializeLevel1()
@@ -164,7 +167,7 @@
         {
             Scene.CreateBackGround("BackGround", "BG");
             Scene.CreatePlayer("Player");
-            _waveManager.AddWave(500, 500, 5, SpaceshipType.BasicEnemySpaceship);
+            _waveManager.AddWave(0, 500, 5, SpaceshipType.BasicEnemySpaceship);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
         }
@@ -178,7 +181,7 @@
 
         public void DrawMainMenu()
         {
-
+            _mainMenu.DrawSplashScreen();
         }
 
         public void DrawLevel1()

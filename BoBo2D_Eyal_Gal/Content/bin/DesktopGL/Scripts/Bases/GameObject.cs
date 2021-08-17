@@ -43,7 +43,7 @@ namespace BoBo2D_Eyal_Gal
             Name = name;
             IsEnabled = true;
 
-            Transform transform = new Transform(this,position, new Vector2(1,1));
+            Transform transform = new Transform(this, position, new Vector2(1,1));
             AddComponent(transform);
             transform.GameObjectP = this;
             transform.TransformP = transform;
@@ -203,17 +203,14 @@ namespace BoBo2D_Eyal_Gal
             Transform transform = GetComponent<Transform>();
             BoxCollider boxCollider = GetComponent<BoxCollider>();
             Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
+
             transform.Position += direction;
 
             if (boxCollider != null)
-            {
                 boxCollider.TransformP = transform;
-            }
 
             if(rigidbooty != null)
-            {
                 rigidbooty.TransformP.Position = transform.Position;
-            }
         }
         #endregion
 

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Xna.Framework;
+using System.Collections.Generic;
 
 
 namespace BoBo2D_Eyal_Gal
@@ -29,6 +30,17 @@ namespace BoBo2D_Eyal_Gal
                    collider.BoxRight > anotherCollider.BoxLeft &&
                    collider.BoxTop < anotherCollider.BoxBottom &&
                    collider.BoxBottom > anotherCollider.BoxTop;
+        }
+
+        public static bool AABB(Rectangle mouse, BoxCollider anotherCollider)
+        {
+            if (mouse == null || anotherCollider == null)
+                return false;
+
+            return mouse.Left < anotherCollider.BoxRight &&
+                   mouse.Right > anotherCollider.BoxLeft &&
+                   mouse.Top < anotherCollider.BoxBottom &&
+                   mouse.Bottom > anotherCollider.BoxTop;
         }
 
         public static bool IsCollidingFromLeft(BoxCollider collider, BoxCollider anotherCollider)
@@ -85,10 +97,19 @@ namespace BoBo2D_Eyal_Gal
 
                     if (AABB(collider, AllBoxColliders[i]))
                     {
-                        collider.CollidesWith(AllBoxColliders[i]);
-                        collider.StartCollidingWith(AllBoxColliders[i]);
-                        collider.FinishedCollidingWith(AllBoxColliders[i]);
+                            collider.CollidesWith(AllBoxColliders[i]);
+                        /*
+                        try
+                        {
+                            //collider.StartCollidingWith(AllBoxColliders[i]);
+                            //collider.FinishedCollidingWith(AllBoxColliders[i]);
+                        }
+                        catch (System.ArgumentOutOfRangeException)
+                        {
+                            AllBoxColliders.Remove(AllBoxColliders[i]);
+                        }
                         return;
+                        */
                     }
 
                     if(count != AllBoxColliders.Count)

@@ -174,3 +174,14 @@ C:\Users\new-hp\source\repos\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreap
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Ammo.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\HealthBar.xnb
 D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\obj\Debug\netcoreapp3.1\BoBo2D_Eyal_Gal.csproj.AssemblyReference.cache
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Gui\Exit_BTN.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Gui\Header.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Gui\Start_BTN.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Gui\You Lose.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Gui\DeathText.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Gui\ExitBtn.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\sprites\Gui\StartBtn.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\DeathText.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\ExitBtn.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\Header.xnb
+D:\Users\Daimnon's\Documents\GitHub\BoBo2D_Eyal_Gal\BoBo2D_Eyal_Gal\bin\Debug\netcoreapp3.1\Content\StartBtn.xnb

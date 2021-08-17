@@ -7,15 +7,45 @@ namespace BoBo2D_Eyal_Gal
 {
     public class Game1 : Game
     {
+        #region Game Singleton
+        static Game _instance = null;
+        public static Game Instance
+        {
+            get
+            {
+                if (_instance == null)
+                    _instance = new Game();
+
+                return _instance;
+            }
+        }
+        #endregion
+
+        #region Game1 Singleton
+        static Game1 _game1Instance = null;
+        public static Game1 Game1Instance
+        {
+            get
+            {
+                if (_game1Instance == null)
+                    _game1Instance = new Game1();
+
+                return _game1Instance;
+            }
+        }
+        #endregion
+
         #region Fields
         private List<SceneManager> _allScenes = new List<SceneManager>(5);
         private GraphicsDeviceManager _graphics;
         private SceneManager _activeScene;
         private SpriteBatch _spriteBatch;
+        private Game _gameInstance;
         #endregion
 
         #region Properties
         public SpriteBatch SpriteBatch => _spriteBatch;
+        public Game GameInstance => _gameInstance;
         #endregion
 
         #region Constructor
@@ -23,7 +53,8 @@ namespace BoBo2D_Eyal_Gal
         {
             _graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            IsMouseVisible = true;
+            IsMouseVisible = false;
+            _gameInstance = this;
 
             _activeScene = new SceneManager(this);
             _allScenes.Add(_activeScene);

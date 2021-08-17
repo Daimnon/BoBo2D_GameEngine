@@ -38,14 +38,16 @@ namespace BoBo2D_Eyal_Gal
             UIManager.EnableHealthIcons();
         }
 
-        public static void DamagedByPlayerShot(Weapon weapon, Spaceship playerShip)
+        public static void DamagedByPlayerShot(Weapon weapon, Spaceship enemy)
         {
-            playerShip.Health -= (int)weapon.BaseDamage;
-            UIManager.DisableHealthIcons();
+            enemy.Health -= (int)weapon.BaseDamage;
         }
 
         public static void DamagedByEnemyShot(Projectile enemyProjectile)
         {
+            if (enemyProjectile == null)
+                return;
+
             (_player as Spaceship).Health -= (int)Math.Ceiling(enemyProjectile.Damage);
             UIManager.DisableHealthIcons();
         }
@@ -59,7 +61,8 @@ namespace BoBo2D_Eyal_Gal
         public static void DamagedByPlayerBash(Spaceship spaceship)
         {
             spaceship.Health -= (_player as Spaceship).ShieldPower;
-            UIManager.DisableHealthIcons();
+            if (spaceship.IsPlayer)
+                UIManager.DisableHealthIcons();
         }
     }
 }

@@ -5,7 +5,13 @@ namespace BoBo2D_Eyal_Gal
     static public class Time
     {
         #region Fields
-        static public float DeltaTime => DeltaTimeAsFloat();
+        static float _deltaTime = DeltaTimeAsFloat();
+        static bool _freezeGame = false;
+        #endregion
+
+        #region Properties
+        static public float DeltaTime => _deltaTime;
+        static public bool FreezeGame { get => _freezeGame; set => _freezeGame = value; }
         #endregion
 
         #region Methods

@@ -12,6 +12,7 @@ namespace BoBo2D_Eyal_Gal
     {
         #region Fields
         Weapon _currentWeapon, _firstWeapon, _secondWeapon, _thirdWeapon;
+        Projectile _spaceShipProjectile;
         Vector2 _lastFramePosition, _currentSpeed;
 
         string _spriteName;
@@ -27,6 +28,7 @@ namespace BoBo2D_Eyal_Gal
         public Weapon FirstWeapon => _firstWeapon;
         public Weapon SecondWeapon => _secondWeapon;
         public Weapon ThirdWeapon => _thirdWeapon;
+        public Projectile SpaceShipProjectile { get => _spaceShipProjectile; set => _spaceShipProjectile = value; }
         public Vector2 CurrentSpeed => _currentSpeed;
         public string SpriteName => _spriteName;
         public int CurrentLvl { get => _currentLvl; set => _currentLvl = value; }
@@ -58,6 +60,7 @@ namespace BoBo2D_Eyal_Gal
 
             LoadStats(shipType);
             AddComponent(new Sprite(this, _spriteName));
+            GetComponent<Transform>().Scale = new Vector2(GetComponent<Sprite>().SpriteWidth, GetComponent<Sprite>().SpriteHeight);
             AddComponent(new BoxCollider(this));
             GetComponent<BoxCollider>().OnCollision += CollidesWith;
             GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
@@ -147,6 +150,7 @@ namespace BoBo2D_Eyal_Gal
                 _shield = stats.Shield;
                 _maxShield = stats.MaxShield;
                 _shieldRegen = stats.ShieldRegen;
+                _shieldPower = stats.ShieldPower;
                 _speed = stats.Speed;
                 _score = stats.Score;
             }
@@ -181,8 +185,8 @@ namespace BoBo2D_Eyal_Gal
                 //bounce left
                 if (gameObjectTransform.Position.X - gameObjectCollider.BoxLeft <= anotherGameObjectTransform.Position.X + anotherGameObjectCollider.BoxRight)
                 {
-                    gameObjectTransform.Position -= (new Vector2(1, 0));
-                    anotherGameObjectTransform.Position += (new Vector2(1, 0));
+                    gameObjectTransform.Position -= (new Vector2(20, 0));
+                    anotherGameObjectTransform.Position += (new Vector2(20, 0));
                 }
             }
 
@@ -191,8 +195,8 @@ namespace BoBo2D_Eyal_Gal
                 //bounce right
                 if (gameObjectTransform.Position.X + gameObjectCollider.BoxRight >= anotherGameObjectTransform.Position.X - anotherGameObjectCollider.BoxLeft)
                 {
-                    gameObjectTransform.Position += (new Vector2(1, 0));
-                    anotherGameObjectTransform.Position -= (new Vector2(1, 0));
+                    gameObjectTransform.Position += (new Vector2(20, 0));
+                    anotherGameObjectTransform.Position -= (new Vector2(20, 0));
                 }
             }
 
@@ -201,8 +205,8 @@ namespace BoBo2D_Eyal_Gal
                 //bounce up
                 if (gameObjectTransform.Position.Y + gameObjectCollider.BoxBottom >= anotherGameObjectTransform.Position.Y - anotherGameObjectCollider.BoxTop)
                 {
-                    gameObjectTransform.Position -= (new Vector2(0, 1));
-                    anotherGameObjectTransform.Position += (new Vector2(0, 1));
+                    gameObjectTransform.Position -= (new Vector2(0, 20));
+                    anotherGameObjectTransform.Position += (new Vector2(0, 20));
                     //return;
                 }
             }
@@ -212,8 +216,8 @@ namespace BoBo2D_Eyal_Gal
                 //bounce down
                 if (gameObjectTransform.Position.Y - gameObjectCollider.BoxTop <= anotherGameObjectTransform.Position.Y + anotherGameObjectCollider.BoxBottom)
                 {
-                    gameObjectTransform.Position += (new Vector2(0, 1));
-                    anotherGameObjectTransform.Position -= (new Vector2(0, 1));
+                    gameObjectTransform.Position += (new Vector2(0, 20));
+                    anotherGameObjectTransform.Position -= (new Vector2(0, 20));
                 }
             }
         }
@@ -224,17 +228,20 @@ namespace BoBo2D_Eyal_Gal
             if (anotherCollider.GameObjectP == null)
                 return;
                               // Gets nothing, never catching the right projectile;
-             if (!(IsPlayer && (anotherCollider.GameObjectP as Projectile).IsPlayerProjectile && !IsPlayer && !(anotherCollider.GameObjectP as Projectile).IsPlayerProjectile))
+            if (_spaceShipProjectile != null && !_spaceShipProjectile.IsPlayerProjectile)
             {
-                if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                if (!(IsPlayer && _spaceShipProjectile.IsPlayerProjectile && !IsPlayer))
                 {
-                    SolveCollision(this, anotherCollider.GameObjectP);
+                    if (anotherCollider.GameObjectP is Spaceship && !(anotherCollider.GameObjectP is Projectile))
+                    {
+                        SolveCollision(this, anotherCollider.GameObjectP);
 
-                    if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                        CombatManager.DamagedByPlayerBash(anotherCollider.GameObjectP as Spaceship);
+                        if ((anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                            CombatManager.DamagedByPlayerBash(anotherCollider.GameObjectP as Spaceship);
 
-                    if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
-                        CombatManager.DamagedByEnemyBash(anotherCollider.GameObjectP as Spaceship);
+                        if (!(anotherCollider.GameObjectP as Spaceship).IsPlayer)
+                            CombatManager.DamagedByEnemyBash(anotherCollider.GameObjectP as Spaceship);
+                    }
                 }
             }
         }
@@ -247,6 +254,15 @@ namespace BoBo2D_Eyal_Gal
         public void FinishedCollidingWith(BoxCollider anotherCollider)
         {
             //implement client logic
+        }
+
+        public void GameOver()
+        {
+            if (IsPlayer)
+            {
+                Scene.CreateBackGround("GameOverScreen", "BG");
+                Time.FreezeGame = true;
+            }
         }
         #endregion
 

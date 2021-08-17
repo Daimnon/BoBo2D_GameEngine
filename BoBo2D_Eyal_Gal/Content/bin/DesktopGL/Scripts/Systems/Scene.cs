@@ -8,6 +8,7 @@ namespace BoBo2D_Eyal_Gal
         static Game1 _game;
         static WaveManager _waveManager;
         static Spaceship _player;
+        static SplashScreen _splashScreen;
 
         static int _gameState;
         static bool _isSceneAlive;
@@ -15,6 +16,7 @@ namespace BoBo2D_Eyal_Gal
 
         #region Properties
         public static int GameState { get => _gameState; set => _gameState = value; }
+        public static SplashScreen SplashScreen { get => _splashScreen; set => _splashScreen = value; }
         #endregion
 
         #region Game Assets Initialization Methods
@@ -45,6 +47,10 @@ namespace BoBo2D_Eyal_Gal
                 "Laser2",
                 "HealthBar",
                 "Ammo",
+                "ExitBtn",
+                "Header",
+                "StartBtn",
+                "DeathText",
             };
 
             DataManager.Instance.SpriteDataHolder.SpriteNames = spriteNames;
@@ -100,7 +106,7 @@ namespace BoBo2D_Eyal_Gal
         public static void CreateWeapon(WeaponType weaponType, ProjectileType projectileType,
             int cooldown,int maxAmmo, float baseDamage, float damageScalar, string spriteName)
         {
-            WeaponStats weaponStats = new WeaponStats(weaponType, projectileType, cooldown,maxAmmo, baseDamage, damageScalar, spriteName);
+            WeaponStats weaponStats = new WeaponStats(weaponType, projectileType, cooldown, maxAmmo, baseDamage, damageScalar, spriteName);
             StatsHandler.AddToCollection(weaponStats);
         }
 

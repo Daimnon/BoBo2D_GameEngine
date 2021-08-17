@@ -25,10 +25,12 @@ namespace BoBo2D_Eyal_Gal
             TransformP = gameObject.GetComponent<Transform>();
             Name = gameObject.Name;
 
-            _texture = DataManager.Instance.GetTexture2D(spriteName);
             _color = color;
+            _texture = DataManager.Instance.GetTexture2D(spriteName);
             SpriteWidth = _texture.Width;
             SpriteHeight = _texture.Height;
+
+            TransformP.Scale = new Vector2(SpriteWidth, SpriteHeight);
 
             SubscriptionManager.AddSubscriber<IDrawable>(this);
         }
@@ -39,8 +41,8 @@ namespace BoBo2D_Eyal_Gal
             TransformP = gameObject.GetComponent<Transform>();
             Name = gameObject.Name;
 
-            _texture = DataManager.Instance.GetTexture2D(spriteName);
             _color = Color.White;
+            _texture = DataManager.Instance.GetTexture2D(spriteName);
             SpriteWidth = _texture.Width;
             SpriteHeight = _texture.Height;
 
