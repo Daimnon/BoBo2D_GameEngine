@@ -7,7 +7,7 @@ namespace BoBo2D_Eyal_Gal
 {
     public class Game1 : Game
     {
-        #region Singleton
+        #region Game Singleton
         static Game _instance = null;
         public static Game Instance
         {

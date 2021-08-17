@@ -11,7 +11,7 @@ namespace BoBo2D_Eyal_Gal
         Game1 _game;
         SpriteBatch _spriteBatch;
         SceneManager _sceneManager;
-        GameObject _startBtn, _exitBtn, _header, _mouseObject;
+        GameObject _menuFont, _startBtn, _exitBtn, _header, _mouseObject, _splashFont;
         BoxCollider _mouseCollider, _startBtnCollider, _exitBtnCollider;
         MouseState _mouseState = Mouse.GetState();
         Point _mousePosition;
@@ -20,7 +20,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Constructor
-        public MainMenu(Game1 game, SceneManager sceneManager)
+        public MainMenu(Game1 game, SceneManager sceneManager, SplashScreen splashScreen)
         {
             _game = game;
             _spriteBatch = game.SpriteBatch;
@@ -30,7 +30,7 @@ namespace BoBo2D_Eyal_Gal
             _mouseObject.GetComponent<Transform>().Position = new Vector2(_mousePosition.X, _mousePosition.Y);
             _mouseObject.AddComponent(new BoxCollider(_mouseObject));
             _mouseCollider = _mouseObject.GetComponent<BoxCollider>();
-
+            _splashFont = splashScreen.SplashFont;
 
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
         }
@@ -46,6 +46,7 @@ namespace BoBo2D_Eyal_Gal
                 return;
             }
 
+            /*
             _header = new GameObject("MenuHeader", new Vector2(180, 120));
             _startBtn = new GameObject("StartBtn", new Vector2(200, 150));
             _exitBtn = new GameObject("ExitBtn", new Vector2(200, 175));
@@ -59,8 +60,23 @@ namespace BoBo2D_Eyal_Gal
             _exitBtn.AddComponent(new Sprite(_exitBtn, "ExitBtn"));
             _exitBtn.AddComponent(new BoxCollider(_exitBtn));
             _exitBtnCollider = _startBtn.GetComponent<BoxCollider>();
+            */
+            // start
+            _startBtn = new GameObject("StartGame", new Vector2(350, 200));
+            _startBtn.AddComponent(new Transform(_startBtn));
+            _startBtn.AddComponent(new TextSprite(_startBtn, "GameSpriteFont"));
+            _startBtn.AddComponent(new BoxCollider(_startBtn));
+            _startBtn.GetComponent<TextSprite>().Text = "Start";
 
-            //_spriteBatch.DrawString(_menuFont.GetComponent<TextSprite>().SpriteFont, Time.DeltaTime.ToString(), new Vector2(250, 200), Color.White);
+            //exit
+            _exitBtn = new GameObject("ExitGame", new Vector2(450, 200));
+            _exitBtn.AddComponent(new Transform(_exitBtn));
+            _exitBtn.AddComponent(new TextSprite(_exitBtn, "GameSpriteFont"));
+            _exitBtn.AddComponent(new BoxCollider(_exitBtn));
+            _exitBtn.GetComponent<TextSprite>().Text = "Exit";
+
+            _spriteBatch.DrawString(_startBtn.GetComponent<TextSprite>().SpriteFont, _startBtn.GetComponent<TextSprite>().Text, new Vector2(350, 200), Color.White);
+            _spriteBatch.DrawString(_exitBtn.GetComponent<TextSprite>().SpriteFont, _exitBtn.GetComponent<TextSprite>().Text, new Vector2(450, 200), Color.White);
         }
         #endregion
 

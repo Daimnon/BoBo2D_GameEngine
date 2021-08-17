@@ -184,8 +184,8 @@ namespace BoBo2D_Eyal_Gal
                 //bounce left
                 if (gameObjectTransform.Position.X - gameObjectCollider.BoxLeft <= anotherGameObjectTransform.Position.X + anotherGameObjectCollider.BoxRight)
                 {
-                    gameObjectTransform.Position -= (new Vector2(1, 0));
-                    anotherGameObjectTransform.Position += (new Vector2(1, 0));
+                    gameObjectTransform.Position -= (new Vector2(20, 0));
+                    anotherGameObjectTransform.Position += (new Vector2(20, 0));
                 }
             }
 
@@ -194,8 +194,8 @@ namespace BoBo2D_Eyal_Gal
                 //bounce right
                 if (gameObjectTransform.Position.X + gameObjectCollider.BoxRight >= anotherGameObjectTransform.Position.X - anotherGameObjectCollider.BoxLeft)
                 {
-                    gameObjectTransform.Position += (new Vector2(1, 0));
-                    anotherGameObjectTransform.Position -= (new Vector2(1, 0));
+                    gameObjectTransform.Position += (new Vector2(20, 0));
+                    anotherGameObjectTransform.Position -= (new Vector2(20, 0));
                 }
             }
 
@@ -204,8 +204,8 @@ namespace BoBo2D_Eyal_Gal
                 //bounce up
                 if (gameObjectTransform.Position.Y + gameObjectCollider.BoxBottom >= anotherGameObjectTransform.Position.Y - anotherGameObjectCollider.BoxTop)
                 {
-                    gameObjectTransform.Position -= (new Vector2(0, 1));
-                    anotherGameObjectTransform.Position += (new Vector2(0, 1));
+                    gameObjectTransform.Position -= (new Vector2(0, 20));
+                    anotherGameObjectTransform.Position += (new Vector2(0, 20));
                     //return;
                 }
             }
@@ -215,8 +215,8 @@ namespace BoBo2D_Eyal_Gal
                 //bounce down
                 if (gameObjectTransform.Position.Y - gameObjectCollider.BoxTop <= anotherGameObjectTransform.Position.Y + anotherGameObjectCollider.BoxBottom)
                 {
-                    gameObjectTransform.Position += (new Vector2(0, 1));
-                    anotherGameObjectTransform.Position -= (new Vector2(0, 1));
+                    gameObjectTransform.Position += (new Vector2(0, 20));
+                    anotherGameObjectTransform.Position -= (new Vector2(0, 20));
                 }
             }
         }
@@ -253,6 +253,14 @@ namespace BoBo2D_Eyal_Gal
         public void FinishedCollidingWith(BoxCollider anotherCollider)
         {
             //implement client logic
+        }
+
+        public void GameOver()
+        {
+            if (IsPlayer)
+            {
+                Game1.Instance.
+            }
         }
         #endregion
 
