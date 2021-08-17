@@ -45,6 +45,9 @@ namespace BoBo2D_Eyal_Gal
 
         public static void DamagedByEnemyShot(Projectile enemyProjectile)
         {
+            if (enemyProjectile == null)
+                return;
+
             (_player as Spaceship).Health -= (int)Math.Ceiling(enemyProjectile.Damage);
             UIManager.DisableHealthIcons();
         }

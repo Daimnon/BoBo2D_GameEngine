@@ -48,7 +48,7 @@ namespace BoBo2D_Eyal_Gal
         {
             _timer++;
 
-            if (_timer >= 250)
+            if (_sceneManager.GameState == -1 && _timer >= 250)
             {
                 Scene.GameState = 0;
                 _sceneManager.GameState++;

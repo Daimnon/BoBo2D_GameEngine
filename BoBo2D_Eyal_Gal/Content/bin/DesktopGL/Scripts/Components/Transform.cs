@@ -224,6 +224,15 @@ namespace BoBo2D_Eyal_Gal
             return base.GetHashCode();
         }
 
+        public void Update()
+        {
+            if (GameObjectP.GetComponent<Sprite>() != null)
+            {
+                GameObjectP.GetComponent<Sprite>().SpriteWidth = TransformP.Scale.X;
+                GameObjectP.GetComponent<Sprite>().SpriteHeight = TransformP.Scale.Y;
+            }
+        }
+
         /* Equals
         public override bool Equals(object obj)
         {

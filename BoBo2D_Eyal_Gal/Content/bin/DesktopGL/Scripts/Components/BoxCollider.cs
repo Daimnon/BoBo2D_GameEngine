@@ -51,10 +51,19 @@ namespace BoBo2D_Eyal_Gal
             TransformP = gameObject.GetComponent<Transform>();
             Name = gameObject.Name;
 
-            //width
-            float spriteWidth = gameObject.GetComponent<Sprite>().SpriteWidth;
-            //height
-            float spriteHeight = gameObject.GetComponent<Sprite>().SpriteHeight;
+            float spriteWidth;
+            float spriteHeight;
+
+            if (gameObject.GetComponent<Sprite>() == null)
+            {
+                spriteWidth = 1;
+                spriteHeight = 1;
+            }
+            else
+            {
+                spriteWidth = gameObject.GetComponent<Sprite>().SpriteWidth;
+                spriteHeight = gameObject.GetComponent<Sprite>().SpriteHeight;
+            }
             
             Scale = new Vector2(spriteWidth, spriteHeight);
             TransformP.Scale = Scale;

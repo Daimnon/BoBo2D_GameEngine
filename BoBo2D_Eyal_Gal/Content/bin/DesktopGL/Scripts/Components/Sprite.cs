@@ -30,6 +30,8 @@ namespace BoBo2D_Eyal_Gal
             SpriteWidth = _texture.Width;
             SpriteHeight = _texture.Height;
 
+            TransformP.Scale = new Vector2(SpriteWidth, SpriteHeight);
+
             SubscriptionManager.AddSubscriber<IDrawable>(this);
         }
 

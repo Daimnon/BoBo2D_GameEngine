@@ -45,6 +45,10 @@ namespace BoBo2D_Eyal_Gal
                 "Laser2",
                 "HealthBar",
                 "Ammo",
+                "ExitBtn",
+                "Header",
+                "StartBtn",
+                "DeathText",
             };
 
             DataManager.Instance.SpriteDataHolder.SpriteNames = spriteNames;

@@ -43,7 +43,7 @@ namespace BoBo2D_Eyal_Gal
             Name = name;
             IsEnabled = true;
 
-            Transform transform = new Transform(this,position, new Vector2(1,1));
+            Transform transform = new Transform(this, position, new Vector2(1,1));
             AddComponent(transform);
             transform.GameObjectP = this;
             transform.TransformP = transform;

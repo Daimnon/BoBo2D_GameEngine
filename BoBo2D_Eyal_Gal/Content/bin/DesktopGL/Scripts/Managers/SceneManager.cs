@@ -9,6 +9,7 @@ namespace BoBo2D_Eyal_Gal
         WaveManager _waveManager;
         Spaceship _player;
         SplashScreen _splashScreen;
+        MainMenu _mainMenu;
 
         int _gameState;
         bool _isSceneAlive;
@@ -27,7 +28,8 @@ namespace BoBo2D_Eyal_Gal
             _gameState = 1;
             _game = game;
             _waveManager = new WaveManager();
-            _splashScreen = new SplashScreen(_game,this);
+            _splashScreen = new SplashScreen(_game, this);
+            _mainMenu = new MainMenu(_game,this);
             _isSceneAlive = true;
 
         }
@@ -166,7 +168,7 @@ namespace BoBo2D_Eyal_Gal
         {
             Scene.CreateBackGround("BackGround", "BG");
             Scene.CreatePlayer("Player");
-            _waveManager.AddWave(500, 500, 5, SpaceshipType.BasicEnemySpaceship);
+            _waveManager.AddWave(0, 500, 5, SpaceshipType.BasicEnemySpaceship);
             SubscriptionManager.ActivateAllSubscribersOfType<IStartable>();
             //_waveManager = new WaveManager(0, 750);
         }
@@ -180,7 +182,7 @@ namespace BoBo2D_Eyal_Gal
 
         public void DrawMainMenu()
         {
-
+            _mainMenu.DrawSplashScreen();
         }
 
         public void DrawLevel1()
