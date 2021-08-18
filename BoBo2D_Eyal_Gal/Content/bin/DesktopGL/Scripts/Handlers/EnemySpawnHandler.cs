@@ -47,7 +47,7 @@ namespace BoBo2D_Eyal_Gal
                     SetNextTimeToSpawn();
             }
             else
-                _timeTillNextSpawn -= Time.DeltaTime * 10;
+                _timeTillNextSpawn -= Time2.DeltaTime * 10;
         }
 
         void Spawn()

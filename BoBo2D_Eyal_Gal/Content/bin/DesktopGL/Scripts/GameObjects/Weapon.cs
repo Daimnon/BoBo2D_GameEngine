@@ -99,7 +99,7 @@ namespace BoBo2D_Eyal_Gal
         {
             if(_currentCoolDown > 0)
             {
-                _currentCoolDown -= 1 * (Time.DeltaTime * 10);
+                _currentCoolDown -= 1 * (Time2.DeltaTime * 10);
             }
         }
         #endregion

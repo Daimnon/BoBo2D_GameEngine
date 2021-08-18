@@ -99,7 +99,7 @@ namespace BoBo2D_Eyal_Gal
                     _sceneManager.GameState++;
                     _sceneManager.Initialize();
                     _sceneManager.Start();
-                    Time.StopTimer(_timer);
+                    Time2.StopTimer(_timer);
                 }
             }
             else if (Physics.AABB(_mouseCollider, _exitBtnCollider))

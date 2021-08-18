@@ -261,7 +261,7 @@ namespace BoBo2D_Eyal_Gal
             if (IsPlayer)
             {
                 Scene.CreateBackGround("GameOverScreen", "BG");
-                Time.FreezeGame = true;
+                Time2.FreezeGame = true;
             }
         }
         #endregion

@@ -106,14 +106,14 @@ namespace BoBo2D_Eyal_Gal
         {
             OnCollisionStart?.Invoke(anotherCollider);
             IsColliding = true;
-            Time.ContinueTimer(CollisionTimer);
+            Time2.ContinueTimer(CollisionTimer);
         }
 
         public void FinishedCollidingWith(BoxCollider anotherCollider)
         {
             OnCollisionEnd?.Invoke(anotherCollider);
             IsColliding = true;
-            Time.StopTimer(CollisionTimer);
+            Time2.StopTimer(CollisionTimer);
         }
         #endregion
 
