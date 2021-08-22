@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BoBo2D_Eyal_Gal
+﻿namespace BoBo2D_Eyal_Gal
 {
     //                            Compute DeltaTime
     //                                    |
@@ -21,7 +17,7 @@ namespace BoBo2D_Eyal_Gal
     //             |    if (FixedTime + FixedDeltaTime < Time)
     //             |
     // true: FixedTime += FixedDeltaTime;  <->  false: run Update() & rest of logic;
-    public static class Time
+    public static class Time2
     {
         #region Fields
         //readonly static fields

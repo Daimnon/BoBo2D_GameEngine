@@ -2,7 +2,7 @@
 
 namespace BoBo2D_Eyal_Gal
 {
-    static public class Time2
+    static public class Time
     {
         #region Fields
         static float _deltaTime = DeltaTimeAsFloat();

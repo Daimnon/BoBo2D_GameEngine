@@ -106,19 +106,19 @@ namespace BoBo2D_Eyal_Gal
 
             //determine min.X
             if (vectorA.X < vectorB.X)
-                minVector2 = new Vector2(vectorA.X, minVector2.Y, minVector2.Z);
+                minVector2 = new Vector2(vectorA.X, minVector2.Y);
             else
-                minVector2 = new Vector2(vectorB.X, minVector2.Y, minVector2.Z);
+                minVector2 = new Vector2(vectorB.X, minVector2.Y);
 
             //determine min.Y
             if (vectorA.Y < vectorB.Y)
-                minVector2 = new Vector2(minVector2.X, vectorA.Y, minVector2.Z);
+                minVector2 = new Vector2(minVector2.X, vectorA.Y);
             else
-                minVector2 = new Vector2(minVector2.X, vectorB.Y, minVector2.Z);
+                minVector2 = new Vector2(minVector2.X, vectorB.Y);
 
             //determine min.Z
             if (vectorA.Z < vectorB.Z)
-                minVector2 = new Vector2(minVector2.X, minVector2.Y, vectorA.Z);
+                minVector2 = new Vector2(minVector2.X, minVector2.Y);
 
             //debug
             else
