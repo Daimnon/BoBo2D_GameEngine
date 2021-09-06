@@ -12,7 +12,7 @@ namespace BoBo2D_Eyal_Gal
         SpriteBatch _spriteBatch;
         SceneManager _sceneManager;
         GameObject _menuFont, _startBtn, _exitBtn, _header, _mouseObject, _splashFont;
-        BoxCollider _mouseCollider, _startBtnCollider, _exitBtnCollider;
+        BoxCollider2 _mouseCollider, _startBtnCollider, _exitBtnCollider;
         MouseState _mouseState = Mouse.GetState();
         Point _mousePosition;
 
@@ -29,7 +29,7 @@ namespace BoBo2D_Eyal_Gal
             _mouseObject = new GameObject("MouseCrosshair");
             _mouseObject.GetComponent<Transform>().Position = new Vector2(_mousePosition.X, _mousePosition.Y);
             _mouseObject.AddComponent(new BoxCollider(_mouseObject));
-            _mouseCollider = _mouseObject.GetComponent<BoxCollider>();
+            _mouseCollider = _mouseObject.GetComponent<BoxCollider2>();
             _splashFont = splashScreen.SplashFont;
 
             SubscriptionManager.AddSubscriber<IUpdatable>(this);

@@ -7,21 +7,21 @@ namespace BoBo2D_Eyal_Gal
     public static class Physics
     {
         #region Fields
-        static List<BoxCollider> _allBoxColliders = new List<BoxCollider>(20);
+        static List<BoxCollider2> _allBoxColliders = new List<BoxCollider2>(20);
         static float _gravity = 9.80665f;
         static float _collisionTimer = 0;
         static bool _usePhysics = true;
         #endregion
 
         #region Properties
-        public static List<BoxCollider> AllBoxColliders { get => _allBoxColliders; set => _allBoxColliders = value; }
+        public static List<BoxCollider2> AllBoxColliders { get => _allBoxColliders; set => _allBoxColliders = value; }
         public static float Gravity { get => _gravity; set => _gravity = value; }
         public static float CollisionTimer { get => _collisionTimer; set => _collisionTimer = value; }
         public static bool UsePhysics { get => _usePhysics; set => _usePhysics = value; }
         #endregion
 
         #region Methods
-        public static bool AABB(BoxCollider collider, BoxCollider anotherCollider)
+        public static bool AABB(BoxCollider2 collider, BoxCollider2 anotherCollider)
         {
             if (collider == null || anotherCollider == null)
                 return false;
@@ -32,7 +32,7 @@ namespace BoBo2D_Eyal_Gal
                    collider.BoxBottom > anotherCollider.BoxTop;
         }
 
-        public static bool AABB(Rectangle mouse, BoxCollider anotherCollider)
+        public static bool AABB(Rectangle mouse, BoxCollider2 anotherCollider)
         {
             if (mouse == null || anotherCollider == null)
                 return false;
@@ -43,7 +43,7 @@ namespace BoBo2D_Eyal_Gal
                    mouse.Bottom > anotherCollider.BoxTop;
         }
 
-        public static bool IsCollidingFromLeft(BoxCollider collider, BoxCollider anotherCollider)
+        public static bool IsCollidingFromLeft(BoxCollider2 collider, BoxCollider2 anotherCollider)
         {
             if (AABB(collider, anotherCollider) && collider.TransformP.Position.X <= anotherCollider.TransformP.Position.X)
                 return true;
@@ -52,7 +52,7 @@ namespace BoBo2D_Eyal_Gal
                 return false;
         }
 
-        public static bool IsCollidingFromRight(BoxCollider collider, BoxCollider anotherCollider)
+        public static bool IsCollidingFromRight(BoxCollider2 collider, BoxCollider2 anotherCollider)
         {
             if (AABB(collider, anotherCollider) && collider.TransformP.Position.X >= anotherCollider.TransformP.Position.X)
                 return true;
@@ -61,7 +61,7 @@ namespace BoBo2D_Eyal_Gal
                 return false;
         }
 
-        public static bool IsCollidingFromTop(BoxCollider collider, BoxCollider anotherCollider)
+        public static bool IsCollidingFromTop(BoxCollider2 collider, BoxCollider2 anotherCollider)
         {
             if (AABB(collider, anotherCollider) && collider.TransformP.Position.Y <= anotherCollider.TransformP.Position.Y)
                 return true;
@@ -70,7 +70,7 @@ namespace BoBo2D_Eyal_Gal
                 return false;
         }
 
-        public static bool IsCollidingFromBottom(BoxCollider collider, BoxCollider anotherCollider)
+        public static bool IsCollidingFromBottom(BoxCollider2 collider, BoxCollider2 anotherCollider)
         {
             if (AABB(collider, anotherCollider) && collider.TransformP.Position.Y >= anotherCollider.TransformP.Position.Y)
                 return true;
@@ -81,7 +81,7 @@ namespace BoBo2D_Eyal_Gal
 
         public static void Update()
         {
-            foreach (BoxCollider collider in AllBoxColliders)
+            foreach (BoxCollider2 collider in AllBoxColliders)
             {
                 if (!collider.IsEnabled)
                     continue;

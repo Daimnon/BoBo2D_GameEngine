@@ -22,10 +22,12 @@
         #region Fields
         //readonly static fields
         private readonly static int _frameCount;
-        private readonly static float _fixedTime, _deltaTime, _fixedUnscaledDeltaTime, _realtimeSinceStartup, _smoothDeltaTime, _timeAtFrameStart,
-            _timeSinceLevelLoad, _unscaledDeltaTime, _unscaledTime;
-        private readonly static double _fixedTimeAsDouble, _fixedUnscaledTimeAsDouble, _realtimeSinceStartupAsDouble, _timeAsDouble,
-            _timeSinceLevelLoadAsDouble, _unscaledTimeAsDouble;
+
+        private readonly static float _fixedTime, _deltaTime, _fixedUnscaledDeltaTime, _realtimeSinceStartup, _smoothDeltaTime,
+                                      _timeAtFrameStart, _timeSinceLevelLoad, _unscaledDeltaTime, _unscaledTime;
+
+        private readonly static double _fixedTimeAsDouble, _fixedUnscaledTimeAsDouble, _realtimeSinceStartupAsDouble,
+                                       _timeAsDouble, _timeSinceLevelLoadAsDouble, _unscaledTimeAsDouble;
 
         //static fields
         private static float _fixedDeltaTime, _maxDeltaTime, _maxParticleDeltaTime, _timeScale;

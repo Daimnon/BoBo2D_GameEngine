@@ -62,9 +62,9 @@ namespace BoBo2D_Eyal_Gal
             AddComponent(new Sprite(this, _spriteName));
             GetComponent<Transform>().Scale = new Vector2(GetComponent<Sprite>().SpriteWidth, GetComponent<Sprite>().SpriteHeight);
             AddComponent(new BoxCollider(this));
-            GetComponent<BoxCollider>().OnCollision += CollidesWith;
-            GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
-            GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
+            GetComponent<BoxCollider2>().OnCollision += CollidesWith;
+            GetComponent<BoxCollider2>().OnCollisionStart += CollidesWith;
+            GetComponent<BoxCollider2>().OnCollisionEnd += CollidesWith;
             AddComponent(new Rigidbooty(this));
 
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
@@ -104,7 +104,7 @@ namespace BoBo2D_Eyal_Gal
             GetComponent<Transform>().Position = position;
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
-            GetComponent<BoxCollider>().OnCollision += CollidesWith;
+            GetComponent<BoxCollider2>().OnCollision += CollidesWith;
             AddComponent(new Rigidbooty(this));
 
             SubscriptionManager.AddSubscriber<IUpdatable>(this);
@@ -177,8 +177,8 @@ namespace BoBo2D_Eyal_Gal
         {
             Transform gameObjectTransform = gameObject.GetComponent<Transform>();
             Transform anotherGameObjectTransform = anotherGameObject.GetComponent<Transform>();
-            BoxCollider gameObjectCollider = gameObject.GetComponent<BoxCollider>();
-            BoxCollider anotherGameObjectCollider = anotherGameObject.GetComponent<BoxCollider>();
+            BoxCollider2 gameObjectCollider = gameObject.GetComponent<BoxCollider2>();
+            BoxCollider2 anotherGameObjectCollider = anotherGameObject.GetComponent<BoxCollider2>();
 
             if (Physics.AABB(gameObjectCollider, anotherGameObjectCollider))
             {
@@ -222,7 +222,7 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
-        public void CollidesWith(BoxCollider anotherCollider)
+        public void CollidesWith(BoxCollider2 anotherCollider)
         {
             //be spesific about what type of object I collide with
             if (anotherCollider.GameObjectP == null)
@@ -246,12 +246,12 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
-        public void StartCollidingWith(BoxCollider anotherCollider)
+        public void StartCollidingWith(BoxCollider2 anotherCollider)
         {
             //implement client logic
         }
 
-        public void FinishedCollidingWith(BoxCollider anotherCollider)
+        public void FinishedCollidingWith(BoxCollider2 anotherCollider)
         {
             //implement client logic
         }

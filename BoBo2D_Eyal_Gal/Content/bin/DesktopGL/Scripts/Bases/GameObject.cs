@@ -201,7 +201,7 @@ namespace BoBo2D_Eyal_Gal
         public void MoveGameObject(Vector2 direction)
         {
             Transform transform = GetComponent<Transform>();
-            BoxCollider boxCollider = GetComponent<BoxCollider>();
+            BoxCollider2 boxCollider = GetComponent<BoxCollider2>();
             Rigidbooty rigidbooty = GetComponent<Rigidbooty>();
 
             transform.Position += direction;

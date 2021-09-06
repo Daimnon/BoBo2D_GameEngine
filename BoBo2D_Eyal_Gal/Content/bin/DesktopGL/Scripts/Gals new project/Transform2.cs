@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class Transform2 : Component
+    public class Transform2 : Component2
     {
         #region Fields
         //Transform _transform;
@@ -28,7 +28,7 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Constructors
-        public Transform(GameObject gameObject)
+        public Transform2(GameObject2 gameObject)
         {
             GameObjectP = gameObject;
             TransformP = this;
@@ -40,7 +40,18 @@ namespace BoBo2D_Eyal_Gal
             Console.WriteLine($"New Transform{this}");
         }
 
-        public Transform(GameObject gameObject, Vector2 position, Vector2 scale)
+        public Transform2(GameObject2 gameObject, Vector2 position)
+        {
+            GameObjectP = gameObject;
+            TransformP = this;
+            Name = gameObject.Name;
+
+            Position = position;
+
+            Console.WriteLine(Environment.NewLine + $"New Transform{this}" + Environment.NewLine);
+        }
+
+        public Transform2(GameObject2 gameObject, Vector2 position, Vector2 scale)
         {
             GameObjectP = gameObject;
             TransformP = this;
@@ -87,7 +98,7 @@ namespace BoBo2D_Eyal_Gal
             }
         }
 
-        public void Translate(MoveDirection direction, GameObject gameObject, float speed)
+        public void Translate(MoveDirection direction, GameObject2 gameObject, float speed)
         {
             if (gameObject is Spaceship ship)
             {
@@ -135,55 +146,11 @@ namespace BoBo2D_Eyal_Gal
                     break;
             }
         }
-
-        public void Translate(MoveDirection direction, GameObject gameObject, Vector2 speed)
-        {
-            if (gameObject is Spaceship ship)
-                ship.CalculateCurrentSpeed(Position);
-
-            switch (direction)
-            {
-                case MoveDirection.Up:
-                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
-                    break;
-
-                case MoveDirection.Down:
-                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
-                    break;
-
-                case MoveDirection.Right:
-                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
-                    break;
-
-                case MoveDirection.Left:
-                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
-                    break;
-
-                case MoveDirection.UpperRight:
-                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
-                    break;
-
-                case MoveDirection.UpperLeft:
-                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
-                    break;
-
-                case MoveDirection.LowerRight:
-                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
-                    break;
-
-                case MoveDirection.LowerLeft:
-                    gameObject.MoveGameObject(GetVelocity(direction) * speed);
-                    break;
-
-                default:
-                    break;
-            }
-        }
         #endregion
 
         //need fixes
         #region Static Methods
-        public static void Destroy(GameObject parentGameObject)
+        public static void Destroy(GameObject2 parentGameObject)
         {
             //check if gameObject exist
             if (parentGameObject == null)
@@ -214,10 +181,10 @@ namespace BoBo2D_Eyal_Gal
 
         public void Update()
         {
-            if (GameObjectP.GetComponent<Sprite>() != null)
+            if (GameObjectP.GetComponent<Sprite2>() != null)
             {
-                GameObjectP.GetComponent<Sprite>().SpriteWidth = TransformP.Scale.X;
-                GameObjectP.GetComponent<Sprite>().SpriteHeight = TransformP.Scale.Y;
+                GameObjectP.GetComponent<Sprite2>().SpriteWidth = TransformP.Scale.X;
+                GameObjectP.GetComponent<Sprite2>().SpriteHeight = TransformP.Scale.Y;
             }
         }
 

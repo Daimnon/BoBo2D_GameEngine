@@ -230,6 +230,12 @@ namespace BoBo2D_Eyal_Gal
             Vector2 result = new Vector2(firstVector2.X / secondVector2.X, firstVector2.Y / secondVector2.Y);
             return result;
         }
+
+        public static Vector2 operator *(Vector2 vector, float value)
+        {
+            Vector2 result = new Vector2(vector.X * value, vector.Y * value);
+            return result;
+        }
         public static bool operator ==(Vector2 firstVector2, Vector2 secondVector2)
         {
             if (firstVector2 == secondVector2)

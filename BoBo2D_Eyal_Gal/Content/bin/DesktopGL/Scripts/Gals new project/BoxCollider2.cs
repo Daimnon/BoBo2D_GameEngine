@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace BoBo2D_Eyal_Gal
 {
-    public class BoxCollider : Component
+    public class BoxCollider2 : Component2
     {
         #region Fields
         Vector2 _scale;
@@ -39,30 +39,30 @@ namespace BoBo2D_Eyal_Gal
         #endregion
 
         #region Events
-        public event Action<BoxCollider> OnCollision;
-        public event Action<BoxCollider> OnCollisionStart;
-        public event Action<BoxCollider> OnCollisionEnd;
+        public event Action<BoxCollider2> OnCollision;
+        public event Action<BoxCollider2> OnCollisionStart;
+        public event Action<BoxCollider2> OnCollisionEnd;
         #endregion
 
         #region Constructor
-        public BoxCollider(GameObject gameObject)
+        public BoxCollider2(GameObject2 gameObject)
         {
             GameObjectP = gameObject;
-            TransformP = gameObject.GetComponent<Transform>();
+            TransformP = gameObject.GetComponent<Transform2>();
             Name = gameObject.Name;
 
             float spriteWidth;
             float spriteHeight;
 
-            if (gameObject.GetComponent<Sprite>() == null)
+            if (gameObject.GetComponent<Sprite2>() == null)
             {
                 spriteWidth = 1;
                 spriteHeight = 1;
             }
             else
             {
-                spriteWidth = gameObject.GetComponent<Sprite>().SpriteWidth;
-                spriteHeight = gameObject.GetComponent<Sprite>().SpriteHeight;
+                spriteWidth = gameObject.GetComponent<Sprite2>().SpriteWidth;
+                spriteHeight = gameObject.GetComponent<Sprite2>().SpriteHeight;
             }
             
             Scale = new Vector2(spriteWidth, spriteHeight);
@@ -96,24 +96,24 @@ namespace BoBo2D_Eyal_Gal
                 IsEnabled = true;
         }
 
-        public void CollidesWith(BoxCollider anotherCollider)
+        public void CollidesWith(BoxCollider2 anotherCollider)
         {
             OnCollision?.Invoke(anotherCollider);
             IsColliding = true;
         }
 
-        public void StartCollidingWith(BoxCollider anotherCollider)
+        public void StartCollidingWith(BoxCollider2 anotherCollider)
         {
             OnCollisionStart?.Invoke(anotherCollider);
             IsColliding = true;
-            Time.ContinueTimer(CollisionTimer);
+            Time2.ContinueTimer(CollisionTimer);
         }
 
-        public void FinishedCollidingWith(BoxCollider anotherCollider)
+        public void FinishedCollidingWith(BoxCollider2 anotherCollider)
         {
             OnCollisionEnd?.Invoke(anotherCollider);
             IsColliding = true;
-            Time.StopTimer(CollisionTimer);
+            Time2.StopTimer(CollisionTimer);
         }
         #endregion
 

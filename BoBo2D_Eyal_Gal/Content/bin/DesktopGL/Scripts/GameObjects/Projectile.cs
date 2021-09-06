@@ -47,9 +47,9 @@ namespace BoBo2D_Eyal_Gal
             LoadStats(projectileType);
             AddComponent(new Sprite(this, _spriteName));
             AddComponent(new BoxCollider(this));
-            GetComponent<BoxCollider>().OnCollision += CollidesWith;
-            GetComponent<BoxCollider>().OnCollisionStart += CollidesWith;
-            GetComponent<BoxCollider>().OnCollisionEnd += CollidesWith;
+            GetComponent<BoxCollider2>().OnCollision += CollidesWith;
+            GetComponent<BoxCollider2>().OnCollisionStart += CollidesWith;
+            GetComponent<BoxCollider2>().OnCollisionEnd += CollidesWith;
             AddComponent(new Rigidbooty(this));
 
             _transform = GetComponent<Transform>();
@@ -116,7 +116,7 @@ namespace BoBo2D_Eyal_Gal
             _spriteName = stats.SpriteName;
         }
 
-        public void CollidesWith(BoxCollider anotherCollider)
+        public void CollidesWith(BoxCollider2 anotherCollider)
         {
             GameObject playerObject = GameObjectManager.Instance.FindGameObjectByName("Player");
             Spaceship playerShip = GameObjectManager.Instance.FindGameObjectByName("Player") as Spaceship;
